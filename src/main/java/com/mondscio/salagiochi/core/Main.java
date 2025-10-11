@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.print("prova di commit & push.");
-		System.out.print("prova di commit & push.(1)");
+		System.out.print("prova di commit & push.(2)");
 
 	}
 
