@@ -5,9 +5,14 @@ import com.mondsciomegn.salagiochi.db.DataBaseContainer;
 import com.mondsciomegn.salagiochi.db.Utente;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
@@ -49,37 +54,56 @@ public class Room {
 	}
 	
 	private void StanzaSX(BorderPane root) {
-		TableView<Utente> table = new TableView<>();
+		TableView<Utente> userTable = new TableView<>();
 
+		 addUserColums(userTable);	// Aggiungo le varie colonne
+	    userTable.getItems().addAll(DataBaseContainer.getAllUsers());		// Carica i dati 
+	  
+	   
+	    
+	    //DA MODIFICARE IN CASO CI SIANO PIU TABELLE ---->>
+	    userTable.setMaxWidth(600); 
+	    StackPane tableContainer = new StackPane(userTable);	// Solo per rendere la tabella un po più carina
+	    int numRecords = userTable.getItems().size();
+	    int downPadding = 500 - numRecords;
+	    if(downPadding < 50) downPadding = 50;
+	    	
+	    tableContainer.setPadding(new Insets(
+	    	    0, // sopra
+	    	    20, // destra
+	    	    downPadding, // sotto
+	    	    20  // sinistra
+	    	));
+	   tableContainer.setAlignment(Pos.TOP_CENTER);
+	    root.setCenter(tableContainer);	
+	  // <<---- DA MODIFICARE IN CASO CI SIANO PIU TABELLE 
+	}
+	
+	private void addUserColums(TableView<Utente> table) {
+		
 	    TableColumn<Utente, Integer> colId = new TableColumn<>("ID");
-	    colId.setCellValueFactory(data -> 
-	        new javafx.beans.property.SimpleIntegerProperty(data.getValue().getId()).asObject()
+	    colId.setCellValueFactory(data ->
+	        new SimpleIntegerProperty(data.getValue().getId()).asObject()
 	    );
 
 	    TableColumn<Utente, String> colNick = new TableColumn<>("NickName");
 	    colNick.setCellValueFactory(data ->
-	        new javafx.beans.property.SimpleStringProperty(data.getValue().getNickname())
+	        new SimpleStringProperty(data.getValue().getNickname())
 	    );
 
 	    TableColumn<Utente, String> colNome = new TableColumn<>("Nome");
 	    colNome.setCellValueFactory(data ->
-	        new javafx.beans.property.SimpleStringProperty(data.getValue().getNome())
+	        new SimpleStringProperty(data.getValue().getNome())
 	    );
 
 	    TableColumn<Utente, Integer> colScore = new TableColumn<>("Score");
 	    colScore.setCellValueFactory(data ->
-	        new javafx.beans.property.SimpleIntegerProperty(data.getValue().getScore()).asObject()
+	        new SimpleIntegerProperty(data.getValue().getScore()).asObject()
 	    );
 
 	    table.getColumns().addAll(colId, colNick, colNome, colScore);
-
-	    // Carica i dati (vuoto per ora)
-	    table.getItems().addAll(DataBaseContainer.getAllUtenti());
-
-	    // Inserisci nella scena
-	    root.setCenter(table);
-		
 	}
+
 	
 	private void StanzaCENTRALE(BorderPane root) {
         

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseContainer {
-	 public static List<Utente> getAllUtenti() {
+	 public static List<Utente> getAllUsers() {
 	        List<Utente> utenti = new ArrayList<>();
 
 	        String query = "SELECT id, nickname, nome, score FROM utente";
