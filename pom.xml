@@ -34,7 +34,7 @@
             	<version>0.0.8</version>
             	
             	<configuration>
-                	<mainClass>com.mondsciomegn.salagiochi.gui.home</mainClass>
+                	<mainClass>com.mondsciomegn.salagiochi.gui.Home</mainClass>
             	</configuration>
        		</plugin>
     	</plugins>
