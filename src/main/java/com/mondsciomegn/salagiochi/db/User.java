@@ -16,6 +16,7 @@ public class User {
         this.surname = surname;
         this.score = score;
     }
+    //
 
     public int getId() { 
     	return id;
