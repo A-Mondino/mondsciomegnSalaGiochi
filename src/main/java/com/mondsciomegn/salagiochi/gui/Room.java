@@ -2,7 +2,7 @@ package com.mondsciomegn.salagiochi.gui;
 
 import com.mondsciomegn.salagiochi.*;
 import com.mondsciomegn.salagiochi.db.DataBaseContainer;
-import com.mondsciomegn.salagiochi.db.Utente;
+import com.mondsciomegn.salagiochi.db.User;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -23,7 +23,7 @@ import javafx.scene.control.Button;
 
 public class Room {
 	private Label roomLabel = new Label();
-	Label label = new Label("");			// Uso una label vuota solo per mantenere le freccie laterali alla stessa altezza
+	Label label = new Label("");						// Uso una label vuota solo per mantenere le freccie laterali alla stessa altezza
 	
 	public void showRoom(BorderPane root, int room) {
 		
@@ -38,78 +38,84 @@ public class Room {
 	        case -1:
 	        	roomLabel.setText("Tabellone");
 	        	
-	        	StanzaSX(root);
+	        	roomL(root);
 	            break;
 	        case 0:
 	        	
 	        	roomLabel.setText("Sala Giochi");
-	        	StanzaCENTRALE(root);
+	        	roomM(root);												// Main Room
 	            break;
 	        case 1:
 	        	
 	        	roomLabel.setText("VideoGames");
-	        	StanzaDX(root);
+	        	roomR(root);
 	            break;
 		} 
 	}
 	
-	private void StanzaSX(BorderPane root) {
-		TableView<Utente> userTable = new TableView<>();
+	private void roomL(BorderPane root) {
+		TableView<User> userTable = new TableView<>();
 
-		 addUserColums(userTable);	// Aggiungo le varie colonne
+		addUserColums(userTable);											// Aggiungo le varie colonne
 	    userTable.getItems().addAll(DataBaseContainer.getAllUsers());		// Carica i dati 
 	  
 	   
 	    
 	    //DA MODIFICARE IN CASO CI SIANO PIU TABELLE ---->>
 	    userTable.setMaxWidth(600); 
-	    StackPane tableContainer = new StackPane(userTable);	// Solo per rendere la tabella un po più carina
+	    StackPane tableContainer = new StackPane(userTable);				// Solo per rendere la tabella un po più carina
 	    int numRecords = userTable.getItems().size();
 	    int downPadding = 500 - numRecords;
 	    if(downPadding < 50) downPadding = 50;
 	    	
 	    tableContainer.setPadding(new Insets(
-	    	    0, // sopra
-	    	    20, // destra
-	    	    downPadding, // sotto
-	    	    20  // sinistra
+	    	    0, 				// sopra
+	    	    20, 			// destra
+	    	    downPadding, 	// sotto
+	    	    20  			// sinistra
 	    	));
 	   tableContainer.setAlignment(Pos.TOP_CENTER);
 	    root.setCenter(tableContainer);	
 	  // <<---- DA MODIFICARE IN CASO CI SIANO PIU TABELLE 
 	}
 	
-	private void addUserColums(TableView<Utente> table) {
+	
+	private void addUserColums(TableView<User> table) {
 		
-	    TableColumn<Utente, Integer> colId = new TableColumn<>("ID");
+	    TableColumn<User, Integer> colId = new TableColumn<>("ID");
 	    colId.setCellValueFactory(data ->
 	        new SimpleIntegerProperty(data.getValue().getId()).asObject()
 	    );
 
-	    TableColumn<Utente, String> colNick = new TableColumn<>("NickName");
+	    TableColumn<User, String> colNick = new TableColumn<>("NickName");
 	    colNick.setCellValueFactory(data ->
 	        new SimpleStringProperty(data.getValue().getNickname())
 	    );
 
-	    TableColumn<Utente, String> colNome = new TableColumn<>("Nome");
-	    colNome.setCellValueFactory(data ->
-	        new SimpleStringProperty(data.getValue().getNome())
+	    TableColumn<User, String> colName = new TableColumn<>("Nome");
+	    colName.setCellValueFactory(data ->
+	        new SimpleStringProperty(data.getValue().getName())
+	    );
+	    
+	    TableColumn<User, String> colSurname = new TableColumn<>("Cognome");
+	    colSurname.setCellValueFactory(data ->
+	    	new SimpleStringProperty(data.getValue().getSurname())
 	    );
 
-	    TableColumn<Utente, Integer> colScore = new TableColumn<>("Score");
+	    TableColumn<User, Integer> colScore = new TableColumn<>("Score");
 	    colScore.setCellValueFactory(data ->
 	        new SimpleIntegerProperty(data.getValue().getScore()).asObject()
 	    );
 
-	    table.getColumns().addAll(colId, colNick, colNome, colScore);
+	    table.getColumns().addAll(colId, colNick, colName, colSurname, colScore);
 	}
 
 	
-	private void StanzaCENTRALE(BorderPane root) {
+	private void roomM(BorderPane root) {
         
     }
 	
-	private void StanzaDX(BorderPane root) {
+	private void roomR(BorderPane root) {
 	
 	}
 	

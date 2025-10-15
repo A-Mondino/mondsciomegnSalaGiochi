@@ -4,29 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseContainer {
-	 public static List<Utente> getAllUsers() {
-	        List<Utente> utenti = new ArrayList<>();
+	 public static List<User> getAllUsers() {
+	        List<User> users = new ArrayList<>();
 
-	        String query = "SELECT id, nickname, nome, score FROM utente";
+	        String query = "SELECT * FROM utente";
 
 	        try (Connection conn = DataBaseConnection.getConnection();
 	             Statement stmt = conn.createStatement();
 	             ResultSet rs = stmt.executeQuery(query)) {
 
 	            while (rs.next()) {
-	                Utente u = new Utente(
+	                User u = new User(
 	                        rs.getInt("id"),
 	                        rs.getString("nickname"),
 	                        rs.getString("nome"),
+	                        rs.getString("cognome"),
 	                        rs.getInt("score")
 	                );
-	                utenti.add(u);
+	                users.add(u);
 	            }
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 
-	        return utenti;
+	        return users;
 	    }
 }

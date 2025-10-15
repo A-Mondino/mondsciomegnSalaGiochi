@@ -1,29 +1,40 @@
 package com.mondsciomegn.salagiochi.db;
 
 
-public class Utente {
+public class User {
     private int id;
     private String nickname;
-    private String nome;
+    private String name;
+    private String surname;
     private int score;
 
-    public Utente(int id, String nickname, String nome, int score) {
+    
+    public User(int id, String nickname, String name, String surname, int score) {
         this.id = id;
         this.nickname = nickname;
-        this.nome = nome;
+        this.name = name;
+        this.surname = surname;
         this.score = score;
     }
 
     public int getId() { 
     	return id;
     }
+    
     public String getNickname() {
     	return nickname; 
     }
-    public String getNome() { 
-    	return nome;
+    
+    public String getName() { 
+    	return name;
     }
+    
+    public String getSurname() {
+    	return surname;
+    }
+    
     public int getScore() { 
     	return score; 
     }
+    
 }
