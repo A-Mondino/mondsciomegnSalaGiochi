@@ -35,13 +35,13 @@ public class dadi extends VideoGames{
 	
 	private static int lancia() {
 		Random ran = new Random();
-		int somma=0, dado1, dado2;
+		int somma = 0, dado1, dado2;
 		
-		dado1 = ran.nextInt(6)+1;
+		dado1 = ran.nextInt(6) + 1;
 
-		dado2 = ran.nextInt(6)+1;
-		System.out.println("I numeri usciti dal lancio dei due dati sono: "+dado1+" e "+dado2);
-		somma = dado1+dado2;
+		dado2 = ran.nextInt(6) + 1;
+		System.out.println("I numeri usciti dal lancio dei due dati sono: "+ dado1 + " e " + dado2);
+		somma = dado1 + dado2;
 		
 		return somma;
 	}

@@ -8,7 +8,6 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 
 public class cartaForbiceSasso extends VideoGames {
 	
-
 	public cartaForbiceSasso(String name, Category category, int score) {
 		super(name, category, score);
 	}
@@ -27,11 +26,11 @@ public class cartaForbiceSasso extends VideoGames {
 			System.out.println("3 - SASSO ");
 			scelta = scanner.nextInt();
 			
-			num=controlli.controlloScelta(scelta);
+			num = controlli.controlloScelta(scelta);
 			
-		}while(num==0);
+		}while(num == 0);
 		
-		sceltaC = ran.nextInt(3)+1;
+		sceltaC = ran.nextInt(3) + 1;
 		
 		switch(sceltaC) {
 			case 1:

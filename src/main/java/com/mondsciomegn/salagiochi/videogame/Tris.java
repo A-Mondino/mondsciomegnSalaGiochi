@@ -63,7 +63,7 @@ public class Tris extends VideoGames{
 	@Override
 	public void play() {
 		controlli controllo = new controlli();
-		int riga=0, colonna=0, num;
+		int riga = 0, colonna = 0, num;
 		boolean ris, fine=false;
 		final char[][] areaGioco = {
 				{' ', ' ', ' '},
@@ -78,8 +78,8 @@ public class Tris extends VideoGames{
 
 		do {
 			do {
-				num=0;
-				riga= tastiera(riga);
+				num = 0;
+				riga = tastiera(riga);
 				colonna = tastiera(riga, colonna);
 				
 				ris = controllo.controllo(riga, colonna, areaGioco);
@@ -89,7 +89,7 @@ public class Tris extends VideoGames{
 					num++; 
 				}
 				
-				}while(num!=0);
+				}while(num != 0);
 			
 			//se il valore inserito dall'utente è corretto inserisce la X
 			areaGioco[riga][colonna] = 'X';
@@ -98,7 +98,7 @@ public class Tris extends VideoGames{
 			int rigaC = mossa[0];
 			int colonnaC = mossa[1];
 			
-			System.out.println("POSIZIONE COMPUTER " +rigaC + "," +colonnaC);
+			System.out.println("POSIZIONE COMPUTER " + rigaC + "," +colonnaC);
 			
 			//O segno computer
 			areaGioco[rigaC][colonnaC] = 'O';
@@ -106,7 +106,7 @@ public class Tris extends VideoGames{
 			stampaGriglia(areaGioco);
 			fine = controllo.controlloTris(areaGioco);
 			
-		}while(fine!=true);
+		}while(fine != true);
 	}
 	
 

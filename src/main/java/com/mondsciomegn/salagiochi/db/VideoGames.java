@@ -2,6 +2,7 @@ package com.mondsciomegn.salagiochi.db;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class VideoGames {
 	private final int id = 0;
@@ -15,7 +16,6 @@ public abstract class VideoGames {
 		this.name = name;
 		this.category = category;
 		this.score = score;
-		
 	}
 	
 	public abstract void play();
@@ -24,12 +24,14 @@ public abstract class VideoGames {
 		
 	}
 	
-	public void setScore(int score) {
-		this.score = score;
-	}
 	public int getScore() {
 		return score;
 	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -57,5 +59,22 @@ public abstract class VideoGames {
 	public List<CheckPoint> getCheckpoints() {
 		return checkpoints;
 	}
+	
+	public void setCheckPoint(List<Checkpoint> checkpoints) {
+		this.checkpoints = checkpoints;
+	}
+	
+	public boolean equals(Object o) {			// confronto oggetti VideoGames
+    	if (this == o)
+    		return true;
+    	if (!(o instanceOf VideoGames)) 
+    		return false;
+    	VideoGames v = (VideoGames) o;
+    	return id == v.id;
+    }
+    
+    public int hashCode() {						
+    	return Objects.hash(id);
+    }
 	
 }

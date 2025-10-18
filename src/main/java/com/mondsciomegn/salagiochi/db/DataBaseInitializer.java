@@ -14,6 +14,7 @@ public class DataBaseInitializer {
                 "cognome VARCHAR(30), " +
                 "score INT" +
                 " );" ;
+        
         String videogames = 
                 "CREATE TABLE IF NOT EXISTS videogioco (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -21,21 +22,28 @@ public class DataBaseInitializer {
                 "categoria VARCHAR(30), " +
                 "score INT" +
                 " );" ;
+        
         String category = 
                 "CREATE TABLE IF NOT EXISTS category (" +
                 "nome VARCHAR(30) PRIMARY KEY," +
                 "descrizione VARCHAR(50) " +
                 " );" ;
+        
         String checkpoint =
         		"CREATE TABLE IF NOT EXISTS checkpoint (" +
         		"id INT AUTO_INCREMENT PRIMARY KEY," +
                 "punti INT " +
                 " );" ;
-        /*String ranking =
-        		"CREATE TABLE IF NOT EXISTS checkpoint (" +
+        
+        String activityLog =
+        		"CREATE TABLE IF NOT EXISTS activityLog (" +
         		"id INT AUTO_INCREMENT PRIMARY KEY," +
-                "punti INT " +
-                " );" ;*/
+                "data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+        		"punteggio INT," +
+                "FOREIGN KEY (user) REFERENCES User(id)," +
+                "FOREIGN KEY (videogame_id) REFERENCES Videogame_id(id)" +
+                " );" ;
+        
         
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
@@ -44,7 +52,7 @@ public class DataBaseInitializer {
             stmt.execute(videogames);
             stmt.execute(category);
             stmt.execute(checkpoint);
-            //stmt.execute(ranking);
+            stmt.execute(activityLog);
             
             
         } catch (SQLException e) {

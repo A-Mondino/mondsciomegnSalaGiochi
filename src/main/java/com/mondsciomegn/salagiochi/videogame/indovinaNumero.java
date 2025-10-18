@@ -35,9 +35,9 @@ public class indovinaNumero extends VideoGames{
 			
 			uscita = controlli.controlloNumeroCasuale(numero, numeroCasuale);
 		
-		}while(uscita != false && cont<5);	
+		}while(uscita != false && cont < 5);	
 			
-		if(cont==5) {
+		if(cont == 5) {
 			System.out.println("HAI PERSO!");
 		}
 	}
