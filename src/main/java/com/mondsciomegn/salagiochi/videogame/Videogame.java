@@ -1,8 +1,22 @@
 package com.mondsciomegn.salagiochi.videogame;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
-public abstract class videoGame {
+public abstract class Videogame {
+	private final int id;
+	private String nameV;
+	private Category category;
+	private final List<CheckPoint> checkpoints = new ArrayList<>();
+	
+	public Videogame(int id, String nameV, Category category) {
+		this.id = id;
+		this.nameV = nameV;
+		this.category = category;
+	}
+	
+	
 	public void gioca() {
 	}
 	

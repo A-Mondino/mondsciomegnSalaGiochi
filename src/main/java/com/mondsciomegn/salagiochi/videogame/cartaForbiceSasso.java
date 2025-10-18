@@ -3,7 +3,8 @@ package com.mondsciomegn.salagiochi.videogame;
 import java.util.Random;
 import java.util.Scanner;
 
-public class cartaForbiceSasso extends videoGame{
+public class cartaForbiceSasso extends videoGame {
+	
 	public void gioca() {
 		Scanner scanner = new Scanner(System.in);
 		Random ran = new Random();

@@ -10,11 +10,12 @@ public class User {
 
     
     public User(int id, String nickname, String name, String surname, int score) {
+        if (nickname == null) throw new IllegalArgumentException("Nickame non valido");
         this.id = id;
         this.nickname = nickname;
         this.name = name;
         this.surname = surname;
-        this.score = score;
+        this.score = 0;
     }
     //
 
