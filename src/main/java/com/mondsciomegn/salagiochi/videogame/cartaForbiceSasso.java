@@ -3,9 +3,17 @@ package com.mondsciomegn.salagiochi.videogame;
 import java.util.Random;
 import java.util.Scanner;
 
-public class cartaForbiceSasso extends videoGame {
+import com.mondsciomegn.salagiochi.db.Category;
+import com.mondsciomegn.salagiochi.db.VideoGames;
+
+public class cartaForbiceSasso extends VideoGames {
 	
-	public void gioca() {
+
+	public cartaForbiceSasso(String name, Category category, int score) {
+		super(name, category, score);
+	}
+
+	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		Random ran = new Random();
 		controlli c = new controlli();

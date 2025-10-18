@@ -1,0 +1,12 @@
+2025-10-18 19:35:34.844653+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+SELECT * FROM videogioco [42102-224]
+2025-10-18 19:41:10.468148+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+SELECT * FROM videogioco [42102-224]
+2025-10-18 19:41:17.901617+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+SELECT * FROM videogioco [42102-224]
+2025-10-18 19:41:42.415905+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+SELECT * FROM videogioco [42102-224]

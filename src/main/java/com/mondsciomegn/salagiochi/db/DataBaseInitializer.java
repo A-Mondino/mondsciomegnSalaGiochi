@@ -14,13 +14,39 @@ public class DataBaseInitializer {
                 "cognome VARCHAR(30), " +
                 "score INT" +
                 " );" ;
-
+        String videogames = 
+                "CREATE TABLE IF NOT EXISTS videogioco (" +
+                "id INT AUTO_INCREMENT PRIMARY KEY," +
+                "nome VARCHAR(30)," +
+                "categoria VARCHAR(30), " +
+                "score INT" +
+                " );" ;
+        String category = 
+                "CREATE TABLE IF NOT EXISTS category (" +
+                "nome VARCHAR(30) PRIMARY KEY," +
+                "descrizione VARCHAR(50) " +
+                " );" ;
+        String checkpoint =
+        		"CREATE TABLE IF NOT EXISTS checkpoint (" +
+        		"id INT AUTO_INCREMENT PRIMARY KEY," +
+                "punti INT " +
+                " );" ;
+        /*String ranking =
+        		"CREATE TABLE IF NOT EXISTS checkpoint (" +
+        		"id INT AUTO_INCREMENT PRIMARY KEY," +
+                "punti INT " +
+                " );" ;*/
+        
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(user);
+            stmt.execute(videogames);
+            stmt.execute(category);
+            stmt.execute(checkpoint);
+            //stmt.execute(ranking);
             
-           // System.out.println("Tabelle pronte!");
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

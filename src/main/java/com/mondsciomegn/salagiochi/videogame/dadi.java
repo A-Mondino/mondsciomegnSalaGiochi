@@ -2,11 +2,21 @@ package com.mondsciomegn.salagiochi.videogame;
 
 import java.util.Random;
 
+import com.mondsciomegn.salagiochi.db.Category;
+import com.mondsciomegn.salagiochi.db.VideoGames;
 
-public class dadi extends videoGame{
-controlli controllo = new controlli();
+
+public class dadi extends VideoGames{
 	
-	public void gioca() {
+	
+	public dadi(String name, Category category, int score) {
+		super(name, category, score);
+		
+	}
+
+	controlli controllo = new controlli();
+	
+	public void play() {
 		int somma, sommaCasuale;
 		
 		System.out.println("LANCIO DEI DADI: ");
@@ -23,7 +33,7 @@ controlli controllo = new controlli();
 		
 	}
 	
-	public static int lancia() {
+	private static int lancia() {
 		Random ran = new Random();
 		int somma=0, dado1, dado2;
 		

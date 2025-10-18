@@ -3,11 +3,20 @@ package com.mondsciomegn.salagiochi.videogame;
 import java.util.Random;
 import java.util.Scanner;
 
-public class indovinaNumero extends videoGame{
+import com.mondsciomegn.salagiochi.db.Category;
+import com.mondsciomegn.salagiochi.db.VideoGames;
+
+public class indovinaNumero extends VideoGames{
+	
+	public indovinaNumero(String name, Category category, int score) {
+		super(name, category, score);
+		
+	}
+
 	Scanner scanner = new Scanner(System.in);
 	Random random = new Random();
 	
-	public void gioca() {
+	public void play() {
 		
 		int numeroCasuale, numero, cont=0;
 		boolean uscita;

@@ -1,8 +1,10 @@
 package com.mondsciomegn.salagiochi.gui;
 
 import com.mondsciomegn.salagiochi.*;
+import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseContainer;
 import com.mondsciomegn.salagiochi.db.User;
+import com.mondsciomegn.salagiochi.db.VideoGames;
 import com.mondsciomegn.salagiochi.videogame.*;
 
 import javafx.application.Application;
@@ -17,6 +19,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -27,8 +30,7 @@ public class Room {
 	Label label = new Label("");						// Uso una label vuota solo per mantenere le freccie laterali alla stessa altezza
 	
 	public void showRoom(BorderPane root, int room) {
-		
-		
+			
         VBox box = new VBox(roomLabel,label);
         box.setStyle("-fx-font-size: 30px;");
         box.setAlignment(Pos.TOP_CENTER);
@@ -42,13 +44,13 @@ public class Room {
 	        	roomL(root);
 	            break;
 	        case 0:
-	        	
 	        	roomLabel.setText("Sala Giochi");
+	        	
 	        	roomM(root);												// Main Room
 	            break;
-	        case 1:
-	        	
+	        case 1:	        	
 	        	roomLabel.setText("VideoGames");
+	        	
 	        	roomR(root);
 	            break;
 		} 
@@ -56,28 +58,41 @@ public class Room {
 	
 	private void roomL(BorderPane root) {
 		TableView<User> userTable = new TableView<>();
+	    TableView<VideoGames> gameTable = new TableView<>();
+	   double tableWidth = 500;		// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
 
-		addUserColums(userTable);											// Aggiungo le varie colonne
-	    userTable.getItems().addAll(DataBaseContainer.getAllUsers());		// Carica i dati 
-	  
 	   
+	    addUserColums(userTable); // Aggiungo le colonne
+	    addGameColums(gameTable);
 	    
-	    //DA MODIFICARE IN CASO CI SIANO PIU TABELLE ---->>
-	    userTable.setMaxWidth(600); 
-	    StackPane tableContainer = new StackPane(userTable);				// Solo per rendere la tabella un po più carina
-	    int numRecords = userTable.getItems().size();
-	    int downPadding = 500 - numRecords;
-	    if(downPadding < 50) downPadding = 50;
-	    	
-	    tableContainer.setPadding(new Insets(
-	    	    0, 				// sopra
-	    	    20, 			// destra
-	    	    downPadding, 	// sotto
-	    	    20  			// sinistra
-	    	));
-	   tableContainer.setAlignment(Pos.TOP_CENTER);
-	    root.setCenter(tableContainer);	
-	  // <<---- DA MODIFICARE IN CASO CI SIANO PIU TABELLE 
+	    
+	    userTable.getItems().addAll(DataBaseContainer.getAllUsers()); // Aggiungo i dati
+	    gameTable.getItems().addAll(DataBaseContainer.getAllGames());
+	    
+	    
+	    
+	    userTable.setPrefWidth(tableWidth);
+	    gameTable.setPrefWidth(tableWidth);
+	    StackPane userPane = new StackPane(userTable);	// Metto tutto dentro ad un StackPane per centrare tutto
+	    StackPane gamePane = new StackPane(gameTable);
+	    userPane.setAlignment(Pos.CENTER);
+	    gamePane.setAlignment(Pos.CENTER);
+	    
+
+	    
+	    GridPane grid = new GridPane();	// Creo una griglia 2x2
+	    grid.setPadding(new Insets(20));
+	    grid.setHgap(20); // spazio orizzontale tra le tabelle
+	    grid.setVgap(20); // spazio verticale tra le tabelle
+
+	    // Posiziona le tabelle nella prima riga
+	    grid.add(userTable, 0, 0); // colonna 0, riga 0
+	    grid.add(gameTable, 1, 0); // colonna 1, riga 0
+
+
+	    // Centrare la griglia nella stanza
+	    BorderPane.setAlignment(grid, Pos.CENTER);
+	    root.setCenter(grid);
 	}
 	
 	
@@ -117,37 +132,31 @@ public class Room {
     }
 	
 	private void roomR(BorderPane root) {
-		TableView<videoGames> table = new TableView<>();
 		
-		TableColumn<videoGames, String> nome = new TableColumn<>("Gioco: ");
-		nome.setCellValueFactory(data ->
-        new SimpleStringProperty(data.getValue().getNome()));
-
-		TableColumn<videoGames, String> istruzione = new TableColumn<>("Istruzioni: ");
-		istruzione.setCellValueFactory(data ->
-        new SimpleStringProperty(data.getValue().getIstruzione()));
-		
-		TableColumn<videoGames, Integer> punteggio = new TableColumn<>("Punteggio: ");
-		punteggio.setCellValueFactory(data ->
-		new SimpleIntegerProperty(data.getValue().getPunteggio()).asObject());
-		
-		TableColumn<videoGames, String> inizio = new TableColumn<>("Inizia: ");
-		inizio.setCellValueFactory(data ->
-        new SimpleStringProperty(data.getValue().getInizio()));
-		
-	    table.getColumns().addAll(nome, istruzione, punteggio, inizio);
-	    
-	    table.getItems().addAll(
-	    		new videoGames("Tris", "istruzioni", "schiaccia bottone", 3),
-	    		new videoGames("Carta, Forbice e Sasso", "istruzioni", "schiaccia bottone", 1),
-	    		new videoGames("Inodvina il numero", "istruzioni", "schiaccia bottone", 1),
-	    		new videoGames("Dadi", "istruzioni", "schiaccia bottone", 2));
 
 		Button start = new Button("Inizia a giocare");		// Bottone di inizio
 		root.setCenter(start);
 		
-		VBox layout = new VBox(20, table, start);
+		VBox layout = new VBox(20, start);
 		root.setCenter(layout);
+	}
+
+	private void addGameColums(TableView<VideoGames> gameTable) {
+		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco: ");
+		name.setCellValueFactory(data ->
+        new SimpleStringProperty(data.getValue().getName()));
+
+		
+		TableColumn<VideoGames, Integer> score = new TableColumn<>("Punteggio: ");
+		score.setCellValueFactory(data ->
+		new SimpleIntegerProperty(data.getValue().getScore()).asObject());
+		
+	/*	TableColumn<VideoGames, Category> category = new TableColumn<>("Categoria: ");
+		category.setCellValueFactory(data ->
+        new Category(data.getValue().getCategory()));*/
+		
+		gameTable.getColumns().addAll(name, score);
+		
 	}
 	
 }
