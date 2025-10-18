@@ -3,6 +3,7 @@ package com.mondsciomegn.salagiochi.gui;
 import com.mondsciomegn.salagiochi.*;
 import com.mondsciomegn.salagiochi.db.DataBaseContainer;
 import com.mondsciomegn.salagiochi.db.User;
+import com.mondsciomegn.salagiochi.videogame.*;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -116,7 +117,37 @@ public class Room {
     }
 	
 	private void roomR(BorderPane root) {
-	
+		TableView<videoGames> table = new TableView<>();
+		
+		TableColumn<videoGames, String> nome = new TableColumn<>("Gioco: ");
+		nome.setCellValueFactory(data ->
+        new SimpleStringProperty(data.getValue().getNome()));
+
+		TableColumn<videoGames, String> istruzione = new TableColumn<>("Istruzioni: ");
+		istruzione.setCellValueFactory(data ->
+        new SimpleStringProperty(data.getValue().getIstruzione()));
+		
+		TableColumn<videoGames, Integer> punteggio = new TableColumn<>("Punteggio: ");
+		punteggio.setCellValueFactory(data ->
+		new SimpleIntegerProperty(data.getValue().getPunteggio()).asObject());
+		
+		TableColumn<videoGames, String> inizio = new TableColumn<>("Inizia: ");
+		inizio.setCellValueFactory(data ->
+        new SimpleStringProperty(data.getValue().getInizio()));
+		
+	    table.getColumns().addAll(nome, istruzione, punteggio, inizio);
+	    
+	    table.getItems().addAll(
+	    		new videoGames("Tris", "istruzioni", "schiaccia bottone", 3),
+	    		new videoGames("Carta, Forbice e Sasso", "istruzioni", "schiaccia bottone", 1),
+	    		new videoGames("Inodvina il numero", "istruzioni", "schiaccia bottone", 1),
+	    		new videoGames("Dadi", "istruzioni", "schiaccia bottone", 2));
+
+		Button start = new Button("Inizia a giocare");		// Bottone di inizio
+		root.setCenter(start);
+		
+		VBox layout = new VBox(20, table, start);
+		root.setCenter(layout);
 	}
 	
 }
