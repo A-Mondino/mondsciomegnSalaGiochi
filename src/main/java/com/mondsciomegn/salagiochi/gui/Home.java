@@ -7,6 +7,10 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -21,6 +25,20 @@ public class Home extends Application{
 
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Sala Giochi");
+        String imagePath = getClass().getResource("./img/roomM.jpg").toExternalForm();
+        BackgroundImage bgImage = new BackgroundImage(
+                new Image(imagePath),
+                BackgroundRepeat.NO_REPEAT,		// Serve a non far ripetere l'immagine nè in orizz
+                BackgroundRepeat.NO_REPEAT,		// Nè in verticale
+                BackgroundPosition.CENTER,
+                new BackgroundSize(
+                        BackgroundSize.AUTO, BackgroundSize.AUTO,
+                        false,	// Larghezza in percentuale = false
+                        false, 	// Altezza in percentuale = false
+                        true, 	// Adatta alla pagina (coprire l'intera area)
+                        false)	// Ritagliare l'immagine = false
+        );
+        root.setBackground(new Background(bgImage));
 
         // Etichette centrali
         Label roomLabel = new Label("Benvenuto in sala giochi!!");
