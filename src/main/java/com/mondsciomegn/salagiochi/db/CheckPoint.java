@@ -1,9 +1,8 @@
 package com.mondsciomegn.salagiochi.db;
 
-import java.util.Objects;
 
 public class CheckPoint {
-	private int id;							// name of category
+	private int id;							
 	private int points;
 	
 	public CheckPoint(int id, int points) {
@@ -29,8 +28,4 @@ public class CheckPoint {
 	}
 	
 	
-    
-    public int hashCode() {						
-    	return Objects.hash(id);
-    }
 }

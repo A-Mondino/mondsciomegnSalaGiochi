@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
+
 public class cartaForbiceSasso extends VideoGames {
 	
 	public cartaForbiceSasso(String name, Category category, int score) {

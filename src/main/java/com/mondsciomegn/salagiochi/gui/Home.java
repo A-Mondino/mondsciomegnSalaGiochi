@@ -1,6 +1,5 @@
 package com.mondsciomegn.salagiochi.gui;
 
-
 import com.mondsciomegn.salagiochi.db.DataBaseInitializer;
 
 import javafx.application.Application;

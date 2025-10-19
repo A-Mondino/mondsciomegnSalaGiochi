@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
+
 public class Room {
 	private Label roomLabel = new Label();
 	Label label = new Label("");						// Uso una label vuota solo per mantenere le freccie laterali alla stessa altezza
