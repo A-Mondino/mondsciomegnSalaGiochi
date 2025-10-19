@@ -10,3 +10,9 @@ SELECT * FROM videogioco [42102-224]
 2025-10-18 19:41:42.415905+02:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
 SELECT * FROM videogioco [42102-224]
+2025-10-19 16:27:37.052246+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS activityLog (id INT AUTO_INCREMENT PRIMARY KEY,data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP,punteggio INT,FOREIGN KEY ([*]user) REFERENCES User(id),FOREIGN KEY (videogame_id) REFERENCES Videogame_id(id) );"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS activityLog (id INT AUTO_INCREMENT PRIMARY KEY,data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP,punteggio INT,FOREIGN KEY (user) REFERENCES User(id),FOREIGN KEY (videogame_id) REFERENCES Videogame_id(id) ); [42001-224]
+2025-10-19 16:28:54.842900+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS activityLog (id INT AUTO_INCREMENT PRIMARY KEY,data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP,punteggio INT, [*]);"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS activityLog (id INT AUTO_INCREMENT PRIMARY KEY,data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP,punteggio INT, ); [42001-224]

@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 public abstract class VideoGames {
 	private final int id = 0;
 	private String name;
 	private Category category;
 	private int score = 0;
-	private final List<CheckPoint> checkpoints = new ArrayList<>();
+	private List<CheckPoint> checkpoints = new ArrayList<>();
 	private float time = 0;
 	
 	public VideoGames(String name, Category category, int score) {
@@ -60,18 +61,11 @@ public abstract class VideoGames {
 		return checkpoints;
 	}
 	
-	public void setCheckPoint(List<Checkpoint> checkpoints) {
+	public void setCheckPoint(List<CheckPoint> checkpoints) {
 		this.checkpoints = checkpoints;
 	}
 	
-	public boolean equals(Object o) {			// confronto oggetti VideoGames
-    	if (this == o)
-    		return true;
-    	if (!(o instanceOf VideoGames)) 
-    		return false;
-    	VideoGames v = (VideoGames) o;
-    	return id == v.id;
-    }
+	
     
     public int hashCode() {						
     	return Objects.hash(id);

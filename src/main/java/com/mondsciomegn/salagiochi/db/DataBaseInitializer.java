@@ -39,9 +39,7 @@ public class DataBaseInitializer {
         		"CREATE TABLE IF NOT EXISTS activityLog (" +
         		"id INT AUTO_INCREMENT PRIMARY KEY," +
                 "data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-        		"punteggio INT," +
-                "FOREIGN KEY (user) REFERENCES User(id)," +
-                "FOREIGN KEY (videogame_id) REFERENCES Videogame_id(id)" +
+        		"punteggio INT" +
                 " );" ;
         
         

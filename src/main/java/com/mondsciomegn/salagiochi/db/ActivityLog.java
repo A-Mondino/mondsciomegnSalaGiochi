@@ -1,14 +1,15 @@
 package com.mondsciomegn.salagiochi.db;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class ActivityLog {
-	private final User user;
-	private final VideoGames videogame;
-	private final LocalDateTime dateGame;
-	private final int score;
+	private User user;
+	private VideoGames videogame;
+	private LocalDateTime dateGame;
+	private int score;
 	
-	public ActivityLog(User user, VideoGames videogame, int score) {
+	public ActivityLog(User user, VideoGames videogame, LocalDateTime dateGame, int score) {
 		this.user = user;
 		this.videogame = videogame;
 		this.dateGame = dateGame;

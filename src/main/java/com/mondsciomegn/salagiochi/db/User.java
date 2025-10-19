@@ -3,7 +3,7 @@ package com.mondsciomegn.salagiochi.db;
 import java.util.Objects;
 
 public class User {
-    private final int id = 0;
+    private int id = 0;
     private String nickname;
     private String name;
     private String surname;
@@ -65,14 +65,7 @@ public class User {
     	this.score += Points;
     }
     
-    public boolean equals(Object o) {			// confronto oggetti User
-    	if (this == o)
-    		return true;
-    	if (!(o instanceOf User)) 
-    		return false;
-    	User user = (User) o;
-    	return id == user.id;
-    }
+    
     
     public int hashCode() {						
     	return Objects.hash(id);
