@@ -22,7 +22,11 @@ public abstract class VideoGames {
 	public abstract void play();
 	
 	private void startTimer() {
-		
+		// da finire
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	public int getScore() {
@@ -65,10 +69,5 @@ public abstract class VideoGames {
 		this.checkpoints = checkpoints;
 	}
 	
-	
-    
-    public int hashCode() {						
-    	return Objects.hash(id);
-    }
 	
 }

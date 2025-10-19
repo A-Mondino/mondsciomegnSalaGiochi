@@ -3,6 +3,7 @@ package com.mondsciomegn.salagiochi.db;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+
 public class ActivityLog {
 	private User user;
 	private VideoGames videogame;

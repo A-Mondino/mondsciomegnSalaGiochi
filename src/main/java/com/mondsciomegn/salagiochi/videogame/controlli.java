@@ -1,5 +1,6 @@
 package com.mondsciomegn.salagiochi.videogame;
 
+
 public class controlli {
 	// Controlli per tris
 		// Controllo se la posizione scritta dall'utente è accettabile

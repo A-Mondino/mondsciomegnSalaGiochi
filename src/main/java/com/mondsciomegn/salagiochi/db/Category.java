@@ -1,9 +1,8 @@
 package com.mondsciomegn.salagiochi.db;
 
-import java.util.Objects;
 
 public class Category {
-	private String name;							// name of category
+	private String name;							
 	private String description;
 	
 	public Category(String name, String description) {
@@ -29,10 +28,6 @@ public class Category {
 		this.description = description;
 	}
 	
-    
-    public int hashCode() {						
-    	return name.hashCode();
-    }
 	
 	
 }

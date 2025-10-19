@@ -8,10 +8,8 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 
 public class dadi extends VideoGames{
 	
-	
 	public dadi(String name, Category category, int score) {
 		super(name, category, score);
-		
 	}
 
 	controlli controllo = new controlli();
@@ -29,8 +27,7 @@ public class dadi extends VideoGames{
 		System.out.println("La somma dei dati lanciati dall'avversario è: "+sommaCasuale);
 
 		
-		controllo.controlloDadiMaggiore(somma, sommaCasuale);
-		
+		controllo.controlloDadiMaggiore(somma, sommaCasuale);	
 	}
 	
 	private static int lancia() {

@@ -1,6 +1,5 @@
 package com.mondsciomegn.salagiochi.db;
 
-import java.util.Objects;
 
 public class User {
     private int id = 0;
@@ -65,10 +64,5 @@ public class User {
     	this.score += Points;
     }
     
-    
-    
-    public int hashCode() {						
-    	return Objects.hash(id);
-    }
     
 }
