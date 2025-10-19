@@ -34,11 +34,11 @@ import javafx.scene.control.Button;
 
 public class Room extends Application{
 	private int currentRoom = 0; 
+	private Boolean firstTime = true;
 	private Stage primaryStage = null;
 	private BorderPane root = new BorderPane();				// Finestra 
 	private Label roomLabel = new Label();
-	Label label = new Label("");						// Uso una label vuota solo per mantenere le freccie laterali alla stessa altezza
-	
+	Scene scene = new Scene(root, 1000, 650);
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -64,7 +64,7 @@ public class Room extends Application{
 
 	private void showRoom(int room) {
 			
-        VBox box = new VBox(roomLabel,label);
+        VBox box = new VBox(roomLabel);
         box.setStyle("-fx-font-size: 30px;");
         box.setAlignment(Pos.TOP_CENTER);
         root.setTop(box);
@@ -72,17 +72,16 @@ public class Room extends Application{
         
 		switch (room) {
 	        case -1:
-	        	roomLabel.setText("Tabellone");
+	        	roomLabel.setText("Tabellone");			// VANNO MESSI IN UN CONTENITORE ADEGUATO
 	        	
 	        	roomL(root);
 	            break;
 	        case 0:
-	        	roomLabel.setText("Sala Giochi");
 	        	
 	        	roomM(root);												// Main Room
 	            break;
 	        case 1:	        	
-	        	roomLabel.setText("VideoGames");
+	        	roomLabel.setText("VideoGames");		// VANNO MESSI IN UN CONTENITORE ADEGUATO
 	        	
 	        	roomR(root);
 	            break;
@@ -152,9 +151,8 @@ public class Room extends Application{
 
         // Etichette 
         Label roomLabel = new Label("Benvenuto in sala giochi!!");
-        Label label = new Label("Se è la tua prima volta, guardati un po' intorno!!");
         roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
-        label.setStyle("-fx-font-size: 20px;");
+        
 
         // Giusto un po di formattazzione grafica ---->
 
@@ -165,8 +163,17 @@ public class Room extends Application{
         box.setMaxHeight(100);
         box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
 
+        if(firstTime) {	
+        	Label label = new Label("Se è la tua prima volta, guardati un po' intorno!!");
+        	label.setStyle("-fx-font-size: 20px;");
+        	box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Vertical Box, che impila verticalmente i parametri
+        	firstTime = false;
+        }else {
+        	roomLabel.setText("SalaGiochi");
+        	box.getChildren().addAll(roomLabel);
+
+        }
         
-        box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Vertical Box, che impila verticalmente i parametri
         StackPane centerPane = new StackPane(box);
         centerPane.setAlignment(Pos.BOTTOM_CENTER);  
         root.setCenter(centerPane);
@@ -202,7 +209,7 @@ public class Room extends Application{
         
         
         // Scena
-        Scene scene = new Scene(root, 1000, 650);
+        
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -218,12 +225,12 @@ public class Room extends Application{
 	}
 
 	private void addGameColums(TableView<VideoGames> gameTable) {
-		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco: ");
+		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco");
 		name.setCellValueFactory(data ->
         new SimpleStringProperty(data.getValue().getName()));
 
 		
-		TableColumn<VideoGames, Integer> score = new TableColumn<>("Punteggio: ");
+		TableColumn<VideoGames, Integer> score = new TableColumn<>("Punteggio");
 		score.setCellValueFactory(data ->
 		new SimpleIntegerProperty(data.getValue().getScore()).asObject());
 		
@@ -245,7 +252,7 @@ public class Room extends Application{
 	        new SimpleStringProperty(data.getValue().getNickname())
 	    );
 
-	    TableColumn<User, String> colName = new TableColumn<>("Nome");
+/*	    TableColumn<User, String> colName = new TableColumn<>("Nome");
 	    colName.setCellValueFactory(data ->
 	        new SimpleStringProperty(data.getValue().getName())
 	    );
@@ -254,13 +261,13 @@ public class Room extends Application{
 	    colSurname.setCellValueFactory(data ->
 	    	new SimpleStringProperty(data.getValue().getSurname())
 	    );
-
+*/
 	    TableColumn<User, Integer> colScore = new TableColumn<>("Score");
 	    colScore.setCellValueFactory(data ->
 	        new SimpleIntegerProperty(data.getValue().getScore()).asObject()
 	    );
 
-	    table.getColumns().addAll(colId, colNick, colName, colSurname, colScore);
+	    table.getColumns().addAll(colId, colNick, colScore);
 	}
 
 
