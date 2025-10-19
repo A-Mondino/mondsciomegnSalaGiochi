@@ -102,7 +102,7 @@ public class Room extends Application{
 	    gameTable.getItems().addAll(DataBaseContainer.getAllGames());
 	    
 	    
-	    
+	   
 	    userTable.setPrefWidth(tableWidth);
 	    gameTable.setPrefWidth(tableWidth);
 	    StackPane userPane = new StackPane(userTable);	// Metto tutto dentro ad un StackPane per centrare tutto
