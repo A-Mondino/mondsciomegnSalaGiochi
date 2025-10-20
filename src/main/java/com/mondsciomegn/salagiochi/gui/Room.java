@@ -20,6 +20,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -38,7 +39,9 @@ public class Room extends Application{
 	private Stage primaryStage = null;
 	private BorderPane root = new BorderPane();				// Finestra 
 	private Label roomLabel = new Label();
-	Scene scene = new Scene(root, 1000, 650);
+	private final int roomH = 1000;
+	private final int roomW = 650;
+	Scene scene = new Scene(root, roomH, roomW);
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -185,13 +188,18 @@ public class Room extends Application{
         leftArrow.setStyle("-fx-font-size: 40px; -fx-background-color: transparent;");
         leftArrow.setOnAction(e -> switchRoom(-1)); 		// Evento OnClick
         
-        // Wrapper pane per renderlo visibile
+        
+        AnchorPane leftAnchor = new AnchorPane();
         StackPane leftPane = new StackPane(leftArrow);
-        leftPane.setPadding(new Insets(5)); // piccolo padding interno
+        AnchorPane.setTopAnchor(leftPane,(double) roomW/3);   // 20px dal bordo superiore
+        AnchorPane.setLeftAnchor(leftPane, 20.0);  // 20px dal bordo sinistro
+        
+        leftPane.setMaxHeight(50);
         leftPane.setAlignment(Pos.CENTER_LEFT);
-        leftPane.setStyle("-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 5;");
-
-        root.setLeft(leftPane);
+        leftPane.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        leftAnchor.getChildren().add(leftPane);
+        root.setLeft(leftAnchor);
+        
 
 
         // Freccia destra
@@ -199,12 +207,16 @@ public class Room extends Application{
         rightArrow.setStyle("-fx-font-size: 40px; -fx-background-color: transparent;");
         rightArrow.setOnAction(e -> switchRoom(1)); 		// Evento OnClick
         
+        AnchorPane rightAnchor = new AnchorPane();
         StackPane rightPane = new StackPane(rightArrow);
-        rightPane.setPadding(new Insets(5));
+        AnchorPane.setTopAnchor(rightPane,(double) roomW/3);   // 20px dal bordo superiore
+        AnchorPane.setRightAnchor(rightPane, 20.0);  // 20px dal bordo sinistro
+        
+        rightPane.setMaxHeight(50);        
         rightPane.setAlignment(Pos.CENTER_RIGHT);
-        rightPane.setStyle("-fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 10;");
-
-        root.setRight(rightPane);
+        rightPane.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        rightAnchor.getChildren().add(rightPane);
+        root.setRight(rightAnchor);
 
         
         
