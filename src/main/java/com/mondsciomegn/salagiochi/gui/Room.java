@@ -15,11 +15,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -27,7 +26,9 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -227,13 +228,62 @@ public class Room extends Application{
     }
 	
 	private void roomR(BorderPane root) {
-		
+	    primaryStage.setTitle("Seleziona un gioco");
 
-		Button start = new Button("Inizia a giocare");		// Bottone di inizio
-		root.setCenter(start);
+	    GridPane grid = new GridPane();
+	    grid.setHgap(10);
+	    grid.setVgap(10);
+	    grid.setAlignment(Pos.CENTER);
+
+	    ColumnConstraints col = new ColumnConstraints();
+	    col.setPercentWidth(50);
+	    grid.getColumnConstraints().addAll(col, col);
+
+	    RowConstraints row = new RowConstraints();
+	    row.setPercentHeight(50);
+	    grid.getRowConstraints().addAll(row, row);
+
+	    // Creazione dei 4 riquadri cliccabili per i rispettivi giochi
+	    grid.add(createImagePane("./img/tris.jpg", () -> {
+	        new Tris("tris", null, currentRoom).play();  
+	    }), 0, 0);
+
+	    grid.add(createImagePane("./img/SCF.jpg", () -> {
+	        new cartaForbiceSasso("carta forbice sasso", null, currentRoom).play();
+	    }), 1, 0);
+
+	    grid.add(createImagePane("./img/dadi.jpg", () -> {
+	        new dadi("dadi", null, currentRoom).play();
+	    }), 0, 1);
+
+	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
+	        new indovinaNumero("indovina il numero", null, currentRoom).play();
+	    }), 1, 1);
+
+	    VBox centerLayout = new VBox(20, grid);
+	    centerLayout.setAlignment(Pos.CENTER);
+
+	    root.setCenter(centerLayout);
+        
+		//Button start = new Button("Inizia a giocare");		// Bottone di inizio
+		//root.setCenter(start);
 		
-		VBox layout = new VBox(20, start);
-		root.setCenter(layout);
+		//VBox layout = new VBox(20, start);
+		//root.setCenter(layout);
+	}
+	
+	private StackPane createImagePane(String imagePath, Runnable onClick) {
+	    Image img = new Image(getClass().getResourceAsStream(imagePath));
+	    ImageView imgView = new ImageView(img);
+	    imgView.setFitWidth(250);
+	    imgView.setFitHeight(250);
+	    imgView.setPreserveRatio(true);
+
+	    imgView.setOnMouseClicked(e -> onClick.run());
+
+	    StackPane pane = new StackPane(imgView);
+	    pane.setStyle("-fx-border-color: black; -fx-padding: 10;");
+	    return pane;
 	}
 
 	private void addGameColums(TableView<VideoGames> gameTable) {
@@ -281,6 +331,7 @@ public class Room extends Application{
 
 	    table.getColumns().addAll(colId, colNick, colScore);
 	}
+	
 
 
 }
