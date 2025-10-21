@@ -11,8 +11,6 @@ public class dadi extends VideoGames{
 	public dadi(String name, Category category, int score) {
 		super(name, category, score);
 	}
-
-	controlli controllo = new controlli();
 	
 	public void play() {
 		int somma, sommaCasuale;
@@ -27,7 +25,7 @@ public class dadi extends VideoGames{
 		System.out.println("La somma dei dati lanciati dall'avversario è: "+sommaCasuale);
 
 		
-		controllo.controlloDadiMaggiore(somma, sommaCasuale);	
+		controlloDadiMaggiore(somma, sommaCasuale);	
 	}
 	
 	private static int lancia() {
@@ -41,6 +39,20 @@ public class dadi extends VideoGames{
 		somma = dado1 + dado2;
 		
 		return somma;
+	}
+	
+	private static void controlloDadiMaggiore(int somma, int sommaC) {
+		if(somma<sommaC) {
+			System.out.println("HAI PERSO!");
+		}else {
+			if(somma>sommaC) {
+				System.out.println("HAI VINTO!");
+			}else {
+				if(somma==sommaC) {
+					System.out.println("PAREGGIO!");
+				}
+			}
+		}
 	}
 	
 

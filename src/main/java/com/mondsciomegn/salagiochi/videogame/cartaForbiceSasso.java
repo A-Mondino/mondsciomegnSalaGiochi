@@ -16,7 +16,6 @@ public class cartaForbiceSasso extends VideoGames {
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		Random ran = new Random();
-		controlli c = new controlli();
 		
 		int sceltaC, scelta, num;
 		
@@ -27,7 +26,7 @@ public class cartaForbiceSasso extends VideoGames {
 			System.out.println("3 - SASSO ");
 			scelta = scanner.nextInt();
 			
-			num = controlli.controlloScelta(scelta);
+			num = controlloScelta(scelta);
 			
 		}while(num == 0);
 		
@@ -49,7 +48,33 @@ public class cartaForbiceSasso extends VideoGames {
 			default:
 				break;
 		}
-		controlli.controlloVittoria(scelta, sceltaC);
+		controlloVittoria(scelta, sceltaC);
+	}
+	
+	private static int controlloScelta(int scelta) {
+		int num=0;
+		if(scelta<1 || scelta>3) {
+			System.out.println("SCELTA NON CORRETTA!!");
+		}else {
+			num++;
+		}
+		
+		return num;
+	}
+	
+	
+	private static void controlloVittoria(int scelta, int sceltaC) {
+		if((scelta == 1 && sceltaC == 1) || (scelta == 2 && sceltaC == 2) || (scelta == 3 && sceltaC == 3))  {
+			System.out.println("PAREGGIO! ");
+		}else {
+			if((scelta == 1 && sceltaC == 2) || (scelta == 2 && sceltaC == 3) || (scelta == 3 && sceltaC == 1)) {
+				System.out.println("HAI PERSO! ");
+			}else {
+				if((scelta == 1 && sceltaC == 3) || (scelta == 2 && sceltaC == 1) || (scelta == 3 && sceltaC == 2)) {
+					System.out.println("HAI VINTO! ");
+				}
+			}
+		}
 	}
 }
 

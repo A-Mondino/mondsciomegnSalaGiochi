@@ -20,9 +20,7 @@ public class indovinaNumero extends VideoGames{
 		
 		int numeroCasuale, numero, cont=0;
 		boolean uscita;
-		
-		controlli controlli = new controlli();
-		
+				
 		numeroCasuale = random.nextInt(100);
 		System.out.println(numeroCasuale);
 
@@ -33,13 +31,32 @@ public class indovinaNumero extends VideoGames{
 			
 			cont++;
 			
-			uscita = controlli.controlloNumeroCasuale(numero, numeroCasuale);
+			uscita = controlloNumeroCasuale(numero, numeroCasuale);
 		
 		}while(uscita != false && cont < 5);	
 			
 		if(cont == 5) {
 			System.out.println("HAI PERSO!");
 		}
+	}
+	
+	private static boolean controlloNumeroCasuale(int numero, int numeroCasuale) {
+		if(numero<numeroCasuale) {
+			System.out.println("Il numero che hai inserito è più PICCOLO del numero estratto");
+			return true;
+		}else {
+			
+			if(numero>numeroCasuale) {
+				System.out.println("Il numero che hai inserito è più GRANDE del numero estratto");
+				return true;
+			}else {
+				if(numero==numeroCasuale) {
+					System.out.println("HAI VINTO!");
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 
