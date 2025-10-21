@@ -68,34 +68,41 @@ public class Room extends Application{
 
 	private void showRoom(int room) {
 			
-        VBox box = new VBox(roomLabel);
-        box.setStyle("-fx-font-size: 30px;");
-        box.setAlignment(Pos.TOP_CENTER);
-        root.setTop(box);
-        root.setCenter(null);
+       root.setCenter(null);
         
 		switch (room) {
-	        case -1:
-	        	roomLabel.setText("Tabellone");			// VANNO MESSI IN UN CONTENITORE ADEGUATO
-	        	
+	        case -1:	        	
 	        	roomL(root);
 	            break;
+	            
 	        case 0:
-	        	
 	        	roomM(root);												// Main Room
 	            break;
+	            
 	        case 1:	        	
-	        	roomLabel.setText("VideoGames");		// VANNO MESSI IN UN CONTENITORE ADEGUATO
-	        	
 	        	roomR(root);
 	            break;
 		} 
 	}
 	
 	private void roomL(BorderPane root) {
+		
+		roomLabel.setText("Tabellone");
+        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+
+        VBox box = new VBox(10);   // Box per contenere la roomLabel
+        box.setPadding(new Insets(20));
+        box.setAlignment(Pos.BOTTOM_CENTER);  
+        box.setMaxWidth(300);
+        box.setMaxHeight(100);
+        box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        box.getChildren().add(roomLabel);
+        StackPane centerPane = new StackPane(box);
+        centerPane.setAlignment(Pos.BOTTOM_CENTER);          
+        
 		TableView<User> userTable = new TableView<>();
 	    TableView<VideoGames> gameTable = new TableView<>();
-	   double tableWidth = 500;		// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
+	    double tableWidth = 500;		// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
 
 	   
 	    addUserColums(userTable); // Aggiungo le colonne
@@ -116,23 +123,27 @@ public class Room extends Application{
 	    
 
 	    
-	    GridPane grid = new GridPane();	// Creo una griglia 2x2
+	    GridPane grid = new GridPane();		// Creo una griglia 2x2
 	    grid.setPadding(new Insets(20));
-	    grid.setHgap(20); // spazio orizzontale tra le tabelle
-	    grid.setVgap(20); // spazio verticale tra le tabelle
+	    grid.setHgap(20); 					// spazio orizzontale tra le tabelle
+	    grid.setVgap(20); 					// spazio verticale tra le tabelle
 
 	    // Posiziona le tabelle nella prima riga
-	    grid.add(userTable, 0, 0); // colonna 0, riga 0
-	    grid.add(gameTable, 1, 0); // colonna 1, riga 0
-
+	    grid.add(userTable, 0, 0);			// colonna 0, riga 0
+	    grid.add(gameTable, 1, 0); 			// colonna 1, riga 0
 
 	    // Centrare la griglia nella stanza
 	    BorderPane.setAlignment(grid, Pos.CENTER);
-	    root.setCenter(grid);
+	    
+	    
+	    // Aggiungere l'etichetta ad una box solo per avere tutte le etichette di ogni stanza allineate
+	    VBox centerContent = new VBox(30, grid, centerPane);
+	    centerContent.setAlignment(Pos.CENTER);
+	    root.setCenter(centerContent);
 	}
 		
 	private void roomM(BorderPane root) {
-		primaryStage.setTitle("Sala Giochi");
+		primaryStage.setTitle("Sala Giochi");			// Titolo 
         String imagePath = getClass().getResource("./img/roomM1.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
                 new Image(imagePath),
@@ -140,47 +151,56 @@ public class Room extends Application{
                 BackgroundRepeat.NO_REPEAT,		// Nè in verticale
                 BackgroundPosition.CENTER,
                 new BackgroundSize(
-                        //BackgroundSize.AUTO,
-                        //BackgroundSize.AUTO,
                 		1.0,
                 		1.0,
-                        true,	// Larghezza in percentuale = false
-                        true, 	// Altezza in percentuale = false
-                        false, 	// Adatta alla pagina (coprire l'intera area)
-                        true)	// Ritagliare l'immagine = false
+                        true,	// Larghezza in percentuale = true
+                        true, 	// Altezza in percentuale = true
+                        false, 	// Adatta alla scena = false
+                        false)	// Ritagliare l'immagine = false
         );
         root.setBackground(new Background(bgImage));
         
         
 
         // Etichette 
-        Label roomLabel = new Label("Benvenuto in sala giochi!!");
+        roomLabel.setText("Benvenuto in sala giochi!!");
         roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
         
-
         // Giusto un po di formattazzione grafica ---->
 
-        VBox box = new VBox(10);   // Spazio tra etichette
+        VBox box = new VBox(10);   
         box.setPadding(new Insets(20));
         box.setAlignment(Pos.BOTTOM_CENTER);  
         box.setMaxWidth(550);
         box.setMaxHeight(100);
         box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
-
-        if(firstTime) {	
+        StackPane centerPane = new StackPane(box);
+        centerPane.setAlignment(Pos.BOTTOM_CENTER);
+        
+        if(!firstTime) {		// Se non è la prima volta che visualizzi la stanza centrale:
+        	GridPane grid = new GridPane();	// Creo una griglia 2x2 per adesso vuota
+    	    grid.setPadding(new Insets(20));
+    	    BorderPane.setAlignment(grid, Pos.CENTER);
+    	    roomLabel.setText("SalaGiochi");
+            box.setMaxWidth(300);			
+    	    box.getChildren().add(roomLabel);
+    	    // Aggiungere l'etichetta ad una vìbox sempre per uniformità tra etichette
+    	    VBox centerContent = new VBox(430, grid, centerPane);		// Il padding è così grande perch+ per ora la griglia è vuota
+    	    centerContent.setAlignment(Pos.CENTER);
+    	    root.setCenter(centerContent);
+    	    
+    	    //----->> Aggangiare qui di seguito il codice se implementiamo un "Registra entrata"
+    	    
+        }else {		// Else è per forza la prima volta che visualizzi la stanza
         	Label label = new Label("Se è la tua prima volta, guardati un po' intorno!!");
         	label.setStyle("-fx-font-size: 20px;");
         	box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Vertical Box, che impila verticalmente i parametri
-        	firstTime = false;
-        }else {
-        	roomLabel.setText("SalaGiochi");
-        	box.getChildren().addAll(roomLabel);
-
+        	root.setCenter(centerPane);
+        	firstTime = false;			// Flag visualizzata a false
         }
         
-        StackPane centerPane = new StackPane(box);
-        centerPane.setAlignment(Pos.BOTTOM_CENTER);  
-        root.setCenter(centerPane);
+        
+        
 
         
   
@@ -192,7 +212,7 @@ public class Room extends Application{
         
         AnchorPane leftAnchor = new AnchorPane();
         StackPane leftPane = new StackPane(leftArrow);
-        AnchorPane.setTopAnchor(leftPane,(double) roomW/3);   // 20px dal bordo superiore
+        AnchorPane.setTopAnchor(leftPane,(double) roomW/2.5);   // 20px dal bordo superiore
         AnchorPane.setLeftAnchor(leftPane, 20.0);  // 20px dal bordo sinistro
         
         leftPane.setMaxHeight(50);
@@ -210,13 +230,13 @@ public class Room extends Application{
         
         AnchorPane rightAnchor = new AnchorPane();
         StackPane rightPane = new StackPane(rightArrow);
-        AnchorPane.setTopAnchor(rightPane,(double) roomW/3);   // 20px dal bordo superiore
+        AnchorPane.setTopAnchor(rightPane,(double) roomW/2.5);   // 20px dal bordo superiore
         AnchorPane.setRightAnchor(rightPane, 20.0);  // 20px dal bordo sinistro
         
         rightPane.setMaxHeight(50);        
         rightPane.setAlignment(Pos.CENTER_RIGHT);
         rightPane.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
-        rightAnchor.getChildren().add(rightPane);
+        rightAnchor.getChildren().add(rightPane);		// L'anchor serve solo per centrare le freccie verticalmente
         root.setRight(rightAnchor);
 
         
@@ -228,11 +248,23 @@ public class Room extends Application{
     }
 	
 	private void roomR(BorderPane root) {
-	    primaryStage.setTitle("Seleziona un gioco");
+		roomLabel.setText("VideoGames");
+        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+        
+
+        VBox box = new VBox(10);    		// Stesso codice per le etichette delle altre due stanze
+        box.setPadding(new Insets(20));
+        box.setAlignment(Pos.BOTTOM_CENTER);  
+        box.setMaxWidth(300);
+        box.setMaxHeight(100);
+        box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        box.getChildren().add(roomLabel);
+        StackPane centerPane = new StackPane(box);
+        centerPane.setAlignment(Pos.BOTTOM_CENTER);  
 
 	    GridPane grid = new GridPane();
-	    grid.setHgap(10);
-	    grid.setVgap(10);
+	    grid.setHgap(5);
+	    grid.setVgap(5);
 	    grid.setAlignment(Pos.CENTER);
 
 	    ColumnConstraints col = new ColumnConstraints();
@@ -260,23 +292,18 @@ public class Room extends Application{
 	        new indovinaNumero("indovina il numero", null, currentRoom).play();
 	    }), 1, 1);
 
-	    VBox centerLayout = new VBox(20, grid);
-	    centerLayout.setAlignment(Pos.CENTER);
-
-	    root.setCenter(centerLayout);
-        
-		//Button start = new Button("Inizia a giocare");		// Bottone di inizio
-		//root.setCenter(start);
-		
-		//VBox layout = new VBox(20, start);
-		//root.setCenter(layout);
+	    
+	    VBox centerContent = new VBox(20, grid, centerPane);
+	    centerContent.setAlignment(Pos.CENTER);
+	    root.setCenter(centerContent);
+	    
 	}
 	
-	private StackPane createImagePane(String imagePath, Runnable onClick) {
+	private StackPane createImagePane(String imagePath, Runnable onClick) {	// x i 4 quadranti delle immagini dei giochi
 	    Image img = new Image(getClass().getResourceAsStream(imagePath));
 	    ImageView imgView = new ImageView(img);
-	    imgView.setFitWidth(250);
-	    imgView.setFitHeight(250);
+	    imgView.setFitWidth(200);
+	    imgView.setFitHeight(200);
 	    imgView.setPreserveRatio(true);
 
 	    imgView.setOnMouseClicked(e -> onClick.run());
@@ -330,7 +357,9 @@ public class Room extends Application{
 	    );
 
 	    table.getColumns().addAll(colId, colNick, colScore);
+	    
 	}
+	
 	
 
 
