@@ -1,170 +1,164 @@
 package com.mondsciomegn.salagiochi.videogame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
+import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 
 public class Tris extends VideoGames{
-	public Tris(String name, Category category, int score) {
+	 public Tris(String name, Category category, int score) {
 		super(name, category, score);
 	}
-	
-	private static void stampaGriglia(char[][] areaGioco) {
-	    System.out.println("\n  0   1   2"); 
-	    for (int i = 0; i < 3; i++) {
-	        System.out.print(i + " "); 
-	        for (int j = 0; j < 3; j++) {
-	            System.out.print(areaGioco[i][j]);
-	            if (j < 2) System.out.print(" | ");
-	        }
-	        System.out.println();
-	        if (i < 2) System.out.println("  -----------");
+
+	private Button[][] buttons = new Button[3][3];
+	    private char[][] areaGioco = new char[3][3];
+	    private boolean gameOver = false;
+	    private Random random = new Random();
+
+	    @Override
+	    public void play() {
+	    	Platform.runLater(() -> {
+	    		mostraPopUp("Inserisci tre simboli uguali in orizzontale, obliquo o verticale" +
+	            " prima dell'avversario. Il primo giocatore che riesce a creare una di queste" + 
+	    		" combinazioni, vince la partita! Se invece tutte le caselle si riempiono senza "+
+	            "che nessuno abbia allineato i tre simboli, il gioco termina in pareggio." );
+	            Stage primaryStage = new Stage();
+	            startGame(primaryStage);
+	        });
 	    }
-	    System.out.println();
-	}
-	
-	private static int[] mossaCasuale(char[][] griglia) {
-	    Random rand = new Random();
-	    int riga, colonna;
 
-	    do {
-	        riga = rand.nextInt(3); 
-	        colonna = rand.nextInt(3);
-	    } while (griglia[riga][colonna] != ' ');
+	    private void startGame(Stage stage) {
+	        stage.setTitle("Gioco Tris");
 
-	    return new int[]{riga, colonna};
-	}
-	
-	private static int tastiera(int riga) {
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("Scrivere dove vuoi posizionare la figura: ");
-		
-		System.out.println("Scrivere il numero della riga dove posizionare la figura: ");
-		riga = scanner.nextInt();
+	        GridPane grid = new GridPane();
 
-		return riga;
-	}
-	
-	private static int tastiera(int riga, int colonna) {
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("Scrivere dove vuoi posizionare la figura: ");
-		
-		System.out.println("Scrivere il numero della colonna dove posizionare la figura: ");
-		colonna = scanner.nextInt();
-		
-		return colonna;
-	}
+	        for (int i = 0; i < 3; i++) {
+	            for (int j = 0; j < 3; j++) {
+	                areaGioco[i][j] = ' ';
+	                Button button = new Button("");
+	                button.setMinSize(100, 100);
+	                button.setStyle("-fx-font-size: 36px;");
 
-	@Override
-	public void play() {
-		int riga = 0, colonna = 0, num;
-		boolean ris, fine=false;
-		final char[][] areaGioco = {
-				{' ', ' ', ' '},
-				{' ', ' ', ' '},
-				{' ', ' ', ' '},
-		};
-		
-		System.out.println("TRIS ");
-		System.out.println("Inserisci il segno nella griglia di gioco, se fai tre segni vicini (orizzontalmente, verticalmente e in obliquo) vinci!");
-		System.out.println("Inserisci il numero della riga (da 0 a 2) e della colonna (da 0 a 2) per indicare la posizione dove vuoi giocare... \n\n");
+	                final int riga = i;
+	                final int colonna = j;
 
+	                button.setOnAction(e -> {
+	                    if (!gameOver && button.getText().isEmpty()) {
+	                        playerMove(riga, colonna);
+	                    }
+	                });
 
-		do {
-			do {
-				num = 0;
-				riga = tastiera(riga);
-				colonna = tastiera(riga, colonna);
-				
-				ris = controllo(riga, colonna, areaGioco);
-				
-				if(ris == false) {
-					System.out.println("POSIZIONE NON TROVATA");
-					num++; 
-				}
-				
-				}while(num != 0);
-			
-			//se il valore inserito dall'utente è corretto inserisce la X
-			areaGioco[riga][colonna] = 'X';
-
-			int mossa[] = mossaCasuale(areaGioco);
-			int rigaC = mossa[0];
-			int colonnaC = mossa[1];
-			
-			System.out.println("POSIZIONE COMPUTER " + rigaC + "," +colonnaC);
-			
-			//O segno computer
-			areaGioco[rigaC][colonnaC] = 'O';
-			
-			stampaGriglia(areaGioco);
-			fine = controlloTris(areaGioco);
-			
-		}while(fine != true);
-	}
-	
-	private static boolean controllo(int riga, int colonna, char[][] areaGioco) {
-		
-		if(riga>2 || riga<0 || colonna>2 || colonna<0) {
-			return false;
-		}else {
-			if (areaGioco[riga][colonna] != ' ') {
-	        return false;
-	        }else {
-			return true;
+	                buttons[i][j] = button;
+	                grid.add(button, j, i);
+	            }
 	        }
-		}
+
+	        Scene scene = new Scene(grid, 300, 300);
+	        stage.setScene(scene);
+	        stage.show();
+	    }
+
+	    private void playerMove(int riga, int colonna) {
+	        areaGioco[riga][colonna] = 'X';
+	        buttons[riga][colonna].setText("X");
+
+	        if (controlloGioco('X')) {
+	            gameOver = true;
+	            mostraMessaggio("Hai vinto!");
+	            return;
+	        }
+
+	        computerMove();
+
+	        if (controlloGioco('O')) {
+	            gameOver = true;
+	            mostraMessaggio("Hai perso!");
+	        }
+	    }
+
+	    private void computerMove() {
+	        if (gameOver) return;
+
+	        int[] mossa = mossaCasuale();
+
+	        if (mossa == null) {
+	            gameOver = true;
+	            mostraMessaggio("Pareggio!");
+	            return;
+	        }
+
+	        int riga = mossa[0];
+	        int colonna = mossa[1];
+	        areaGioco[riga][colonna] = 'O';
+	        buttons[riga][colonna].setText("O");
+	    }
+
+	    private int[] mossaCasuale() {
+	        List<int[]> libere = new ArrayList<>();
+	        for (int i = 0; i < 3; i++) {
+	            for (int j = 0; j < 3; j++) {
+	                if (areaGioco[i][j] == ' ') {
+	                    libere.add(new int[]{i, j});
+	                }
+	            }
+	        }
+	        if (libere.isEmpty()) return null;
+
+	        return libere.get(random.nextInt(libere.size()));
+	    }
+
+	    private boolean controlloGioco(char simbolo) {
+	        for (int i = 0; i < 3; i++) {
+	            if (areaGioco[i][0] == simbolo && areaGioco[i][1] == simbolo && areaGioco[i][2] == simbolo)
+	                return true;
+	        }
+	        for (int j = 0; j < 3; j++) {
+	            if (areaGioco[0][j] == simbolo && areaGioco[1][j] == simbolo && areaGioco[2][j] == simbolo)
+	                return true;
+	        }
+	        if (areaGioco[0][0] == simbolo && areaGioco[1][1] == simbolo && areaGioco[2][2] == simbolo)
+	            return true;
+	        if (areaGioco[0][2] == simbolo && areaGioco[1][1] == simbolo && areaGioco[2][0] == simbolo)
+	            return true;
+	        return false;
+	    }
+
+	    // Risulatato partita
+	    private void mostraMessaggio(String messaggio) {
+	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	        alert.setTitle("Risultato");
+	        alert.setHeaderText(null);
+	        alert.setContentText(messaggio);
+	        alert.showAndWait();
+	    }
+	    
+	    // Pop-up istruzioni di gioco 
+	    private void mostraPopUp(String messaggio) {
+	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	        alert.setTitle("Dettagli Gioco");
+	        alert.setHeaderText("Istruzioni:");
+	        alert.setContentText(messaggio);
+	        alert.showAndWait();
+	    }
 	}
 	
-	private static boolean controlloTris(char[][] areaGioco) {
-		for(int i=0; i<2; i++) {
-			
-			// Orizzontale
-			if(areaGioco[i][0] == 'X' && areaGioco[i][1] == 'X' && areaGioco[i][2] == 'X') {
-				System.out.println("HAI VINTO!");
-				return true;
-			}
-			
-			if(areaGioco[i][0] == 'O' && areaGioco[i][1] == 'O' && areaGioco[i][2] == 'O') {
-					System.out.println("HAI PERSO!");
-					return true;
-				}
-			}
-		
-		
-		for(int j=0; j<2; j++) {
-			
-			// Vericale
-			if(areaGioco[0][j] == 'X' && areaGioco[1][j] == 'X' && areaGioco[2][j] == 'X') {
-				System.out.println("HAI VINTO!");
-				return true;
-			}
-
-			if(areaGioco[0][j] == 'O' && areaGioco[1][j] == 'O' && areaGioco[2][j] == 'O') {
-				System.out.println("HAI PERSO!");
-				return true;
-				}
-			}
-		
-		// Obliquo
-		if((areaGioco[0][0] == 'X' && areaGioco[1][1] == 'X' && areaGioco[2][2] == 'X')||(areaGioco[0][2] == 'X' && areaGioco[1][1] == 'X' && areaGioco[2][0] == 'X')){
-			System.out.println("HAI VINTO!");
-			return true;
-		}
-		
-		if((areaGioco[0][0] == 'O' && areaGioco[1][1] == 'O' && areaGioco[2][2] == 'O')||(areaGioco[0][2] == 'O' && areaGioco[1][1] == 'O' && areaGioco[2][0] == 'O')) {
-			System.out.println("HAI PERSO!");
-			return true;
-			}
-			
-		return false;
-			
-		}
-	
-
-}
