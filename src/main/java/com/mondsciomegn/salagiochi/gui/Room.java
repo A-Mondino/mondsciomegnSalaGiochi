@@ -15,8 +15,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -29,12 +32,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class Room extends Application{
 	private int currentRoom = 0; 
@@ -88,7 +95,7 @@ public class Room extends Application{
 	}
 	
 	private void roomL(BorderPane root) {
-		
+		root.getTop().setVisible(false);
 		roomLabel.setText("Tabellone");
         roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
 
@@ -146,7 +153,7 @@ public class Room extends Application{
 		
 	private void roomM(BorderPane root) {
 		primaryStage.setTitle("Sala Giochi");			// Titolo 
-        String imagePath = getClass().getResource("./img/roomM1.jpg").toExternalForm();
+        String imagePath = getClass().getResource("./img/roomM.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
                 new Image(imagePath),
                 BackgroundRepeat.NO_REPEAT,		// Serve a non far ripetere l'immagine nè in orizz
@@ -160,9 +167,25 @@ public class Room extends Application{
                         false, 	// Adatta alla scena = false
                         false)	// Ritagliare l'immagine = false
         );
-        root.setBackground(new Background(bgImage));
+        root.setBackground(new Background(bgImage));		// Solo per l'immagine sfondo
         
         
+        ToolBar toolbar = new ToolBar();		// ToolBar per il login nel sistema 
+        toolbar.setPadding(new Insets(15));
+        String tmp = getClass().getResource("./img/tmp.png").toExternalForm();	// Da cambiare questa foto....
+      
+        ImageView imageView = new ImageView(new Image(tmp));		// Crei un ImageView per poter mostrare la foto
+        imageView.setFitWidth(30);   
+        imageView.setFitHeight(30);
+        imageView.setPreserveRatio(true);
+        Region spacer = new Region();			// Questo spacer in realtà non serve a niente, ma non esiste altro modo per mettere l'elemento nella toolBar tutto a sinistra...
+        HBox.setHgrow(spacer, Priority.ALWAYS); // ...quindi uso uno spacer per "pushare" l'elemento a sinistra
+
+        toolbar.getItems().addAll(spacer,imageView);
+        toolbar.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        
+        root.setTop(toolbar);	// Aggiungo alla root
+        root.getTop().setVisible(true);	// E la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
 
         // Etichette 
         roomLabel.setText("Benvenuto in sala giochi!!");
@@ -170,40 +193,49 @@ public class Room extends Application{
         
         // Giusto un po di formattazzione grafica ---->
 
-        VBox box = new VBox(10);   
+        VBox box = new VBox(10);   	// La box per il titolo principale
         box.setPadding(new Insets(20));
         box.setAlignment(Pos.BOTTOM_CENTER);  
-        box.setMaxWidth(550);
-        box.setMaxHeight(100);
         box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
-        StackPane centerPane = new StackPane(box);
-        centerPane.setAlignment(Pos.BOTTOM_CENTER);
+        
+        
+        GridPane grid = new GridPane();		// La griglia per formattazione, da valutare se metterci qualcosa dentro
+        grid.setPadding(new Insets(20));
+        grid.setHgap(50);
+        grid.setVgap(50);
+        grid.setAlignment(Pos.TOP_RIGHT);
+        
+        
+        VBox formLoginBox =  new VBox();		// Per ora inutilizzati perchè li farò comparire una volta aggiunto l'event listener sulla foto nella toolbar
+        formLoginBox = LoginBox();
+        VBox formRegisterBox = new VBox();
+        formRegisterBox = RegisterBox();
+       
+       // grid.add(formRegisterBox, 0, 0); // cella (0,0)
+       // grid.add(formLoginBox, 1, 0);    // cella (0,1)
+        int extraPadding = 0;
         
         if(!firstTime) {		// Se non è la prima volta che visualizzi la stanza centrale:
-        	GridPane grid = new GridPane();	// Creo una griglia 2x2 per adesso vuota
-    	    grid.setPadding(new Insets(20));
-    	    BorderPane.setAlignment(grid, Pos.CENTER);
     	    roomLabel.setText("SalaGiochi");
-            box.setMaxWidth(300);			
+            box.setMaxWidth(300);		
+            box.setMaxHeight(100);
     	    box.getChildren().add(roomLabel);
-    	    // Aggiungere l'etichetta ad una vìbox sempre per uniformità tra etichette
-    	    VBox centerContent = new VBox(430, grid, centerPane);		// Il padding è così grande perch+ per ora la griglia è vuota
-    	    centerContent.setAlignment(Pos.CENTER);
-    	    root.setCenter(centerContent);
-    	    
-    	    //----->> Aggangiare qui di seguito il codice se implementiamo un "Registra entrata"
-    	    
+    	    extraPadding = 70;
+   
         }else {		// Else è per forza la prima volta che visualizzi la stanza
         	Label label = new Label("Se è la tua prima volta, guardati un po' intorno!!");
         	label.setStyle("-fx-font-size: 20px;");
+        	box.setMaxWidth(550);
+            box.setMaxHeight(100);
         	box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Vertical Box, che impila verticalmente i parametri
-        	root.setCenter(centerPane);
         	firstTime = false;			// Flag visualizzata a false
+        	
         }
-        
-        
-        
-
+        StackPane centerPane = new StackPane(box);		// Aggiungo la box dopo che l'ho formattata in base a firstTime
+        centerPane.setAlignment(Pos.BOTTOM_CENTER);		// La centro
+        VBox centerContent = new VBox((400 + extraPadding), grid, centerPane);	// Questo serve solo per mettere in modo ordinato gli elementi (l'extra padding è solo per formattazione grafica)
+        centerContent.setAlignment(Pos.CENTER);
+        root.setCenter(centerContent);
         
   
         // Freccia sinistra
@@ -214,7 +246,7 @@ public class Room extends Application{
         
         AnchorPane leftAnchor = new AnchorPane();
         StackPane leftPane = new StackPane(leftArrow);
-        AnchorPane.setTopAnchor(leftPane,(double) roomW/2.5);   // 20px dal bordo superiore
+        AnchorPane.setTopAnchor(leftPane,(double) (roomW/2.5));   // 20px dal bordo superiore
         AnchorPane.setLeftAnchor(leftPane, 20.0);  // 20px dal bordo sinistro
         
         leftPane.setMaxHeight(50);
@@ -232,7 +264,7 @@ public class Room extends Application{
         
         AnchorPane rightAnchor = new AnchorPane();
         StackPane rightPane = new StackPane(rightArrow);
-        AnchorPane.setTopAnchor(rightPane,(double) roomW/2.5);   // 20px dal bordo superiore
+        AnchorPane.setTopAnchor(rightPane,(double) (roomW/2.5));   // 20px dal bordo superiore
         AnchorPane.setRightAnchor(rightPane, 20.0);  // 20px dal bordo sinistro
         
         rightPane.setMaxHeight(50);        
@@ -249,7 +281,61 @@ public class Room extends Application{
         primaryStage.show();
     }
 	
+	private VBox RegisterBox() {		// Da verificare se va cambiata dopo l'event listener sulla foto della toolbar
+		VBox registerBox = new VBox(10);
+        registerBox.setAlignment(Pos.CENTER);
+        registerBox.setPadding(new Insets(20));
+        registerBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
+        Label regTitle = new Label("Registrati");
+        regTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        TextField regUser = new TextField();
+        regUser.setPromptText("Username");
+        PasswordField regPass = new PasswordField();
+        regPass.setPromptText("Password");
+        PasswordField regPassConf = new PasswordField();
+        regPassConf.setPromptText("Conferma Password");
+        Button regButton = new Button("Registrati");
+        regButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8;");
+        regButton.setOnAction(e -> {
+            if (regUser.getText().isEmpty() || regPass.getText().isEmpty() || regPassConf.getText().isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Compila tutti i campi!", ButtonType.OK).showAndWait();
+            } else if (!regPass.getText().equals(regPassConf.getText())) {
+                new Alert(Alert.AlertType.ERROR, "Le password non coincidono!", ButtonType.OK).showAndWait();
+            } else {
+                new Alert(Alert.AlertType.INFORMATION, "Registrazione completata per " + regUser.getText() + "!", ButtonType.OK).showAndWait();
+            }
+        });
+        registerBox.getChildren().addAll(regTitle, regUser, regPass, regPassConf, regButton);
+
+		return registerBox;
+	}
+
+	private VBox LoginBox() {		// Da verificare se va cambiata dopo l'event listener sulla foto della toolbar
+		VBox loginBox = new VBox(10);
+        loginBox.setAlignment(Pos.CENTER);
+        loginBox.setPadding(new Insets(20));
+        loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
+        Label logTitle = new Label("Accedi");
+        logTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        TextField logUser = new TextField();
+        logUser.setPromptText("Username");
+        PasswordField logPass = new PasswordField();
+        logPass.setPromptText("Password");
+        Button logButton = new Button("Login");
+        logButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;");
+        logButton.setOnAction(e -> {
+            if (logUser.getText().isEmpty() || logPass.getText().isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Inserisci username e password!", ButtonType.OK).showAndWait();
+            } else {
+                new Alert(Alert.AlertType.INFORMATION, "Benvenuto " + logUser.getText() + "!", ButtonType.OK).showAndWait();
+            }
+        });
+        loginBox.getChildren().addAll(logTitle, logUser, logPass, logButton);
+        return loginBox;
+	}
+
 	private void roomR(BorderPane root) {
+		root.getTop().setVisible(false);
 		roomLabel.setText("VideoGames");
         roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
         
