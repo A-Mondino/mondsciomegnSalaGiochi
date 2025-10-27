@@ -2,7 +2,6 @@ package com.mondsciomegn.salagiochi.db;
 
 
 public class User {
-    private int id = 0;
     private String nickname;
     private String name;
     private String password;
@@ -28,14 +27,6 @@ public class User {
         this.name = name;
         this.password = password;
         this.score = 0;
-    }
-
-    public int getId() { 
-    	return id;
-    }
-    
-    public void setId(int id) {
-    	this.id = id;
     }
     
     public String getNickname() {

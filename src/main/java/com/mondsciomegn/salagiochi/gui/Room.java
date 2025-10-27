@@ -113,12 +113,15 @@ public class Room extends Application{
         
 		TableView<User> userTable = new TableView<>();
 	    TableView<VideoGames> gameTable = new TableView<>();
+	    
 	    double tableWidth = 500;		// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
 
 	   
 	    addUserColums(userTable); // Aggiungo le colonne
+	    userTable.getColumns().get(2).setVisible(false);	// Nascondo la password
 	    addGameColums(gameTable);
 	    
+	   
 	    
 	    userTable.getItems().addAll(DataBaseContainer.getAllUsers()); // Aggiungo i dati
 	    gameTable.getItems().addAll(DataBaseContainer.getAllGames());
@@ -389,7 +392,7 @@ public class Room extends Application{
             	try {
                    User newUser = new User(regNickname.getText(), regUser.getText(),  regPass.getText());                    
                     
-                   String sql = "INSERT INTO utente(nickname, nome, password, score) VALUES (?, ?, ?, ?)";
+                   String sql = "INSERT INTO utente(nickname, nome, psww , score) VALUES (?, ?, ?, ?)";
                     
                     try (Connection conn = DataBaseConnection.getConnection();
                             PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -398,13 +401,41 @@ public class Room extends Application{
                         stmt.setString(2, newUser.getName());
                         stmt.setString(3, newUser.getPassword());
                         stmt.setInt(4,0);
-                        stmt.executeUpdate(); // esegue l'inserimento
-
-                        infoAlert.setTitle("Registrazione riuscita");      // Titolo della finestra dell'alert
-                        infoAlert.setHeaderText("Benvenuto " + regUser.getText() + "!");	// Messaggio
-                        infoAlert.showAndWait();
                         
-                        popupStage.close();
+                        
+                        try {
+                            stmt.executeUpdate(); // prova a inserire l'utente
+                            infoAlert.setTitle("Registrazione riuscita");
+                            infoAlert.setHeaderText("Benvenuto " + regUser.getText() + "!\nRicordati di fare il Login");
+                            infoAlert.showAndWait();
+                            
+                            
+                            
+                            regUser.clear();
+                            regNickname.clear();
+                            regPass.clear();
+                            regPassConf.clear();
+                          //  popupStage.close();
+
+                        } catch (SQLException ex) {
+                            // Controlla se è violazione di UNIQUE o PRIMARY KEY
+                            if (ex.getErrorCode() == 23505 || ex.getMessage().contains("Unique") || ex.getMessage().contains("PRIMARY KEY")) {
+                                errorAlert.setTitle("Errore registrazione");
+                                errorAlert.setHeaderText("Nickname già esistente!");
+                                errorAlert.showAndWait();
+
+                                regUser.clear();
+                                regNickname.clear();
+                                regPass.clear();
+                                regPassConf.clear();
+                                
+                            } else {
+                                ex.printStackTrace();
+                                errorAlert.setTitle("Errore DB");
+                                errorAlert.setHeaderText("Impossibile registrare l'utente!");
+                                errorAlert.showAndWait();
+                            }
+                        }
                            
                        } catch (SQLException e1) {
                            e1.printStackTrace();
@@ -437,6 +468,7 @@ public class Room extends Application{
         logTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         TextField logUser = new TextField();
         logUser.setPromptText("Nickname");
+
         PasswordField logPass = new PasswordField();
         logPass.setPromptText("Password");
         Button logButton = new Button("Login");
@@ -510,10 +542,6 @@ public class Room extends Application{
 	@SuppressWarnings("unchecked")
 	private void addUserColums(TableView<User> table) {
 		
-	    TableColumn<User, Integer> colId = new TableColumn<>("ID");
-	    colId.setCellValueFactory(data ->
-	        new SimpleIntegerProperty(data.getValue().getId()).asObject()
-	    );
 
 	    TableColumn<User, String> colNick = new TableColumn<>("NickName");
 	    colNick.setCellValueFactory(data ->
@@ -525,7 +553,7 @@ public class Room extends Application{
 	        new SimpleStringProperty(data.getValue().getName())
 	    );
 	    
-	    TableColumn<User, String> colPassword = new TableColumn<>("Password");
+	    TableColumn<User, String> colPassword = new TableColumn<>("psww");
 	    colPassword.setCellValueFactory(data ->
 	    	new SimpleStringProperty(data.getValue().getPassword())
 	    );
@@ -536,7 +564,7 @@ public class Room extends Application{
 	    );
 
 	    
-	    table.getColumns().addAll(colId, colNick, colName, colPassword, colScore);
+	    table.getColumns().addAll(colNick, colName, colPassword, colScore);
 	}
 	
 	

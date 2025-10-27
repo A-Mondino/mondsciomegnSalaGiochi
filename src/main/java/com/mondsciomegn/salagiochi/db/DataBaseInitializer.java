@@ -8,11 +8,11 @@ import java.sql.Statement;
 public class DataBaseInitializer {
     public static void initialize() {
         String user = 
+        		//"DROP TABLE IF EXISTS utente; " +
                 "CREATE TABLE IF NOT EXISTS utente (" +
-                "id INT AUTO_INCREMENT PRIMARY KEY," +
-                "nickname VARCHAR(30)," +
+                "nickname VARCHAR(30) PRIMARY KEY," +
                 "nome VARCHAR(30), " +
-                "password VARCHAR(30), " +
+                "psww VARCHAR(30), " +
                 "score INT" +
                 " );" ;
         
