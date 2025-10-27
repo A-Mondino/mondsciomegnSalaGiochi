@@ -5,18 +5,30 @@ public class User {
     private int id = 0;
     private String nickname;
     private String name;
-    private String surname;
+    private String password;
     private int score = 0;
 
     
-    public User(String nickname, String name, String surname, int score) {
+    public User(String nickname, String name, String password, int score) {
         if (nickname == null) throw new IllegalArgumentException("Nickame non valido");
         this.nickname = nickname;
         this.name = name;
-        this.surname = surname;
+        this.password = password;
         this.score = score;
     }
-    //
+    
+    public User(String nickname, String name, int score) {
+        this.nickname = nickname;
+        this.name = name;
+        this.score = 0;
+    }
+    
+    public User(String nickname, String name, String password) {
+        this.nickname = nickname;
+        this.name = name;
+        this.password = password;
+        this.score = 0;
+    }
 
     public int getId() { 
     	return id;
@@ -42,21 +54,21 @@ public class User {
     	this.name = name;
     }
     
-    public String getSurname() {
-    	return surname;
+    public String getPassword() {
+    	return password;
     }
     
-    public void setSurname() { 
-    	this.surname = surname;
+    public void setPassword(String password) { 
+    	this.password = password;
     }
     
     public int getScore() { 
     	return score; 
     }
     
-    public void setScore() {
+    public void setScore(int score) {
     	if(score < 0) throw new IllegalArgumentException("Lo score non può essere negativo!");
-    	this.score = score; 
+    		this.score = score; 
     }
     
     public void addScore(int Points) {

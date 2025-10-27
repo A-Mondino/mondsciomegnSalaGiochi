@@ -12,7 +12,7 @@ public class DataBaseInitializer {
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
                 "nickname VARCHAR(30)," +
                 "nome VARCHAR(30), " +
-                "cognome VARCHAR(30), " +
+                "password VARCHAR(30), " +
                 "score INT" +
                 " );" ;
         

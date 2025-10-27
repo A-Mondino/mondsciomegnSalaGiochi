@@ -22,7 +22,7 @@ public class DataBaseContainer {
 	                User u = new User(
 	                        rs.getString("nickname"),
 	                        rs.getString("nome"),
-	                        rs.getString("cognome"),
+	                        rs.getString("password"),
 	                        rs.getInt("score")
 	                );
 	                users.add(u);

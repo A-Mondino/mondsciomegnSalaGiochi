@@ -1,7 +1,14 @@
 package com.mondsciomegn.salagiochi.gui;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import com.mondsciomegn.salagiochi.*;
 import com.mondsciomegn.salagiochi.db.Category;
+import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.DataBaseContainer;
 import com.mondsciomegn.salagiochi.db.DataBaseInitializer;
 import com.mondsciomegn.salagiochi.db.User;
@@ -42,6 +49,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.Node;
 
 public class Room extends Application{
 	private int currentRoom = 0; 
@@ -78,17 +86,20 @@ public class Room extends Application{
 	private void showRoom(int room) {
 			
        root.setCenter(null);
-        
-		switch (room) {
-	        case -1:	        	
+       roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+       switch (room) {
+	        case -1:	    
+	        	roomLabel.setText("Tabellone");
 	        	roomL(root);
 	            break;
 	            
 	        case 0:
+	        	roomLabel.setText("Benvenuto in sala giochi!!");
 	        	roomM(root);												// Main Room
 	            break;
 	            
-	        case 1:	        	
+	        case 1:	  
+	        	roomLabel.setText("VideoGames");
 	        	roomR(root);
 	            break;
 		} 
@@ -96,17 +107,8 @@ public class Room extends Application{
 	
 	private void roomL(BorderPane root) {
 		root.getTop().setVisible(false);
-		roomLabel.setText("Tabellone");
-        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
 
-        VBox box = new VBox(10);   // Box per contenere la roomLabel
-        box.setPadding(new Insets(20));
-        box.setAlignment(Pos.BOTTOM_CENTER);  
-        box.setMaxWidth(300);
-        box.setMaxHeight(100);
-        box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
-        box.getChildren().add(roomLabel);
-        StackPane centerPane = new StackPane(box);
+        StackPane centerPane = new StackPane(boxTitle());
         centerPane.setAlignment(Pos.BOTTOM_CENTER);          
         
 		TableView<User> userTable = new TableView<>();
@@ -187,10 +189,43 @@ public class Room extends Application{
         root.setTop(toolbar);	// Aggiungo alla root
         root.getTop().setVisible(true);	// E la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
 
-        // Etichette 
-        roomLabel.setText("Benvenuto in sala giochi!!");
-        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+    
+        imageView.setOnMouseClicked(event -> {  // Evento on-click
+            Stage popupStage = new Stage();		// Creo un nuovo Stage (finestra figlia)
+            popupStage.setTitle("Login / Form");
+            
+            GridPane formGrid = new GridPane();		// Uso una griglia per mettere tutto in modo ordinato
+            formGrid.setPadding(new Insets(20));
+            formGrid.setHgap(50);
+            formGrid.setVgap(50);
+            formGrid.setAlignment(Pos.CENTER);
+            
+            
+            VBox formLoginBox =  new VBox();		
+            formLoginBox = LoginBox(popupStage);			// Carico il form
+            VBox formRegisterBox = new VBox();
+            formRegisterBox = RegisterBox(popupStage);	// Carico il form
+            	
+            formGrid.add(formRegisterBox, 0, 0); // cella (0,0)
+            formGrid.add(formLoginBox, 1, 0);    // cella (0,1)
+
+            VBox centerContent = new VBox(10, formGrid);	
+            centerContent.setAlignment(Pos.CENTER);
+            
+            
+            // Scena del popup
+            Scene popupScene = new Scene(centerContent, roomH/2, roomW/2);
+            popupStage.setScene(popupScene);
+
+            // Imposto la finestra come "figlia" della principale
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            popupStage.initModality(Modality.WINDOW_MODAL); // Blocca la finestra principale finché non chiudi il popup
+            popupStage.show(); // Mostra la finestra
+        });
         
+        
+        
+       
         // Giusto un po di formattazzione grafica ---->
 
         VBox box = new VBox(10);   	// La box per il titolo principale
@@ -205,15 +240,7 @@ public class Room extends Application{
         grid.setVgap(50);
         grid.setAlignment(Pos.TOP_RIGHT);
         
-        
-        VBox formLoginBox =  new VBox();		// Per ora inutilizzati perchè li farò comparire una volta aggiunto l'event listener sulla foto nella toolbar
-        formLoginBox = LoginBox();
-        VBox formRegisterBox = new VBox();
-        formRegisterBox = RegisterBox();
-       
-       // grid.add(formRegisterBox, 0, 0); // cella (0,0)
-       // grid.add(formLoginBox, 1, 0);    // cella (0,1)
-        int extraPadding = 0;
+        int extraPadding = 0;			// Solo x formattazione grafica
         
         if(!firstTime) {		// Se non è la prima volta che visualizzi la stanza centrale:
     	    roomLabel.setText("SalaGiochi");
@@ -281,73 +308,10 @@ public class Room extends Application{
         primaryStage.show();
     }
 	
-	private VBox RegisterBox() {		// Da verificare se va cambiata dopo l'event listener sulla foto della toolbar
-		VBox registerBox = new VBox(10);
-        registerBox.setAlignment(Pos.CENTER);
-        registerBox.setPadding(new Insets(20));
-        registerBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
-        Label regTitle = new Label("Registrati");
-        regTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        TextField regUser = new TextField();
-        regUser.setPromptText("Username");
-        PasswordField regPass = new PasswordField();
-        regPass.setPromptText("Password");
-        PasswordField regPassConf = new PasswordField();
-        regPassConf.setPromptText("Conferma Password");
-        Button regButton = new Button("Registrati");
-        regButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8;");
-        regButton.setOnAction(e -> {
-            if (regUser.getText().isEmpty() || regPass.getText().isEmpty() || regPassConf.getText().isEmpty()) {
-                new Alert(Alert.AlertType.WARNING, "Compila tutti i campi!", ButtonType.OK).showAndWait();
-            } else if (!regPass.getText().equals(regPassConf.getText())) {
-                new Alert(Alert.AlertType.ERROR, "Le password non coincidono!", ButtonType.OK).showAndWait();
-            } else {
-                new Alert(Alert.AlertType.INFORMATION, "Registrazione completata per " + regUser.getText() + "!", ButtonType.OK).showAndWait();
-            }
-        });
-        registerBox.getChildren().addAll(regTitle, regUser, regPass, regPassConf, regButton);
-
-		return registerBox;
-	}
-
-	private VBox LoginBox() {		// Da verificare se va cambiata dopo l'event listener sulla foto della toolbar
-		VBox loginBox = new VBox(10);
-        loginBox.setAlignment(Pos.CENTER);
-        loginBox.setPadding(new Insets(20));
-        loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
-        Label logTitle = new Label("Accedi");
-        logTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        TextField logUser = new TextField();
-        logUser.setPromptText("Username");
-        PasswordField logPass = new PasswordField();
-        logPass.setPromptText("Password");
-        Button logButton = new Button("Login");
-        logButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;");
-        logButton.setOnAction(e -> {
-            if (logUser.getText().isEmpty() || logPass.getText().isEmpty()) {
-                new Alert(Alert.AlertType.WARNING, "Inserisci username e password!", ButtonType.OK).showAndWait();
-            } else {
-                new Alert(Alert.AlertType.INFORMATION, "Benvenuto " + logUser.getText() + "!", ButtonType.OK).showAndWait();
-            }
-        });
-        loginBox.getChildren().addAll(logTitle, logUser, logPass, logButton);
-        return loginBox;
-	}
-
 	private void roomR(BorderPane root) {
-		root.getTop().setVisible(false);
-		roomLabel.setText("VideoGames");
-        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
-        
+		root.getTop().setVisible(false);        
 
-        VBox box = new VBox(10);    		// Stesso codice per le etichette delle altre due stanze
-        box.setPadding(new Insets(20));
-        box.setAlignment(Pos.BOTTOM_CENTER);  
-        box.setMaxWidth(300);
-        box.setMaxHeight(100);
-        box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
-        box.getChildren().add(roomLabel);
-        StackPane centerPane = new StackPane(box);
+        StackPane centerPane = new StackPane(boxTitle());
         centerPane.setAlignment(Pos.BOTTOM_CENTER);  
 
 	    GridPane grid = new GridPane();
@@ -387,6 +351,132 @@ public class Room extends Application{
 	    
 	}
 	
+	private VBox RegisterBox(Stage popupStage) {		
+		VBox registerBox = new VBox(10);
+        registerBox.setAlignment(Pos.CENTER);
+        registerBox.setPadding(new Insets(20));
+        registerBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
+        Label regTitle = new Label("Registrati");
+        regTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+       
+        TextField regNickname = new TextField();
+        regNickname.setPromptText("Nickname");
+        TextField regUser = new TextField();
+        regUser.setPromptText("Nome");
+        PasswordField regPass = new PasswordField();
+        regPass.setPromptText("Password");
+        PasswordField regPassConf = new PasswordField();
+        regPassConf.setPromptText("Conferma Password");
+        Button regButton = new Button("Registrati");
+        regButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8;");
+        
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION, null, ButtonType.OK);
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR, null, ButtonType.OK);
+        Alert warningAlert = new Alert(Alert.AlertType.WARNING, null, ButtonType.OK);
+        
+        regButton.setOnAction(e -> {
+            if (regUser.getText().isEmpty() || regNickname.getText().isEmpty() || regPass.getText().isEmpty() || regPassConf.getText().isEmpty()) {
+            	warningAlert.setTitle("Credenziali mancanti"); 
+            	warningAlert.setHeaderText("Compila tutti i campi!");
+            	warningAlert.showAndWait();
+            } else if (!regPass.getText().equals(regPassConf.getText())) {
+                errorAlert.setTitle("Credenziali errate"); 
+            	errorAlert.setHeaderText("Le password non coincidono!");
+                errorAlert.showAndWait();
+                regPass.clear();
+                regPassConf.clear();
+            } else {
+            	try {
+                   User newUser = new User(regNickname.getText(), regUser.getText(),  regPass.getText());                    
+                    
+                   String sql = "INSERT INTO utente(nickname, nome, password, score) VALUES (?, ?, ?, ?)";
+                    
+                    try (Connection conn = DataBaseConnection.getConnection();
+                            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                    	stmt.setString(1, newUser.getNickname());
+                        stmt.setString(2, newUser.getName());
+                        stmt.setString(3, newUser.getPassword());
+                        stmt.setInt(4,0);
+                        stmt.executeUpdate(); // esegue l'inserimento
+
+                        infoAlert.setTitle("Registrazione riuscita");      // Titolo della finestra dell'alert
+                        infoAlert.setHeaderText("Benvenuto " + regUser.getText() + "!");	// Messaggio
+                        infoAlert.showAndWait();
+                        
+                        popupStage.close();
+                           
+                       } catch (SQLException e1) {
+                           e1.printStackTrace();
+                       }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    errorAlert.setTitle("Errore DB");
+                    errorAlert.setHeaderText("Impossibile registrare l'utente!");
+                    errorAlert.showAndWait();
+                    regUser.clear();
+                    regPass.clear();
+                    regPassConf.clear();
+                }
+                
+            }
+        });
+        
+        registerBox.getChildren().addAll(regTitle, regUser, regNickname, regPass, regPassConf, regButton);
+
+		return registerBox;
+	}
+
+	private VBox LoginBox(Stage popupStage) {		
+		VBox loginBox = new VBox(10);
+        loginBox.setAlignment(Pos.CENTER);
+        loginBox.setPadding(new Insets(20));
+        loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
+        Label logTitle = new Label("Accedi");
+        logTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        TextField logUser = new TextField();
+        logUser.setPromptText("Nickname");
+        PasswordField logPass = new PasswordField();
+        logPass.setPromptText("Password");
+        Button logButton = new Button("Login");
+        logButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;");
+        
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION, null, ButtonType.OK);
+        Alert warningAlert = new Alert(Alert.AlertType.WARNING, null, ButtonType.OK);
+        logButton.setOnAction(e -> {
+            if (logUser.getText().isEmpty() || logPass.getText().isEmpty()) {
+            	warningAlert.setTitle("Credenziali mancanti"); 
+            	warningAlert.setHeaderText("Inserisci username e password!");
+                warningAlert.showAndWait();
+            } else {
+                
+            	infoAlert.setTitle("Login riuscito");      // Titolo della finestra dell'alert
+                infoAlert.setHeaderText("Bentornato " + logUser.getText() + "!");	// Messaggio
+                infoAlert.showAndWait();
+
+                logUser.clear();
+                logPass.clear();
+                popupStage.close();
+            }
+        });
+        loginBox.getChildren().addAll(logTitle, logUser, logPass, logButton);
+        return loginBox;
+	}
+
+	private VBox boxTitle() {
+		
+		VBox box = new VBox(10);   // Box per contenere la roomLabel
+        box.setPadding(new Insets(20));
+        box.setAlignment(Pos.BOTTOM_CENTER);  
+        box.setMaxWidth(300);
+        box.setMaxHeight(100);
+        box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        box.getChildren().add(roomLabel);
+		return box;
+	}
+
+	
 	private StackPane createImagePane(String imagePath, Runnable onClick) {	// x i 4 quadranti delle immagini dei giochi
 	    Image img = new Image(getClass().getResourceAsStream(imagePath));
 	    ImageView imgView = new ImageView(img);
@@ -417,6 +507,7 @@ public class Room extends Application{
 		gameTable.getColumns().addAll(name, score);
 	}	
 	
+	@SuppressWarnings("unchecked")
 	private void addUserColums(TableView<User> table) {
 		
 	    TableColumn<User, Integer> colId = new TableColumn<>("ID");
@@ -429,23 +520,23 @@ public class Room extends Application{
 	        new SimpleStringProperty(data.getValue().getNickname())
 	    );
 
-/*	    TableColumn<User, String> colName = new TableColumn<>("Nome");
+	    TableColumn<User, String> colName = new TableColumn<>("Nome");
 	    colName.setCellValueFactory(data ->
 	        new SimpleStringProperty(data.getValue().getName())
 	    );
 	    
-	    TableColumn<User, String> colSurname = new TableColumn<>("Cognome");
-	    colSurname.setCellValueFactory(data ->
-	    	new SimpleStringProperty(data.getValue().getSurname())
+	    TableColumn<User, String> colPassword = new TableColumn<>("Password");
+	    colPassword.setCellValueFactory(data ->
+	    	new SimpleStringProperty(data.getValue().getPassword())
 	    );
-*/
+
 	    TableColumn<User, Integer> colScore = new TableColumn<>("Score");
 	    colScore.setCellValueFactory(data ->
 	        new SimpleIntegerProperty(data.getValue().getScore()).asObject()
 	    );
 
-	    table.getColumns().addAll(colId, colNick, colScore);
 	    
+	    table.getColumns().addAll(colId, colNick, colName, colPassword, colScore);
 	}
 	
 	
