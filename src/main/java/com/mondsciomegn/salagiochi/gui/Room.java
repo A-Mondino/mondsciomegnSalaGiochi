@@ -1,10 +1,15 @@
 package com.mondsciomegn.salagiochi.gui;
 
+import java.lang.ProcessHandle.Info;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
+
+import org.h2.command.dml.Insert;
 
 import com.mondsciomegn.salagiochi.*;
 import com.mondsciomegn.salagiochi.db.Category;
@@ -50,10 +55,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.Node;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Room extends Application{
 	private int currentRoom = 0; 
 	private Boolean firstTime = true;
+	private BooleanProperty loggedIn = new SimpleBooleanProperty(false);		// Serve per la visibilità del botttone di logout
+    private StringProperty currentNickName = new SimpleStringProperty("");		// Serve per la string dopo il login
+	
+	
 	private Stage primaryStage = null;
 	private BorderPane root = new BorderPane();				// Finestra 
 	private Label roomLabel = new Label();
@@ -158,7 +171,7 @@ public class Room extends Application{
 		
 	private void roomM(BorderPane root) {
 		primaryStage.setTitle("Sala Giochi");			// Titolo 
-        String imagePath = getClass().getResource("./img/roomM.jpg").toExternalForm();
+        String imagePath = getClass().getResource("./img/roomM1.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
                 new Image(imagePath),
                 BackgroundRepeat.NO_REPEAT,		// Serve a non far ripetere l'immagine nè in orizz
@@ -177,6 +190,10 @@ public class Room extends Application{
         
         ToolBar toolbar = new ToolBar();		// ToolBar per il login nel sistema 
         toolbar.setPadding(new Insets(15));
+        BorderPane.setMargin(toolbar, new Insets(10, 10, 0, 10)); // margine superiore 10px
+
+        toolbar.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+
         String tmp = getClass().getResource("./img/tmp.png").toExternalForm();	// Da cambiare questa foto....
       
         ImageView imageView = new ImageView(new Image(tmp));		// Crei un ImageView per poter mostrare la foto
@@ -186,8 +203,33 @@ public class Room extends Application{
         Region spacer = new Region();			// Questo spacer in realtà non serve a niente, ma non esiste altro modo per mettere l'elemento nella toolBar tutto a sinistra...
         HBox.setHgrow(spacer, Priority.ALWAYS); // ...quindi uso uno spacer per "pushare" l'elemento a sinistra
 
-        toolbar.getItems().addAll(spacer,imageView);
-        toolbar.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
+        Label nickName = new Label("");			// Label del nickName
+        nickName.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        nickName.textProperty().bind(currentNickName);
+        
+        
+        Button logOut = new Button("LogOut");
+        loggedIn.set(false);			//Non lo mostro finchè il login non va a buon fine ----> vedi loginBox
+        logOut.visibleProperty().bind(loggedIn);
+        
+        logOut.setOnAction(e -> {
+        	Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Logout");
+            confirmAlert.setHeaderText("Sei sicuro di voler effettuare il logout?");
+            confirmAlert.setContentText("Conferma per uscire.");
+
+            // Mostra la finestra e aspetta la risposta
+            Optional<ButtonType> result = confirmAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
+            	currentNickName.set("");      // resetta nickname
+            	loggedIn.set(false);  		  // nasconde il bottone logout
+            } else {
+                // L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
+            }
+        }); 		// Evento OnClick
+        
+        toolbar.getItems().addAll(nickName, logOut, spacer, imageView);
+        HBox.setMargin(logOut, new Insets(0, 0, 0, 20)); 			// Margine sinistro di 20px per separare un po il bottone
         
         root.setTop(toolbar);	// Aggiungo alla root
         root.getTop().setVisible(true);	// E la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
@@ -205,7 +247,7 @@ public class Room extends Application{
             
             
             VBox formLoginBox =  new VBox();		
-            formLoginBox = LoginBox(popupStage);			// Carico il form
+            formLoginBox = LoginBox(popupStage, nickName);			// Carico il form
             VBox formRegisterBox = new VBox();
             formRegisterBox = RegisterBox(popupStage);	// Carico il form
             	
@@ -226,8 +268,7 @@ public class Room extends Application{
             popupStage.show(); // Mostra la finestra
         });
         
-        
-        
+
        
         // Giusto un po di formattazzione grafica ---->
 
@@ -354,6 +395,8 @@ public class Room extends Application{
 	    
 	}
 	
+	
+	
 	private VBox RegisterBox(Stage popupStage) {		
 		VBox registerBox = new VBox(10);
         registerBox.setAlignment(Pos.CENTER);
@@ -459,7 +502,7 @@ public class Room extends Application{
 		return registerBox;
 	}
 
-	private VBox LoginBox(Stage popupStage) {		
+	private VBox LoginBox(Stage popupStage, Label nickName) {		
 		VBox loginBox = new VBox(10);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setPadding(new Insets(20));
@@ -475,21 +518,69 @@ public class Room extends Application{
         logButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;");
         
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION, null, ButtonType.OK);
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR, null, ButtonType.OK);
         Alert warningAlert = new Alert(Alert.AlertType.WARNING, null, ButtonType.OK);
+        
         logButton.setOnAction(e -> {
             if (logUser.getText().isEmpty() || logPass.getText().isEmpty()) {
             	warningAlert.setTitle("Credenziali mancanti"); 
             	warningAlert.setHeaderText("Inserisci username e password!");
                 warningAlert.showAndWait();
             } else {
-                
-            	infoAlert.setTitle("Login riuscito");      // Titolo della finestra dell'alert
-                infoAlert.setHeaderText("Bentornato " + logUser.getText() + "!");	// Messaggio
-                infoAlert.showAndWait();
+            	try {
+                                         
+                    String sql = "SELECT nickname FROM utente WHERE nickname = ? AND psww = ?";
+                     
+                     try (Connection conn = DataBaseConnection.getConnection();
+                         PreparedStatement stmt = conn.prepareStatement(sql)) {
+                	 	 stmt.setString(1, logUser.getText());		// Sostituisce il primo ? con il nickname del form
+                	 	 stmt.setString(2, logPass.getText());
+                    	 ResultSet rs = stmt.executeQuery(); // Esegue la query e salva il risultato
+                    	 if (rs.next()) {					// Nickname trovato
+                    		 currentNickName.set(logUser.getText());
+                    		 loggedIn.set(true);		// Login andato a buon fine, posso mostrare il tasto di login 
+                             infoAlert.setTitle("Login riuscito");
+                             infoAlert.setHeaderText("Bentornato " + logUser.getText() + "!");
+                             infoAlert.showAndWait();
+                             logUser.clear();
+                             logPass.clear();
+                             popupStage.close();
+                         } else { // Nessun utente trovato o password errata, dobbiamo distinguere i due casi
+                        	 String sql1 = "SELECT nickname FROM utente WHERE nickname = ? ";
+                        	 
+                        	 try (PreparedStatement stmt1 = conn.prepareStatement(sql1)) {
+                        		 stmt1.setString(1, logUser.getText());
+                        		 ResultSet rs1 = stmt1.executeQuery(); // Cerco solo il nickname
+                        		 if (rs1.next()) {		// Se trovo un risultatp significa che aveva sbagliato password prima
+                        			 errorAlert.setTitle("Password Errata");
+                                     errorAlert.setHeaderText("Le password non corrispondono!");
+                                     errorAlert.showAndWait();
+                                     logPass.clear();
+                        		 }
+                        		 else {					// Se no l'utente non esiste
+                        			 errorAlert.setTitle("Utente non trovato");
+                                     errorAlert.setHeaderText("Nickname non esistente!");
+                                     errorAlert.showAndWait();
+                                     logUser.clear();
+                                     logPass.clear();
+                        		 }
+                        	 }catch (SQLException e1) {
+		                       	  e1.printStackTrace();
+		                         }
+                             
+                         }    
+                      } catch (SQLException e2) {
+                    	  e2.printStackTrace();
+                      }
 
-                logUser.clear();
-                logPass.clear();
-                popupStage.close();
+                 } catch (Exception ex) {
+                     ex.printStackTrace();
+                     errorAlert.setTitle("Errore DB");
+                     errorAlert.setHeaderText("Errore durante la connessione al database.");
+                     errorAlert.showAndWait();
+                     logUser.clear();
+                	 logPass.clear();
+                 }
             }
         });
         loginBox.getChildren().addAll(logTitle, logUser, logPass, logButton);
