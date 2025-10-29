@@ -1683,3 +1683,62 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "CiaoSonoAndre" not found [42122
 	at java.base/java.lang.Thread.run(Thread.java:840)
 2025-10-28 22:18:36.487468+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2025-10-29 14:18:07.414263+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIZIONE CHARACTER VARYING(50)": "'Questa categoria rappresenta i giochi vecchio stile :)' (54)"; SQL statement:
+INSERT INTO category VALUES ('Arcade', 'Questa categoria rappresenta i giochi vecchio stile :)') [22001-224]
+2025-10-29 14:45:46.584334+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE [*]WHERE 1=1"; expected "identifier"; SQL statement:
+DROP TABLE WHERE 1=1 [42001-224]
+2025-10-29 14:46:18.905241+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE [*]* WHERE 1=1"; expected "identifier"; SQL statement:
+DROP TABLE * WHERE 1=1 [42001-224]
+2025-10-29 14:47:34.000727+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIZIONE CHARACTER VARYING(50)": "'Questa categoria rappresenta i giochi vecchio stile :)' (54)"; SQL statement:
+INSERT INTO category (nome, descrizione) VALUES ('Arcade', 'Questa categoria rappresenta i giochi vecchio stile :)') [22001-224]
+2025-10-29 14:49:42.204453+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO videogioco (nome, categoria, score) VALUES ('Tris', 'Arcade', 100)[*]WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Tris');"; SQL statement:
+INSERT INTO videogioco (nome, categoria, score) VALUES ('Tris', 'Arcade', 100)WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Tris'); [42000-224]
+2025-10-29 14:56:40.861844+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO category (nome, descrizione) SELECT 'Arcade', 'Giochi vecchio stile :D'WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Arcade')UNION [*]ALLSELECT 'Strategia', 'Giochi di strategia e tattica'WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Strategia');"; expected "ALL, DISTINCT, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO category (nome, descrizione) SELECT 'Arcade', 'Giochi vecchio stile :D'WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Arcade')UNION ALLSELECT 'Strategia', 'Giochi di strategia e tattica'WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Strategia'); [42001-224]
+2025-10-29 15:55:58.222097+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "NICKNAME" not found; SQL statement:
+INSERT INTO utente (nickname, nome, psww, score)SELECT 'COMPUTER', 'computer', 'computer123' , 0 WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nickname = 'COMPUTER'); [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244)
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213)
+	at org.h2.expression.condition.Comparison.optimize(Comparison.java:147)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:148)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1177)
+	at org.h2.command.query.Query.prepare(Query.java:218)
+	at org.h2.expression.condition.PredicateWithSubquery.optimize(PredicateWithSubquery.java:37)
+	at org.h2.expression.condition.ExistsPredicate.optimize(ExistsPredicate.java:16)
+	at org.h2.expression.condition.ConditionNot.optimize(ConditionNot.java:54)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:148)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1177)
+	at org.h2.command.query.Query.prepare(Query.java:218)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:310)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:190)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:147)
+	at com.mondsciomegn.salagiochi.db.DataBaseInitializer.initialize(DataBaseInitializer.java:75)
+	at com.mondsciomegn.salagiochi.gui.Room.main(Room.java:84)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplicationWithArgs(LauncherImpl.java:465)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication(LauncherImpl.java:364)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/sun.launcher.LauncherHelper$FXHelper.main(LauncherHelper.java:1085)

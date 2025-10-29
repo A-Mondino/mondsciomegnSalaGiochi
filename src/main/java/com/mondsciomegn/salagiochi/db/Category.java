@@ -10,6 +10,11 @@ public class Category {
         this.name = name;
 		this.description = description;
 	}
+	public Category(String name ) {
+        if (name == null) throw new IllegalArgumentException("Nome categoria non valido");
+        this.name = name;
+		description = "";
+	}
 	
 	
 	public String getName() {
@@ -28,6 +33,9 @@ public class Category {
 		this.description = description;
 	}
 	
+	public String toString() {
+		return name;
+	}
 	
 	
 }

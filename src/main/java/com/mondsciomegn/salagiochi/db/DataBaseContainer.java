@@ -12,7 +12,7 @@ public class DataBaseContainer {
 	 public static List<User> getAllUsers() {
 	        List<User> users = new ArrayList<>();
 
-	        String query = "SELECT * FROM utente";
+	        String query = "SELECT * FROM utente ORDER BY score DESC, nickname ASC";
 
 	        try (Connection conn = DataBaseConnection.getConnection();
 	             Statement stmt = conn.createStatement();
@@ -40,16 +40,17 @@ public class DataBaseContainer {
 		 
 	        List<VideoGames> games = new ArrayList<>();
 
-	        String query = "SELECT * FROM videogioco";
+	        String query = "SELECT * FROM videogioco ORDER BY score DESC";
 
 	        try (Connection conn = DataBaseConnection.getConnection();
 	             Statement stmt = conn.createStatement();
 	             ResultSet rs = stmt.executeQuery(query)) {
-
+	        	
 	            while (rs.next()) {
+	            	Category cat = new Category(rs.getString("categoria"));
 	                VideoGames v = new Tris(
 	                        rs.getString("nome"),
-	                        (new Category(rs.getString("categoria"), null)),
+	                        cat,
 	                        rs.getInt("score")
 	                );
 	                games.add(v);

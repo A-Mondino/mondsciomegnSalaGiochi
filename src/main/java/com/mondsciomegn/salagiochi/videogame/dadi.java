@@ -12,7 +12,7 @@ public class dadi extends VideoGames{
 		super(name, category, score);
 	}
 	
-	public void play() {
+	public void play(String nickName) {
 		int somma, sommaCasuale;
 		
 		System.out.println("LANCIO DEI DADI: ");

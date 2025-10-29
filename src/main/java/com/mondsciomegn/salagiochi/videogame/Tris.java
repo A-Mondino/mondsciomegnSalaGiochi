@@ -26,50 +26,65 @@ import javafx.stage.Stage;
 
 
 public class Tris extends VideoGames{
-	 public Tris(String name, Category category, int score) {
-		super(name, category, score);
-	}
+		
+		public Tris(String name, Category category, int score) {
+			super(name, category, score);
+		}
 
-	private Button[][] buttons = new Button[3][3];
-	    private char[][] areaGioco = new char[3][3];
+	 	private Button[][] buttons = new Button[3][3];		// Griglia del tris
+	    private char[][] playGrid = new char[3][3];		// Matrice di supporto
+	    
 	    private boolean gameOver = false;
 	    private Random random = new Random();
-
+	    
+	    private Stage primaryStage = new Stage();
+	    
+	    
 	    @Override
-	    public void play() {
+	    public void play(String nickName) {
 	    	Platform.runLater(() -> {
-	    		mostraPopUp("Inserisci tre simboli uguali in orizzontale, obliquo o verticale" +
+	    		showPopUp("Inserisci tre simboli uguali in orizzontale, obliquo o verticale" +
 	            " prima dell'avversario. Il primo giocatore che riesce a creare una di queste" + 
 	    		" combinazioni, vince la partita! Se invece tutte le caselle si riempiono senza "+
 	            "che nessuno abbia allineato i tre simboli, il gioco termina in pareggio." );
-	            Stage primaryStage = new Stage();
-	            startGame(primaryStage);
+	            
+	            startGame(primaryStage, nickName);
 	        });
 	    }
 
-	    private void startGame(Stage stage) {
+	    private void startGame(Stage stage, String nickName) {
+	    		
+	    	if(nickName.isEmpty()) {		// Significa che qualcuno sta giocando come guest
+	    		// Devo creare un nuovo utente guest1, guest2 etc etc
+	    	}
+	    	
+	    	
 	        stage.setTitle("Gioco Tris");
 
 	        GridPane grid = new GridPane();
 
-	        for (int i = 0; i < 3; i++) {
+	        for (int i = 0; i < 3; i++) {		// Inizializzo la matrice di bottoni 
 	            for (int j = 0; j < 3; j++) {
-	                areaGioco[i][j] = ' ';
-	                Button button = new Button("");
-	                button.setMinSize(100, 100);
-	                button.setStyle("-fx-font-size: 36px;");
+	                playGrid[i][j] = ' ';		
+	                buttons[i][j] = new Button("");
+	                buttons[i][j].setMinSize(100, 100);
+	                buttons[i][j].setStyle("-fx-font-size: 36px;");
+	                grid.add( buttons[i][j], j, i);
+	            }
+	        }
+	        
+	        for (int i = 0; i < 3; i++) {		// per le 3 x 3 caselle della griglia
+	            for (int j = 0; j < 3; j++) {
+	            	
+	            	final int row = i;
+	                final int col = j;
 
-	                final int riga = i;
-	                final int colonna = j;
-
-	                button.setOnAction(e -> {
-	                    if (!gameOver && button.getText().isEmpty()) {
-	                        playerMove(riga, colonna);
-	                    }
-	                });
-
-	                buttons[i][j] = button;
-	                grid.add(button, j, i);
+	            	 buttons[i][j].setOnAction(e -> {
+		                    if (!gameOver && buttons[row][col].getText().isEmpty()) {
+		                        playerMove(row, col);
+		                        computerMove();			// Dopo che ho fatto la mossa io la deve fare anche il computer
+		                    }
+		                });
 	            }
 	        }
 
@@ -78,73 +93,71 @@ public class Tris extends VideoGames{
 	        stage.show();
 	    }
 
-	    private void playerMove(int riga, int colonna) {
-	        areaGioco[riga][colonna] = 'X';
-	        buttons[riga][colonna].setText("X");
+	    private void playerMove(int row, int col) {
+	        playGrid[row][col] = 'X';			// Setto la matrice di supporto con il segno del giocatore
+	        buttons[row][col].setText("X");		// Setto anche il bottone
 
-	        if (controlloGioco('X')) {
+	        if (gameCheck('X')) {			// poi controllo se ho vinto
 	            gameOver = true;
-	            mostraMessaggio("Hai vinto!");
-	            return;
-	        }
-
-	        computerMove();
-
-	        if (controlloGioco('O')) {
-	            gameOver = true;
-	            mostraMessaggio("Hai perso!");
+	            showMessage("Hai vinto!");
+	            primaryStage.hide();
 	        }
 	    }
 
-	    private void computerMove() {
-	        if (gameOver) return;
+	    private void computerMove() {	
+	        int[] move = move();
 
-	        int[] mossa = mossaCasuale();
-
-	        if (mossa == null) {
+	        if (move == null) {		// Se il mio array di mosse è vuoto significa che il computer non puo più fare nulla ed è un pareggio
 	            gameOver = true;
-	            mostraMessaggio("Pareggio!");
-	            return;
+	            showMessage("Pareggio!");
+	            primaryStage.hide();
+	        }else {						// Altrimenti ho trovato una mossa da fare 
+		        int row = move[0];
+		        int col = move[1];
+		        playGrid[row][col] = 'O';
+		        buttons[row][col].setText("O");
 	        }
-
-	        int riga = mossa[0];
-	        int colonna = mossa[1];
-	        areaGioco[riga][colonna] = 'O';
-	        buttons[riga][colonna].setText("O");
+	        
+	        if (gameCheck('O')) {		// Poi controllo se il computer ha vinto
+	            gameOver = true;
+	            showMessage("Hai perso!");
+	            primaryStage.hide();
+	        }
+	        
 	    }
 
-	    private int[] mossaCasuale() {
-	        List<int[]> libere = new ArrayList<>();
+	    private int[] move() {			// GGIUNGERE MATRICE PRIORITA PER MOSSA NOT DUMB
+	        List<int[]> unused = new ArrayList<>();
 	        for (int i = 0; i < 3; i++) {
 	            for (int j = 0; j < 3; j++) {
-	                if (areaGioco[i][j] == ' ') {
-	                    libere.add(new int[]{i, j});
+	                if (playGrid[i][j] == ' ') {
+	                    unused.add(new int[]{i, j});
 	                }
 	            }
 	        }
-	        if (libere.isEmpty()) return null;
+	        if (unused.isEmpty()) return null;
 
-	        return libere.get(random.nextInt(libere.size()));
+	        return unused.get(random.nextInt(unused.size()));
 	    }
 
-	    private boolean controlloGioco(char simbolo) {
+	    private boolean gameCheck(char symbol) {
 	        for (int i = 0; i < 3; i++) {
-	            if (areaGioco[i][0] == simbolo && areaGioco[i][1] == simbolo && areaGioco[i][2] == simbolo)
+	            if (playGrid[i][0] == symbol && playGrid[i][1] == symbol && playGrid[i][2] == symbol)
 	                return true;
 	        }
 	        for (int j = 0; j < 3; j++) {
-	            if (areaGioco[0][j] == simbolo && areaGioco[1][j] == simbolo && areaGioco[2][j] == simbolo)
+	            if (playGrid[0][j] == symbol && playGrid[1][j] == symbol && playGrid[2][j] == symbol)
 	                return true;
 	        }
-	        if (areaGioco[0][0] == simbolo && areaGioco[1][1] == simbolo && areaGioco[2][2] == simbolo)
+	        if (playGrid[0][0] == symbol && playGrid[1][1] == symbol && playGrid[2][2] == symbol)
 	            return true;
-	        if (areaGioco[0][2] == simbolo && areaGioco[1][1] == simbolo && areaGioco[2][0] == simbolo)
+	        if (playGrid[0][2] == symbol && playGrid[1][1] == symbol && playGrid[2][0] == symbol)
 	            return true;
 	        return false;
 	    }
 
 	    // Risulatato partita
-	    private void mostraMessaggio(String messaggio) {
+	    private void showMessage(String messaggio) {
 	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	        alert.setTitle("Risultato");
 	        alert.setHeaderText(null);
@@ -153,7 +166,7 @@ public class Tris extends VideoGames{
 	    }
 	    
 	    // Pop-up istruzioni di gioco 
-	    private void mostraPopUp(String messaggio) {
+	    private void showPopUp(String messaggio) {
 	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	        alert.setTitle("Dettagli Gioco");
 	        alert.setHeaderText("Istruzioni:");

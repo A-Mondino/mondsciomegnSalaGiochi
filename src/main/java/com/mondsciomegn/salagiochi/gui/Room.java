@@ -22,6 +22,7 @@ import com.mondsciomegn.salagiochi.videogame.*;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -54,6 +55,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -115,6 +117,8 @@ public class Room extends Application{
 	            break;
 		} 
 	}
+
+	
 	
 	private void roomL(BorderPane root) {
 		root.getTop().setVisible(false);
@@ -188,13 +192,15 @@ public class Room extends Application{
         
         ToolBar toolbar = new ToolBar();		// ToolBar per il login nel sistema 
         toolbar.setPadding(new Insets(15));
-        BorderPane.setMargin(toolbar, new Insets(10, 10, 0, 10)); // margine superiore 10px
+        BorderPane.setMargin(toolbar, new Insets(10, 10, 0, 10)); // margine superiore, destro e sinistro di 10px
 
         toolbar.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
 
         String tmp = getClass().getResource("./img/tmp.png").toExternalForm();	
       
         ImageView imageView = new ImageView(new Image(tmp));		// Crei un ImageView per poter mostrare la foto
+        imageView.setPickOnBounds(true); // Serve perchè avendo l'immagine senza sfondo, risualtano "clickabili" solo pochi pixels, grazie a questo il click è percepito su tutta l'immagine
+        imageView.setCursor(Cursor.HAND);	// Solo una piccola chicca :D
         imageView.setFitWidth(40);   
         imageView.setFitHeight(40);
         imageView.setPreserveRatio(true);
@@ -206,13 +212,12 @@ public class Room extends Application{
         nickName.textProperty().bind(currentNickName);
                 
         toolbar.getItems().addAll(nickName, spacer, imageView);
+        root.setTop(toolbar);	// Aggiungo alla root...
+        root.getTop().setVisible(true);	// ...e la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
 
-        root.setTop(toolbar);	// Aggiungo alla root
-        root.getTop().setVisible(true);	// E la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
-
-    
         imageView.setOnMouseClicked(event -> {  // Evento on-click
         	Stage popupStage = new Stage();		// Creo un nuovo Stage (finestra figlia)
+        	
         	if(currentNickName.get().equals("")) {		// Se il nickname è vuoto significa che non ho fatto il login, quindi mostro i due form (registrazione e login)
                 popupStage.setTitle("Register / Login");
                 
@@ -222,14 +227,13 @@ public class Room extends Application{
                 formGrid.setVgap(50);
                 formGrid.setAlignment(Pos.CENTER);
                 
-                
                 VBox formLoginBox =  new VBox();		
                 formLoginBox = LoginBox(popupStage, nickName);			// Carico il form
                 VBox formRegisterBox = new VBox();
-                formRegisterBox = RegisterBox(popupStage);	// Carico il form
+                formRegisterBox = RegisterBox(popupStage);				// Carico il form
                 	
-                formGrid.add(formRegisterBox, 0, 0); // cella (0,0)
-                formGrid.add(formLoginBox, 1, 0);    // cella (0,1)
+                formGrid.add(formRegisterBox, 0, 0); 					// cella (0,0)
+                formGrid.add(formLoginBox, 1, 0);    					// cella (0,1)
 
                 VBox centerContent = new VBox(10, formGrid);	
                 centerContent.setAlignment(Pos.CENTER);
@@ -240,13 +244,14 @@ public class Room extends Application{
                 popupStage.setScene(popupScene);
 
         	}
-        	else {	//	L'utente è loggato, devo mostrare un popup di logout o cancella account
+        	else {				//	L'utente è loggato, devo mostrare un popup di logout o cancella account
         		popupStage.setTitle("Account");
         		
     	        Label title = new Label("Ciao " + currentNickName.get() + "!");
     	        title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
     	        Button logOut = new Button("LogOut");
+    	        logOut.setCursor(Cursor.HAND);
     	        logOut.setStyle("-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold;");
     	        
     	        logOut.setOnAction(e -> {
@@ -257,7 +262,7 @@ public class Room extends Application{
     	            confirmAlert.setContentText("Conferma per uscire.");
 
     	            // Mostra la finestra e aspetta la risposta
-    	            Optional<ButtonType> result = confirmAlert.showAndWait();
+    	            Optional<ButtonType> result = confirmAlert.showAndWait();		
     	            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
     	            	currentNickName.set("");      // resetta nickname
     	            	popupStage.close();
@@ -267,6 +272,7 @@ public class Room extends Application{
     	        }); 		// Evento OnClick
 
     	        Button deleteAccount = new Button("Elimina Account");
+    	        deleteAccount.setCursor(Cursor.HAND);
     	        deleteAccount.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-weight: bold;");
     	        
     	        deleteAccount.setOnAction(e -> {
@@ -274,7 +280,7 @@ public class Room extends Application{
     	            confirmDelete.setTitle("Elimina Account");
     	           
     	            confirmDelete.setHeaderText("Sei sicuro di voler eliminare il tuo account?");
-    	            confirmDelete.setContentText("Questa azione è irreversibile!");
+    	            confirmDelete.setContentText("Questa azione è IRREVERSIBILE!");
     	            
     	            confirmDelete.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
     	            Optional<ButtonType> result = confirmDelete.showAndWait();
@@ -315,7 +321,7 @@ public class Room extends Application{
        
         // Giusto un po di formattazzione grafica ---->
 
-        VBox box = new VBox(10);   	// La box per il titolo principale
+        VBox box = new VBox(10);   			// La box per il titolo principale
         box.setPadding(new Insets(20));
         box.setAlignment(Pos.BOTTOM_CENTER);  
         box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
@@ -327,26 +333,26 @@ public class Room extends Application{
         grid.setVgap(50);
         grid.setAlignment(Pos.TOP_RIGHT);
         
-        int extraPadding = 0;			// Solo x formattazione grafica
+        int extraPadding = 0;				// Solo x formattazione grafica
         
-        if(!firstTime) {		// Se non è la prima volta che visualizzi la stanza centrale:
+        if(!firstTime) {					// Se non è la prima volta che visualizzi la stanza centrale:
     	    roomLabel.setText("SalaGiochi");
             box.setMaxWidth(300);		
             box.setMaxHeight(100);
     	    box.getChildren().add(roomLabel);
     	    extraPadding = 70;
    
-        }else {		// Else è per forza la prima volta che visualizzi la stanza
+        }else {								// else è per forza la prima volta che visualizzi la stanza
         	Label label = new Label("Se è la tua prima volta, guardati un po' intorno!!");
         	label.setStyle("-fx-font-size: 20px;");
         	box.setMaxWidth(550);
             box.setMaxHeight(100);
-        	box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Vertical Box, che impila verticalmente i parametri
-        	firstTime = false;			// Flag visualizzata a false
+        	box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Box, che impila verticalmente i parametri
+        	firstTime = false;									
         	
         }
-        StackPane centerPane = new StackPane(box);		// Aggiungo la box dopo che l'ho formattata in base a firstTime
-        centerPane.setAlignment(Pos.BOTTOM_CENTER);		// La centro
+        StackPane centerPane = new StackPane(box);				// Aggiungo la box dopo che l'ho formattata in base a firstTime
+        centerPane.setAlignment(Pos.BOTTOM_CENTER);				
         VBox centerContent = new VBox((400 + extraPadding), grid, centerPane);	// Questo serve solo per mettere in modo ordinato gli elementi (l'extra padding è solo per formattazione grafica)
         centerContent.setAlignment(Pos.CENTER);
         root.setCenter(centerContent);
@@ -355,6 +361,7 @@ public class Room extends Application{
         // Freccia sinistra
         Button leftArrow = new Button("◄");
         leftArrow.setStyle("-fx-font-size: 40px; -fx-background-color: transparent;");
+        leftArrow.setCursor(Cursor.HAND);
         leftArrow.setOnAction(e -> switchRoom(-1)); 		// Evento OnClick
         
         
@@ -374,6 +381,7 @@ public class Room extends Application{
         // Freccia destra
         Button rightArrow = new Button("►");
         rightArrow.setStyle("-fx-font-size: 40px; -fx-background-color: transparent;");
+        rightArrow.setCursor(Cursor.HAND);
         rightArrow.setOnAction(e -> switchRoom(1)); 		// Evento OnClick
         
         AnchorPane rightAnchor = new AnchorPane();
@@ -387,7 +395,6 @@ public class Room extends Application{
         rightAnchor.getChildren().add(rightPane);		// L'anchor serve solo per centrare le freccie verticalmente
         root.setRight(rightAnchor);
 
-        
         
         // Scena
         
@@ -416,19 +423,19 @@ public class Room extends Application{
 
 	    // Creazione dei 4 riquadri cliccabili per i rispettivi giochi
 	    grid.add(createImagePane("./img/tris.jpg", () -> {
-	        new Tris("tris", null, currentRoom).play();  
+	        new Tris("tris", null, currentRoom).play(currentNickName.get());  
 	    }), 0, 0);
 
 	    grid.add(createImagePane("./img/SCF.jpg", () -> {
-	        new cartaForbiceSasso("carta forbice sasso", null, currentRoom).play();
+	        new cartaForbiceSasso("carta forbice sasso", null, currentRoom).play(currentNickName.get());
 	    }), 1, 0);
 
 	    grid.add(createImagePane("./img/dadi.jpg", () -> {
-	        new dadi("dadi", null, currentRoom).play();
+	        new dadi("dadi", null, currentRoom).play(currentNickName.get());
 	    }), 0, 1);
 
 	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
-	        new indovinaNumero("indovina il numero", null, currentRoom).play();
+	        new indovinaNumero("indovina il numero", null, currentRoom).play(currentNickName.get());
 	    }), 1, 1);
 
 	    
@@ -437,6 +444,7 @@ public class Room extends Application{
 	    root.setCenter(centerContent);
 	    
 	}
+	
 	
 	
 	
@@ -457,6 +465,7 @@ public class Room extends Application{
         PasswordField regPassConf = new PasswordField();
         regPassConf.setPromptText("Conferma Password");
         Button regButton = new Button("Registrati");
+        regButton.setCursor(Cursor.HAND);
         regButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8;");
         
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION, null, ButtonType.OK);
@@ -476,56 +485,56 @@ public class Room extends Application{
                 regPassConf.clear();
             } else {
             	try {
-                   User newUser = new User(regNickname.getText(), regUser.getText(),  regPass.getText());                    
+                    User newUser = new User(regNickname.getText(), regUser.getText(),  regPass.getText());                    
                     
-                   String sql = "INSERT INTO utente(nickname, nome, psww , score) VALUES (?, ?, ?, ?)";
+                    String sql = "INSERT INTO utente(nickname, nome, psww , score) VALUES (?, ?, ?, ?)";
                     
                     try (Connection conn = DataBaseConnection.getConnection();
                             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-                    	stmt.setString(1, newUser.getNickname());
-                        stmt.setString(2, newUser.getName());
-                        stmt.setString(3, newUser.getPassword());
-                        stmt.setInt(4,0);
-                        
-                        
-                        try {
-                            stmt.executeUpdate(); // prova a inserire l'utente
-                            infoAlert.setTitle("Registrazione riuscita");
-                            infoAlert.setHeaderText("Benvenuto " + regUser.getText() + "!\nRicordati di fare il Login");
-                            infoAlert.showAndWait();
-                            
-                            
-                            
-                            regUser.clear();
-                            regNickname.clear();
-                            regPass.clear();
-                            regPassConf.clear();
-                          //  popupStage.close();
-
-                        } catch (SQLException ex) {
-                            // Controlla se è violazione di UNIQUE o PRIMARY KEY
-                            if (ex.getErrorCode() == 23505 || ex.getMessage().contains("Unique") || ex.getMessage().contains("PRIMARY KEY")) {
-                                errorAlert.setTitle("Errore registrazione");
-                                errorAlert.setHeaderText("Nickname già esistente!");
-                                errorAlert.showAndWait();
-
-                                regUser.clear();
-                                regNickname.clear();
-                                regPass.clear();
-                                regPassConf.clear();
-                                
-                            } else {
-                                ex.printStackTrace();
-                                errorAlert.setTitle("Errore DB");
-                                errorAlert.setHeaderText("Impossibile registrare l'utente!");
-                                errorAlert.showAndWait();
-                            }
-                        }
+	                    	stmt.setString(1, newUser.getNickname());
+	                        stmt.setString(2, newUser.getName());
+	                        stmt.setString(3, newUser.getPassword());
+	                        stmt.setInt(4,0);
+	                        
+	                        
+	                        try {
+	                            stmt.executeUpdate(); // prova a inserire l'utente
+	                            infoAlert.setTitle("Registrazione riuscita");
+	                            infoAlert.setHeaderText("Benvenuto " + regUser.getText() + "!\nRicordati di fare il Login");
+	                            infoAlert.showAndWait();
+	                            
+	                            
+	                            
+	                            regUser.clear();
+	                            regNickname.clear();
+	                            regPass.clear();
+	                            regPassConf.clear();
+	                          //  popupStage.close();
+	
+	                        } catch (SQLException ex) {
+	                            // Controlla se è violazione di UNIQUE o PRIMARY KEY
+	                            if (ex.getErrorCode() == 23505 || ex.getMessage().contains("Unique") || ex.getMessage().contains("PRIMARY KEY")) {
+	                                errorAlert.setTitle("Errore registrazione");
+	                                errorAlert.setHeaderText("Nickname già esistente!");
+	                                errorAlert.showAndWait();
+	
+	                                regUser.clear();
+	                                regNickname.clear();
+	                                regPass.clear();
+	                                regPassConf.clear();
+	                                
+	                            } else {
+	                                ex.printStackTrace();
+	                                errorAlert.setTitle("Errore DB");
+	                                errorAlert.setHeaderText("Impossibile registrare l'utente!");
+	                                errorAlert.showAndWait();
+	                            }
+	                        }
                            
-                       } catch (SQLException e1) {
-                           e1.printStackTrace();
-                       }
+                      } catch (SQLException e1) {
+                    	  e1.printStackTrace();
+                      }
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -552,12 +561,13 @@ public class Room extends Application{
         loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
         Label logTitle = new Label("Accedi");
         logTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        
         TextField logUser = new TextField();
         logUser.setPromptText("Nickname");
-
         PasswordField logPass = new PasswordField();
         logPass.setPromptText("Password");
         Button logButton = new Button("Login");
+        logButton.setCursor(Cursor.HAND);
         logButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;");
         
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION, null, ButtonType.OK);
@@ -572,46 +582,45 @@ public class Room extends Application{
             } else {
             	try {
                                          
-                    String sql = "SELECT nickname FROM utente WHERE nickname = ? AND psww = ?";
+                     String sql = "SELECT nickname FROM utente WHERE nickname = ? AND psww = ?";
                      
                      try (Connection conn = DataBaseConnection.getConnection();
-                         PreparedStatement stmt = conn.prepareStatement(sql)) {
-                	 	 stmt.setString(1, logUser.getText());		// Sostituisce il primo ? con il nickname del form
-                	 	 stmt.setString(2, logPass.getText());
-                    	 ResultSet rs = stmt.executeQuery(); // Esegue la query e salva il risultato
-                    	 if (rs.next()) {					// Nickname trovato
-                    		 currentNickName.set(logUser.getText());
-                    		
-                             infoAlert.setTitle("Login riuscito");
-                             infoAlert.setHeaderText("Bentornato " + logUser.getText() + "!");
-                             infoAlert.showAndWait();
-                             logUser.clear();
-                             logPass.clear();
-                             popupStage.close();
-                         } else { // Nessun utente trovato o password errata, dobbiamo distinguere i due casi
-                        	 String sql1 = "SELECT nickname FROM utente WHERE nickname = ? ";
-                        	 
-                        	 try (PreparedStatement stmt1 = conn.prepareStatement(sql1)) {
-                        		 stmt1.setString(1, logUser.getText());
-                        		 ResultSet rs1 = stmt1.executeQuery(); // Cerco solo il nickname
-                        		 if (rs1.next()) {		// Se trovo un risultatp significa che aveva sbagliato password prima
-                        			 errorAlert.setTitle("Password Errata");
-                                     errorAlert.setHeaderText("Le password non corrispondono!");
-                                     errorAlert.showAndWait();
-                                     logPass.clear();
-                        		 }
-                        		 else {					// Se no l'utente non esiste
-                        			 errorAlert.setTitle("Utente non trovato");
-                                     errorAlert.setHeaderText("Nickname non esistente!");
-                                     errorAlert.showAndWait();
-                                     logUser.clear();
-                                     logPass.clear();
-                        		 }
-                        	 }catch (SQLException e1) {
-		                       	  e1.printStackTrace();
-		                         }
-                             
-                         }    
+	                         PreparedStatement stmt = conn.prepareStatement(sql)) {
+	                	 	 stmt.setString(1, logUser.getText());		// Sostituisce il primo ? con il nickname del form
+	                	 	 stmt.setString(2, logPass.getText());
+	                    	 ResultSet rs = stmt.executeQuery(); // Esegue la query e salva il risultato
+	                    	 if (rs.next()) {					// Nickname trovato
+	                    		 currentNickName.set(logUser.getText());
+	                    		
+	                             infoAlert.setTitle("Login riuscito");
+	                             infoAlert.setHeaderText("Bentornato " + logUser.getText() + "!");
+	                             infoAlert.showAndWait();
+	                             logUser.clear();
+	                             logPass.clear();
+	                             popupStage.close();
+	                         } else { // Nessun utente trovato o password errata, dobbiamo distinguere i due casi
+	                        	 String sql1 = "SELECT nickname FROM utente WHERE nickname = ? ";
+	                        	 
+	                        	 try (PreparedStatement stmt1 = conn.prepareStatement(sql1)) {
+	                        		 stmt1.setString(1, logUser.getText());
+	                        		 ResultSet rs1 = stmt1.executeQuery(); // Cerco solo il nickname
+	                        		 if (rs1.next()) {		// Se trovo un risultatp significa che aveva sbagliato password prima
+	                        			 errorAlert.setTitle("Password Errata");
+	                                     errorAlert.setHeaderText("Le password non corrispondono!");
+	                                     errorAlert.showAndWait();
+	                                     logPass.clear();
+	                        		 }
+	                        		 else {					// Se no l'utente non esiste
+	                        			 errorAlert.setTitle("Utente non trovato");
+	                                     errorAlert.setHeaderText("Nickname non esistente!");
+	                                     errorAlert.showAndWait();
+	                                     logUser.clear();
+	                                     logPass.clear();
+	                        		 }
+	                        	 }catch (SQLException e1) {
+			                       	  e1.printStackTrace();
+			                     }
+	                         }    
                       } catch (SQLException e2) {
                     	  e2.printStackTrace();
                       }
@@ -624,7 +633,7 @@ public class Room extends Application{
                      logUser.clear();
                 	 logPass.clear();
                  }
-            }
+              }
         });
         loginBox.getChildren().addAll(logTitle, logUser, logPass, logButton);
         return loginBox;
@@ -646,6 +655,7 @@ public class Room extends Application{
 	private StackPane createImagePane(String imagePath, Runnable onClick) {	// x i 4 quadranti delle immagini dei giochi
 	    Image img = new Image(getClass().getResourceAsStream(imagePath));
 	    ImageView imgView = new ImageView(img);
+	    imgView.setCursor(Cursor.HAND);
 	    imgView.setFitWidth(200);
 	    imgView.setFitHeight(200);
 	    imgView.setPreserveRatio(true);
@@ -668,11 +678,11 @@ public class Room extends Application{
 		score.setCellValueFactory(data ->
 		new SimpleIntegerProperty(data.getValue().getScore()).asObject());
 		
-	/*	TableColumn<VideoGames, Category> category = new TableColumn<>("Categoria: ");
+		TableColumn<VideoGames, Category> category = new TableColumn<>("Categoria");
 		category.setCellValueFactory(data ->
-        new Category(data.getValue().getCategory()));*/
+		new SimpleObjectProperty<>(data.getValue().getCategory()));
 
-		gameTable.getColumns().addAll(name,score);
+		gameTable.getColumns().addAll(name,category, score);
 	}	
 	
 	@SuppressWarnings("unchecked")
@@ -703,7 +713,5 @@ public class Room extends Application{
 	    table.getColumns().addAll(colNick, colName, colPassword, colScore);
 	}
 	
-	
-
 
 }

@@ -16,7 +16,7 @@ public class indovinaNumero extends VideoGames{
 	Scanner scanner = new Scanner(System.in);
 	Random random = new Random();
 	
-	public void play() {
+	public void play(String nickName) {
 		
 		int numeroCasuale, numero, cont=0;
 		boolean uscita;

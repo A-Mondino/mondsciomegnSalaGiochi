@@ -19,7 +19,7 @@ public abstract class VideoGames {
 		this.score = score;
 	}
 	
-	public abstract void play();
+	public abstract void play(String nickName);
 	
 	private void startTimer() {
 		// da finire

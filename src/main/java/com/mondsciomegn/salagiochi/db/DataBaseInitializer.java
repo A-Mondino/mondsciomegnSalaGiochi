@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 public class DataBaseInitializer {
     public static void initialize() {
+    	
         String user = 
                 "CREATE TABLE IF NOT EXISTS utente (" +
                 "nickname VARCHAR(30) PRIMARY KEY," +
@@ -15,7 +16,7 @@ public class DataBaseInitializer {
                 "score INT" +
                 " );" ;
         
-        String videogames = 
+        String videogame = 
                 "CREATE TABLE IF NOT EXISTS videogioco (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
                 "nome VARCHAR(30)," +
@@ -43,15 +44,37 @@ public class DataBaseInitializer {
                 " );" ;
         
         
+        String createCategorys =  "INSERT INTO category (nome, descrizione) " +
+        						  "SELECT 'Arcade', 'Giochi vecchio stile :D'" +
+        						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Arcade')" +
+        						  "UNION ALL " +
+        						  "SELECT 'Strategia', 'Giochi di strategia e tattica'" + 
+        						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Strategia');";
+        						  
+        
+        String createVideogames = "INSERT INTO videogioco (nome, categoria, score)" +
+        						  "SELECT 'Tris', 'Arcade', 100 " +
+        						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Tris')" + 
+        						  "UNION ALL " + 
+        						  "SELECT 'Battaglia Navale', 'Strategia', 1000 " +
+        						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Battaglia Navale');";
+       
+        String createUsers = 	  "INSERT INTO utente (nickname, nome, psww, score)" +
+				  				  "SELECT '_COMPUTER_', 'computer', 'computer123' , 0 " +
+				  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_COMPUTER_');"; 
+				  				  
+        
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(user);
-            stmt.execute(videogames);
+            stmt.execute(videogame);
             stmt.execute(category);
             stmt.execute(checkpoint);
             stmt.execute(activityLog);
-            
+            stmt.executeUpdate(createUsers);
+            stmt.executeUpdate(createCategorys);
+            stmt.executeUpdate(createVideogames);
             
         } catch (SQLException e) {
             e.printStackTrace();

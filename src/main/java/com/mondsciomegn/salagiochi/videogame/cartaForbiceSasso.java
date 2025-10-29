@@ -13,7 +13,7 @@ public class cartaForbiceSasso extends VideoGames {
 		super(name, category, score);
 	}
 
-	public void play() {
+	public void play(String nickName) {
 		Scanner scanner = new Scanner(System.in);
 		Random ran = new Random();
 		
