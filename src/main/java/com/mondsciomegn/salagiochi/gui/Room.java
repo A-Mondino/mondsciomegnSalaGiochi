@@ -63,9 +63,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Room extends Application{
 	private int currentRoom = 0; 
 	private Boolean firstTime = true;
-	private BooleanProperty loggedIn = new SimpleBooleanProperty(false);		// Serve per la visibilità del botttone di logout
-    private StringProperty currentNickName = new SimpleStringProperty("");		// Serve per la string dopo il login
-	
+    private StringProperty currentNickName = new SimpleStringProperty("");		// Serve per memorizzare il nickName dopo il login
 	
 	private Stage primaryStage = null;
 	private BorderPane root = new BorderPane();				// Finestra 
@@ -194,11 +192,11 @@ public class Room extends Application{
 
         toolbar.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
 
-        String tmp = getClass().getResource("./img/tmp.png").toExternalForm();	// Da cambiare questa foto....
+        String tmp = getClass().getResource("./img/tmp.png").toExternalForm();	
       
         ImageView imageView = new ImageView(new Image(tmp));		// Crei un ImageView per poter mostrare la foto
-        imageView.setFitWidth(30);   
-        imageView.setFitHeight(30);
+        imageView.setFitWidth(40);   
+        imageView.setFitHeight(40);
         imageView.setPreserveRatio(true);
         Region spacer = new Region();			// Questo spacer in realtà non serve a niente, ma non esiste altro modo per mettere l'elemento nella toolBar tutto a sinistra...
         HBox.setHgrow(spacer, Priority.ALWAYS); // ...quindi uso uno spacer per "pushare" l'elemento a sinistra
@@ -206,66 +204,111 @@ public class Room extends Application{
         Label nickName = new Label("");			// Label del nickName
         nickName.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         nickName.textProperty().bind(currentNickName);
-        
-        
-        Button logOut = new Button("LogOut");
-        loggedIn.set(false);			//Non lo mostro finchè il login non va a buon fine ----> vedi loginBox
-        logOut.visibleProperty().bind(loggedIn);
-        
-        logOut.setOnAction(e -> {
-        	Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Logout");
-            confirmAlert.setHeaderText("Sei sicuro di voler effettuare il logout?");
-            confirmAlert.setContentText("Conferma per uscire.");
+                
+        toolbar.getItems().addAll(nickName, spacer, imageView);
 
-            // Mostra la finestra e aspetta la risposta
-            Optional<ButtonType> result = confirmAlert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
-            	currentNickName.set("");      // resetta nickname
-            	loggedIn.set(false);  		  // nasconde il bottone logout
-            } else {
-                // L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
-            }
-        }); 		// Evento OnClick
-        
-        toolbar.getItems().addAll(nickName, logOut, spacer, imageView);
-        HBox.setMargin(logOut, new Insets(0, 0, 0, 20)); 			// Margine sinistro di 20px per separare un po il bottone
-        
         root.setTop(toolbar);	// Aggiungo alla root
         root.getTop().setVisible(true);	// E la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
 
     
         imageView.setOnMouseClicked(event -> {  // Evento on-click
-            Stage popupStage = new Stage();		// Creo un nuovo Stage (finestra figlia)
-            popupStage.setTitle("Login / Form");
-            
-            GridPane formGrid = new GridPane();		// Uso una griglia per mettere tutto in modo ordinato
-            formGrid.setPadding(new Insets(20));
-            formGrid.setHgap(50);
-            formGrid.setVgap(50);
-            formGrid.setAlignment(Pos.CENTER);
-            
-            
-            VBox formLoginBox =  new VBox();		
-            formLoginBox = LoginBox(popupStage, nickName);			// Carico il form
-            VBox formRegisterBox = new VBox();
-            formRegisterBox = RegisterBox(popupStage);	// Carico il form
-            	
-            formGrid.add(formRegisterBox, 0, 0); // cella (0,0)
-            formGrid.add(formLoginBox, 1, 0);    // cella (0,1)
+        	Stage popupStage = new Stage();		// Creo un nuovo Stage (finestra figlia)
+        	if(currentNickName.get().equals("")) {		// Se il nickname è vuoto significa che non ho fatto il login, quindi mostro i due form (registrazione e login)
+                popupStage.setTitle("Register / Login");
+                
+                GridPane formGrid = new GridPane();		// Uso una griglia per mettere tutto in modo ordinato
+                formGrid.setPadding(new Insets(20));
+                formGrid.setHgap(50);
+                formGrid.setVgap(50);
+                formGrid.setAlignment(Pos.CENTER);
+                
+                
+                VBox formLoginBox =  new VBox();		
+                formLoginBox = LoginBox(popupStage, nickName);			// Carico il form
+                VBox formRegisterBox = new VBox();
+                formRegisterBox = RegisterBox(popupStage);	// Carico il form
+                	
+                formGrid.add(formRegisterBox, 0, 0); // cella (0,0)
+                formGrid.add(formLoginBox, 1, 0);    // cella (0,1)
 
-            VBox centerContent = new VBox(10, formGrid);	
-            centerContent.setAlignment(Pos.CENTER);
-            
-            
-            // Scena del popup
-            Scene popupScene = new Scene(centerContent, roomH/2, roomW/2);
-            popupStage.setScene(popupScene);
+                VBox centerContent = new VBox(10, formGrid);	
+                centerContent.setAlignment(Pos.CENTER);
+                
+                
+                // Scena del popup
+                Scene popupScene = new Scene(centerContent, roomH/2, roomW/2);
+                popupStage.setScene(popupScene);
 
-            // Imposto la finestra come "figlia" della principale
+        	}
+        	else {	//	L'utente è loggato, devo mostrare un popup di logout o cancella account
+        		popupStage.setTitle("Account");
+        		
+    	        Label title = new Label("Ciao " + currentNickName.get() + "!");
+    	        title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+    	        Button logOut = new Button("LogOut");
+    	        logOut.setStyle("-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold;");
+    	        
+    	        logOut.setOnAction(e -> {
+    	        	Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+    	            confirmAlert.setTitle("Logout");
+    	            
+    	            confirmAlert.setHeaderText("Sei sicuro di voler effettuare il logout?");
+    	            confirmAlert.setContentText("Conferma per uscire.");
+
+    	            // Mostra la finestra e aspetta la risposta
+    	            Optional<ButtonType> result = confirmAlert.showAndWait();
+    	            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
+    	            	currentNickName.set("");      // resetta nickname
+    	            	popupStage.close();
+    	            } else {
+    	                // L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
+    	            }
+    	        }); 		// Evento OnClick
+
+    	        Button deleteAccount = new Button("Elimina Account");
+    	        deleteAccount.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-weight: bold;");
+    	        
+    	        deleteAccount.setOnAction(e -> {
+    	            Alert confirmDelete = new Alert(Alert.AlertType.WARNING);
+    	            confirmDelete.setTitle("Elimina Account");
+    	           
+    	            confirmDelete.setHeaderText("Sei sicuro di voler eliminare il tuo account?");
+    	            confirmDelete.setContentText("Questa azione è irreversibile!");
+    	            
+    	            confirmDelete.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+    	            Optional<ButtonType> result = confirmDelete.showAndWait();
+    	            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
+    	            	try (Connection conn = DataBaseConnection.getConnection();
+   	                         PreparedStatement stmt = conn.prepareStatement("DELETE FROM utente WHERE nickname = ?")) {
+   	                        stmt.setString(1, currentNickName.get());
+   	                        stmt.executeUpdate();
+   	                        currentNickName.set("");
+   	                        popupStage.close();
+   	                    } catch (SQLException ex) {
+   	                        ex.printStackTrace();
+   	                        Alert err = new Alert(Alert.AlertType.ERROR, "Errore durante l'eliminazione dell'account.");
+   	                        err.showAndWait();
+   	                    }
+    	            } else {
+    	                // L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
+    	            }
+    	        });
+
+    	        VBox box = new VBox(15, title, logOut, deleteAccount);
+    	        box.setAlignment(Pos.CENTER);
+    	        box.setPadding(new Insets(20));
+
+    	        Scene popupScene = new Scene(box, 300, 200);
+    	        popupStage.setScene(popupScene);
+        	}
+        	
+        	
+        	// Imposto la finestra come "figlia" della principale
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
             popupStage.initModality(Modality.WINDOW_MODAL); // Blocca la finestra principale finché non chiudi il popup
             popupStage.show(); // Mostra la finestra
+            
         });
         
 
@@ -538,7 +581,7 @@ public class Room extends Application{
                     	 ResultSet rs = stmt.executeQuery(); // Esegue la query e salva il risultato
                     	 if (rs.next()) {					// Nickname trovato
                     		 currentNickName.set(logUser.getText());
-                    		 loggedIn.set(true);		// Login andato a buon fine, posso mostrare il tasto di login 
+                    		
                              infoAlert.setTitle("Login riuscito");
                              infoAlert.setHeaderText("Bentornato " + logUser.getText() + "!");
                              infoAlert.showAndWait();
@@ -613,7 +656,8 @@ public class Room extends Application{
 	    pane.setStyle("-fx-border-color: black; -fx-padding: 10;");
 	    return pane;
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	private void addGameColums(TableView<VideoGames> gameTable) {
 		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco");
 		name.setCellValueFactory(data ->
@@ -627,7 +671,8 @@ public class Room extends Application{
 	/*	TableColumn<VideoGames, Category> category = new TableColumn<>("Categoria: ");
 		category.setCellValueFactory(data ->
         new Category(data.getValue().getCategory()));*/
-		gameTable.getColumns().addAll(name, score);
+
+		gameTable.getColumns().addAll(name,score);
 	}	
 	
 	@SuppressWarnings("unchecked")
