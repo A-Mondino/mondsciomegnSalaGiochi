@@ -10,7 +10,7 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 public class indovinaNumero extends VideoGames{
 	
 	public indovinaNumero(String name, Category category, int score) {
-		super(name, category, score);
+		super(name, category);
 	}
 
 	Scanner scanner = new Scanner(System.in);

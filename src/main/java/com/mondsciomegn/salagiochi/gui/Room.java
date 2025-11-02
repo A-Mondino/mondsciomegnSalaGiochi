@@ -423,19 +423,19 @@ public class Room extends Application{
 
 	    // Creazione dei 4 riquadri cliccabili per i rispettivi giochi
 	    grid.add(createImagePane("./img/tris.jpg", () -> {
-	        new Tris("tris", null, currentRoom).play(currentNickName.get());  
+	        new Tris("Tris", new Category("Arcade")).play(currentNickName.get());  
 	    }), 0, 0);
 
 	    grid.add(createImagePane("./img/SCF.jpg", () -> {
-	        new cartaForbiceSasso("carta forbice sasso", null, currentRoom).play(currentNickName.get());
+	        new cartaForbiceSasso("carta forbice sasso", null, 0).play(currentNickName.get());
 	    }), 1, 0);
 
 	    grid.add(createImagePane("./img/dadi.jpg", () -> {
-	        new dadi("dadi", null, currentRoom).play(currentNickName.get());
+	        new dadi("dadi", null, 0).play(currentNickName.get());
 	    }), 0, 1);
 
 	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
-	        new indovinaNumero("indovina il numero", null, currentRoom).play(currentNickName.get());
+	        new indovinaNumero("indovina il numero", null, 0).play(currentNickName.get());
 	    }), 1, 1);
 
 	    
@@ -681,8 +681,13 @@ public class Room extends Application{
 		TableColumn<VideoGames, Category> category = new TableColumn<>("Categoria");
 		category.setCellValueFactory(data ->
 		new SimpleObjectProperty<>(data.getValue().getCategory()));
-
-		gameTable.getColumns().addAll(name,category, score);
+		
+		TableColumn<VideoGames, String> desc = new TableColumn<>("Descrizione");
+	    desc.setCellValueFactory(data ->
+	    new SimpleStringProperty(data.getValue().getCategory().getDescription()));
+	    
+	    
+		gameTable.getColumns().addAll(name,category, desc, score);
 	}	
 	
 	@SuppressWarnings("unchecked")

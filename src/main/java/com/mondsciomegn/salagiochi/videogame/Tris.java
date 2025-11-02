@@ -1,5 +1,9 @@
 package com.mondsciomegn.salagiochi.videogame;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,6 +12,8 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import com.mondsciomegn.salagiochi.db.Category;
+import com.mondsciomegn.salagiochi.db.DataBaseConnection;
+import com.mondsciomegn.salagiochi.db.User;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
 import javafx.application.Platform;
@@ -27,8 +33,12 @@ import javafx.stage.Stage;
 
 public class Tris extends VideoGames{
 		
-		public Tris(String name, Category category, int score) {
-			super(name, category, score);
+		public Tris(String name, Category category) {
+			super(name, category);
+		}
+		public Tris(String name, Category category,int score) {
+			super(name, category);
+			setScore(score);
 		}
 
 	 	private Button[][] buttons = new Button[3][3];		// Griglia del tris
@@ -52,11 +62,26 @@ public class Tris extends VideoGames{
 	        });
 	    }
 
-	    private void startGame(Stage stage, String nickName) {
+	    private void startGame(Stage stage, String nickname) {
 	    		
-	    	if(nickName.isEmpty()) {		// Significa che qualcuno sta giocando come guest
-	    		// Devo creare un nuovo utente guest1, guest2 etc etc
-	    	}
+	    	if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
+                String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
+		  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
+		  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
+                
+                try (Connection conn = DataBaseConnection.getConnection();
+                        PreparedStatement stmt = conn.prepareStatement(sql)) {
+                        try {
+                            stmt.executeUpdate(); 		// Prova a inserire l'utente
+
+                        } catch (SQLException ex) { 
+                        	ex.printStackTrace();
+                        }
+                       
+                  } catch (SQLException e1) {
+                	  e1.printStackTrace();
+                  }
+            }
 	    	
 	    	
 	        stage.setTitle("Gioco Tris");
@@ -81,10 +106,10 @@ public class Tris extends VideoGames{
 
 	            	 buttons[i][j].setOnAction(e -> {
 		                    if (!gameOver && buttons[row][col].getText().isEmpty()) {
-		                        playerMove(row, col);
-		                        computerMove();			// Dopo che ho fatto la mossa io la deve fare anche il computer
+		                    	if(!playerMove(row, col, nickname))	// questo if e il ritorno della funzione... 
+		                    		computerMove();			// Dopo che ho fatto la mossa io la deve fare anche il computer
 		                    }
-		                });
+		             });
 	            }
 	        }
 
@@ -93,25 +118,63 @@ public class Tris extends VideoGames{
 	        stage.show();
 	    }
 
-	    private void playerMove(int row, int col) {
+	    private Boolean playerMove(int row, int col, String nickname) {	
+	    	//...serve solo per evitare un errore che si verificava perchè la mossa del computer veniva fatta lo stesso dopo il primaryStage.hide();
 	        playGrid[row][col] = 'X';			// Setto la matrice di supporto con il segno del giocatore
 	        buttons[row][col].setText("X");		// Setto anche il bottone
 
-	        if (gameCheck('X')) {			// poi controllo se ho vinto
+	        if (gameCheck('X')) {			// Poi controllo se ho vinto
 	            gameOver = true;
 	            showMessage("Hai vinto!");
 	            primaryStage.hide();
+	            addPoints(nickname);		// E assegno i punti
+	            return true;
 	        }
+	        
+	        return false;
 	    }
 
-	    private void computerMove() {	
+	    private void addPoints(String nickname) {
+	    	if(nickname.isEmpty()) {				// Gioco come anonimo
+		    	String sql  = "UPDATE utente SET score = ? WHERE nickname = ?";
+		    	try (Connection conn = DataBaseConnection.getConnection();
+	                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+	
+		            	stmt.setInt(1, getScore());     // Assegna il punteggio
+		            	if(nickname.isEmpty())
+		            		stmt.setString(2,"_ANONIMO_");
+	                    stmt.executeUpdate(); 			// Prova a fare l'update
+	
+	                   
+	              } catch (SQLException e1) {
+	            	  e1.printStackTrace();
+	              }
+	    	}
+	    	else {									// Ho un nickname valido
+	    		String sql  = "UPDATE utente SET score = score + ? WHERE nickname = ?";
+		    	try (Connection conn = DataBaseConnection.getConnection();
+	                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+	
+		            	stmt.setInt(1, getScore());     // Assegna il punteggio
+		            	stmt.setString(2,nickname);
+	                    stmt.executeUpdate(); 			// Prova a fare l'update
+	                   
+	              } catch (SQLException e1) {
+	            	  e1.printStackTrace();
+	              }
+	    	}
+			
+		}
+
+		private void computerMove() {	
 	        int[] move = move();
 
 	        if (move == null) {		// Se il mio array di mosse è vuoto significa che il computer non puo più fare nulla ed è un pareggio
 	            gameOver = true;
 	            showMessage("Pareggio!");
 	            primaryStage.hide();
-	        }else {						// Altrimenti ho trovato una mossa da fare 
+	            
+	        } else {						// Altrimenti ho trovato una mossa da fare 
 		        int row = move[0];
 		        int col = move[1];
 		        playGrid[row][col] = 'O';
@@ -122,11 +185,12 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Hai perso!");
 	            primaryStage.hide();
+	            addPoints("_COMPUTER_");
 	        }
 	        
 	    }
 
-	    private int[] move() {			// GGIUNGERE MATRICE PRIORITA PER MOSSA NOT DUMB
+	    private int[] move() {			// AGGIUNGERE MATRICE PRIORITA PER MOSSA NOT DUMB
 	        List<int[]> unused = new ArrayList<>();
 	        for (int i = 0; i < 3; i++) {
 	            for (int j = 0; j < 3; j++) {
@@ -135,7 +199,8 @@ public class Tris extends VideoGames{
 	                }
 	            }
 	        }
-	        if (unused.isEmpty()) return null;
+	        if (unused.isEmpty()) 
+	        	return null;
 
 	        return unused.get(random.nextInt(unused.size()));
 	    }
@@ -145,14 +210,18 @@ public class Tris extends VideoGames{
 	            if (playGrid[i][0] == symbol && playGrid[i][1] == symbol && playGrid[i][2] == symbol)
 	                return true;
 	        }
+	        
 	        for (int j = 0; j < 3; j++) {
 	            if (playGrid[0][j] == symbol && playGrid[1][j] == symbol && playGrid[2][j] == symbol)
 	                return true;
 	        }
+	        
 	        if (playGrid[0][0] == symbol && playGrid[1][1] == symbol && playGrid[2][2] == symbol)
 	            return true;
+	        
 	        if (playGrid[0][2] == symbol && playGrid[1][1] == symbol && playGrid[2][0] == symbol)
 	            return true;
+	        
 	        return false;
 	    }
 

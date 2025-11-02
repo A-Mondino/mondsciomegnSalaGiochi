@@ -48,7 +48,7 @@ public class DataBaseInitializer {
         						  "SELECT 'Arcade', 'Giochi vecchio stile :D'" +
         						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Arcade')" +
         						  "UNION ALL " +
-        						  "SELECT 'Strategia', 'Giochi di strategia e tattica'" + 
+        						  "SELECT 'Strategia', 'Giochi di tattica'" + 
         						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Strategia');";
         						  
         
@@ -66,7 +66,7 @@ public class DataBaseInitializer {
         
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
-
+        	
             stmt.execute(user);
             stmt.execute(videogame);
             stmt.execute(category);

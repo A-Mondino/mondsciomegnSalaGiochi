@@ -1,5 +1,9 @@
 package com.mondsciomegn.salagiochi.db;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,11 +17,27 @@ public abstract class VideoGames {
 	private List<CheckPoint> checkpoints = new ArrayList<>();
 	private float time = 0;
 	
-	public VideoGames(String name, Category category, int score) {
+	public VideoGames(String name, Category category) {
 		this.name = name;
 		this.category = category;
-		this.score = score;
+		String sql  = "SELECT score FROM videogioco WHERE nome = ?";
+    	try (Connection conn = DataBaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            	stmt.setString(1, name);    
+            	try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        this.score = rs.getInt("score");
+                    } else {
+                        this.score = 0; // fallback
+                    }
+                }
+               
+          } catch (SQLException e1) {
+        	  e1.printStackTrace();
+          }
 	}
+	
 	
 	public abstract void play(String nickName);
 	

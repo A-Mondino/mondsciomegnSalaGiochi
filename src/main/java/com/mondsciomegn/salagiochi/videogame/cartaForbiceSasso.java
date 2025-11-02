@@ -10,7 +10,7 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 public class cartaForbiceSasso extends VideoGames {
 	
 	public cartaForbiceSasso(String name, Category category, int score) {
-		super(name, category, score);
+		super(name, category);
 	}
 
 	public void play(String nickName) {

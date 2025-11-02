@@ -9,7 +9,7 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 public class dadi extends VideoGames{
 	
 	public dadi(String name, Category category, int score) {
-		super(name, category, score);
+		super(name, category);
 	}
 	
 	public void play(String nickName) {
