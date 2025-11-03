@@ -6,13 +6,13 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
 
-public class dadi extends VideoGames{
+public class Roulette extends VideoGames{
 	
-	public dadi(String name, Category category, int score) {
+	public Roulette(String name, Category category) {
 		super(name, category);
 	}
 	
-	public void play(String nickName) {
+	public void play(String nickName) { /*
 		int somma, sommaCasuale;
 		
 		System.out.println("LANCIO DEI DADI: ");
@@ -25,7 +25,7 @@ public class dadi extends VideoGames{
 		System.out.println("La somma dei dati lanciati dall'avversario è: "+sommaCasuale);
 
 		
-		controlloDadiMaggiore(somma, sommaCasuale);	
+		controlloDadiMaggiore(somma, sommaCasuale);	*/
 	}
 	
 	private static int lancia() {

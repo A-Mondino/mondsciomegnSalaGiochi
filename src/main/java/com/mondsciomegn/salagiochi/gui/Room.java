@@ -423,19 +423,23 @@ public class Room extends Application{
 
 	    // Creazione dei 4 riquadri cliccabili per i rispettivi giochi
 	    grid.add(createImagePane("./img/tris.jpg", () -> {
-	        new Tris("Tris", new Category("Arcade")).play(currentNickName.get());  
+	        new Tris("Tris", new Category("Arcade"))
+	        .play(currentNickName.get());  
 	    }), 0, 0);
 
 	    grid.add(createImagePane("./img/SCF.jpg", () -> {
-	        new cartaForbiceSasso("carta forbice sasso", null, 0).play(currentNickName.get());
+	        new BattagliaNavale("Battaglianavale", new Category("Strategia"))
+	        .play(currentNickName.get());
 	    }), 1, 0);
 
 	    grid.add(createImagePane("./img/dadi.jpg", () -> {
-	        new dadi("dadi", null, 0).play(currentNickName.get());
+	        new Roulette("Roulette", new Category("Fortuna"))
+	        .play(currentNickName.get());
 	    }), 0, 1);
 
 	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
-	        new indovinaNumero("indovina il numero", null, 0).play(currentNickName.get());
+	        new TrovaDadi("TrovaDadi", new Category("Fortuna"))
+	        .play(currentNickName.get());
 	    }), 1, 1);
 
 	    

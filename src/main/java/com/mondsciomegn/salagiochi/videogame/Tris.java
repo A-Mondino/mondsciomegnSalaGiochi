@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+
 
 import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
@@ -21,6 +22,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,6 +32,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+
 
 
 public class Tris extends VideoGames{
@@ -42,7 +49,9 @@ public class Tris extends VideoGames{
 		}
 
 	 	private Button[][] buttons = new Button[3][3];		// Griglia del tris
-	    private char[][] playGrid = new char[3][3];		// Matrice di supporto
+	    private char[][] playGrid = new char[3][3];			// Matrice di supporto
+	    
+	    private GridPane grid = new GridPane();				// Per la visualizzazione grafica
 	    
 	    private boolean gameOver = false;
 	    private Random random = new Random();
@@ -52,17 +61,34 @@ public class Tris extends VideoGames{
 	    
 	    @Override
 	    public void play(String nickName) {
-	    	Platform.runLater(() -> {
-	    		showPopUp("Inserisci tre simboli uguali in orizzontale, obliquo o verticale" +
-	            " prima dell'avversario. Il primo giocatore che riesce a creare una di queste" + 
-	    		" combinazioni, vince la partita! Se invece tutte le caselle si riempiono senza "+
-	            "che nessuno abbia allineato i tre simboli, il gioco termina in pareggio." );
-	            
-	            startGame(primaryStage, nickName);
-	        });
+	    	Dialog<ButtonType> dialog = new Dialog<>();
+	    	dialog.setTitle("Dettagli Gioco");
+	    	dialog.setHeaderText("Istruzioni:");
+	    	dialog.setContentText(
+	    	        "Inserisci tre simboli uguali in orizzontale, obliquo o verticale " +
+	                "prima dell'avversario. Il primo giocatore che riesce a creare una di queste " +
+	                "combinazioni vince la partita!\n\n" +
+	                "Se invece tutte le caselle si riempiono senza che nessuno abbia allineato " +
+	                "i tre simboli, il gioco termina in pareggio."
+	    	);
+	    	
+	    	ButtonType play = new ButtonType("Gioca", ButtonBar.ButtonData.OK_DONE);
+	    	ButtonType cancel = new ButtonType("Annulla", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+	    	dialog.getDialogPane().getButtonTypes().setAll(play, cancel);
+
+	    	Optional<ButtonType> result = dialog.showAndWait();
+	    	if (!result.isPresent() || result.get() == cancel) {
+	    	    return;
+	    	}
+
+	    	startGame(nickName);
+
 	    }
 
-	    private void startGame(Stage stage, String nickname) {
+
+
+	    private void startGame(String nickname) {
 	    		
 	    	if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
                 String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
@@ -84,9 +110,8 @@ public class Tris extends VideoGames{
             }
 	    	
 	    	
-	        stage.setTitle("Gioco Tris");
+	        primaryStage.setTitle("Gioco Tris");
 
-	        GridPane grid = new GridPane();
 
 	        for (int i = 0; i < 3; i++) {		// Inizializzo la matrice di bottoni 
 	            for (int j = 0; j < 3; j++) {
@@ -114,8 +139,8 @@ public class Tris extends VideoGames{
 	        }
 
 	        Scene scene = new Scene(grid, 300, 300);
-	        stage.setScene(scene);
-	        stage.show();
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
 	    }
 
 	    private Boolean playerMove(int row, int col, String nickname) {	

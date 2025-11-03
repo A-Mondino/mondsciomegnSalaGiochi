@@ -49,15 +49,24 @@ public class DataBaseInitializer {
         						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Arcade')" +
         						  "UNION ALL " +
         						  "SELECT 'Strategia', 'Giochi di tattica'" + 
-        						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Strategia');";
+        						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Strategia')" +
+        						  "UNION ALL " +
+        						  "SELECT 'Fortuna', 'Giochi di fortuna'" + 
+        						  "WHERE NOT EXISTS (SELECT 1 FROM category WHERE nome = 'Fortuna');";
         						  
         
         String createVideogames = "INSERT INTO videogioco (nome, categoria, score)" +
-        						  "SELECT 'Tris', 'Arcade', 100 " +
+        						  "SELECT 'Tris', 'Arcade', 300 " +
         						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Tris')" + 
         						  "UNION ALL " + 
         						  "SELECT 'Battaglia Navale', 'Strategia', 1000 " +
-        						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Battaglia Navale');";
+        						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Battaglia Navale')" + 
+        						  "UNION ALL " + 
+        						  "SELECT 'Roulette', 'Fortuna', 50 " +
+        						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Roulette')" + 
+        						  "UNION ALL " + 
+        						  "SELECT 'TrovaDadi', 'Fortuna', 150 " +
+        						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'TrovaDadi');";
        
         String createUsers = 	  "INSERT INTO utente (nickname, nome, psww, score)" +
 				  				  "SELECT '_COMPUTER_', 'computer', 'computer123' , 0 " +
@@ -67,7 +76,7 @@ public class DataBaseInitializer {
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
         	
-            stmt.execute(user);
+        	stmt.execute(user);
             stmt.execute(videogame);
             stmt.execute(category);
             stmt.execute(checkpoint);

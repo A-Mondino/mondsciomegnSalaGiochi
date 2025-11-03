@@ -7,9 +7,9 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
 
-public class indovinaNumero extends VideoGames{
+public class TrovaDadi extends VideoGames{
 	
-	public indovinaNumero(String name, Category category, int score) {
+	public TrovaDadi(String name, Category category) {
 		super(name, category);
 	}
 
@@ -17,7 +17,7 @@ public class indovinaNumero extends VideoGames{
 	Random random = new Random();
 	
 	public void play(String nickName) {
-		
+		/*
 		int numeroCasuale, numero, cont=0;
 		boolean uscita;
 				
@@ -37,7 +37,7 @@ public class indovinaNumero extends VideoGames{
 			
 		if(cont == 5) {
 			System.out.println("HAI PERSO!");
-		}
+		} */
 	}
 	
 	private static boolean controlloNumeroCasuale(int numero, int numeroCasuale) {
