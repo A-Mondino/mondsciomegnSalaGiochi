@@ -1,31 +1,119 @@
 package com.mondsciomegn.salagiochi.videogame;
 
+import java.awt.Label;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.Random;
 
 import com.mondsciomegn.salagiochi.db.Category;
+import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 public class Roulette extends VideoGames{
+	
+    private boolean gameOver = false;
+    private Stage primaryStage = new Stage();
 	
 	public Roulette(String name, Category category) {
 		super(name, category);
 	}
 	
-	public void play(String nickName) { /*
-		int somma, sommaCasuale;
-		
-		System.out.println("LANCIO DEI DADI: ");
-		System.out.println("Lancia due dati e il punteggio più alto vince la partita! \n\n");
-		
-		somma = lancia();
-		System.out.println("La somma dei dati che hai lanciato è: "+somma+"\n");
+	public void play(String nickName) { 
+		Dialog<ButtonType> dialog = new Dialog<>();
+    	dialog.setTitle("Dettagli Gioco");
+    	dialog.setHeaderText("Istruzioni:");
+    	dialog.setContentText(
+    	        "Lancia i due dadi, chi ottiene la somma maggiore dei dati lanciati vince!\n" +
+                "Se entrambi i giocatori ottengono la stessa somma dal lancio dei dadi " +
+                "il gioco finisce in pareggio."
+    	);
+    	
+    	ButtonType play = new ButtonType("Gioca", ButtonBar.ButtonData.OK_DONE);
+    	ButtonType cancel = new ButtonType("Annulla", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-		sommaCasuale = lancia();
-		System.out.println("La somma dei dati lanciati dall'avversario è: "+sommaCasuale);
+    	dialog.getDialogPane().getButtonTypes().setAll(play, cancel);
 
+    	Optional<ButtonType> result = dialog.showAndWait();
+    	if (!result.isPresent() || result.get() == cancel) {
+    	    return;
+    	}
+
+    	startGame(nickName);
+	}
+	
+	private void startGame(String nickname) {
+		if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
+            String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
+	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
+	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
+            
+            try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    try {
+                        stmt.executeUpdate(); 		// Prova a inserire l'utente
+
+                    } catch (SQLException ex) { 
+                    	ex.printStackTrace();
+                    }
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+        }
+		primaryStage.setTitle("Gioco dei Dadi");
+
+        Label titolo = new Label("Lancio dei Dadi");
+
+        Label playerLabel = new Label("Giocatore:");
+        Label risultatoPlayer = new Label("-");
+
+        Label computerLabel = new Label("Computer:");
+        Label risultatoComputer = new Label("-");
+
+        Button lanciaButton = new Button("Lancia i Dadi");
+        lanciaButton.setStyle("-fx-font-size: 14px; -fx-padding: 6px 12px;");
+
+        // Evento click
+        lanciaButton.setOnAction(e -> {
+            if (!gameOver) {
+                int sommaGiocatore = lancia();
+                int sommaComputer = lancia();
+
+                risultatoPlayer.setText(String.valueOf(sommaGiocatore));
+                risultatoComputer.setText(String.valueOf(sommaComputer));
+
+                controlloDadiMaggiore(sommaGiocatore, sommaComputer, nickname);
+                gameOver = true;
+            }
+        });
+
+        VBox centro = new VBox(10);
+        centro.setStyle("-fx-alignment: center;");
+
+        BorderPane layout = new BorderPane();
+        layout.setCenter(centro);
+        layout.setBottom(lanciaButton);
+
+        BorderPane.setAlignment(lanciaButton, javafx.geometry.Pos.CENTER);
+        layout.setStyle("-fx-padding: 20;");
+
+        Scene scene = new Scene(layout, 300, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();
 		
-		controlloDadiMaggiore(somma, sommaCasuale);	*/
 	}
 	
 	private static int lancia() {
@@ -33,27 +121,68 @@ public class Roulette extends VideoGames{
 		int somma = 0, dado1, dado2;
 		
 		dado1 = ran.nextInt(6) + 1;
-
 		dado2 = ran.nextInt(6) + 1;
-		System.out.println("I numeri usciti dal lancio dei due dati sono: "+ dado1 + " e " + dado2);
 		somma = dado1 + dado2;
 		
 		return somma;
 	}
 	
-	private static void controlloDadiMaggiore(int somma, int sommaC) {
+	private void controlloDadiMaggiore(int somma, int sommaC, String nickName) {
 		if(somma<sommaC) {
-			System.out.println("HAI PERSO!");
+			showMessage("HAI PERSO!");
+            addPoints(nickName);
 		}else {
 			if(somma>sommaC) {
-				System.out.println("HAI VINTO!");
+				showMessage("HAI VINTO!");
+	            addPoints(nickName);
 			}else {
 				if(somma==sommaC) {
-					System.out.println("PAREGGIO!");
+					showMessage("PAREGGIO!");
+		            addPoints(nickName);
 				}
 			}
 		}
 	}
+	
+	private void addPoints(String nickname) {
+    	if(nickname.isEmpty()) {				// Gioco come anonimo
+	    	String sql  = "UPDATE utente SET score = ? WHERE nickname = ?";
+	    	try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            	stmt.setInt(1, getScore());     // Assegna il punteggio
+	            	if(nickname.isEmpty())
+	            		stmt.setString(2,"_ANONIMO_");
+                    stmt.executeUpdate(); 			// Prova a fare l'update
+
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+    	}
+    	else {									// Ho un nickname valido
+    		String sql  = "UPDATE utente SET score = score + ? WHERE nickname = ?";
+	    	try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            	stmt.setInt(1, getScore());     // Assegna il punteggio
+	            	stmt.setString(2,nickname);
+                    stmt.executeUpdate(); 			// Prova a fare l'update
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+    	}
+		
+	}
+	
+	  private void showMessage(String messaggio) {
+	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	        alert.setTitle("Risultato");
+	        alert.setHeaderText(null);
+	        alert.setContentText(messaggio);
+	        alert.showAndWait();
+	    }
 	
 
 }
