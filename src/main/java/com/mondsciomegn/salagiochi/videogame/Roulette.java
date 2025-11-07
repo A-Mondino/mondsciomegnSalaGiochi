@@ -1,6 +1,5 @@
 package com.mondsciomegn.salagiochi.videogame;
 
-import java.awt.Label;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,6 +10,8 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -78,35 +79,36 @@ public class Roulette extends VideoGames{
         Label titolo = new Label("Lancio dei Dadi");
 
         Label playerLabel = new Label("Giocatore:");
-        Label risultatoPlayer = new Label("-");
 
         Label computerLabel = new Label("Computer:");
-        Label risultatoComputer = new Label("-");
+        
+        Label messaggio = new Label("-");
+        Label messaggio1 = new Label("-");
 
         Button lanciaButton = new Button("Lancia i Dadi");
-        lanciaButton.setStyle("-fx-font-size: 14px; -fx-padding: 6px 12px;");
 
         // Evento click
         lanciaButton.setOnAction(e -> {
             if (!gameOver) {
                 int sommaGiocatore = lancia();
-                int sommaComputer = lancia();
+                messaggio.setText("La somma dei dadi che hai lanciato è: " +sommaGiocatore);
 
-                risultatoPlayer.setText(String.valueOf(sommaGiocatore));
-                risultatoComputer.setText(String.valueOf(sommaComputer));
+                int sommaComputer = lancia();
+                messaggio1.setText("La somma dei dadi lanciati dall'avversario è: " +sommaComputer);
 
                 controlloDadiMaggiore(sommaGiocatore, sommaComputer, nickname);
                 gameOver = true;
             }
         });
-
+        
         VBox centro = new VBox(10);
         centro.setStyle("-fx-alignment: center;");
+        centro.getChildren().addAll(titolo, playerLabel, messaggio,
+        	    computerLabel, messaggio1);
 
         BorderPane layout = new BorderPane();
         layout.setCenter(centro);
         layout.setBottom(lanciaButton);
-
         BorderPane.setAlignment(lanciaButton, javafx.geometry.Pos.CENTER);
         layout.setStyle("-fx-padding: 20;");
 
