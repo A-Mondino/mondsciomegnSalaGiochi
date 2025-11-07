@@ -427,7 +427,7 @@ public class Room extends Application{
 	        .play(currentNickName.get());  
 	    }), 0, 0);
 
-	    grid.add(createImagePane("./img/SCF.jpg", () -> {
+	    grid.add(createImagePane("./img/BN.jpg", () -> {
 	        new BattagliaNavale("Battaglianavale", new Category("Strategia"))
 	        .play(currentNickName.get());
 	    }), 1, 0);
