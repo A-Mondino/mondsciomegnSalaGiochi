@@ -52,7 +52,8 @@ public class BattagliaNavale extends VideoGames {
     private boolean gameOver = false;				
   
     
-    private Integer[] currentShip = new Integer[2];			
+    private Integer[] currentShip = new Integer[2];	
+    private int [] totalShip = new int[4];					// 4 sono i tipi di barche, da grandezza 1, 2, 3, 4
     // currentShip[0] tiene la grandezza della Barca selezionata, currentShip[1] tiene quanti pezzi mancano per completarne l'inserimento
     
     
@@ -124,7 +125,7 @@ public class BattagliaNavale extends VideoGames {
             }
         }
         
-       
+        setNumberOfBoats();					// Inizializzo qui la quantità di barche per ogni tipo
         
         
         for (int i = 0; i < N; i++) {		// per le 3 x 3 caselle della griglia
@@ -178,7 +179,6 @@ public class BattagliaNavale extends VideoGames {
 	
 	
 	private void putAllBoatdown() {
-		
 		boatStage.setTitle("Navi della flotta");
 		
 		VBox boatBox = new VBox(10);
@@ -196,9 +196,16 @@ public class BattagliaNavale extends VideoGames {
 		boatBox.getChildren().addAll(boats);
 		for(int i = 0; i < 4; i++) {
 			final int boatLength = i + 1;
+			
 			boats[i].setOnAction(e -> {
 				currentShip[0] = boatLength;	// Qui metto la grandezza della barca
 				currentShip[1] = boatLength;	// E qui quanto mi manca per metterla completamente sulla griglia
+				boatStage.setOnHidden(event -> primaryStage.getScene().getRoot().setDisable(false));
+				
+				totalShip[currentShip[0]-1]--;							// La tolgo dall'elenco totale
+				if(totalShip[currentShip[0]-1] == 0)					// Se il contatore delle barche di quella grandezza è a zero
+					if(!boats[boatLength-1].isDisable())
+						boats[boatLength-1].setDisable(true);			// disabilito il bottone se non era già disabilitato
 				boatStage.close();
 			});
 		}
@@ -212,21 +219,36 @@ public class BattagliaNavale extends VideoGames {
 	    boatStage.setX(primaryStage.getX() - s.getWidth() - 10);	// Questo serve per aprire la finestra a sx di quella principale
 	    boatStage.setY(primaryStage.getY());
 
+	    primaryStage.getScene().getRoot().setDisable(true);
 	    boatStage.show();
 	
 	}
 	
+	
+	private void setNumberOfBoats() {	
+		totalShip[0] = 4;			// Barche da 1 
+		totalShip[1] = 2;			// Da 2
+		totalShip[2] = 1;			// Da 3 
+		totalShip[3] = 1;			// Da 4
+	}
+	
+	
 	private boolean playerMove(int row, int col, String nickname) {
 		if(currentShip[0] != 0) {										// Solo per controllare che ci sia una barca da inserire
 			playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
-			currentShip[1]--;											// E segno che l'ho messa giu
-			if(currentShip[1] == 0) {		// Quando ho messo giù tutta la barca 
-				boatStage.show();			// Riapro il pannello delle barche (DA AGGIUNGERE: togliere un counter dalle barche di quella length, ovvero currentShip[0])	
-				resetBackGround();			// Resetto il Background 
+			currentShip[1]--;											// E segno che l'ho messa giu			
+			if(currentShip[1] == 0) {									// Quando ho messo giù tutta la barca 
+				 
+				if(!checkForAllBoatsDown()) {							// Se non ho messo giù tutte le barche
+					primaryStage.getScene().getRoot().setDisable(true);	// Tolgo di nuovo la possibilità di premere sulla griglia
+					boatStage.show();									// Riapro il pannello delle barche 
+				}
+				resetBackGround();										// In ogni caso resetto il Background 
 				return true;
 			}else {
 				if(colorNearCells(row,col) == false) {		// Se il colore non va a buon fine fai l'undo delle operazioni sopra
 					currentShip[1]++;
+					totalShip[currentShip[0]-1]++;
 					playerGrid[row][col].setText("");
 				}
 			}			 
@@ -234,6 +256,15 @@ public class BattagliaNavale extends VideoGames {
 				
 		return true;		// Ritornerò false quando non dovrà fare la mossa il computer (ovvero se vinco/colpisco)
 	}
+	
+	private boolean checkForAllBoatsDown() {
+		for(int i = 0; i < 4; i++)
+			if(totalShip[i] != 0)
+				return false;
+			
+		return true;
+	}
+	
 	
 	private void resetBackGround() {
 		for(int i=0; i < N; i++) 
