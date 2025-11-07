@@ -61,6 +61,7 @@ public class Tris extends VideoGames{
 	    
 	    @Override
 	    public void play(String nickName) {
+	    	setNickname(nickName);
 	    	Dialog<ButtonType> dialog = new Dialog<>();
 	    	dialog.setTitle("Dettagli Gioco");
 	    	dialog.setHeaderText("Istruzioni:");
@@ -82,15 +83,15 @@ public class Tris extends VideoGames{
 	    	    return;
 	    	}
 
-	    	startGame(nickName);
+	    	startGame();
 
 	    }
 
 
 
-	    private void startGame(String nickname) {
+	    private void startGame() {
 	    		
-	    	if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
+	    	if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
                 String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
 		  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
 		  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
@@ -131,7 +132,7 @@ public class Tris extends VideoGames{
 
 	            	 buttons[i][j].setOnAction(e -> {
 		                    if (!gameOver && buttons[row][col].getText().isEmpty()) {
-		                    	if(!playerMove(row, col, nickname))	// questo if e il ritorno della funzione... 
+		                    	if(!playerMove(row, col))	// questo if e il ritorno della funzione... 
 		                    		computerMove();			// Dopo che ho fatto la mossa io la deve fare anche il computer
 		                    }
 		             });
@@ -143,7 +144,7 @@ public class Tris extends VideoGames{
 	        primaryStage.show();
 	    }
 
-	    private Boolean playerMove(int row, int col, String nickname) {	
+	    private Boolean playerMove(int row, int col) {	
 	    	//...serve solo per evitare un errore che si verificava perchè la mossa del computer veniva fatta lo stesso dopo il primaryStage.hide();
 	        playGrid[row][col] = 'X';			// Setto la matrice di supporto con il segno del giocatore
 	        buttons[row][col].setText("X");		// Setto anche il bottone
@@ -152,7 +153,7 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Hai vinto!");
 	            primaryStage.hide();
-	            addPoints(nickname);		// E assegno i punti
+	            addPoints(getNickname());		// E assegno i punti
 	            return true;
 	        }
 	        
@@ -259,13 +260,6 @@ public class Tris extends VideoGames{
 	        alert.showAndWait();
 	    }
 	    
-	    // Pop-up istruzioni di gioco 
-	    private void showPopUp(String messaggio) {
-	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	        alert.setTitle("Dettagli Gioco");
-	        alert.setHeaderText("Istruzioni:");
-	        alert.setContentText(messaggio);
-	        alert.showAndWait();
-	    }
+	    
 	}
 	

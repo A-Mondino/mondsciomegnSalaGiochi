@@ -16,6 +16,7 @@ public abstract class VideoGames {
 	private int score = 0;
 	private List<CheckPoint> checkpoints = new ArrayList<>();
 	private float time = 0;
+	private String nickname = null;
 	
 	public VideoGames(String name, Category category) {
 		this.name = name;
@@ -88,6 +89,12 @@ public abstract class VideoGames {
 	public void setCheckPoint(List<CheckPoint> checkpoints) {
 		this.checkpoints = checkpoints;
 	}
-	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	
 }
