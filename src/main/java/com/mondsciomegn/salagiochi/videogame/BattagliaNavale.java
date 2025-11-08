@@ -41,6 +41,7 @@ public class BattagliaNavale extends VideoGames {
 	
 	private final int N = 8;
 	private Button[][] playerGrid = new Button[N][N];		// Griglia del Giocatore
+	private Character[][] tmp = new Character[N][N];
     private Button[][] computerGrid = new Button[N][N];		// Matrice di supporto
     
 
@@ -123,6 +124,7 @@ public class BattagliaNavale extends VideoGames {
                playerGrid[i][j].setMinSize(MAXH/DIV, MAXW/DIV);
                playerGrid[i][j].setStyle("-fx-font-size: 20px;");
                player.add(playerGrid[i][j], j, i);
+               tmp[i][j] = 'k';
                 
                computerGrid[i][j] = new Button("");
                computerGrid[i][j].setMinSize(MAXH/DIV, MAXW/DIV); 
@@ -185,7 +187,7 @@ public class BattagliaNavale extends VideoGames {
 			row.setAlignment(Pos.CENTER);
 			row.setPrefWidth(220);
 			
-			boats[i] = new Button("Nave da " + (i+1));
+			boats[i] = new Button("Nave da " + (i+2));
 			boats[i].setMaxWidth(Double.MAX_VALUE);
 			boats[i].setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 			HBox.setHgrow(boats[i], Priority.ALWAYS);
@@ -202,18 +204,19 @@ public class BattagliaNavale extends VideoGames {
 		
 		
 		for(int i = 0; i < 4; i++) {
-			final int boatLength = i + 1;
+			final int boatLength = i + 2;
 			
 			boats[i].setOnAction(e -> {
 				currentShip[0] = boatLength;	// Qui metto la grandezza della barca
 				currentShip[1] = boatLength;	// E qui quanto mi manca per metterla completamente sulla griglia
 				boatStage.setOnHidden(event -> primaryStage.getScene().getRoot().setDisable(false));
-				totalPlayerShips[currentShip[0]-1]--;						// La tolgo dall'elenco totale
-				if(totalPlayerShips[currentShip[0]-1] == 0)					// Se il contatore delle barche di quella grandezza è a zero
-					if(!boats[boatLength-1].isDisable())
-						boats[boatLength-1].setDisable(true);			// disabilito il bottone se non era già disabilitato
+				totalPlayerShips[currentShip[0]-2]--;						// La tolgo dall'elenco totale
+				if(totalPlayerShips[currentShip[0]-2] == 0)					// Se il contatore delle barche di quella grandezza è a zero
+					if(!boats[boatLength-2].isDisable())
+						boats[boatLength-2].setDisable(true);			// disabilito il bottone se non era già disabilitato
 				
 				boatStage.close();
+				colorCells();
 			});
 		}
 		
@@ -225,8 +228,7 @@ public class BattagliaNavale extends VideoGames {
                 final int col = j;
 
                 playerGrid[i][j].setOnAction(e -> {  
-	                    	if(!playerBoatDown(row, col))
-	                    		computerMove();			// Dopo che ho fatto la mossa io la deve fare anche il computer
+	                    	playerBoatDown(row, col);
 	             });
             }
         }
@@ -248,26 +250,34 @@ public class BattagliaNavale extends VideoGames {
 	}
 	
 	
+	private void colorCells() {
+		for (int i = 0; i < N; i++) {		// per le 3 x 3 caselle della griglia
+            for (int j = 0; j < N; j++) {
+            	if(!playerGrid[i][j].getText().isEmpty()) {
+            		playerGrid[i][j].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
+            		
+            	}
+            }
+        }
+		
+	}
 	private void setNumberOfBoats() {	
-		totalPlayerShips[0] = 2;			// Barche da 1 
-		totalPlayerShips[1] = 30;			// Da 2
-		totalPlayerShips[2] = 10;			// Da 3 
-		totalPlayerShips[3] = 1;			// Da 4
+		totalPlayerShips[0] = 1;			// Barche da 2 
+		totalPlayerShips[1] = 2;			// Da 3
+		totalPlayerShips[2] = 1;			// Da 4 
+		totalPlayerShips[3] = 1;			// Da 5
 		
-		totalComputerShips[0] = 1;			// Barche da 1 
-		totalComputerShips[1] = 1;			// Da 2
-		totalComputerShips[2] = 1;			// Da 3 
-		totalComputerShips[3] = 1;			// Da 4
+		totalComputerShips[0] = 1;			// Barche da 2
+		totalComputerShips[1] = 2;			// Da 3
+		totalComputerShips[2] = 1;			// Da 4 
+		totalComputerShips[3] = 1;			// Da 5
 		putAllBoatdown();
-		
 	}
 	
 	
 	private boolean playerBoatDown(int row, int col) {
 		if(currentShip[0] != 0) {											// Se ho una barca da inserire
 			if(!canPlaceShip(row,col)) {									// Controllo che io abbia spazio per metterla
-				if(currentShip[0] == currentShip[1])
-					resetBackGround();
 				return false;
 			}
 			
@@ -278,47 +288,26 @@ public class BattagliaNavale extends VideoGames {
 	           											// E l'ultima casella premuta
 	            
 	            playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
+	            tmp[row][col] = 'x';
 	            currentShip[1]--;											// E segno che l'ho messa giu			
 	            if (currentShip[0] > 1) {									// Se la nave è più lunga di 1, evidenzio dove posso continuare l'inserimento
 	                highlightValidDirections(row, col);
 	            }
 			}
-			else{						// Non è il primo pezzo													// Sto inserendo barche di lunghezza 3 o 4
-				if(firstRow == lastRow && firstCol == lastCol) {		// Della nave sto mettendo il secondo pezzo, allora basta controllare
-					if(isNearToCell(row, col, firstRow, firstCol) ) {	// Che io stia inserendo la barca vicino alla posizione di partenza
-						if(playerGrid[row][col].getUserData() == null ) {	// E che sia una casella valida
-							playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
-							currentShip[1]--;			// E segno che l'ho messa giu
-							lastRow = row;				// E aggiorno la posizione dell'ultimo inserimento
-							lastCol = col;
-						}else {											// Se non è una casella valida ma è vuota
-							if(playerGrid[row][col].getText().isEmpty()) 
-								playerGrid[row][col].setUserData(null);	// la setto come valida per barche future
-							
-							return false;	
-						}
+			else{														// Non è il primo pezzo													
+				if(isNearToCell(row, col, firstRow, firstCol)) {	// Controllo che io stia inserendo la barca vicino alla posizione di partenza
+					if(playerGrid[row][col].getText().isEmpty() && tmp[row][col] == 'k') {// E che sia una casella valida
+						playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
+						currentShip[1]--;			// E segno che l'ho messa giu
+						firstRow = row;				// E aggiorno la posizione dell'ultimo inserimento
+						firstCol = col;
+						//Ricolorare in base a quanto manca
+					}else {								
+						return false;	
 					}
-					else
-						return false;
 				}
-				else {												// Significa che è un pezzo diverso dal secondo
-					if(isNearToCell(row, col, lastRow, lastCol) ||  isNearToCell(row, col, firstRow, firstCol)) { // Controlla che io stia inserendo la barca vicino alla posizione di partenza o all'ultima inserita
-						if(playerGrid[row][col].getUserData() == null) {		// E che il bottone non sia stato messo come blocked
-							playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
-							currentShip[1]--;			// E segno che l'ho messa giu
-							lastRow = row;				// E aggiorno la posizione dell'ultimo inserimento
-							lastCol = col;
-						}
-						else {
-							if(playerGrid[row][col].getText().isEmpty()) 
-								playerGrid[row][col].setUserData(null);	// la setto come valida per altre
-							return false;	
-						}
-					}
-					else 
-						return false;
-				}
-				
+				else
+					return false;	
 			}
 			
 			if(currentShip[1] == 0) {									// Poi se ho messo giù tutta la barca 
@@ -326,7 +315,8 @@ public class BattagliaNavale extends VideoGames {
 		        firstCol = -N;
 		        lastCol = -N;											// Resetto le coordinate della prima casella della barca
 		        lastRow = -N;
-		        resetBackGround();										
+		        resetBackGround();
+		        
 		        if(!checkForAllBoatsDown()) {							// Controllo se non ho messo giù tutte le barche
 					primaryStage.getScene().getRoot().setDisable(true);	// Tolgo di nuovo la possibilità di premere sulla griglia
 					
@@ -368,100 +358,75 @@ public class BattagliaNavale extends VideoGames {
 	
 	
 	private boolean canPlaceShip(int row, int col) {
+		
 	    int shipLen = currentShip[0];
 	    
-	    if (!playerGrid[row][col].getText().isEmpty())  // Il punto iniziale non deve essere occupato
+	    // 1. Il punto iniziale non deve essere occupato
+	    if (!playerGrid[row][col].getText().isEmpty()) 
 	        return false;
 	    
-		if (shipLen == 1)  // Se la nave è di lunghezza 1, è sempre posizionabile (se non è occupata)
-			return true;
+	    // 2. Barca di lunghezza 1 è sempre posizionabile (se non occupata)
+	    if (shipLen == 1) 
+	        return true;
 	    
-		// Controlla le 4 direzioni per la lunghezza completa della nave
 	    boolean canPlace = false;
 
-	    // --- Controllo Orizzontale (col + i) ---
-	    // Destra
+	    // --- Destra (col + i) ---
+	    // C'è spazio fino alla fine della griglia (ultima cella: col + shipLen - 1)
 	    if (col + shipLen <= N) { 
-	        boolean isClear = true;				// C'è spazio fino alla fine della griglia
-	        for (int i = 1; i < shipLen; i++)  // Controlla da 1 in poi (0 è la cella attuale)
+	        boolean isClear = true;
+	        for (int i = 1; i < shipLen; i++) {
 	            if (!playerGrid[row][col + i].getText().isEmpty()) {
-	            	playerGrid[row][col + i].setUserData("BLOCKED");
 	                isClear = false;
 	                break;
 	            }
-	        
-	        if (isClear) {
-	        	canPlace = true;
-	        	for (int i = 1; i < shipLen; i++)  // Controlla da 1 in poi (0 è la cella attuale)
-		            playerGrid[row][col + i].setUserData(null);
-		                
-		           
 	        }
-	        	
+	        if (isClear) return true;
 	    }
 	    
-	    // Sinistra
-	
-        if (col - shipLen + 1 >= 0) { // controllo fino alla fine della griglia (-1 perché se sono nella colonna 2 posso inerire una barca da 3 perchè la matrice va da 0 a N-1)
-            boolean isClear = true;
-            for (int i = 1; i < shipLen; i++) 
-                if (!playerGrid[row][col - i].getText().isEmpty()) {
-                	playerGrid[row][col - i].setUserData("BLOCKED");
-                    isClear = false;
-                    break;
-                }
-            
-            if (isClear) { 
-            	canPlace = true;
-            	for (int i = 1; i < shipLen; i++) 
-	               playerGrid[row][col - i].setUserData(null);        
-            }
-        }
-	    
-
-	    
-	    
-	    // --- Controllo Verticale (row + i) ---
-	    // Giù
-	    
-        if(row + shipLen <= N) {					// C'è spazio fino alla fine della griglia
-	    	boolean isClear = true;
-	        for (int i = 1; i < shipLen; i++) 			// Controlla da 1 in poi (0 è la cella attuale)
-	            if (!playerGrid[row + i][col].getText().isEmpty()) {
-	            	playerGrid[row + i][col].setUserData("BLOCKED");
+	    // --- Sinistra (col - i) ---
+	    // C'è spazio fino all'inizio della griglia (ultima cella: col - shipLen + 1)
+	    if (!canPlace && col - shipLen + 1 >= 0) {
+	        boolean isClear = true;
+	        for (int i = 1; i < shipLen; i++) {
+	            if (!playerGrid[row][col - i].getText().isEmpty()) {
 	                isClear = false;
 	                break;
 	            }
-	        
-	        if (isClear) {
-	        	canPlace = true;
-	        	for (int i = 1; i < shipLen; i++) 			// Controlla da 1 in poi (0 è la cella attuale)
-		            playerGrid[row + i][col].setUserData(null);     
 	        }
-        }
+	        if (isClear) return true;
+	    }
+
+	    // --- Giù (row + i) ---
+	    // C'è spazio fino alla fine della griglia (ultima cella: row + shipLen - 1)
+	    if (!canPlace && row + shipLen <= N) {
+	        boolean isClear = true;
+	        for (int i = 1; i < shipLen; i++) {
+	            if (!playerGrid[row + i][col].getText().isEmpty()) {
+	                isClear = false;
+	                break;
+	            }
+	        }
+	        if (isClear) return true;
+	    }
 	    
-	    
-	    // Su
-	     
-        if (row - shipLen + 1 >= 0) { // Stessa logica di prima
-            boolean isClear = true;
-            for (int i = 1; i < shipLen; i++) 
-                if (!playerGrid[row - i][col].getText().isEmpty()) {
-                	playerGrid[row - i][col].setUserData("BLOCKED");
-                    isClear = false;
-                    break;
-                }
-            
-            if (isClear) {
-            	canPlace = true;
-            	for (int i = 1; i < shipLen; i++) 
-	                playerGrid[row - i][col].setUserData(null);            
-            }
-        }
-    
+	    // --- Su (row - i) ---
+	    // C'è spazio fino all'inizio della griglia (ultima cella: row - shipLen + 1)
+	    if (!canPlace && row - shipLen + 1 >= 0) {
+	        boolean isClear = true;
+	        for (int i = 1; i < shipLen; i++) {
+	            if (!playerGrid[row - i][col].getText().isEmpty()) {
+	                isClear = false;
+	                break;
+	            }
+	        }
+	        if (isClear) return true;
+	    }
 
 	    return canPlace;
 	}
+	
+	
 	
 	private void highlightValidDirections(int row, int col) {
 	    resetBackGround(); // pulisci eventuali colori precedenti
@@ -513,24 +478,22 @@ public class BattagliaNavale extends VideoGames {
 	}
 
 	private void colorDirection(int row, int col, int dr, int dc, int len, boolean valid) {
+		colorCells();
 	    String color = valid ? "rgba(0,255,0,0.3)" : "rgba(255,0,0,0.3)";
+	    Character prova = valid ? 'k' : 'x'; 
+	    
 	    for (int i = 1; i < len; i++) {
 	        int r = row + dr * i;
 	        int c = col + dc * i;
 	        if (r < 0 || r >= N || c < 0 || c >= N) 
 	        	break;
 
-	        // Imposta il valore "fantasma"
-	        if (!valid) {
-	            playerGrid[r][c].setUserData("TMP_BLOCKED");
-	        } else {
-	            playerGrid[r][c].setUserData(null); 
-	        }
-
 	        playerGrid[r][c].setStyle(
 	            String.format("-fx-background-color: %s; -fx-font-size: 20px;", color)
 	        );
+	        tmp[r][c] = prova; 
 	    }
+	    playerGrid[row][col].setStyle("-fx-background-color: rgba(0,255,0,0.3); -fx-font-size: 20px;");
 	}
 
 	
@@ -549,11 +512,11 @@ public class BattagliaNavale extends VideoGames {
 			for(int j = 0; j < N; j++) 
 				if(playerGrid[i][j].getText().isEmpty()) {
 					playerGrid[i][j].setStyle("-fx-font-size: 20px;");
-					playerGrid[i][j].setUserData(null);
+					tmp[i][j] = 'k';
 				}
 				else {
-					playerGrid[i][j].setStyle("-fx-background-color: rgba(144, 238, 144, 0.5); -fx-font-size: 20px;");
-					
+					playerGrid[i][j].setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-font-size: 20px;");	
+					tmp[i][j] = 'x';
 				}
 	}
 		
