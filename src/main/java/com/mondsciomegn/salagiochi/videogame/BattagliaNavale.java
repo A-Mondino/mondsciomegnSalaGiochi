@@ -6,6 +6,8 @@ import java.io.StreamCorruptedException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
@@ -42,6 +44,8 @@ public class BattagliaNavale extends VideoGames {
 	
 	
 	private final int N = 8;
+	private final int BOAT_TYPE = 4;
+	
 	private Button[][] playerGrid = new Button[N][N];		// Griglia del Giocatore
 	private Character[][] tmpPlayer = new Character[N][N];
     private Button[][] computerGrid = new Button[N][N];		// Matrice di supporto
@@ -55,8 +59,13 @@ public class BattagliaNavale extends VideoGames {
     
     private Integer[] currentShip = new Integer[2];	
     // currentShip[0] tiene la grandezza della Barca selezionata, currentShip[1] tiene quanti pezzi mancano per completarne l'inserimento
-    private int [] totalPlayerShips = new int[4];					// 4 sono i tipi di barche, da grandezza 2, 3, 4, 5
-    private int [] totalComputerShips = new int [4];
+    private int [] totalPlayerShips = new int[BOAT_TYPE];					// 4 sono i tipi di barche, da grandezza 2, 3, 4, 5
+    private int [] totalComputerShips = new int [BOAT_TYPE];
+    
+    private Map<Character, Integer> computerShipSizes = new HashMap<>();		// Le due mappe le uso per tenere traccia di quale nave è stata colpita
+    private Map<Character, Integer> computerShipHits = new HashMap<>();
+    private final char[] computerShipIDs = {'A', 'B', 'C', 'D', 'E'}; 			// 5 navi max --> A = nave da 2; B = nave da 3; C = nave da 3; D = nave da 4; E = Nave da 5
+
     
     private int firstRow = -N;
     private int firstCol = -N;
@@ -127,6 +136,9 @@ public class BattagliaNavale extends VideoGames {
                computerGrid[i][j].setMinSize(MAXH/DIV, MAXW/DIV); 
                computerGrid[i][j].setStyle("-fx-font-size: 20px;");
                computer.add(computerGrid[i][j], j, i);
+               
+               tmpPlayer[i][j] = '-';
+               tmpComputer[i][j] = '-';
             }
         }
         for (int i = 0; i < N; i++) 		// Disattivo i bottoni del computer per impedire all'utente che prema li prima del dovuto
@@ -192,10 +204,10 @@ public class BattagliaNavale extends VideoGames {
 		boatBox.setPadding(new Insets(10));
 		
 		
-		Button[] boats = new Button[4];
-		Label[] boatsLabel = new Label[4];
+		Button[] boats = new Button[BOAT_TYPE];			// Quattro bottoni, uno per ogni tipo di nave
+		Label[] boatsLabel = new Label[BOAT_TYPE];
 		
-		for(int i=0; i <4; i++) {
+		for(int i=0; i <BOAT_TYPE; i++) {
 			HBox row = new HBox(10);
 			row.setAlignment(Pos.CENTER);
 			row.setPrefWidth(220);
@@ -214,7 +226,7 @@ public class BattagliaNavale extends VideoGames {
 		}
 		
 		
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < BOAT_TYPE; i++) {		// Rimango in attesa dei click dell'utente
 			final int boatLength = i + 2;
 			
 			boats[i].setOnAction(e -> {
@@ -282,14 +294,10 @@ public class BattagliaNavale extends VideoGames {
 			}else{														// Non è il primo pezzo
 				if(tmpPlayer[row][col] == 'k')
 					if(isNearToCell(row, col, firstRow, firstCol)) {	// Controllo che io stia inserendo la barca vicino alla posizione di partenza
-						if(true) {// E che sia una casella valida
 							playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
 							resetBackGrid();			// Aggionro la matrice
 							currentShip[1]--;			// E segno che l'ho messa giu
-							firstRow = row;				// E aggiorno la posizione dell'ultimo inserimento
-							firstCol = col;
-							//Ricolorare in base a quanto manca
-						}
+							completeShip(row,col);		// Completo l'inserimento calcolando la direzione
 					}
 					else 
 						return false;
@@ -298,7 +306,7 @@ public class BattagliaNavale extends VideoGames {
 				
 			}
 			
-			if(currentShip[1] == 0) {									// Poi se ho messo giù tutta la barca 
+			if(currentShip[1] == 0) {									// Poi quando ho messo giù tutta la barca 
 				firstRow = -N;											// Resetto le coordinate della prima casella della barca
 		        firstCol = -N;
 		        resetBackGround();										// Resetto tutti i colori e caselle settate invalide
@@ -309,9 +317,9 @@ public class BattagliaNavale extends VideoGames {
 				}
 				else {
 					currentShip[0] = 0;									// Segno che non ci sono più barche da posizionare
-					setPlayerGrid();
+					setPlayerGrid();									// Sistemo la griglia di supporto
 					placeComputerShips();								// Faccio posizionare le barche al pc
-					enterBattlePhase();
+					enterBattlePhase();									// Inizia la fase di gioco
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			        alert.setTitle("FUOCO!!!!");
 			        alert.setHeaderText("È ARRIVATO IL MOMENTO DI SPARARE AL NEMICO!!!");
@@ -320,38 +328,56 @@ public class BattagliaNavale extends VideoGames {
 				}
 				return true;
 			}			
-		}	// CurrentShip[0] vale zero e quindi devo tornare false perchè il click non porta a nulla
+		}	
 					
 		return true;
 	}
 	
 	
-	
 	private void playerAttack(int row, int col) {
-		if(tmpComputer[row][col] != '-') {
-			computerGrid[row][col].setText("X");
-			computerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
-			if(checkPlayerWin()) {
+		if(tmpComputer[row][col] != '-') {			// Se colpisco qualcosa nella girglia del computer
+			char id = tmpComputer[row][col];		// Memorizzo l'id di cosa ho colpito
+	        computerGrid[row][col].setText("X");	// Segno che l'ho compito
+			computerShipHits.put(id, computerShipHits.get(id) + 1);	// Aggiungo il colpo nella mappa che mantiene, per ogni ID, il numero di volte in cui ho colpito quel tipo di barca 
+									
+	        if (computerShipHits.get(id).equals(computerShipSizes.get(id))) 	// Se la nave è affondata (i colpi subiti dalla nave == dimensione)
+	            drawnShip(id); 													// La coloro tutta di rosso
+	        else  																// Altrimenti l'ho colpita ma non affondata 
+	            computerGrid[row][col].setStyle("-fx-background-color: rgba(255,165,0,0.3); -fx-font-size: 20px;"); // Allora coloro la casella di arancio
+	        
+			
+			if(checkPlayerWin()) {				// Poi controllo se ho vinto
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		        alert.setTitle("RISULTATO");
 		        alert.setHeaderText("Hai vinto!!!");
 		        alert.setContentText(null);
 		        alert.showAndWait();
 		        primaryStage.close();
-				addPoints(getNickname());
+				addPoints(getNickname());		// Calcolo i punti
 			}
 		}
-		else {			// Turno del computer a sparare
+		else {			// Non ho colpito niente, è il turno del computer a sparare
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	        alert.setTitle("MANCATO!!!!");
 	        alert.setHeaderText("Hai trovato un buco nell'acqua xD");
 	        alert.setContentText("ora il computer ti sparerà");
 	        alert.showAndWait();
-			computerGrid[row][col].setStyle("-fx-background-color: rgba(0,0,255,0.3); -fx-font-size: 20px;");
+			computerGrid[row][col].setStyle("-fx-background-color: rgba(0,0,255,0.3); -fx-font-size: 20px;");	// Coloro la casella di blue
 			exitBattlePhase();
 			computerAttack();
 		}
 			
+	}
+	
+	
+	private void drawnShip(char index) {
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < N; j++) {
+				if(tmpComputer[i][j] != null && tmpComputer[i][j]  == index)
+					computerGrid[i][j].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
+			}
+		}
+		
 	}
 	
 	
@@ -360,14 +386,14 @@ public class BattagliaNavale extends VideoGames {
 		while(true) {
 		    int row = rand.nextInt(N);  // numero casuale tra 0 e N-1
 		    int col = rand.nextInt(N);  // numero casuale tra 0 e N-1
-		    if(tmpPlayer[row][col] != 'r' && tmpPlayer[row][col] != '-' && tmpPlayer[row][col] != 'm') {		// Se ha beccato una cella con qualcosa dentro 
-		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");// Che non era già stata rivelata o mancata
+		    if(tmpPlayer[row][col] != 'r' && (tmpPlayer[row][col] != '-' && tmpPlayer[row][col] != 'm')) {		// Se ha beccato una cella con qualcosa dentro, che non era già stata rivelata o mancata
+		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");	// Coloro la cella di rossa visto che è un colpo andato a segno
 		    	tmpPlayer[row][col] = 'r';  // Significa che ho preso una barca, allora la rivelo	    		
 		    }
-		    else if(tmpPlayer[row][col] == '-') {		// Se ha beccato una casella vuota
-				tmpPlayer[row][col] = 'm';				// Segna che ha mancato
-		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(0,0,255,0.3); -fx-font-size: 20px;");
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    else if(tmpPlayer[row][col] == '-') {		// Altrimenti se ha beccato una casella vuota
+				tmpPlayer[row][col] = 'm';				// Segna che ha mancato quella casella li, così da un pescarla più casualmente
+		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(0,0,255,0.3); -fx-font-size: 20px;");	// Colora di blue
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);	// Informa l'utente del cambio di turno
 		        alert.setTitle("MANCATO!!!!");
 		        alert.setHeaderText("Il computer ti ha mancato");
 		        alert.setContentText("ora tocca di nuovo a te sparare");
@@ -376,7 +402,7 @@ public class BattagliaNavale extends VideoGames {
 				return;
 		    }
 		    
-		    if(checkComputerWin()) {
+		    if(checkComputerWin()) {			// Stessa logica del player
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		        alert.setTitle("RISULTATO");
 		        alert.setHeaderText("Hai perso!!!");
@@ -391,11 +417,11 @@ public class BattagliaNavale extends VideoGames {
 	
 	
 	
-	private boolean checkComputerWin() {
+	private boolean checkComputerWin() {	// Se tutte le barche sono state rivelate, il giocatore ha perso
 		for (int i = 0; i < N; i++) 		
             for (int j = 0; j < N; j++) 
             	if(tmpPlayer[i][j] != '-')			// Ogni volta che ho una barca nella griglia di supporto
-            		if(!playerGrid[i][j].getText().isEmpty() && tmpPlayer[i][j] != 'r')	// Se anche solo una barca nella player grid non rivelata
+            		if(!playerGrid[i][j].getText().isEmpty() && tmpPlayer[i][j] != 'r')	// Se anche solo una barca nella playerGrid non è rivelata
             			return false;									// Non ha vinto
 		return true;
 	}
@@ -433,7 +459,7 @@ public class BattagliaNavale extends VideoGames {
 	}
 	
 	
-	private void enterBattlePhase() { // Disabilito i pulsanti di playerGrid
+	private void enterBattlePhase() { // Disabilito i pulsanti di playerGrid e riabilito quelli del pc in modo da poter essere premuti
 		for (int i = 0; i < N; i++) 
 		    for (int j = 0; j < N; j++) 
 		        playerGrid[i][j].setDisable(true);		
@@ -442,7 +468,7 @@ public class BattagliaNavale extends VideoGames {
 		        computerGrid[i][j].setDisable(false);
 	}
 	
-	private void exitBattlePhase() { // Disabilito i pulsanti di playerGrid
+	private void exitBattlePhase() { // Faccio il contrario
 		for (int i = 0; i < N; i++) 
 		    for (int j = 0; j < N; j++) 
 		        playerGrid[i][j].setDisable(false);		
@@ -454,81 +480,95 @@ public class BattagliaNavale extends VideoGames {
 	
 	
 	private void placeComputerShips() {
-	    Random rand = new Random();
+		Random rand = new Random();
+	    int idIndex = 0; 								// Per scorrere gli ID univoci
 
-	    for (int shipIndex = 0; shipIndex < totalComputerShips.length; shipIndex++) {
-	        int shipSize = shipIndex + 2;         // Le navi vanno da 2 a 5
-	        int shipsToPlace = totalComputerShips[shipIndex];
+	    for (int i = 0; i < N; i++)						// Inizializzo la matrice di supporto per evitare valori null
+	        for (int j = 0; j < N; j++)
+	            tmpComputer[i][j] = '-';
 
-	        for (int s = 0; s < shipsToPlace; s++) {
+	    for (int shipIndex = 0; shipIndex < BOAT_TYPE; shipIndex++) {		
+	        int shipSize = shipIndex + 2; 				// Le navi vanno da 2 a 5
+	        int shipsToPlace = totalComputerShips[shipIndex];		// Mi salvo quale nave è da mettere giù
+
+	        for (int s = 0; s < shipsToPlace; s++) {			// Per tutta la lunghezza
 	            boolean placed = false;
+	            char shipID = computerShipIDs[idIndex++]; 		// Assegna ID univoco
+
 	            
-	            while (!placed) {
+	            computerShipSizes.put(shipID, shipSize);		// Registra la dimensione della nave
+	            computerShipHits.put(shipID, 0);				// E i colpi che ha subito finora (ovvero 0)
+
+	            while (!placed) {				
 	                int row = rand.nextInt(N);
 	                int col = rand.nextInt(N);
-	                boolean horizontal = rand.nextBoolean(); // Orizzontale o Verticale
+	                boolean horizontal = rand.nextBoolean();
 
 	                if (canPlaceComputerShip(row, col, shipSize, horizontal)) {
 	                    for (int i = 0; i < shipSize; i++) {
 	                        int r = row + (horizontal ? 0 : i);
 	                        int c = col + (horizontal ? i : 0);
-	                        computerGrid[r][c].setText(String.valueOf(shipSize));
+	                        tmpComputer[r][c] = shipID;			 // Salvo l'ID invece del numero perchè con più navi della stessa lunghezza è un casino se no riconoscerle
 	                    }
 	                    placed = true;
 	                }
 	            }
 	        }
 	    }
-	    // A questo punto posso utilizzare la matrice di supporto di prima per la fase di attacco, in modo che nasconda la griglia del pc
-	    for (int i = 0; i < N; i++) 
-		    for (int j = 0; j < N; j++) 
-		    	if(!computerGrid[i][j].getText().isEmpty()) {			// Se trovo una barca
-		    		tmpComputer[i][j] = computerGrid[i][j].getText().charAt(0);			// Mi salvo la posizione 
-			        computerGrid[i][j].setText("");						// sui bottoni nascondo la barca
-		    	}else
-		    		tmpComputer[i][j] = '-';
-		
+
+	    
+	    for (int i = 0; i < N; i++)					// Rimuovi visivamente le navi dal campo del computer
+	        for (int j = 0; j < N; j++)
+	            computerGrid[i][j].setText("");
+	    
+	  /*  
+	    System.out.println("=== Mappa Computer ===");
 	    for (int i = 0; i < N; i++) {
-		    for (int j = 0; j < N; j++) 
-		    	System.out.print(tmpComputer[i][j]);
-		    System.out.println();
-	    }	    
+	        for (int j = 0; j < N; j++)
+	            System.out.print(tmpComputer[i][j] + " ");
+	        System.out.println();
+	    }
+*/
 	}
 	
 
-		// Controlla se si può piazzare una nave del computer
+
 	private boolean canPlaceComputerShip(int row, int col, int size, boolean horizontal) {
 	    if (horizontal) {
-	        if (col + size > N) return false;
-	        for (int i = 0; i < size; i++) {
-	            if (!computerGrid[row][col + i].getText().isEmpty()) return false;
-	        }
+	        if (col + size > N) // Uscirebbe dai bordi
+	        	return false; 
+	        
+	        for (int i = 0; i < size; i++) 
+	            if (tmpComputer[row][col + i] != null && tmpComputer[row][col + i] != '-') 	// C'è già una nave in questa cella
+	                return false;     
 	    } else {
-	        if (row + size > N) return false;
-	        for (int i = 0; i < size; i++) {
-	            if (!computerGrid[row + i][col].getText().isEmpty()) return false;
-	        }
+	        if (row + size > N) // Stessa logica ma per la verticalità
+	        	return false; 
+	        
+	        for (int i = 0; i < size; i++) 
+	            if (tmpComputer[row + i][col] != null && tmpComputer[row + i][col] != '-') 
+	                return false;    
 	    }
 	    return true;
 	}
+
 
 	
 	private void resetBackGrid() {		// x la matrice di supporto
 		for(int i=0; i < N; i++) 
 			for(int j = 0; j < N; j++) 
-				if(playerGrid[i][j].getText().isBlank()) {
+				if(playerGrid[i][j].getText().isBlank()) 
 					tmpPlayer[i][j] = 'k';
-				}
 				else
 					tmpPlayer[i][j] = 'x';
 	}
 	
 	
 	private boolean isNearToCell(int row, int col, int cellRow, int cellCol) {
-	    // Calcola la differenza assoluta tra le righe
-	    int deltaRow = Math.abs(row - cellRow);
-	    // Calcola la differenza assoluta tra le colonne
-	    int deltaCol = Math.abs(col - cellCol);
+	    
+	    int deltaRow = Math.abs(row - cellRow);	// Calcola la differenza assoluta tra le righe
+	    
+	    int deltaCol = Math.abs(col - cellCol);	// Calcola la differenza assoluta tra le colonne
 	    
 	    // Controlla se le celle sono adiacenti ORTOGONALMENTE
 	    // (deltaRow + deltaCol == 1)
@@ -686,7 +726,22 @@ public class BattagliaNavale extends VideoGames {
 	    playerGrid[row][col].setStyle("-fx-background-color: rgba(0,255,0,0.3); -fx-font-size: 20px;");	// questa è per la casella appena selezionata
 	}
 
-	
+	private void completeShip(int row, int col) {
+		for(int k = 0; k < currentShip[1]; k++) {		// poi completa l'inserimento
+			if(row - firstRow == 1)
+				playerGrid[row + k + 1][col].setText(currentShip[0].toString());
+		    if(row - firstRow == -1)
+		    	playerGrid[row - k - 1][col].setText(currentShip[0].toString());
+		    if(col - firstCol == 1)
+		    	playerGrid[row][col + k + 1].setText(currentShip[0].toString());
+		    if(col - firstCol == -1)
+		    	playerGrid[row][col - k - 1].setText(currentShip[0].toString());
+		    
+		}
+		resetBackGrid();
+		currentShip[1] = 0;
+		return;
+	}
 	
 	private boolean checkForAllBoatsDown() {		
 		for(int i = 0; i < 4; i++)
