@@ -46,6 +46,38 @@ public abstract class VideoGames {
 		// da finire
 	}
 	
+	protected void addPoints(String nickname) {
+    	if(nickname.isEmpty()) {				// Gioco come anonimo
+	    	String sql  = "UPDATE utente SET score = ? WHERE nickname = ?";
+	    	try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            	stmt.setInt(1, getScore());     // Assegna il punteggio
+	            	if(nickname.isEmpty())
+	            		stmt.setString(2,"_ANONIMO_");
+                    stmt.executeUpdate(); 			// Prova a fare l'update
+
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+    	}
+    	else {									// Ho un nickname valido
+    		String sql  = "UPDATE utente SET score = score + ? WHERE nickname = ?";
+	    	try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            	stmt.setInt(1, getScore());     // Assegna il punteggio
+	            	stmt.setString(2,nickname);
+                    stmt.executeUpdate(); 			// Prova a fare l'update
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+    	}
+		
+	}
+	
 	public int getId() {
 		return id;
 	}

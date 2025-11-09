@@ -42,6 +42,7 @@ public class Tris extends VideoGames{
 		
 		public Tris(String name, Category category) {
 			super(name, category);
+			setScore(300);
 		}
 		public Tris(String name, Category category,int score) {
 			super(name, category);
@@ -152,7 +153,7 @@ public class Tris extends VideoGames{
 	        if (gameCheck('X')) {			// Poi controllo se ho vinto
 	            gameOver = true;
 	            showMessage("Hai vinto!");
-	            primaryStage.hide();
+	            primaryStage.close();
 	            addPoints(getNickname());		// E assegno i punti
 	            return true;
 	        }
@@ -160,37 +161,7 @@ public class Tris extends VideoGames{
 	        return false;
 	    }
 
-	    private void addPoints(String nickname) {
-	    	if(nickname.isEmpty()) {				// Gioco come anonimo
-		    	String sql  = "UPDATE utente SET score = ? WHERE nickname = ?";
-		    	try (Connection conn = DataBaseConnection.getConnection();
-	                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-	
-		            	stmt.setInt(1, getScore());     // Assegna il punteggio
-		            	if(nickname.isEmpty())
-		            		stmt.setString(2,"_ANONIMO_");
-	                    stmt.executeUpdate(); 			// Prova a fare l'update
-	
-	                   
-	              } catch (SQLException e1) {
-	            	  e1.printStackTrace();
-	              }
-	    	}
-	    	else {									// Ho un nickname valido
-	    		String sql  = "UPDATE utente SET score = score + ? WHERE nickname = ?";
-		    	try (Connection conn = DataBaseConnection.getConnection();
-	                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-	
-		            	stmt.setInt(1, getScore());     // Assegna il punteggio
-		            	stmt.setString(2,nickname);
-	                    stmt.executeUpdate(); 			// Prova a fare l'update
-	                   
-	              } catch (SQLException e1) {
-	            	  e1.printStackTrace();
-	              }
-	    	}
-			
-		}
+
 
 		private void computerMove() {	
 	        int[] move = move();
@@ -198,7 +169,7 @@ public class Tris extends VideoGames{
 	        if (move == null) {		// Se il mio array di mosse è vuoto significa che il computer non puo più fare nulla ed è un pareggio
 	            gameOver = true;
 	            showMessage("Pareggio!");
-	            primaryStage.hide();
+	            primaryStage.close();
 	            
 	        } else {						// Altrimenti ho trovato una mossa da fare 
 		        int row = move[0];
@@ -210,7 +181,7 @@ public class Tris extends VideoGames{
 	        if (gameCheck('O')) {		// Poi controllo se il computer ha vinto
 	            gameOver = true;
 	            showMessage("Hai perso!");
-	            primaryStage.hide();
+	            primaryStage.close();
 	            addPoints("_COMPUTER_");
 	        }
 	        
