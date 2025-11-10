@@ -31,13 +31,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class BattagliaNavale extends VideoGames {
+public class Battleship extends VideoGames {
 	
-	public BattagliaNavale(String name, Category category) {
+	public Battleship(String name, Category category) {
 		super(name, category);
 		setScore(1000);
 	}
-	public BattagliaNavale(String name, Category category,int score) {
+	public Battleship(String name, Category category,int score) {
 		super(name, category);
 		setScore(score);
 	}
@@ -389,16 +389,17 @@ public class BattagliaNavale extends VideoGames {
 		    if(tmpPlayer[row][col] != 'r' && (tmpPlayer[row][col] != '-' && tmpPlayer[row][col] != 'm')) {		// Se ha beccato una cella con qualcosa dentro, che non era già stata rivelata o mancata
 		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");	// Coloro la cella di rossa visto che è un colpo andato a segno
 		    	tmpPlayer[row][col] = 'r';  // Significa che ho preso una barca, allora la rivelo	    		
+		    	Alert alert = new Alert(Alert.AlertType.INFORMATION);	// Informa l'utente del cambio di turno
+		        alert.setTitle("COLPITO!!!!");
+		        alert.setHeaderText("Il computer ti ha colpito!!!");
+		        alert.setContentText(null);
+		        alert.showAndWait();
+				
 		    }
 		    else if(tmpPlayer[row][col] == '-') {		// Altrimenti se ha beccato una casella vuota
 				tmpPlayer[row][col] = 'm';				// Segna che ha mancato quella casella li, così da un pescarla più casualmente
 		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(0,0,255,0.3); -fx-font-size: 20px;");	// Colora di blue
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);	// Informa l'utente del cambio di turno
-		        alert.setTitle("MANCATO!!!!");
-		        alert.setHeaderText("Il computer ti ha mancato");
-		        alert.setContentText("ora tocca di nuovo a te sparare");
-		        alert.showAndWait();
-				enterBattlePhase();
+		    	enterBattlePhase();
 				return;
 		    }
 		    
@@ -522,14 +523,13 @@ public class BattagliaNavale extends VideoGames {
 	            computerGrid[i][j].setText("");
 	    
 	    
-	    /*
 	    System.out.println("=== Mappa Computer ===");
 	    for (int i = 0; i < N; i++) {
 	        for (int j = 0; j < N; j++)
 	            System.out.print(tmpComputer[i][j] + " ");
 	        System.out.println();
 	    }
-*/
+	    
 	}
 	
 
