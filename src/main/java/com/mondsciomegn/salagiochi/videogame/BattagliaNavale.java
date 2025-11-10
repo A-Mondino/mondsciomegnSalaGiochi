@@ -522,14 +522,14 @@ public class BattagliaNavale extends VideoGames {
 	            computerGrid[i][j].setText("");
 	    
 	    
-	    
+	    /*
 	    System.out.println("=== Mappa Computer ===");
 	    for (int i = 0; i < N; i++) {
 	        for (int j = 0; j < N; j++)
 	            System.out.print(tmpComputer[i][j] + " ");
 	        System.out.println();
 	    }
-
+*/
 	}
 	
 
