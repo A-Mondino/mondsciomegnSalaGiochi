@@ -80,7 +80,8 @@ public class Room extends Application{
 		showRoom(currentRoom);
 	}
 	 
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
     	DataBaseInitializer.initialize();					// Preparo il DataBase
 
         launch(args); 										// Avvia l'applicazione JavaFX
