@@ -82,6 +82,7 @@ public class Room extends Application{
 	}
 	 
 
+	
 	public static void main(String[] args) {
     	DataBaseInitializer.initialize();					// Preparo il DataBase
 
