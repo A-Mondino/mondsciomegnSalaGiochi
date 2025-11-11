@@ -98,6 +98,7 @@ public class Room extends Application{
         
     }
 
+	
 	private void showRoom(int room) {
 			
        root.setCenter(null);
