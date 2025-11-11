@@ -43,6 +43,7 @@ public class Battleship extends VideoGames {
 	}
 	
 	
+	
 	private final int N = 8;
 	private final int BOAT_TYPE = 4;
 	
