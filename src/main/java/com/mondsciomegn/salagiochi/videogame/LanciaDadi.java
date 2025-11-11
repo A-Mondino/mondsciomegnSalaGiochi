@@ -120,7 +120,7 @@ public class LanciaDadi extends VideoGames{
 	
 	
 	private static int lancia() {
-		Random ran = new Random();
+		Random ran = new Random();		//Lancio casuale dei dadi 
 		int somma = 0, dado1, dado2;
 		
 		dado1 = ran.nextInt(6) + 1;
@@ -136,20 +136,16 @@ public class LanciaDadi extends VideoGames{
 			showMessage("HAI PERSO!");
             gameOver = true;
             addPoints("_COMPUTER_");
-            primaryStage.close();
 
 		}else {
 			if(somma>sommaC) {
 				showMessage("HAI VINTO!");
 	            addPoints(getNickname());
-	            primaryStage.close();
 
 			}else {
 				if(somma==sommaC) {
 					showMessage("PAREGGIO!");
 		            gameOver = true;
-		            primaryStage.close();
-
 				}
 			}
 		}

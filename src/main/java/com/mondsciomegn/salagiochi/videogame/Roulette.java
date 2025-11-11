@@ -28,14 +28,14 @@ import javafx.stage.Stage;
 public class Roulette extends VideoGames{
 
 	Scanner scanner = new Scanner(System.in);
-	Random random = new Random();
+	Random random = new Random();				//Per estrazione vincente
 
     private List<Integer> numeri = new ArrayList<>();
-    private Button[][] buttons = new Button[9][9];
-    private char[][] playGrid = new char[9][9];
     private int index = 0;
-
+    private String risultato, color;
+    
     private GridPane grid = new GridPane();
+    
     private boolean gameOver = false;
 
     private Stage primaryStage = new Stage();
@@ -49,7 +49,11 @@ public class Roulette extends VideoGames{
     	dialog.setTitle("Dettagli Gioco");
     	dialog.setHeaderText("Istruzioni:");
     	dialog.setContentText(
-    	        "Indovina il numero estratto in 5 tentativi per vincere il gioco."
+    	        "Seleziona uno dei numeri nel tabellone (considerando il colore), l'avversario farà la stessa cosa. \n " +
+    	        "La roulette gira e si ferma su un determinato numero di un determinato colore. \n " +
+    	        "Se il numero estratto combacia con quello che hai scelto, HAI VINTO!\n " +
+    	        "Se, invece, combacia con quello dell'avversario, HAI PERSO! \n" +
+    	        "Se non combacia con nessuno dei due numeri decisi dai giocatori il gioco termina in PAREGGIO. "
     	);
     	
     	ButtonType play = new ButtonType("Gioca", ButtonBar.ButtonData.OK_DONE);
@@ -87,12 +91,13 @@ public class Roulette extends VideoGames{
         }
     	
     	primaryStage.setTitle("Roulette");
+    	grid.getChildren().clear(); 			// pulisci griglia se si rigioca
     	grid.setHgap(5);
     	grid.setVgap(5);
     	grid.setStyle("-fx-background-color: black; -fx-padding: 10;");
 
 		numeri.clear();
-    	int index = 0;
+    	index = 0;
 
     	for (int n = 1; n <= 40; n++) {
     	    numeri.add(n);
@@ -101,17 +106,19 @@ public class Roulette extends VideoGames{
 
     	// Label centrale per messaggi
     	Label messageLabel = new Label("Benvenuto nella Roulette!");
-    	messageLabel.setMinSize(120, 120);
-    	messageLabel.setPrefSize(120, 120);
+    	messageLabel.setWrapText(true);
+    	messageLabel.setMinSize(220, 220);
     	messageLabel.setAlignment(Pos.CENTER);
+    	messageLabel.setStyle("-fx-background-color: white; ");
+    	
+        grid.add(messageLabel, 3, 3, 3, 3); 	// posizione 3,3 con larghezza/altezza 3 celle
+
 
     	for (int i = 0; i < 9; i++) {
     	    for (int j = 0; j < 9; j++) {
 
-    	        if (i == 4 && j == 4) {
-    	            grid.add(messageLabel, j, i);
-    	            continue;
-    	        }
+    	    	// Salta le celle centrali (3-5)
+                if (i >= 3 && i <= 5 && j >= 3 && j <= 5) continue;
 
     	        Button btn = new Button();
     	        btn.setMinSize(70, 70);
@@ -123,7 +130,7 @@ public class Roulette extends VideoGames{
     	            long occorrenze = numeri.subList(0, index).stream()
     	                    .filter(n -> n == numero)
     	                    .count();
-    	            String color = (occorrenze == 0) ? "#ff0000" : "#000000"; // rosso o nero
+    	            String color = (occorrenze == 0) ? "red" : "black"; // rosso o nero
 
     	            btn.setStyle(
     	                "-fx-font-size: 20px; " +
@@ -132,45 +139,53 @@ public class Roulette extends VideoGames{
     	                "-fx-background-color: " + color + ";"
     	            );
 
-    	            final int num = numero;
     	            btn.setOnAction(e -> {
-    	                messageLabel.setText("Hai selezionato il numero " + num);
+    	                //Scelta giocatore
+    	                int num = numero;
+    	                String colore = color.equals("red") ? "rosso" : "nero";
+
+    	                //Scelta avversario
+    	                int numComputer = random.nextInt(40) + 1;
+    	                String coloreComputer = (numComputer % 2 == 0) ? "nero" : "rosso";
+
+    	                //Estrazione numero vincente
+    	                int numVincente = random.nextInt(40) + 1;
+    	                String coloreVincente = (numVincente % 2 == 0) ? "nero" : "rosso";
+    	                
+    	                risultato=controlloVincita(num,numComputer,numVincente,colore,coloreComputer,coloreVincente);
+    	                
+    	                //Output di gioco
+    	                messageLabel.setText("Hai selezionato il numero " + num + ", " +colore+ "\n\n" +
+    	                "L'avversario ha selezionato il numero " + numComputer + ", " +coloreComputer+ "\n\n\n" +
+    	                "L'estrazione vincente è " + numVincente + ", " +coloreVincente+ "\n\n\n" +risultato);
     	            });
-
     	            index++;
-
-    	        } else {
-    	            btn.setDisable(true);
-    	            btn.setStyle("-fx-background-color: #444444;");
-    	        }
-
+    	        } 
     	        grid.add(btn, j, i);
     	    }
     	}
-
     	Scene scene = new Scene(grid, 720, 720);
     	primaryStage.setScene(scene);
     	primaryStage.show();
 		
 	}
 	
-	private boolean controlloNumeroCasuale(int numero, int numeroCasuale) {
-		if(numero<numeroCasuale) {
-			showMessage("Il numero che hai inserito è più PICCOLO del numero estratto");
-			return true;
-		}else {
-			
-			if(numero>numeroCasuale) {
-				showMessage("Il numero che hai inserito è più GRANDE del numero estratto");
-				return true;
-			}else {
-				if(numero==numeroCasuale) {
-					showMessage("HAI VINTO!");
-					return false;
-				}
-			}
-		}
-		return true;
+	private String controlloVincita(int num, int numComputer, int numVincente, String colore, String coloreComputer, String coloreVincente) {
+	    if (num == numVincente && colore.equals(coloreVincente)) {
+	        risultato=("Hai VINTO!");
+            addPoints(getNickname());
+
+	    } else if (numComputer == numVincente && coloreComputer.equals(coloreVincente)) {
+	        risultato=("Hai PERSO!");
+            gameOver = true;
+            addPoints("_COMPUTER_");
+
+	    } else {
+	        risultato=("PAREGGIO!");
+            gameOver = true;
+
+	    }
+	    return risultato;
 	}
 
 }
