@@ -87,6 +87,7 @@ public class Room extends Application{
         launch(args); 										// Avvia l'applicazione JavaFX
     }
 	
+	
 	private void switchRoom(int direction) { 				// Metodo per cambiare stanza
         currentRoom += direction;
 
