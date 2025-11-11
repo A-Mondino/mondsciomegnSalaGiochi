@@ -16,6 +16,7 @@ public class DataBaseInitializer {
                 "score INT" +
                 " );" ;
         
+        
         String videogame = 
                 "CREATE TABLE IF NOT EXISTS videogioco (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -24,17 +25,20 @@ public class DataBaseInitializer {
                 "score INT" +
                 " );" ;
         
+        
         String category = 
                 "CREATE TABLE IF NOT EXISTS category (" +
                 "nome VARCHAR(30) PRIMARY KEY," +
                 "descrizione VARCHAR(50) " +
                 " );" ;
         
+        
         String checkpoint =
         		"CREATE TABLE IF NOT EXISTS checkpoint (" +
         		"id INT AUTO_INCREMENT PRIMARY KEY," +
                 "punti INT " +
                 " );" ;
+        
         
         String activityLog =
         		"CREATE TABLE IF NOT EXISTS activityLog (" +
@@ -89,4 +93,5 @@ public class DataBaseInitializer {
             e.printStackTrace();
         }
     }
+    
 }

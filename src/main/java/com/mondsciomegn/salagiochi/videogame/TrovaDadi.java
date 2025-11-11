@@ -23,8 +23,10 @@ public class TrovaDadi extends VideoGames{
 		super(name, category);
 	}
 
+	
 	Scanner scanner = new Scanner(System.in);
 	Random random = new Random();
+	
 	
 	public void play(String nickName) {
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -46,6 +48,7 @@ public class TrovaDadi extends VideoGames{
 
     	startGame(nickName);
 	}
+	
 	
 	private void startGame(String nickname) {
 		

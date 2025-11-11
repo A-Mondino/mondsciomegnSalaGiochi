@@ -62,10 +62,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+
 public class Room extends Application{
 	private int currentRoom = 0; 
 	private Boolean firstTime = true;
-    private StringProperty currentNickName = new SimpleStringProperty("");		// Serve per memorizzare il nickName dopo il login
+    private StringProperty currentNickName = new SimpleStringProperty("");		// Memorizza il NickName dopo il login
 	
 	private Stage primaryStage = null;
 	private BorderPane root = new BorderPane();				// Finestra 
@@ -74,33 +75,38 @@ public class Room extends Application{
 	private final int roomW = 650;
 	Scene scene = new Scene(root, roomH, roomW);
 	
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 		showRoom(currentRoom);
 	}
 	 
-
+	
 	public static void main(String[] args) {
     	DataBaseInitializer.initialize();					// Preparo il DataBase
-
         launch(args); 										// Avvia l'applicazione JavaFX
     }
+	
 	
 	private void switchRoom(int direction) { 				// Metodo per cambiare stanza
         currentRoom += direction;
 
         // Limita le stanze a 3 (sinistra, centrale, destra)
-        if (currentRoom < -1) currentRoom = 1;				// Se sono a SX e voglio andare a SX resetto la current room a 1 (stanza a DX)
-        if (currentRoom > 1) currentRoom = -1;				// Se sono a DX e voglio andare a DX resetto la current room a -1 (stanza a SX)
-        showRoom(currentRoom);
+        if (currentRoom < -1) 
+        	currentRoom = 1;				// Se sono a SX e voglio andare a SX resetto la current room a 1 (stanza a DX)
         
+        if (currentRoom > 1) 
+        	currentRoom = -1;				// Se sono a DX e voglio andare a DX resetto la current room a -1 (stanza a SX)
+       
+        showRoom(currentRoom); 
     }
 
+	
 	private void showRoom(int room) {
-			
        root.setCenter(null);
        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+       
        switch (room) {
 	        case -1:	    
 	        	roomLabel.setText("Tabellone");
@@ -119,8 +125,7 @@ public class Room extends Application{
 		} 
 	}
 
-	
-	
+		
 	private void roomL(BorderPane root) {
 		root.getTop().setVisible(false);
 
@@ -130,99 +135,97 @@ public class Room extends Application{
 		TableView<User> userTable = new TableView<>();
 	    TableView<VideoGames> gameTable = new TableView<>();
 	    
-	    double tableWidth = 500;		// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
-
+	    double tableWidth = 500;							// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
 	   
-	    addUserColums(userTable); // Aggiungo le colonne
-	    userTable.getColumns().get(2).setVisible(false);	// Nascondo la password
+	    addUserColums(userTable); 										// Aggiunta delle colonne
+	    userTable.getColumns().get(2).setVisible(false);				// Nascondo la password
 	    addGameColums(gameTable);
-	    
 	   
 	    
-	    userTable.getItems().addAll(DataBaseContainer.getAllUsers()); // Aggiungo i dati
+	    userTable.getItems().addAll(DataBaseContainer.getAllUsers());	// Aggiunta dei dati
 	    gameTable.getItems().addAll(DataBaseContainer.getAllGames());
-	    
 	    
 	   
 	    userTable.setPrefWidth(tableWidth);
 	    gameTable.setPrefWidth(tableWidth);
-	    StackPane userPane = new StackPane(userTable);	// Metto tutto dentro ad un StackPane per centrare tutto
+	    StackPane userPane = new StackPane(userTable);					// Creazione StackPane per ogni tabella
 	    StackPane gamePane = new StackPane(gameTable);
 	    userPane.setAlignment(Pos.CENTER);
 	    gamePane.setAlignment(Pos.CENTER);
-	    
 
 	    
-	    GridPane grid = new GridPane();		// Creo una griglia 2x2
+	    GridPane grid = new GridPane();									// Creazione della griglia 2x2
 	    grid.setPadding(new Insets(20));
-	    grid.setHgap(20); 					// spazio orizzontale tra le tabelle
-	    grid.setVgap(20); 					// spazio verticale tra le tabelle
+	    grid.setHgap(20); 												// Spazio orizzontale tra le tabelle
+	    grid.setVgap(20); 												// Spazio verticale tra le tabelle
 
 	    // Posiziona le tabelle nella prima riga
-	    grid.add(userTable, 0, 0);			// colonna 0, riga 0
-	    grid.add(gameTable, 1, 0); 			// colonna 1, riga 0
+	    grid.add(userTable, 0, 0);										// colonna 0, riga 0
+	    grid.add(gameTable, 1, 0); 										// colonna 1, riga 0
 
-	    // Centrare la griglia nella stanza
-	    BorderPane.setAlignment(grid, Pos.CENTER);
+	    
+	    BorderPane.setAlignment(grid, Pos.CENTER);						// Centra la griglia nella stanza
 	    
 	    
-	    // Aggiungere l'etichetta ad una box solo per avere tutte le etichette di ogni stanza allineate
+	    // Aggiunta dell'etichetta ad una box solo per avere tutte le etichette di ogni stanza allineate
 	    VBox centerContent = new VBox(30, grid, centerPane);
 	    centerContent.setAlignment(Pos.CENTER);
 	    root.setCenter(centerContent);
 	}
 		
+	
 	private void roomM(BorderPane root) {
-		primaryStage.setTitle("Sala Giochi");			// Titolo 
+		primaryStage.setTitle("Sala Giochi");							// Titolo 
         String imagePath = getClass().getResource("./img/roomM.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
                 new Image(imagePath),
-                BackgroundRepeat.NO_REPEAT,		// Serve a non far ripetere l'immagine nè in orizz
-                BackgroundRepeat.NO_REPEAT,		// Nè in verticale
+                BackgroundRepeat.NO_REPEAT,								// Serve per evitare la ripetizione dell'immagine in orizzontale
+                BackgroundRepeat.NO_REPEAT,								// o in verticale
                 BackgroundPosition.CENTER,
                 new BackgroundSize(
                 		1.0,
                 		1.0,
-                        true,	// Larghezza in percentuale = true
-                        true, 	// Altezza in percentuale = true
-                        false, 	// Adatta alla scena = false
-                        false)	// Ritagliare l'immagine = false
+                        true,											// Larghezza in percentuale = true
+                        true, 											// Altezza in percentuale = true
+                        false, 											// Adatta alla scena = false
+                        false)											// Ritagliare l'immagine = false
         );
-        root.setBackground(new Background(bgImage));		// Solo per l'immagine sfondo
+        
+        root.setBackground(new Background(bgImage));					// Solo per l'immagine sfondo
         
         
-        ToolBar toolbar = new ToolBar();		// ToolBar per il login nel sistema 
+        ToolBar toolbar = new ToolBar();								// ToolBar per effettuare il login nel sistema 
         toolbar.setPadding(new Insets(15));
-        BorderPane.setMargin(toolbar, new Insets(10, 10, 0, 10)); // margine superiore, destro e sinistro di 10px
-
+        BorderPane.setMargin(toolbar, new Insets(10, 10, 0, 10)); 		// Margine superiore, destro e sinistro di 10px
         toolbar.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
 
         String tmp = getClass().getResource("./img/tmp.png").toExternalForm();	
       
-        ImageView imageView = new ImageView(new Image(tmp));		// Crei un ImageView per poter mostrare la foto
-        imageView.setPickOnBounds(true); // Serve perchè avendo l'immagine senza sfondo, risualtano "clickabili" solo pochi pixels, grazie a questo il click è percepito su tutta l'immagine
-        imageView.setCursor(Cursor.HAND);	// Solo una piccola chicca :D
+        ImageView imageView = new ImageView(new Image(tmp));			// Creazione di un ImageView per poter mostrare la foto
+        imageView.setPickOnBounds(true); 								// Il click è percepito su tutta l'immagine al posto di un solo pixel
+        imageView.setCursor(Cursor.HAND);								// Solo una piccola chicca :D
         imageView.setFitWidth(40);   
         imageView.setFitHeight(40);
         imageView.setPreserveRatio(true);
+        
         Region spacer = new Region();			// Questo spacer in realtà non serve a niente, ma non esiste altro modo per mettere l'elemento nella toolBar tutto a sinistra...
         HBox.setHgrow(spacer, Priority.ALWAYS); // ...quindi uso uno spacer per "pushare" l'elemento a sinistra
 
-        Label nickName = new Label("");			// Label del nickName
+        Label nickName = new Label("");									// Label del NickName
         nickName.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         nickName.textProperty().bind(currentNickName);
                 
         toolbar.getItems().addAll(nickName, spacer, imageView);
-        root.setTop(toolbar);	// Aggiungo alla root...
-        root.getTop().setVisible(true);	// ...e la mostro, è importante perchè nelle altre stanze la nascondo la toolbar
+        root.setTop(toolbar);											// Aggiungo alla root...
+        root.getTop().setVisible(true);									// ...e la mostro; è importante perchè nelle altre stanze nascondo la ToolBar
 
-        imageView.setOnMouseClicked(event -> {  // Evento on-click
-        	Stage popupStage = new Stage();		// Creo un nuovo Stage (finestra figlia)
+        imageView.setOnMouseClicked(event -> {  						// Evento on-click
+        	Stage popupStage = new Stage();								// Creazione di un nuovo Stage (finestra figlia)
         	
-        	if(currentNickName.get().equals("")) {		// Se il nickname è vuoto significa che non ho fatto il login, quindi mostro i due form (registrazione e login)
+        	if(currentNickName.get().equals("")) {		// Se il NickName è vuoto significa che non ho fatto il login, quindi mostro i due form (registrazione e login)
                 popupStage.setTitle("Register / Login");
                 
-                GridPane formGrid = new GridPane();		// Uso una griglia per mettere tutto in modo ordinato
+                GridPane formGrid = new GridPane();						// Creazione di una griglia per mettere tutto in modo ordinato
                 formGrid.setPadding(new Insets(20));
                 formGrid.setHgap(50);
                 formGrid.setVgap(50);
@@ -239,13 +242,11 @@ public class Room extends Application{
                 VBox centerContent = new VBox(10, formGrid);	
                 centerContent.setAlignment(Pos.CENTER);
                 
-                
-                // Scena del popup
-                Scene popupScene = new Scene(centerContent, roomH/2, roomW/2);
+                Scene popupScene = new Scene(centerContent, roomH/2, roomW/2);	    // Scena del popup
                 popupStage.setScene(popupScene);
 
         	}
-        	else {				//	L'utente è loggato, devo mostrare un popup di logout o cancella account
+        	else {														//	L'utente è loggato, devo mostrare un popup di "logout" o "cancella account"
         		popupStage.setTitle("Account");
         		
     	        Label title = new Label("Ciao " + currentNickName.get() + "!");
@@ -255,23 +256,23 @@ public class Room extends Application{
     	        logOut.setCursor(Cursor.HAND);
     	        logOut.setStyle("-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold;");
     	        
-    	        logOut.setOnAction(e -> {
+    	        logOut.setOnAction(e -> {											// Evento OnClick
     	        	Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
     	            confirmAlert.setTitle("Logout");
     	            
     	            confirmAlert.setHeaderText("Sei sicuro di voler effettuare il logout?");
     	            confirmAlert.setContentText("Conferma per uscire.");
 
-    	            // Mostra la finestra e aspetta la risposta
-    	            Optional<ButtonType> result = confirmAlert.showAndWait();		
-    	            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
-    	            	currentNickName.set("");      // resetta nickname
+    	            Optional<ButtonType> result = confirmAlert.showAndWait();		// Mostra la finestra e aspetta la risposta
+    	            if (result.isPresent() && result.get() == ButtonType.OK) {		// L'utente conferma il logout
+    	            	currentNickName.set("");      								// Resetta il NickName
     	            	popupStage.close();
     	            } else {
-    	                // L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
+    	                					// L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
     	            }
-    	        }); 		// Evento OnClick
+    	        }); 						
 
+    	        
     	        Button deleteAccount = new Button("Elimina Account");
     	        deleteAccount.setCursor(Cursor.HAND);
     	        deleteAccount.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-weight: bold;");
@@ -285,7 +286,7 @@ public class Room extends Application{
     	            
     	            confirmDelete.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
     	            Optional<ButtonType> result = confirmDelete.showAndWait();
-    	            if (result.isPresent() && result.get() == ButtonType.OK) {	// Utente conferma il logout
+    	            if (result.isPresent() && result.get() == ButtonType.OK) {		// L'utente conferma il logout
     	            	try (Connection conn = DataBaseConnection.getConnection();
    	                         PreparedStatement stmt = conn.prepareStatement("DELETE FROM utente WHERE nickname = ?")) {
    	                        stmt.setString(1, currentNickName.get());
@@ -298,7 +299,7 @@ public class Room extends Application{
    	                        err.showAndWait();
    	                    }
     	            } else {
-    	                // L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
+    	                					// L'utente ha premuto Cancel o chiuso la finestra, non fare nulla
     	            }
     	        });
 
@@ -311,65 +312,62 @@ public class Room extends Application{
         	}
         	
         	
-        	// Imposto la finestra come "figlia" della principale
-            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            popupStage.initModality(Modality.WINDOW_MODAL); // Blocca la finestra principale finché non chiudi il popup
-            popupStage.show(); // Mostra la finestra
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());	// Imposto la finestra come "figlia" della principale
+            popupStage.initModality(Modality.WINDOW_MODAL); 							// Blocca la finestra principale finché non il popup non viene chiuso
+            popupStage.show();															// Mostra la finestra
             
         });
         
 
        
-        // Giusto un po di formattazzione grafica ---->
+        // Giusto un po' di formattazzione grafica ---->
 
-        VBox box = new VBox(10);   			// La box per il titolo principale
+        VBox box = new VBox(10);   							// Box per il titolo principale
         box.setPadding(new Insets(20));
         box.setAlignment(Pos.BOTTOM_CENTER);  
         box.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
         
         
-        GridPane grid = new GridPane();		// La griglia per formattazione, da valutare se metterci qualcosa dentro
+        GridPane grid = new GridPane();						// Griglia per formattazione, da valutare se metterci qualcosa dentro
         grid.setPadding(new Insets(20));
         grid.setHgap(50);
         grid.setVgap(50);
         grid.setAlignment(Pos.TOP_RIGHT);
         
-        int extraPadding = 0;				// Solo x formattazione grafica
+        int extraPadding = 0;								// Solo per formattazione grafica
         
-        if(!firstTime) {					// Se non è la prima volta che visualizzi la stanza centrale:
+        if(!firstTime) {									// Se non è la prima volta che visualizzi la stanza centrale
     	    roomLabel.setText("SalaGiochi");
             box.setMaxWidth(300);		
             box.setMaxHeight(100);
     	    box.getChildren().add(roomLabel);
     	    extraPadding = 70;
    
-        }else {								// else è per forza la prima volta che visualizzi la stanza
+        }else {												// Altrimenti è sicuramente la prima volta che visualizzi la stanza
         	Label label = new Label("Se è la tua prima volta, guardati un po' intorno!!");
         	label.setStyle("-fx-font-size: 20px;");
         	box.setMaxWidth(550);
             box.setMaxHeight(100);
-        	box.getChildren().addAll(roomLabel, label);			// Aggiungo le due etichette ad una Box, che impila verticalmente i parametri
+        	box.getChildren().addAll(roomLabel, label);		// Aggiunta delle due etichette ad una Box, che ordina verticalmente i parametri
         	firstTime = false;									
         	
         }
-        StackPane centerPane = new StackPane(box);				// Aggiungo la box dopo che l'ho formattata in base a firstTime
+        StackPane centerPane = new StackPane(box);			// Aggiunta della box dopo che è stata formattata in base a firstTime
         centerPane.setAlignment(Pos.BOTTOM_CENTER);				
         VBox centerContent = new VBox((400 + extraPadding), grid, centerPane);	// Questo serve solo per mettere in modo ordinato gli elementi (l'extra padding è solo per formattazione grafica)
         centerContent.setAlignment(Pos.CENTER);
         root.setCenter(centerContent);
         
   
-        // Freccia sinistra
-        Button leftArrow = new Button("◄");
+        Button leftArrow = new Button("◄");					// Freccia sinistra
         leftArrow.setStyle("-fx-font-size: 40px; -fx-background-color: transparent;");
         leftArrow.setCursor(Cursor.HAND);
         leftArrow.setOnAction(e -> switchRoom(-1)); 		// Evento OnClick
         
-        
         AnchorPane leftAnchor = new AnchorPane();
         StackPane leftPane = new StackPane(leftArrow);
-        AnchorPane.setTopAnchor(leftPane,(double) (roomW/2.5));   // 20px dal bordo superiore
-        AnchorPane.setLeftAnchor(leftPane, 20.0);  // 20px dal bordo sinistro
+        AnchorPane.setTopAnchor(leftPane,(double) (roomW/2.5));		// 20px dal bordo superiore
+        AnchorPane.setLeftAnchor(leftPane, 20.0);  					// 20px dal bordo sinistro
         
         leftPane.setMaxHeight(50);
         leftPane.setAlignment(Pos.CENTER_LEFT);
@@ -378,30 +376,27 @@ public class Room extends Application{
         root.setLeft(leftAnchor);
         
 
-
-        // Freccia destra
-        Button rightArrow = new Button("►");
+        Button rightArrow = new Button("►");				// Freccia destra
         rightArrow.setStyle("-fx-font-size: 40px; -fx-background-color: transparent;");
         rightArrow.setCursor(Cursor.HAND);
         rightArrow.setOnAction(e -> switchRoom(1)); 		// Evento OnClick
         
         AnchorPane rightAnchor = new AnchorPane();
         StackPane rightPane = new StackPane(rightArrow);
-        AnchorPane.setTopAnchor(rightPane,(double) (roomW/2.5));   // 20px dal bordo superiore
-        AnchorPane.setRightAnchor(rightPane, 20.0);  // 20px dal bordo sinistro
+        AnchorPane.setTopAnchor(rightPane,(double) (roomW/2.5));	// 20px dal bordo superiore
+        AnchorPane.setRightAnchor(rightPane, 20.0);  				// 20px dal bordo sinistro
         
         rightPane.setMaxHeight(50);        
         rightPane.setAlignment(Pos.CENTER_RIGHT);
         rightPane.setStyle("-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;");
-        rightAnchor.getChildren().add(rightPane);		// L'anchor serve solo per centrare le freccie verticalmente
+        rightAnchor.getChildren().add(rightPane);			// L'anchor serve solo per centrare le frecce verticalmente
         root.setRight(rightAnchor);
 
-        
-        // Scena
-        
-        primaryStage.setScene(scene);
+
+        primaryStage.setScene(scene);						 // Scena
         primaryStage.show();
     }
+	
 	
 	private void roomR(BorderPane root) {
 		root.getTop().setVisible(false);        
@@ -451,13 +446,12 @@ public class Room extends Application{
 	}
 	
 	
-	
-	
 	private VBox RegisterBox(Stage popupStage) {		
 		VBox registerBox = new VBox(10);
         registerBox.setAlignment(Pos.CENTER);
         registerBox.setPadding(new Insets(20));
         registerBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
+        
         Label regTitle = new Label("Registrati");
         regTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
        
@@ -504,18 +498,15 @@ public class Room extends Application{
 	                        
 	                        
 	                        try {
-	                            stmt.executeUpdate(); // prova a inserire l'utente
+	                            stmt.executeUpdate(); 									// prova a inserire l'utente
 	                            infoAlert.setTitle("Registrazione riuscita");
 	                            infoAlert.setHeaderText("Benvenuto " + regUser.getText() + "!\nRicordati di fare il Login");
 	                            infoAlert.showAndWait();
-	                            
-	                            
 	                            
 	                            regUser.clear();
 	                            regNickname.clear();
 	                            regPass.clear();
 	                            regPassConf.clear();
-	                          //  popupStage.close();
 	
 	                        } catch (SQLException ex) {
 	                            // Controlla se è violazione di UNIQUE o PRIMARY KEY
@@ -559,11 +550,13 @@ public class Room extends Application{
 		return registerBox;
 	}
 
+	
 	private VBox LoginBox(Stage popupStage, Label nickName) {		
 		VBox loginBox = new VBox(10);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setPadding(new Insets(20));
         loginBox.setStyle("-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 10;");
+        
         Label logTitle = new Label("Accedi");
         logTitle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
         
@@ -591,10 +584,10 @@ public class Room extends Application{
                      
                      try (Connection conn = DataBaseConnection.getConnection();
 	                         PreparedStatement stmt = conn.prepareStatement(sql)) {
-	                	 	 stmt.setString(1, logUser.getText());		// Sostituisce il primo ? con il nickname del form
+	                	 	 stmt.setString(1, logUser.getText());						// Sostituisce il primo ? con il NickName del form
 	                	 	 stmt.setString(2, logPass.getText());
-	                    	 ResultSet rs = stmt.executeQuery(); // Esegue la query e salva il risultato
-	                    	 if (rs.next()) {					// Nickname trovato
+	                    	 ResultSet rs = stmt.executeQuery(); 						// Esegue la query e salva il risultato
+	                    	 if (rs.next()) {											// NickName trovato
 	                    		 currentNickName.set(logUser.getText());
 	                    		
 	                             infoAlert.setTitle("Login riuscito");
@@ -603,19 +596,19 @@ public class Room extends Application{
 	                             logUser.clear();
 	                             logPass.clear();
 	                             popupStage.close();
-	                         } else { // Nessun utente trovato o password errata, dobbiamo distinguere i due casi
+	                         } else { 													// Nessun utente trovato o password errata (sono due casi distinti)
 	                        	 String sql1 = "SELECT nickname FROM utente WHERE nickname = ? ";
 	                        	 
 	                        	 try (PreparedStatement stmt1 = conn.prepareStatement(sql1)) {
 	                        		 stmt1.setString(1, logUser.getText());
-	                        		 ResultSet rs1 = stmt1.executeQuery(); // Cerco solo il nickname
-	                        		 if (rs1.next()) {		// Se trovo un risultatp significa che aveva sbagliato password prima
+	                        		 ResultSet rs1 = stmt1.executeQuery(); 				// Cerco solo il NickName
+	                        		 if (rs1.next()) {									// Se trovo un risultatp significa che aveva sbagliato password prima
 	                        			 errorAlert.setTitle("Password Errata");
 	                                     errorAlert.setHeaderText("Le password non corrispondono!");
 	                                     errorAlert.showAndWait();
 	                                     logPass.clear();
 	                        		 }
-	                        		 else {					// Se no l'utente non esiste
+	                        		 else {												// Se no l'utente non esiste
 	                        			 errorAlert.setTitle("Utente non trovato");
 	                                     errorAlert.setHeaderText("Nickname non esistente!");
 	                                     errorAlert.showAndWait();
@@ -644,9 +637,9 @@ public class Room extends Application{
         return loginBox;
 	}
 
-	private VBox boxTitle() {
-		
-		VBox box = new VBox(10);   // Box per contenere la roomLabel
+	
+	private VBox boxTitle() {	
+		VBox box = new VBox(10);   					// Box per contenere la roomLabel
         box.setPadding(new Insets(20));
         box.setAlignment(Pos.BOTTOM_CENTER);  
         box.setMaxWidth(300);
@@ -657,14 +650,13 @@ public class Room extends Application{
 	}
 
 	
-	private StackPane createImagePane(String imagePath, Runnable onClick) {	// x i 4 quadranti delle immagini dei giochi
+	private StackPane createImagePane(String imagePath, Runnable onClick) {			// per i 4 quadranti delle immagini dei giochi
 	    Image img = new Image(getClass().getResourceAsStream(imagePath));
 	    ImageView imgView = new ImageView(img);
 	    imgView.setCursor(Cursor.HAND);
 	    imgView.setFitWidth(200);
 	    imgView.setFitHeight(200);
 	    imgView.setPreserveRatio(true);
-
 	    imgView.setOnMouseClicked(e -> onClick.run());
 
 	    StackPane pane = new StackPane(imgView);
@@ -672,12 +664,12 @@ public class Room extends Application{
 	    return pane;
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	private void addGameColums(TableView<VideoGames> gameTable) {
 		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco");
 		name.setCellValueFactory(data ->
         new SimpleStringProperty(data.getValue().getName()));
-
 		
 		TableColumn<VideoGames, Integer> score = new TableColumn<>("Punteggio");
 		score.setCellValueFactory(data ->
@@ -689,15 +681,14 @@ public class Room extends Application{
 		
 		TableColumn<VideoGames, String> desc = new TableColumn<>("Descrizione");
 	    desc.setCellValueFactory(data ->
-	    new SimpleStringProperty(data.getValue().getCategory().getDescription()));
-	    
+	    new SimpleStringProperty(data.getValue().getCategory().getDescription()));    
 	    
 		gameTable.getColumns().addAll(name,category, desc, score);
 	}	
 	
+	
 	@SuppressWarnings("unchecked")
 	private void addUserColums(TableView<User> table) {
-		
 
 	    TableColumn<User, String> colNick = new TableColumn<>("NickName");
 	    colNick.setCellValueFactory(data ->
@@ -718,7 +709,6 @@ public class Room extends Application{
 	    colScore.setCellValueFactory(data ->
 	        new SimpleIntegerProperty(data.getValue().getScore()).asObject()
 	    );
-
 	    
 	    table.getColumns().addAll(colNick, colName, colPassword, colScore);
 	}

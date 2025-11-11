@@ -28,9 +28,11 @@ public class Roulette extends VideoGames{
     private boolean gameOver = false;
     private Stage primaryStage = new Stage();
 	
+    
 	public Roulette(String name, Category category) {
 		super(name, category);
 	}
+	
 	
 	public void play(String nickName) { 
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -55,8 +57,9 @@ public class Roulette extends VideoGames{
     	startGame(nickName);
 	}
 	
+	
 	private void startGame(String nickname) {
-		if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
+		if(nickname.isEmpty()) {														// Significa che qualcuno sta giocando in anonimo
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
 	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
 	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
@@ -64,8 +67,7 @@ public class Roulette extends VideoGames{
             try (Connection conn = DataBaseConnection.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(sql)) {
                     try {
-                        stmt.executeUpdate(); 		// Prova a inserire l'utente
-
+                        stmt.executeUpdate(); 											// Prova a inserire l'utente
                     } catch (SQLException ex) { 
                     	ex.printStackTrace();
                     }
@@ -74,24 +76,22 @@ public class Roulette extends VideoGames{
             	  e1.printStackTrace();
               }
         }
+		
 		primaryStage.setTitle("Gioco dei Dadi");
 
-        Label titolo = new Label("Lancio dei Dadi");
-
+        Label title = new Label("Lancio dei Dadi");
         Label playerLabel = new Label("Giocatore:");
-
         Label computerLabel = new Label("Computer:");
-        
-        Label messaggio = new Label("-");
+        Label message = new Label("-");
         Label messaggio1 = new Label("-");
 
         Button lanciaButton = new Button("Lancia i Dadi");
 
-        // Evento click
+        // Evento OnClick
         lanciaButton.setOnAction(e -> {
             if (!gameOver) {
                 int sommaGiocatore = lancia();
-                messaggio.setText("La somma dei dadi che hai lanciato è: " +sommaGiocatore);
+                message.setText("La somma dei dadi che hai lanciato è: " +sommaGiocatore);
 
                 int sommaComputer = lancia();
                 messaggio1.setText("La somma dei dadi lanciati dall'avversario è: " +sommaComputer);
@@ -103,7 +103,7 @@ public class Roulette extends VideoGames{
         
         VBox centro = new VBox(10);
         centro.setStyle("-fx-alignment: center;");
-        centro.getChildren().addAll(titolo, playerLabel, messaggio,
+        centro.getChildren().addAll(title, playerLabel, message,
         	    computerLabel, messaggio1);
 
         BorderPane layout = new BorderPane();
@@ -118,6 +118,7 @@ public class Roulette extends VideoGames{
 		
 	}
 	
+	
 	private static int lancia() {
 		Random ran = new Random();
 		int somma = 0, dado1, dado2;
@@ -128,6 +129,7 @@ public class Roulette extends VideoGames{
 		
 		return somma;
 	}
+	
 	
 	private void controlloDadiMaggiore(int somma, int sommaC, String nickName) {
 		if(somma<sommaC) {
