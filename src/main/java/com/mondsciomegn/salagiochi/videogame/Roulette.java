@@ -3,6 +3,8 @@ package com.mondsciomegn.salagiochi.videogame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,22 +13,36 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public class Roulette extends VideoGames{
-	
+
+	Scanner scanner = new Scanner(System.in);
+	Random random = new Random();
+
+    private List<Integer> numeri = new ArrayList<>();
+    private Button[][] buttons = new Button[9][9];
+    private char[][] playGrid = new char[9][9];
+    private int index = 0;
+
+    private GridPane grid = new GridPane();
+    private boolean gameOver = false;
+
+    private Stage primaryStage = new Stage();
+    
 	public Roulette(String name, Category category) {
 		super(name, category);
 	}
-
-	
-	Scanner scanner = new Scanner(System.in);
-	Random random = new Random();
-	
 	
 	public void play(String nickName) {
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -49,7 +65,6 @@ public class Roulette extends VideoGames{
     	startGame(nickName);
 	}
 	
-	
 	private void startGame(String nickname) {
 		
     	if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
@@ -70,6 +85,72 @@ public class Roulette extends VideoGames{
             	  e1.printStackTrace();
               }
         }
+    	
+    	primaryStage.setTitle("Roulette");
+    	grid.setHgap(5);
+    	grid.setVgap(5);
+    	grid.setStyle("-fx-background-color: black; -fx-padding: 10;");
+
+		numeri.clear();
+    	int index = 0;
+
+    	for (int n = 1; n <= 40; n++) {
+    	    numeri.add(n);
+    	    numeri.add(n);
+    	}
+
+    	// Label centrale per messaggi
+    	Label messageLabel = new Label("Benvenuto nella Roulette!");
+    	messageLabel.setMinSize(120, 120);
+    	messageLabel.setPrefSize(120, 120);
+    	messageLabel.setAlignment(Pos.CENTER);
+
+    	for (int i = 0; i < 9; i++) {
+    	    for (int j = 0; j < 9; j++) {
+
+    	        if (i == 4 && j == 4) {
+    	            grid.add(messageLabel, j, i);
+    	            continue;
+    	        }
+
+    	        Button btn = new Button();
+    	        btn.setMinSize(70, 70);
+
+    	        if (index < numeri.size()) {
+    	            int numero = numeri.get(index);
+    	            btn.setText(String.valueOf(numero));
+
+    	            long occorrenze = numeri.subList(0, index).stream()
+    	                    .filter(n -> n == numero)
+    	                    .count();
+    	            String color = (occorrenze == 0) ? "#ff0000" : "#000000"; // rosso o nero
+
+    	            btn.setStyle(
+    	                "-fx-font-size: 20px; " +
+    	                "-fx-font-weight: bold; " +
+    	                "-fx-text-fill: white; " +
+    	                "-fx-background-color: " + color + ";"
+    	            );
+
+    	            final int num = numero;
+    	            btn.setOnAction(e -> {
+    	                messageLabel.setText("Hai selezionato il numero " + num);
+    	            });
+
+    	            index++;
+
+    	        } else {
+    	            btn.setDisable(true);
+    	            btn.setStyle("-fx-background-color: #444444;");
+    	        }
+
+    	        grid.add(btn, j, i);
+    	    }
+    	}
+
+    	Scene scene = new Scene(grid, 720, 720);
+    	primaryStage.setScene(scene);
+    	primaryStage.show();
 		
 	}
 	
