@@ -62,6 +62,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+
 public class Room extends Application{
 	private int currentRoom = 0; 
 	private Boolean firstTime = true;
@@ -81,11 +82,13 @@ public class Room extends Application{
 	}
 	 
 
+	
 	public static void main(String[] args) {
     	DataBaseInitializer.initialize();					// Preparo il DataBase
 
         launch(args); 										// Avvia l'applicazione JavaFX
     }
+	
 	
 	private void switchRoom(int direction) { 				// Metodo per cambiare stanza
         currentRoom += direction;
@@ -97,6 +100,7 @@ public class Room extends Application{
         
     }
 
+	
 	private void showRoom(int room) {
 			
        root.setCenter(null);
