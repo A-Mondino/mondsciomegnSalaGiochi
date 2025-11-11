@@ -217,17 +217,7 @@ public class Tris extends VideoGames{
 	            return true;
 	        
 	        return false;
-	    }
-
-
-	    private void showMessage(String messaggio) {
-	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	        alert.setTitle("Risultato");
-	        alert.setHeaderText(null);
-	        alert.setContentText(messaggio);
-	        alert.showAndWait();
-	    }
-	    
+	    }	    
 	    
 	}
 	

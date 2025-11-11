@@ -172,14 +172,5 @@ public class Roulette extends VideoGames{
 		}
 		return true;
 	}
-	
-	private void showMessage(String messaggio) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Risultato");
-        alert.setHeaderText(null);
-        alert.setContentText(messaggio);
-        alert.showAndWait();
-    }
-	
 
 }

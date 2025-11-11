@@ -134,29 +134,25 @@ public class LanciaDadi extends VideoGames{
 	private void controlloDadiMaggiore(int somma, int sommaC, String nickName) {
 		if(somma<sommaC) {
 			showMessage("HAI PERSO!");
-            addPoints(nickName);
+            gameOver = true;
+            addPoints("_COMPUTER_");
+            primaryStage.close();
+
 		}else {
 			if(somma>sommaC) {
 				showMessage("HAI VINTO!");
-	            addPoints(nickName);
+	            addPoints(getNickname());
+	            primaryStage.close();
+
 			}else {
 				if(somma==sommaC) {
 					showMessage("PAREGGIO!");
-		            addPoints(nickName);
+		            gameOver = true;
+		            primaryStage.close();
+
 				}
 			}
 		}
 	}
-	
-	
-	
-	  private void showMessage(String messaggio) {
-	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	        alert.setTitle("Risultato");
-	        alert.setHeaderText(null);
-	        alert.setContentText(messaggio);
-	        alert.showAndWait();
-	    }
-	
 
 }

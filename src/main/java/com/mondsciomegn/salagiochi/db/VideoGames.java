@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.scene.control.Alert;
+
 
 public abstract class VideoGames {
 	private final int id = 0;
@@ -80,6 +82,15 @@ public abstract class VideoGames {
     	}
 		
 	}
+	
+
+    protected void showMessage(String messaggio) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Risultato");
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+        alert.showAndWait();
+    }
 	
 	
 	public int getId() {
