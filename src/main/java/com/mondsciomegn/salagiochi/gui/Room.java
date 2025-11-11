@@ -429,12 +429,12 @@ public class Room extends Application{
 	    }), 1, 0);
 
 	    grid.add(createImagePane("./img/dadi.jpg", () -> {
-	        new Roulette("Roulette", new Category("Fortuna"))
+	        new LanciaDadi("Roulette", new Category("Fortuna"))
 	        .play(currentNickName.get());
 	    }), 0, 1);
 
 	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
-	        new TrovaDadi("TrovaDadi", new Category("Fortuna"))
+	        new Roulette("TrovaDadi", new Category("Fortuna"))
 	        .play(currentNickName.get());
 	    }), 1, 1);
 
