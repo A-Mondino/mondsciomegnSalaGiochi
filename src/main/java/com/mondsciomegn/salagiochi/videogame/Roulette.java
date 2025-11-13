@@ -15,7 +15,6 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -28,16 +27,12 @@ import javafx.stage.Stage;
 public class Roulette extends VideoGames{
 
 	Scanner scanner = new Scanner(System.in);
-	Random random = new Random();				//Per estrazione vincente
+	Random random = new Random();						// Per estrazione vincente
 
     private List<Integer> numeri = new ArrayList<>();
-    private int index = 0;
-    private String risultato, color;
     
-    private GridPane grid = new GridPane();
+    private GridPane grid = new GridPane();				// Per la visualizzazione grafica
     
-    private boolean gameOver = false;
-
     private Stage primaryStage = new Stage();
     
 	public Roulette(String name, Category category) {
@@ -49,10 +44,10 @@ public class Roulette extends VideoGames{
     	dialog.setTitle("Dettagli Gioco");
     	dialog.setHeaderText("Istruzioni:");
     	dialog.setContentText(
-    	        "Seleziona uno dei numeri nel tabellone (considerando il colore), l'avversario farà la stessa cosa. \n " +
-    	        "La roulette gira e si ferma su un determinato numero di un determinato colore. \n " +
-    	        "Se il numero estratto combacia con quello che hai scelto, HAI VINTO!\n " +
-    	        "Se, invece, combacia con quello dell'avversario, HAI PERSO! \n" +
+    	        "Seleziona uno dei numeri nel tabellone (considerando il colore), l'avversario farà la stessa cosa.\n" +
+    	        "La roulette gira e si ferma su un determinato numero di un determinato colore.\n" +
+    	        "Se il numero estratto combacia con quello che hai scelto, HAI VINTO!\n" +
+    	        "Se, invece, combacia con quello dell'avversario, HAI PERSO!\n" +
     	        "Se non combacia con nessuno dei due numeri decisi dai giocatori il gioco termina in PAREGGIO. "
     	);
     	
@@ -97,14 +92,15 @@ public class Roulette extends VideoGames{
     	grid.setStyle("-fx-background-color: black; -fx-padding: 10;");
 
 		numeri.clear();
-    	index = 0;
+    	int index = 0;
 
+    	// Per inserire lo stesso numero due volte nell'area di gioco 
     	for (int n = 1; n <= 40; n++) {
     	    numeri.add(n);
     	    numeri.add(n);
     	}
 
-    	// Label centrale per messaggi
+    	// Label centrale per messaggi di output
     	Label messageLabel = new Label("Benvenuto nella Roulette!");
     	messageLabel.setWrapText(true);
     	messageLabel.setMinSize(220, 220);
@@ -151,13 +147,14 @@ public class Roulette extends VideoGames{
     	                //Estrazione numero vincente
     	                int numVincente = random.nextInt(40) + 1;
     	                String coloreVincente = (numVincente % 2 == 0) ? "nero" : "rosso";
-    	                
-    	                risultato=controlloVincita(num,numComputer,numVincente,colore,coloreComputer,coloreVincente);
-    	                
+    	               
     	                //Output di gioco
     	                messageLabel.setText("Hai selezionato il numero " + num + ", " +colore+ "\n\n" +
     	                "L'avversario ha selezionato il numero " + numComputer + ", " +coloreComputer+ "\n\n\n" +
-    	                "L'estrazione vincente è " + numVincente + ", " +coloreVincente+ "\n\n\n" +risultato);
+    	                "L'estrazione vincente è " + numVincente + ", " +coloreVincente+ "\n\n\n" +
+    	                "(Seleziona un'altra casella per iniziare un'altra partita)");
+    	                
+    	                controlloVincita(num,numComputer,numVincente,colore,coloreComputer,coloreVincente);
     	            });
     	            index++;
     	        } 
@@ -170,22 +167,18 @@ public class Roulette extends VideoGames{
 		
 	}
 	
-	private String controlloVincita(int num, int numComputer, int numVincente, String colore, String coloreComputer, String coloreVincente) {
+	private void controlloVincita(int num, int numComputer, int numVincente, String colore, String coloreComputer, String coloreVincente) {
 	    if (num == numVincente && colore.equals(coloreVincente)) {
-	        risultato=("Hai VINTO!");
+			showMessage("HAI VINTO!");
             addPoints(getNickname());
 
 	    } else if (numComputer == numVincente && coloreComputer.equals(coloreVincente)) {
-	        risultato=("Hai PERSO!");
-            gameOver = true;
+			showMessage("HAI PERSO!");
             addPoints("_COMPUTER_");
 
 	    } else {
-	        risultato=("PAREGGIO!");
-            gameOver = true;
-
+			showMessage("PAREGGIO!");
 	    }
-	    return risultato;
 	}
 
 }
