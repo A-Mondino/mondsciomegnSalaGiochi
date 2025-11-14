@@ -176,7 +176,7 @@ public class Room extends Application{
 	
 	private void roomM(BorderPane root) {
 		primaryStage.setTitle("Sala Giochi");							// Titolo 
-        String imagePath = getClass().getResource("./img/roomM.jpg").toExternalForm();
+        String imagePath = getClass().getResource("./img/room.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
                 new Image(imagePath),
                 BackgroundRepeat.NO_REPEAT,								// Serve per evitare la ripetizione dell'immagine in orizzontale
