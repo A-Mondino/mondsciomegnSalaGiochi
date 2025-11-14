@@ -28,6 +28,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -176,6 +177,7 @@ public class Battleship extends VideoGames {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
         primaryStage.show();
         setNumberOfBoats();					// Inizializzo qui la quantità di barche per ogni tipo		        
 	}
@@ -241,6 +243,7 @@ public class Battleship extends VideoGames {
 						boats[boatLength-2].setDisable(true);			// disabilito il bottone se non era già disabilitato
 				
 				boatStage.close();
+				
 				colorCells();
 			});
 		}
@@ -273,7 +276,8 @@ public class Battleship extends VideoGames {
 	    boatStage.setY(primaryStage.getY());
 
 	    primaryStage.getScene().getRoot().setDisable(true);
-	    boatStage.show();
+	    boatStage.initModality(Modality.APPLICATION_MODAL);
+	    boatStage.showAndWait();
 	
 	}
 	
