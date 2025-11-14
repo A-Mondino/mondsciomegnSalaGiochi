@@ -37,13 +37,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 
 
-
 public class Tris extends VideoGames{
 		
 		public Tris(String name, Category category) {
 			super(name, category);
 			setScore(300);
 		}
+		
 		public Tris(String name, Category category,int score) {
 			super(name, category);
 			setScore(score);
@@ -89,10 +89,9 @@ public class Tris extends VideoGames{
 	    }
 
 
-
 	    private void startGame() {
 	    		
-	    	if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
+	    	if(getNickname().isEmpty()) {									// Significa che qualcuno sta giocando in anonimo
                 String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
 		  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
 		  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
@@ -100,7 +99,7 @@ public class Tris extends VideoGames{
                 try (Connection conn = DataBaseConnection.getConnection();
                         PreparedStatement stmt = conn.prepareStatement(sql)) {
                         try {
-                            stmt.executeUpdate(); 		// Prova a inserire l'utente
+                            stmt.executeUpdate(); 							// Prova a inserire l'utente
 
                         } catch (SQLException ex) { 
                         	ex.printStackTrace();
@@ -111,11 +110,9 @@ public class Tris extends VideoGames{
                   }
             }
 	    	
-	    	
 	        primaryStage.setTitle("Gioco Tris");
 
-
-	        for (int i = 0; i < 3; i++) {		// Inizializzo la matrice di bottoni 
+	        for (int i = 0; i < 3; i++) {								// Inizializzo la matrice di bottoni 
 	            for (int j = 0; j < 3; j++) {
 	                playGrid[i][j] = ' ';		
 	                buttons[i][j] = new Button("");
@@ -125,7 +122,7 @@ public class Tris extends VideoGames{
 	            }
 	        }
 	        
-	        for (int i = 0; i < 3; i++) {		// per le 3 x 3 caselle della griglia
+	        for (int i = 0; i < 3; i++) {								// Griglia con caselle 3x3
 	            for (int j = 0; j < 3; j++) {
 	            	
 	            	final int row = i;
@@ -133,8 +130,8 @@ public class Tris extends VideoGames{
 
 	            	 buttons[i][j].setOnAction(e -> {
 		                    if (!gameOver && buttons[row][col].getText().isEmpty()) {
-		                    	if(!playerMove(row, col))	// questo if e il ritorno della funzione... 
-		                    		computerMove();			// Dopo che ho fatto la mossa io la deve fare anche il computer
+		                    	if(!playerMove(row, col))				// Questo if e il ritorno della funzione... 
+		                    		computerMove();						// Mossa del computer
 		                    }
 		             });
 	            }
@@ -145,16 +142,17 @@ public class Tris extends VideoGames{
 	        primaryStage.show();
 	    }
 
+	    
 	    private Boolean playerMove(int row, int col) {	
 	    	//...serve solo per evitare un errore che si verificava perchè la mossa del computer veniva fatta lo stesso dopo il primaryStage.hide();
-	        playGrid[row][col] = 'X';			// Setto la matrice di supporto con il segno del giocatore
-	        buttons[row][col].setText("X");		// Setto anche il bottone
+	        playGrid[row][col] = 'X';						// Setto la matrice di supporto con il segno del giocatore
+	        buttons[row][col].setText("X");					// Setto anche il bottone
 
-	        if (gameCheck('X')) {			// Poi controllo se ho vinto
+	        if (gameCheck('X')) {							// Controllo se ho vinto
 	            gameOver = true;
 	            showMessage("Hai vinto!");
 	            primaryStage.close();
-	            addPoints(getNickname());		// E assegno i punti
+	            addPoints(getNickname());					// E assegno i punti
 	            return true;
 	        }
 	        
@@ -162,23 +160,22 @@ public class Tris extends VideoGames{
 	    }
 
 
-
 		private void computerMove() {	
 	        int[] move = move();
 
-	        if (move == null) {		// Se il mio array di mosse è vuoto significa che il computer non puo più fare nulla ed è un pareggio
+	        if (move == null) {						// Se il mio array di mosse è vuoto significa che il computer non puo più fare nulla ed è un pareggio
 	            gameOver = true;
 	            showMessage("Pareggio!");
 	            primaryStage.close();
 	            
-	        } else {						// Altrimenti ho trovato una mossa da fare 
+	        } else {								// Altrimenti ho trovato una mossa da fare 
 		        int row = move[0];
 		        int col = move[1];
 		        playGrid[row][col] = 'O';
 		        buttons[row][col].setText("O");
 	        }
 	        
-	        if (gameCheck('O')) {		// Poi controllo se il computer ha vinto
+	        if (gameCheck('O')) {					// Poi controllo se il computer ha vinto
 	            gameOver = true;
 	            showMessage("Hai perso!");
 	            primaryStage.close();
@@ -187,7 +184,8 @@ public class Tris extends VideoGames{
 	        
 	    }
 
-	    private int[] move() {			// AGGIUNGERE MATRICE PRIORITA PER MOSSA NOT DUMB
+		
+	    private int[] move() {						// AGGIUNGERE MATRICE PRIORITA PER MOSSA NOT DUMB
 	        List<int[]> unused = new ArrayList<>();
 	        for (int i = 0; i < 3; i++) {
 	            for (int j = 0; j < 3; j++) {
@@ -202,16 +200,15 @@ public class Tris extends VideoGames{
 	        return unused.get(random.nextInt(unused.size()));
 	    }
 
+	    
 	    private boolean gameCheck(char symbol) {
-	        for (int i = 0; i < 3; i++) {
+	        for (int i = 0; i < 3; i++) 
 	            if (playGrid[i][0] == symbol && playGrid[i][1] == symbol && playGrid[i][2] == symbol)
 	                return true;
-	        }
 	        
-	        for (int j = 0; j < 3; j++) {
+	        for (int j = 0; j < 3; j++) 
 	            if (playGrid[0][j] == symbol && playGrid[1][j] == symbol && playGrid[2][j] == symbol)
 	                return true;
-	        }
 	        
 	        if (playGrid[0][0] == symbol && playGrid[1][1] == symbol && playGrid[2][2] == symbol)
 	            return true;
@@ -220,17 +217,7 @@ public class Tris extends VideoGames{
 	            return true;
 	        
 	        return false;
-	    }
-
-	    // Risulatato partita
-	    private void showMessage(String messaggio) {
-	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	        alert.setTitle("Risultato");
-	        alert.setHeaderText(null);
-	        alert.setContentText(messaggio);
-	        alert.showAndWait();
-	    }
-	    
+	    }	    
 	    
 	}
 	
