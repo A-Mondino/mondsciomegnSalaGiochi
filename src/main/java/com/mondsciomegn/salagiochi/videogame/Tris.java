@@ -139,7 +139,7 @@ public class Tris extends VideoGames{
 
 	        Scene scene = new Scene(grid, 300, 300);
 	        primaryStage.setScene(scene);
-	        primaryStage.show();
+	        primaryStage.showAndWait();
 	    }
 
 	    

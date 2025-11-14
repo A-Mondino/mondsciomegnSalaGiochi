@@ -25,16 +25,18 @@ import javafx.stage.Stage;
 
 public class LanciaDadi extends VideoGames{
 	
-    private boolean gameOver = false;
+
     private Stage primaryStage = new Stage();
 	
     
 	public LanciaDadi(String name, Category category) {
 		super(name, category);
+		setScore(50);
 	}
 	
 	
-	public void play(String nickName) { 
+	public void play(String nickname) { 
+		setNickname(nickname);
 		Dialog<ButtonType> dialog = new Dialog<>();
     	dialog.setTitle("Dettagli Gioco");
     	dialog.setHeaderText("Istruzioni:");
@@ -54,12 +56,12 @@ public class LanciaDadi extends VideoGames{
     	    return;
     	}
 
-    	startGame(nickName);
+    	startGame();
 	}
 	
 	
-	private void startGame(String nickname) {
-		if(nickname.isEmpty()) {														// Significa che qualcuno sta giocando in anonimo
+	private void startGame() {
+		if(getNickname().isEmpty()) {														// Significa che qualcuno sta giocando in anonimo
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
 	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
 	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
@@ -89,16 +91,13 @@ public class LanciaDadi extends VideoGames{
 
         // Evento OnClick
         lanciaButton.setOnAction(e -> {
-            if (!gameOver) {
                 int sommaGiocatore = lancia();
                 message.setText("La somma dei dadi che hai lanciato è: " +sommaGiocatore);
 
                 int sommaComputer = lancia();
                 messaggio1.setText("La somma dei dadi lanciati dall'avversario è: " +sommaComputer);
 
-                controlloDadiMaggiore(sommaGiocatore, sommaComputer, nickname);
-                gameOver = true;
-            }
+                controlloDadiMaggiore(sommaGiocatore, sommaComputer);
         });
         
         VBox centro = new VBox(10);
@@ -114,7 +113,7 @@ public class LanciaDadi extends VideoGames{
 
         Scene scene = new Scene(layout, 300, 300);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.showAndWait();
 		
 	}
 	
@@ -131,23 +130,19 @@ public class LanciaDadi extends VideoGames{
 	}
 	
 	
-	private void controlloDadiMaggiore(int somma, int sommaC, String nickName) {
+	private void controlloDadiMaggiore(int somma, int sommaC) {
 		if(somma<sommaC) {
 			showMessage("HAI PERSO!");
-            gameOver = true;
             addPoints("_COMPUTER_");
-
 		}else {
 			if(somma>sommaC) {
 				showMessage("HAI VINTO!");
 	            addPoints(getNickname());
-
-			}else {
-				if(somma==sommaC) {
+			}else 
+				if(somma==sommaC) 
 					showMessage("PAREGGIO!");
-		            gameOver = true;
-				}
-			}
+				
+			
 		}
 	}
 

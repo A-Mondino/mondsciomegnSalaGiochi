@@ -37,9 +37,11 @@ public class Roulette extends VideoGames{
     
 	public Roulette(String name, Category category) {
 		super(name, category);
+		setScore(600);
 	}
 	
-	public void play(String nickName) {
+	public void play(String nickname) {
+		setNickname(nickname);
 		Dialog<ButtonType> dialog = new Dialog<>();
     	dialog.setTitle("Dettagli Gioco");
     	dialog.setHeaderText("Istruzioni:");
@@ -61,12 +63,11 @@ public class Roulette extends VideoGames{
     	    return;
     	}
 
-    	startGame(nickName);
+    	startGame();
 	}
 	
-	private void startGame(String nickname) {
-		
-    	if(nickname.isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
+	private void startGame() {
+    	if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
 	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
 	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
@@ -163,12 +164,12 @@ public class Roulette extends VideoGames{
     	}
     	Scene scene = new Scene(grid, 720, 720);
     	primaryStage.setScene(scene);
-    	primaryStage.show();
+    	primaryStage.showAndWait();
 		
 	}
 	
 	private void controlloVincita(int num, int numComputer, int numVincente, String colore, String coloreComputer, String coloreVincente) {
-	    if (num == numVincente && colore.equals(coloreVincente)) {
+		if (num == numVincente && colore.equals(coloreVincente)) {
 			showMessage("HAI VINTO!");
             addPoints(getNickname());
 

@@ -66,10 +66,10 @@ public class DataBaseInitializer {
         						  "SELECT 'Battaglia Navale', 'Strategia', 1000 " +
         						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Battaglia Navale')" + 
         						  "UNION ALL " + 
-        						  "SELECT 'Roulette', 'Fortuna', 50 " +
+        						  "SELECT 'Roulette', 'Fortuna', 600 " +
         						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'Roulette')" + 
         						  "UNION ALL " + 
-        						  "SELECT 'TrovaDadi', 'Fortuna', 150 " +
+        						  "SELECT 'LanciaDadi', 'Fortuna', 50 " +
         						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'TrovaDadi');";
        
         String createUsers = 	  "INSERT INTO utente (nickname, nome, psww, score)" +
@@ -79,6 +79,8 @@ public class DataBaseInitializer {
         
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
+        	
+        	stmt.execute("DROP TABLE videogioco");        	
         	
         	stmt.execute(user);
             stmt.execute(videogame);

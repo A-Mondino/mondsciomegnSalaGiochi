@@ -84,11 +84,11 @@ public abstract class VideoGames {
 	}
 	
 
-    protected void showMessage(String messaggio) {
+    protected void showMessage(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Risultato");
         alert.setHeaderText(null);
-        alert.setContentText(messaggio);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 	
