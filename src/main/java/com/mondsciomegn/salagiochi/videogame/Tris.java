@@ -64,6 +64,7 @@ public class Tris extends VideoGames{
 	    public void play(String nickName) {
 	    	setNickname(nickName);
 	    	Dialog<ButtonType> dialog = new Dialog<>();
+	    	
 	    	dialog.setTitle("Dettagli Gioco");
 	    	dialog.setHeaderText("Istruzioni:");
 	    	dialog.setContentText(
@@ -139,6 +140,7 @@ public class Tris extends VideoGames{
 
 	        Scene scene = new Scene(grid, 300, 300);
 	        primaryStage.setScene(scene);
+	        primaryStage.initModality(Modality.APPLICATION_MODAL);
 	        primaryStage.showAndWait();
 	    }
 

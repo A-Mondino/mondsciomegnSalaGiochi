@@ -20,6 +20,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -113,6 +114,7 @@ public class LanciaDadi extends VideoGames{
 
         Scene scene = new Scene(layout, 300, 300);
         primaryStage.setScene(scene);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
         primaryStage.showAndWait();
 		
 	}

@@ -21,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -164,6 +165,7 @@ public class Roulette extends VideoGames{
     	}
     	Scene scene = new Scene(grid, 720, 720);
     	primaryStage.setScene(scene);
+    	primaryStage.initModality(Modality.APPLICATION_MODAL);
     	primaryStage.showAndWait();
 		
 	}
