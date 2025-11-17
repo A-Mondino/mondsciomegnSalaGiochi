@@ -17,9 +17,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 
 
-public class TrovaDadi extends VideoGames{
+public class DiceGuesser extends VideoGames{
 	
-	public TrovaDadi(String name, Category category) {
+	public DiceGuesser(String name, Category category) {
 		super(name, category);
 	}
 

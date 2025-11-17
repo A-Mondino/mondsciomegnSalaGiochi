@@ -137,9 +137,9 @@ public class Room extends Application{
 	    
 	    double tableWidth = 500;							// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
 	   
-	    addUserColums(userTable); 										// Aggiunta delle colonne
+	    addUserColumns(userTable); 										// Aggiunta delle colonne
 	    userTable.getColumns().get(2).setVisible(false);				// Nascondo la password
-	    addGameColums(gameTable);
+	    addGameColumns(gameTable);
 	   
 	    
 	    userTable.getItems().addAll(DataBaseContainer.getAllUsers());	// Aggiunta dei dati
@@ -232,9 +232,9 @@ public class Room extends Application{
                 formGrid.setAlignment(Pos.CENTER);
                 
                 VBox formLoginBox =  new VBox();		
-                formLoginBox = LoginBox(popupStage, nickName);			// Carico il form
+                formLoginBox = loginBox(popupStage, nickName);			// Carico il form
                 VBox formRegisterBox = new VBox();
-                formRegisterBox = RegisterBox(popupStage);				// Carico il form
+                formRegisterBox = registerBox(popupStage);				// Carico il form
                 	
                 formGrid.add(formRegisterBox, 0, 0); 					// cella (0,0)
                 formGrid.add(formLoginBox, 1, 0);    					// cella (0,1)
@@ -434,7 +434,7 @@ public class Room extends Application{
 	    }), 0, 1);
 
 	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
-	        new TrovaDadi("TrovaDadi", new Category("Fortuna"))
+	        new DiceGuesser("TrovaDadi", new Category("Fortuna"))
 	        .play(currentNickName.get());
 	    }), 1, 1);
 
@@ -446,7 +446,7 @@ public class Room extends Application{
 	}
 	
 	
-	private VBox RegisterBox(Stage popupStage) {		
+	private VBox registerBox(Stage popupStage) {		
 		VBox registerBox = new VBox(10);
         registerBox.setAlignment(Pos.CENTER);
         registerBox.setPadding(new Insets(20));
@@ -551,7 +551,7 @@ public class Room extends Application{
 	}
 
 	
-	private VBox LoginBox(Stage popupStage, Label nickName) {		
+	private VBox loginBox(Stage popupStage, Label nickname) {		
 		VBox loginBox = new VBox(10);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setPadding(new Insets(20));
@@ -666,7 +666,7 @@ public class Room extends Application{
 	
 	
 	@SuppressWarnings("unchecked")
-	private void addGameColums(TableView<VideoGames> gameTable) {
+	private void addGameColumns(TableView<VideoGames> gameTable) {
 		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco");
 		name.setCellValueFactory(data ->
         new SimpleStringProperty(data.getValue().getName()));
@@ -688,7 +688,7 @@ public class Room extends Application{
 	
 	
 	@SuppressWarnings("unchecked")
-	private void addUserColums(TableView<User> table) {
+	private void addUserColumns(TableView<User> table) {
 
 	    TableColumn<User, String> colNick = new TableColumn<>("NickName");
 	    colNick.setCellValueFactory(data ->
