@@ -176,7 +176,7 @@ public class Room extends Application{
 	
 	private void roomM(BorderPane root) {
 		primaryStage.setTitle("Sala Giochi");							// Titolo 
-        String imagePath = getClass().getResource("./img/roomM.jpg").toExternalForm();
+        String imagePath = getClass().getResource("./img/room.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
                 new Image(imagePath),
                 BackgroundRepeat.NO_REPEAT,								// Serve per evitare la ripetizione dell'immagine in orizzontale
@@ -424,17 +424,17 @@ public class Room extends Application{
 	    }), 0, 0);
 
 	    grid.add(createImagePane("./img/BN.jpg", () -> {
-	        new Battleship("Battaglianavale", new Category("Strategia"))
+	        new Battleship("BattleShip", new Category("Strategia"))
 	        .play(currentNickName.get());
 	    }), 1, 0);
 
-	    grid.add(createImagePane("./img/dadi.jpg", () -> {
+	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
 	        new Roulette("Roulette", new Category("Fortuna"))
 	        .play(currentNickName.get());
 	    }), 0, 1);
 
-	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
-	        new DiceGuesser("TrovaDadi", new Category("Fortuna"))
+	    grid.add(createImagePane("./img/dadi.jpg", () -> {
+	        new DiceGuesser("DiceGuesser", new Category("Fortuna"))
 	        .play(currentNickName.get());
 	    }), 1, 1);
 
