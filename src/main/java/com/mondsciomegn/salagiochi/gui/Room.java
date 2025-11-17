@@ -423,12 +423,12 @@ public class Room extends Application{
 	        .play(currentNickName.get());  
 	    }), 0, 0);
 
-	    grid.add(createImagePane("./img/BN.jpg", () -> {
+	    grid.add(createImagePane("./img/BN1.jpg", () -> {
 	        new Battleship("BattleShip", new Category("Strategia"))
 	        .play(currentNickName.get());
 	    }), 1, 0);
 
-	    grid.add(createImagePane("./img/indovinaNumero.jpg", () -> {
+	    grid.add(createImagePane("./img/roulette.jpg", () -> {
 	        new Roulette("Roulette", new Category("Fortuna"))
 	        .play(currentNickName.get());
 	    }), 0, 1);

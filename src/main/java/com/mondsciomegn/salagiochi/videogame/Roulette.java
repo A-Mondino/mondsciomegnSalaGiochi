@@ -51,7 +51,8 @@ public class Roulette extends VideoGames{
     	        "La roulette gira e si ferma su un determinato numero di un determinato colore.\n" +
     	        "Se il numero estratto combacia con quello che hai scelto, HAI VINTO!\n" +
     	        "Se, invece, combacia con quello dell'avversario, HAI PERSO!\n" +
-    	        "Se non combacia con nessuno dei due numeri decisi dai giocatori il gioco termina in PAREGGIO. "
+    	        "Se non combacia con nessuno dei due numeri decisi dai giocatori il gioco termina in PAREGGIO.\n\n " +
+    	        "Se si indovina il colore della numero estratto si prendono 100 punti bonus!"
     	);
     	
     	ButtonType play = new ButtonType("Gioca", ButtonBar.ButtonData.OK_DONE);
@@ -182,6 +183,43 @@ public class Roulette extends VideoGames{
 	    } else {
 			showMessage("PAREGGIO!");
 	    }
+		
+		if(colore.equals(coloreVincente)) {
+			addPointsExtra(getNickname());
+		} 
+		
+		if(coloreComputer.equals(coloreVincente)) {
+			addPointsExtra("_COMPUTER_");
+		}
 	}
+	
+	private void addPointsExtra(String nickname) {
+    	if(nickname.isEmpty()) {												// Gioco come anonimo
+	    	String sql  = "UPDATE utente SET score = score + 100 WHERE nickname = ?";
+	    	try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+	            	if(nickname.isEmpty())
+	            		stmt.setString(1,"_ANONIMO_");
+                    	stmt.executeUpdate(); 									// Prova a fare l'update
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+    	}
+    	else {																	// Il NickName è valido
+    		String sql  = "UPDATE utente SET score = score + 100 WHERE nickname = ?";
+	    	try (Connection conn = DataBaseConnection.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            	stmt.setString(1,nickname);
+                    stmt.executeUpdate(); 										// Prova a fare l'update
+                   
+              } catch (SQLException e1) {
+            	  e1.printStackTrace();
+              }
+    	}
+		
+	}
+		
 }
