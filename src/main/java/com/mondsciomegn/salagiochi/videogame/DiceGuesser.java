@@ -86,30 +86,30 @@ public class DiceGuesser extends VideoGames{
         Label playerLabel = new Label("Giocatore:");
         Label computerLabel = new Label("Computer:");
         Label message = new Label("-");
-        Label messaggio1 = new Label("-");
+        Label message1 = new Label("-");
 
-        Button lanciaButton = new Button("Lancia i Dadi");
+        Button throwButton = new Button("Lancia i Dadi");
 
         // Evento OnClick
-        lanciaButton.setOnAction(e -> {
-                int sommaGiocatore = lancia();
-                message.setText("La somma dei dadi che hai lanciato è: " +sommaGiocatore);
+        throwButton.setOnAction(e -> {
+                int sumPlayer = throwD();
+                message.setText("La somma dei dadi che hai lanciato è: " + sumPlayer);
 
-                int sommaComputer = lancia();
-                messaggio1.setText("La somma dei dadi lanciati dall'avversario è: " +sommaComputer);
+                int sumComputer = throwD();
+                message1.setText("La somma dei dadi lanciati dall'avversario è: " + sumComputer);
 
-                controlloDadiMaggiore(sommaGiocatore, sommaComputer);
+                checkHigherDice(sumPlayer, sumComputer);
         });
         
-        VBox centro = new VBox(10);
-        centro.setStyle("-fx-alignment: center;");
-        centro.getChildren().addAll(title, playerLabel, message,
-        	    computerLabel, messaggio1);
+        VBox center = new VBox(10);
+        center.setStyle("-fx-alignment: center;");
+        center.getChildren().addAll(title, playerLabel, message,
+        	    computerLabel, message1);
 
         BorderPane layout = new BorderPane();
-        layout.setCenter(centro);
-        layout.setBottom(lanciaButton);
-        BorderPane.setAlignment(lanciaButton, javafx.geometry.Pos.CENTER);
+        layout.setCenter(center);
+        layout.setBottom(throwButton);
+        BorderPane.setAlignment(throwButton, javafx.geometry.Pos.CENTER);
         layout.setStyle("-fx-padding: 20;");
 
         Scene scene = new Scene(layout, 300, 300);
@@ -120,28 +120,28 @@ public class DiceGuesser extends VideoGames{
 	}
 	
 	
-	private static int lancia() {
-		Random ran = new Random();		//Lancio casuale dei dadi 
-		int somma = 0, dado1, dado2;
+	private static int throwDice() {
+		Random ran = new Random();			//Lancio casuale dei dadi 
+		int sum = 0, dice1, dice2;
 		
-		dado1 = ran.nextInt(6) + 1;
-		dado2 = ran.nextInt(6) + 1;
-		somma = dado1 + dado2;
+		dice1 = ran.nextInt(6) + 1;
+		dice2 = ran.nextInt(6) + 1;
+		sum = dice1 + dice2;
 		
-		return somma;
+		return sum;
 	}
 	
 	
-	private void controlloDadiMaggiore(int somma, int sommaC) {
-		if(somma<sommaC) {
+	private void checkHigherDice(int sum, int sommaC) {
+		if(sum < sumC) {
 			showMessage("HAI PERSO!");
             addPoints("_COMPUTER_");
 		}else {
-			if(somma>sommaC) {
+			if(sum > sumC) {
 				showMessage("HAI VINTO!");
 	            addPoints(getNickname());
 			}else 
-				if(somma==sommaC) 
+				if(sum == sumC) 
 					showMessage("PAREGGIO!");
 				
 			
