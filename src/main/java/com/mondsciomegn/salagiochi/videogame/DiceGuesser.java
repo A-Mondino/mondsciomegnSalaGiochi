@@ -92,10 +92,10 @@ public class DiceGuesser extends VideoGames{
 
         // Evento OnClick
         throwButton.setOnAction(e -> {
-                int sumPlayer = throwD();
+                int sumPlayer = throwDice();
                 message.setText("La somma dei dadi che hai lanciato è: " + sumPlayer);
 
-                int sumComputer = throwD();
+                int sumComputer = throwDice();
                 message1.setText("La somma dei dadi lanciati dall'avversario è: " + sumComputer);
 
                 checkHigherDice(sumPlayer, sumComputer);
@@ -132,7 +132,7 @@ public class DiceGuesser extends VideoGames{
 	}
 	
 	
-	private void checkHigherDice(int sum, int sommaC) {
+	private void checkHigherDice(int sum, int sumC) {
 		if(sum < sumC) {
 			showMessage("HAI PERSO!");
             addPoints("_COMPUTER_");
