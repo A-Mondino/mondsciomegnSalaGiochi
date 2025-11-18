@@ -377,7 +377,7 @@ public class Battleship extends VideoGames {
 			computerShipHits.put(id, computerShipHits.get(id) + 1);	// Aggiungo il colpo nella mappa che mantiene, per ogni ID, il numero di volte in cui ho colpito quel tipo di barca 
 									
 	        if (computerShipHits.get(id).equals(computerShipSizes.get(id))) 	// Se la nave è affondata (i colpi subiti dalla nave == dimensione)
-	            drawnShip(id); 													// La coloro tutta di rosso
+	            sunkenShips(id); 													// La coloro tutta di rosso
 	        else  																// Altrimenti l'ho colpita ma non affondata 
 	            computerGrid[row][col].setStyle("-fx-background-color: rgba(255,165,0,0.3); -fx-font-size: 20px;"); // Allora coloro la casella di arancio
 	        
@@ -406,7 +406,7 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	private void drawnShip(char index) {
+	private void sunkenShips(char index) {
 		for (int i = 1; i < N; i++) 
 	        for (int j = 1; j < N; j++) 
 	            if (tmpComputer[i][j] != null && tmpComputer[i][j] == index)
