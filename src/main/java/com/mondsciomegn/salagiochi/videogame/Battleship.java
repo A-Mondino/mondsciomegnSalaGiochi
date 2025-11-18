@@ -199,7 +199,7 @@ public class Battleship extends VideoGames {
 	
 	
 	
-	private void putAllBoatdown() {
+	private void putAllBoatDown() {
 		boatStage.setTitle("Navi della flotta");
 		
 		VBox boatBox = new VBox(10);
