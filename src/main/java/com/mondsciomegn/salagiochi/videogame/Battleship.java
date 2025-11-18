@@ -375,7 +375,7 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	private void drawnShip(char index) {
+	private void sunkenShip(char index) {
 		for(int i = 0; i < N; i++) {
 			for(int j = 0; j < N; j++) {
 				if(tmpComputer[i][j] != null && tmpComputer[i][j]  == index)
