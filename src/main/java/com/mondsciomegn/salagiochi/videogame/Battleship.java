@@ -45,7 +45,7 @@ public class Battleship extends VideoGames {
 	
 	
 	
-	private final int N = 8;
+	private final int N = 9;
 	private final int BOAT_TYPE = 4;
 	
 	private Button[][] playerGrid = new Button[N][N];		// Griglia del Giocatore
@@ -126,24 +126,54 @@ public class Battleship extends VideoGames {
     	
         primaryStage.setTitle("Battaglia Navale");
 
-        for (int i = 0; i < N; i++) {		// Inizializzo i due campi da gioco
-            for (int j = 0; j < N; j++) {		
-               playerGrid[i][j] = new Button("");
-               playerGrid[i][j].setMinSize(MAXH/DIV, MAXW/DIV);
-               playerGrid[i][j].setStyle("-fx-font-size: 20px;");
-               player.add(playerGrid[i][j], j, i);
-               tmpPlayer[i][j] = 'k';
+        for (int i = 0; i < N; i++) {        
+            for (int j = 0; j < N; j++) {
+
+                playerGrid[i][j] = new Button();
+                playerGrid[i][j].setMinSize(MAXH / DIV, MAXW / DIV);
+                playerGrid[i][j].setStyle("-fx-font-size: 20px;");
+                player.add(playerGrid[i][j], j, i);
+
+                computerGrid[i][j] = new Button();
+                computerGrid[i][j].setMinSize(MAXH / DIV, MAXW / DIV);
+                computerGrid[i][j].setStyle("-fx-font-size: 20px;");
+                computer.add(computerGrid[i][j], j, i);
+
+                												 // Inizializza le matrici logiche
+                tmpPlayer[i][j] = '-';
+                tmpComputer[i][j] = '-';
+
+                if (i == 0 && j == 0) {							 // Cella (0,0): vuota e disattivata
+                    playerGrid[i][j].setText("");
+                    playerGrid[i][j].setDisable(true);
+
+                    computerGrid[i][j].setText("");
+                    computerGrid[i][j].setDisable(true);
+                }else 
+                	if (i == 0 && j > 0) {						 // Prima riga (intestazioni colonne): A–H
+	                    char colLabel = (char) ('A' + (j - 1));  // j=1 -> A, j=8 -> H
+	                    playerGrid[i][j].setText(String.valueOf(colLabel));
+	                    playerGrid[i][j].setDisable(true);
+	
+	                    computerGrid[i][j].setText(String.valueOf(colLabel));
+	                    computerGrid[i][j].setDisable(true);
+                	}else 
+                		if (j == 0 && i > 0) {					 // Prima colonna (intestazioni righe): 1–8
+		                    String rowLabel = String.valueOf(i); // i=1 -> "1", i=8 -> "8"
+		                    playerGrid[i][j].setText(rowLabel);
+		                    playerGrid[i][j].setDisable(true);
+		
+		                    computerGrid[i][j].setText(rowLabel);
+		                    computerGrid[i][j].setDisable(true);
+                		}else {									  // Celle interne (1..8, 1..8): giocabili, no testo iniziale
+		                    playerGrid[i][j].setText("");
+		                    computerGrid[i][j].setText("");
+                		}
                 
-               computerGrid[i][j] = new Button("");
-               computerGrid[i][j].setMinSize(MAXH/DIV, MAXW/DIV); 
-               computerGrid[i][j].setStyle("-fx-font-size: 20px;");
-               computer.add(computerGrid[i][j], j, i);
-               
-               tmpPlayer[i][j] = '-';
-               tmpComputer[i][j] = '-';
             }
         }
-        for (int i = 0; i < N; i++) 		// Disattivo i bottoni del computer per impedire all'utente che prema li prima del dovuto
+
+        for (int i = 0; i < N; i++) 							// Disattivo i bottoni del computer per impedire all'utente che prema li prima del dovuto
 		    for (int j = 0; j < N; j++) 
 		        computerGrid[i][j].setDisable(true);
         
@@ -233,8 +263,8 @@ public class Battleship extends VideoGames {
 			final int boatLength = i + 2;
 			
 			boats[i].setOnAction(e -> {
-				currentShip[0] = boatLength;	// Qui metto la grandezza della barca
-				currentShip[1] = boatLength;	// E qui quanto mi manca per metterla completamente sulla griglia
+				currentShip[0] = boatLength;	   // Qui metto la grandezza della barca
+				currentShip[1] = boatLength;	   // E qui quanto mi manca per metterla completamente sulla griglia
 				boatStage.setOnHidden(event -> primaryStage.getScene().getRoot().setDisable(false));
 				totalPlayerShips[currentShip[0]-2]--;						// La tolgo dall'elenco totale
 				boatsLabel[currentShip[0]-2].setText("x" + totalPlayerShips[currentShip[0]-2]);		// Aggiorno l'etichetta
@@ -249,26 +279,27 @@ public class Battleship extends VideoGames {
 		}
 		
 		
-		for (int i = 0; i < N; i++) {		// Resto in ascolto sull N x N caselle della griglia
-            for (int j = 0; j < N; j++) {
-            	
-            	final int row = i;
-                final int col = j;
+		for (int i = 1; i < N; i++) {       		
+		    for (int j = 1; j < N; j++) {
 
-                playerGrid[i][j].setOnAction(e -> {  
-	                playerBoatDown(row, col);
-	             });
-                computerGrid[i][j].setOnAction(e1 -> {  
-                	playerAttack(row, col);
-                });
-            }
-        }
+		        final int row = i;
+		        final int col = j;
+
+		        playerGrid[i][j].setOnAction(e -> {
+		            playerBoatDown(row, col);
+		        });
+
+		        computerGrid[i][j].setOnAction(e1 -> {
+		            playerAttack(row, col);
+		        });
+		    }
+		}
 		
 		
 		
 		Scene s = new Scene(boatBox, 300, 300);
 		boatStage.setScene(s);
-		boatStage.setOnCloseRequest(e -> {		// Questo impedisce la chiusura della finestra delle barche
+		boatStage.setOnCloseRequest(e -> {							// Questo impedisce la chiusura della finestra delle barche
 			e.consume();
 		});
 
@@ -284,7 +315,7 @@ public class Battleship extends VideoGames {
 	
 	private boolean playerBoatDown(int row, int col) {
 		if(currentShip[0] != 0) {											// Se ho una barca da inserire
-			if(!canPlaceShip(row,col)) 									// Controllo che io abbia spazio per metterla
+			if(!canPlaceShip(row,col)) 										// Controllo che io abbia spazio per metterla
 				return false;			
 			
 			if (currentShip[0] == currentShip[1]) {  						// Primo pezzo della barca
@@ -296,9 +327,9 @@ public class Battleship extends VideoGames {
 	            currentShip[1]--;											// E segno che l'ho messa giu			
 	            if (currentShip[0] > 1) 									// Se la nave è più lunga di 1, evidenzio dove posso continuare l'inserimento
 	                highlightValidDirections(row, col);   
-			}else{														// Non è il primo pezzo
+			}else{															// Non è il primo pezzo
 				if(tmpPlayer[row][col] == 'k')
-					if(isNearToCell(row, col, firstRow, firstCol)) {	// Controllo che io stia inserendo la barca vicino alla posizione di partenza
+					if(isNearToCell(row, col, firstRow, firstCol)) {		// Controllo che io stia inserendo la barca vicino alla posizione di partenza
 							playerGrid[row][col].setText(currentShip[0].toString());	// Inserisco la mossa
 							resetBackGrid();			// Aggionro la matrice
 							currentShip[1]--;			// E segno che l'ho messa giu
@@ -376,12 +407,10 @@ public class Battleship extends VideoGames {
 	
 	
 	private void drawnShip(char index) {
-		for(int i = 0; i < N; i++) {
-			for(int j = 0; j < N; j++) {
-				if(tmpComputer[i][j] != null && tmpComputer[i][j]  == index)
-					computerGrid[i][j].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
-			}
-		}
+		for (int i = 1; i < N; i++) 
+	        for (int j = 1; j < N; j++) 
+	            if (tmpComputer[i][j] != null && tmpComputer[i][j] == index)
+	                computerGrid[i][j].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
 		
 	}
 	
@@ -389,8 +418,8 @@ public class Battleship extends VideoGames {
 	private void computerAttack() {
 		Random rand = new Random();
 		while(true) {
-		    int row = rand.nextInt(N);  // numero casuale tra 0 e N-1
-		    int col = rand.nextInt(N);  // numero casuale tra 0 e N-1
+			int row = rand.nextInt(N - 1) + 1;  		// 1..8
+			int col = rand.nextInt(N - 1) + 1; 			 // 1..8
 		    if(tmpPlayer[row][col] != 'r' && (tmpPlayer[row][col] != '-' && tmpPlayer[row][col] != 'm')) {		// Se ha beccato una cella con qualcosa dentro, che non era già stata rivelata o mancata
 		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");	// Coloro la cella di rossa visto che è un colpo andato a segno
 		    	tmpPlayer[row][col] = 'r';  // Significa che ho preso una barca, allora la rivelo	    		
@@ -408,7 +437,7 @@ public class Battleship extends VideoGames {
 				return;
 		    }
 		    
-		    if(checkComputerWin()) {			// Stessa logica del player
+		    if(checkComputerWin()) {					// Stessa logica del player
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		        alert.setTitle("RISULTATO");
 		        alert.setHeaderText("Hai perso!!!");
@@ -424,63 +453,63 @@ public class Battleship extends VideoGames {
 	
 	
 	private boolean checkComputerWin() {	// Se tutte le barche sono state rivelate, il giocatore ha perso
-		for (int i = 0; i < N; i++) 		
-            for (int j = 0; j < N; j++) 
-            	if(tmpPlayer[i][j] != '-')			// Ogni volta che ho una barca nella griglia di supporto
-            		if(!playerGrid[i][j].getText().isEmpty() && tmpPlayer[i][j] != 'r')	// Se anche solo una barca nella playerGrid non è rivelata
-            			return false;									// Non ha vinto
-		return true;
+	    for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            if (tmpPlayer[i][j] != '-') // c'è una barca o cella marcata
+	                if (!playerGrid[i][j].getText().isEmpty() && tmpPlayer[i][j] != 'r')
+	                    return false;
+	    return true;
 	}
 	
 	
 	private boolean checkPlayerWin() {		// Se tutte le barche sono state rivelate, il pc ha perso
-		for (int i = 0; i < N; i++) 		
-            for (int j = 0; j < N; j++) 
-            	if(tmpComputer[i][j] != '-')			// Ogni volta che ho una barca nella griglia
-            		if(computerGrid[i][j].getText().isEmpty())			// Se anche solo una non è stata rivelata
-            			return false;									// Non ho vinto
-		return true;
+	    for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            if (tmpComputer[i][j] != '-')       // c'è una barca
+	                if (computerGrid[i][j].getText().isEmpty())
+	                    return false;
+	    return true;
 	}
 	
 	
 	
 	private void colorCells() {
-		for (int i = 0; i < N; i++) 		
-            for (int j = 0; j < N; j++) 
-            	if(!playerGrid[i][j].getText().isEmpty()) 
-            		playerGrid[i][j].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
+		for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            if (!playerGrid[i][j].getText().isEmpty())
+	                playerGrid[i][j].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");
 	}
 	
 	
-	private void setPlayerGrid() {
-		for (int i = 0; i < N; i++) 
-		    for (int j = 0; j < N; j++) {
-		    	if(!playerGrid[i][j].getText().isEmpty())
-		    		tmpPlayer[i][j] = playerGrid[i][j].getText().charAt(0);
-		    	else
-		    		tmpPlayer[i][j] = '-';
-		    }
-		        
-		
+	private void setPlayerGrid() {		  // Solo celle di gioco (1..8, 1..8)
+	    for (int i = 1; i < N; i++) 
+	        for (int j = 1; j < N; j++) 
+	            if (!playerGrid[i][j].getText().isEmpty())
+	                tmpPlayer[i][j] = playerGrid[i][j].getText().charAt(0);
+	            else
+	                tmpPlayer[i][j] = '-';
+	        
 	}
 	
 	
 	private void enterBattlePhase() { // Disabilito i pulsanti di playerGrid e riabilito quelli del pc in modo da poter essere premuti
-		for (int i = 0; i < N; i++) 
-		    for (int j = 0; j < N; j++) 
-		        playerGrid[i][j].setDisable(true);		
-		for (int i = 0; i < N; i++) 
-		    for (int j = 0; j < N; j++) 
-		        computerGrid[i][j].setDisable(false);
+	    for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            playerGrid[i][j].setDisable(true);
+
+	    for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            computerGrid[i][j].setDisable(false);
 	}
 	
 	private void exitBattlePhase() { // Faccio il contrario
-		for (int i = 0; i < N; i++) 
-		    for (int j = 0; j < N; j++) 
-		        playerGrid[i][j].setDisable(false);		
-		for (int i = 0; i < N; i++) 
-		    for (int j = 0; j < N; j++) 
-		        computerGrid[i][j].setDisable(true);
+	    for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            playerGrid[i][j].setDisable(false);
+
+	    for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            computerGrid[i][j].setDisable(true);
 	}
 	
 	
@@ -495,7 +524,7 @@ public class Battleship extends VideoGames {
 
 	    for (int shipIndex = 0; shipIndex < BOAT_TYPE; shipIndex++) {		
 	        int shipSize = shipIndex + 2; 				// Le navi vanno da 2 a 5
-	        int shipsToPlace = totalComputerShips[shipIndex];		// Mi salvo quale nave è da mettere giù
+	        int shipsToPlace = totalComputerShips[shipIndex];	// Mi salvo quale nave è da mettere giù
 
 	        for (int s = 0; s < shipsToPlace; s++) {			// Per tutta la lunghezza
 	            boolean placed = false;
@@ -505,16 +534,16 @@ public class Battleship extends VideoGames {
 	            computerShipSizes.put(shipID, shipSize);		// Registra la dimensione della nave
 	            computerShipHits.put(shipID, 0);				// E i colpi che ha subito finora (ovvero 0)
 
-	            while (!placed) {				
-	                int row = rand.nextInt(N);
-	                int col = rand.nextInt(N);
+	            while (!placed) {
+	                int row = rand.nextInt(N - 1) + 1;  		// 1..8
+	                int col = rand.nextInt(N - 1) + 1; 			// 1..8
 	                boolean horizontal = rand.nextBoolean();
 
 	                if (canPlaceComputerShip(row, col, shipSize, horizontal)) {
 	                    for (int i = 0; i < shipSize; i++) {
 	                        int r = row + (horizontal ? 0 : i);
 	                        int c = col + (horizontal ? i : 0);
-	                        tmpComputer[r][c] = shipID;			 // Salvo l'ID invece del numero perchè con più navi della stessa lunghezza è un casino se no riconoscerle
+	                        tmpComputer[r][c] = shipID;
 	                    }
 	                    placed = true;
 	                }
@@ -523,18 +552,27 @@ public class Battleship extends VideoGames {
 	    }
 
 	    
-	    for (int i = 0; i < N; i++)					// Rimuovi visivamente le navi dal campo del computer
-	        for (int j = 0; j < N; j++)
+	    for (int i = 1; i < N; i++)								// Nascondo la visualizzazione all'utente
+	        for (int j = 1; j < N; j++)
 	            computerGrid[i][j].setText("");
-	    
-	    
+
+	    // ------ SOLO PER NOI, NON DOVREBBE ESSERCI ------
 	    System.out.println("=== Mappa Computer ===");
-	    for (int i = 0; i < N; i++) {
-	        for (int j = 0; j < N; j++)
-	            System.out.print(tmpComputer[i][j] + " ");
-	        System.out.println();
-	    }
-	    
+		System.out.print(" "); 
+		for (int j = 1; j < N; j++) {
+		     char colLabel = (char) ('A' + (j - 1)); // 1->A, 8->H
+		     System.out.print(" " + colLabel);
+		 }
+		 System.out.println();
+		
+		 for (int i = 1; i < N; i++) {
+		     System.out.print(i + " ");
+		     for (int j = 1; j < N; j++) 
+		    	 System.out.print(tmpComputer[i][j] + " ");
+		     System.out.println();
+		 }
+
+	    // ------ ... ------
 	}
 	
 
@@ -561,12 +599,12 @@ public class Battleship extends VideoGames {
 
 	
 	private void resetBackGrid() {		// x la matrice di supporto
-		for(int i=0; i < N; i++) 
-			for(int j = 0; j < N; j++) 
-				if(playerGrid[i][j].getText().isBlank()) 
-					tmpPlayer[i][j] = 'k';
-				else
-					tmpPlayer[i][j] = 'x';
+		for (int i = 1; i < N; i++)
+	        for (int j = 1; j < N; j++)
+	            if (playerGrid[i][j].getText().isBlank())
+	                tmpPlayer[i][j] = 'k';
+	            else
+	                tmpPlayer[i][j] = 'x';
 	}
 	
 	
@@ -759,12 +797,24 @@ public class Battleship extends VideoGames {
 	
 	
 	private void resetBackGround() {		// x il colore
-		for(int i=0; i < N; i++) 
-			for(int j = 0; j < N; j++) 
-				if(playerGrid[i][j].getText().isEmpty()) 
-					playerGrid[i][j].setStyle("-fx-font-size: 20px;");
-				else 
-					playerGrid[i][j].setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-font-size: 20px;");	
+		 for (int i = 1; i < N; i++) {
+		        for (int j = 1; j < N; j++) {
+		            if (playerGrid[i][j].getText().isEmpty())
+		                playerGrid[i][j].setStyle("-fx-font-size: 20px;");
+		            else
+		                playerGrid[i][j].setStyle("-fx-background-color: rgba(0, 255, 0, 0.5); -fx-font-size: 20px;");
+		        }
+		    }
+
+		    // Per sicurezza, ripristino stile “pulito” sulle etichette (riga 0 e colonna 0)
+		    for (int j = 0; j < N; j++) {
+		        playerGrid[0][j].setStyle("-fx-font-size: 20px;");
+		        computerGrid[0][j].setStyle("-fx-font-size: 20px;");
+		    }
+		    for (int i = 0; i < N; i++) {
+		        playerGrid[i][0].setStyle("-fx-font-size: 20px;");
+		        computerGrid[i][0].setStyle("-fx-font-size: 20px;");
+		    }
 	}
 		
 	
