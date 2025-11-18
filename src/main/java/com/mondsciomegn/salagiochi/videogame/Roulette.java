@@ -27,11 +27,10 @@ import javafx.stage.Stage;
 
 public class Roulette extends VideoGames{
 
-	Scanner scanner = new Scanner(System.in);
-	Random random = new Random();						// Per estrazione vincente
+	private Random random = new Random();						// Per estrazione vincente
 
     private List<Integer> numbers = new ArrayList<>();
-    private GridPane grid = new GridPane();				// Per la visualizzazione grafica
+    private GridPane grid = new GridPane();						// Per la visualizzazione grafica
     private Stage primaryStage = new Stage();
     
     
@@ -78,7 +77,7 @@ public class Roulette extends VideoGames{
             try (Connection conn = DataBaseConnection.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(sql)) {
                     try {
-                        stmt.executeUpdate(); 		// Prova a inserire l'utente
+                        stmt.executeUpdate(); 			// Prova a inserire l'utente
 
                     } catch (SQLException ex) { 
                     	ex.printStackTrace();
@@ -90,7 +89,7 @@ public class Roulette extends VideoGames{
         }
     	
     	primaryStage.setTitle("Roulette");
-    	grid.getChildren().clear(); 			// pulisci griglia se si rigioca
+    	grid.getChildren().clear(); 					// pulisci griglia se si rigioca
     	grid.setHgap(5);
     	grid.setVgap(5);
     	grid.setStyle("-fx-background-color: black; -fx-padding: 10;");
@@ -111,7 +110,7 @@ public class Roulette extends VideoGames{
     	messageLabel.setAlignment(Pos.CENTER);
     	messageLabel.setStyle("-fx-background-color: white; ");
     	
-        grid.add(messageLabel, 3, 3, 3, 3); 	// posizione 3,3 con larghezza/altezza 3 celle
+        grid.add(messageLabel, 3, 3, 3, 3); 			// posizione 3,3 con larghezza/altezza 3 celle
 
 
     	for (int i = 0; i < 9; i++) {
@@ -130,7 +129,7 @@ public class Roulette extends VideoGames{
     	            long nTimes = numbers.subList(0, index).stream()
     	                    .filter(n -> n == numberRoulette)
     	                    .count();
-    	            String color = (nTimes == 0) ? "red" : "black"; // rosso o nero
+    	            String color = (nTimes == 0) ? "red" : "black"; 	// rosso o nero
 
     	            btn.setStyle(
     	                "-fx-font-size: 20px; " +
