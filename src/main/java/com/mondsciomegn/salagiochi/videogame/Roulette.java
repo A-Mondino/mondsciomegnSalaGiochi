@@ -36,12 +36,16 @@ public class Roulette extends VideoGames{
 	private Random random = new Random();						// Per estrazione vincente
     private Stage boatStage = new Stage();						// Finestra per gettoni
 
-    private List<Integer> numbers = new ArrayList<>();
+    private Button selectedButton = null;
     private GridPane grid = new GridPane();						// Per la visualizzazione grafica
     private Stage primaryStage = new Stage();
     
     private int gameTokens = 0;   								// Gettoni che il giocatore converte
     private boolean puntataAbilitata = false;
+    private boolean selectionLocked = false;
+    private String scelta;
+
+
 
     
 	public Roulette(String name, Category category) {
@@ -130,26 +134,36 @@ public class Roulette extends VideoGames{
     	            "-fx-text-fill: white;" +
     	            "-fx-background-color:" + color + ";"
     	        );
-
-    	     // Solo se le puntate sono abilitate
+    	        
+    	        // Solo se le puntate sono abilitate
     	        btn.setOnAction(e -> {
-    	            if (puntataAbilitata) {
-    	                puntataSuCasella(btn, num);
-    	            } else {
-    	                showMessage("Prima devi convertire i punti in gettoni!");
-    	            }
+    	        	scelta=selectButton(btn);
+    	            showMessage("Hai selezionato: " + btn.getText());
     	        });
 
     	        grid.add(btn, col, row + 1);
     	    }
-
-    	    // Aggiunta colonna con bottoni bianchi che puntano all'intera riga
-    	    Button empty = new Button("Punta sull'intera riga");
-    	    empty.setMinSize(70, 70);
-    	    empty.setStyle("-fx-background-color: white; -fx-border-color: white;");
-    	    grid.add(empty, 12, row + 1); // colonna 12 perché 0–11 sono numeri
     	}
 
+    	    String[] choiceRow = {
+    	    	    "Punta sull'intera riga 1",
+    	    	    "Punta sull'intera riga 2",
+    	    	    "Punta sull'intera riga 3",
+    	    	};
+
+    	    	for (int i = 0; i < 3; i++) {
+    	    	    Button empty = new Button(choiceRow[i]);
+    	    	    empty.setMinSize(70, 70);
+    	    	    empty.setStyle("-fx-background-color: white; -fx-border-color: white;");
+    	    	    
+    	    	    empty.setOnAction(e -> {
+    	    	        scelta = selectButton(empty);
+    	    	        showMessage("Hai selezionato: " + empty.getText());
+    	    	    });
+
+    	    	    grid.add(empty, 12, i + 1);
+    	    	}
+        	
     	String[] choiceColomns = {
     		"Punta sui primi 12 numeri",
     		"Punta sui numeri da 13 a 24",
@@ -161,6 +175,12 @@ public class Roulette extends VideoGames{
     	    Button extra = new Button(choiceColomns[i]);
     	    extra.setMinSize(70 * 4 + 18, 70); 											// 4 colonne + spazio
     	    extra.setStyle("-fx-background-color: white; -fx-border-color: black;");
+    	    
+    	    extra.setOnAction(e -> {
+    	    	scelta=selectButton(extra);
+	            showMessage("Hai selezionato: " + extra.getText());
+	        });
+    	    
     	    grid.add(extra, i * 4, 4, 4, 1);
     	}
     	
@@ -194,6 +214,11 @@ public class Roulette extends VideoGames{
     		        "-fx-border-color: black;"
     		    );
     		    
+    		    b.setOnAction(e -> {
+    		    	scelta=selectButton(b);
+    	            showMessage("Hai selezionato: " + b.getText());
+    	        });
+    		    
     		    grid.add(b, i*2, 5, 2, 1); 
     		}
 
@@ -204,10 +229,14 @@ public class Roulette extends VideoGames{
     	primaryStage.setScene(scene);
     	primaryStage.show();
     	
-    	openTokenConverterWindow();
+    	Converter();
+    	
+    	int numero = estraiNumeroVincente();
+    	verifica(numero, scelta);
+    	
 	}
 	
-	private void openTokenConverterWindow() {
+	private void Converter() {
 
 	    Stage tokenStage = new Stage();
 	    tokenStage.setTitle("Converti punti in gettoni");
@@ -266,18 +295,91 @@ public class Roulette extends VideoGames{
 	}
 	
 	
-	private void puntataSuCasella(Button cell, int numero) {
+	private String selectButton(Button cell) {
 	    if (gameTokens <= 0) {
 	        showMessage("Non hai gettoni disponibili! Converti altri punti.");
-	        return;
+	        return null;
 	    }
 
-	    gameTokens--; // togli un gettone dalla riserva
-	    cell.setStyle(cell.getStyle() + "-fx-border-color: yellow; -fx-border-width: 3px;"); 
-	    showMessage("Hai puntato sulla casella " + numero + ". Gettoni rimanenti: " + gameTokens);
+	    selectedButton = cell;
+	    cell.setStyle(cell.getStyle() + "-fx-border-color: yellow; -fx-border-width: 3px;");
+	    
+	    // Blocca tutte le selezioni future
+	    selectionLocked = true;
+	    
+	    String selectedNumber = cell.getText();
+	    return selectedNumber;
+	}
+	
+	private int estraiNumeroVincente() {
+	    return random.nextInt(36) + 1;
 	}
 
-
+	private void verifica(int num, String decisione) {
+		if(num==Integer.valueOf(decisione)) {
+	        showMessage("HAI VINTO");
+		}
+			
+		switch(decisione) {
+		
+		case "Punta sull'intera riga 1":
+		{
+			break;
+		}
+		
+		case "Punta sull'intera riga 2":
+		{
+			break;
+		}
+		
+		case "Punta sull'intera riga 3":
+		{
+			break;
+		}
+		
+		case "Punta sui primi 12 numeri":
+		{
+			break;
+		}
+		
+		case "Punta sui numeri da 13 a 24":
+		{
+			break;
+		}
+		
+		case "Punta sui numeri da 25 a 36":
+		{
+			break;
+		}
+		
+		case "Punta 1-18":
+		{
+			break;
+		}
+		
+		case "Pari":
+		{
+			break;
+		}
+		
+		case "Disari":
+		{
+			break;
+		}
+		
+		case "Punta 19-36":
+		{
+			break;
+		}
+		
+		case "":
+		{
+			break;
+		}
+		
+		
+		}
+	}
 
 	
 	
