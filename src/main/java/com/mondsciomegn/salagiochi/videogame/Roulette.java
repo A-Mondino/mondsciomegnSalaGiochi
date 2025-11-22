@@ -36,17 +36,16 @@ import javafx.stage.Stage;
 public class Roulette extends VideoGames{
 
 	private Random random = new Random();						// Per estrazione vincente
-    private Stage boatStage = new Stage();						// Finestra per gettoni
 
     private Button selectedButton = null;
     private GridPane grid = new GridPane();						// Per la visualizzazione grafica
     private Stage primaryStage = new Stage();
     
     private int gameTokens = 0;   								// Gettoni che il giocatore converte
-    private boolean puntataAbilitata = false;
     private boolean selectionLocked = false;
-    private String scelta;
-    private int numero;
+    private boolean puntataAbilitata = false;
+    private String chose;
+    private int nWinner;
     
 	public Roulette(String name, Category category) {
 		super(name, category);
@@ -60,7 +59,7 @@ public class Roulette extends VideoGames{
     	dialog.setTitle("Dettagli Gioco");
     	dialog.setHeaderText("Istruzioni:");
     	dialog.setContentText(
-    	        "Punto su uno dei bottoni sulla mappa di gioco"
+    	        "Punta su uno dei bottoni sulla mappa di gioco e buona fortuna!"
     	);
     	
     	ButtonType play = new ButtonType("Gioca", ButtonBar.ButtonData.OK_DONE);
@@ -97,9 +96,9 @@ public class Roulette extends VideoGames{
               }
         }
     	
-    	aggiornaPunteggioDaDB();
+    	updateDB();						// Devo considerare i punteggi del giocatore che sta giocando
     	
-    	primaryStage.setTitle("Roulette Orizzontale");
+    	primaryStage.setTitle("Roulette");
     	grid.getChildren().clear();
     	grid.setHgap(5);
     	grid.setVgap(5);
@@ -115,7 +114,7 @@ public class Roulette extends VideoGames{
     	for (int r : redNumbers) colors.put(r, "red");
     	for (int b : blackNumbers) colors.put(b, "black");
 
-    	// Creazione di tre righe orizzontali contenenti i nuemri di gioco
+    	// Creazione di tre righe orizzontali contenenti i nuemri di gioco, perchè verticalmente era troppo scomodo
     	int[][] layout = {
     	    {1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34},
     	    {2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35},
@@ -137,12 +136,12 @@ public class Roulette extends VideoGames{
     	            "-fx-background-color:" + color + ";"
     	        );
     	        
-    	        // Solo se le puntate sono abilitate
+    	        // Punta sui numeri
     	        btn.setOnAction(e -> {
-    	        	scelta=selectButton(btn);
-    	        	if (scelta != null) {
-    	                numero = estraiNumeroVincente();
-    	                verifica(numero, scelta);
+    	        	chose=selectButton(btn);
+    	        	if (chose != null) {
+    	                nWinner = getWinningNumber();
+    	                winner(nWinner, chose);
     	            }    	        });
 
     	        grid.add(btn, col, row + 1);
@@ -160,11 +159,12 @@ public class Roulette extends VideoGames{
     	    	    empty.setMinSize(70, 70);
     	    	    empty.setStyle("-fx-background-color: white; -fx-border-color: white;");
     	    	    
+        	        // Punta sulle righe
     	    	    empty.setOnAction(e -> {
-    	    	        scelta = selectButton(empty);
-    	    	        if (scelta != null) {
-    	    	            numero = estraiNumeroVincente();
-    	    	            verifica(numero, scelta);
+    	    	        chose = selectButton(empty);
+    	    	        if (chose != null) {
+    	    	            nWinner = getWinningNumber();
+    	    	            winner(nWinner, chose);
     	    	        }
     	    	    });
 
@@ -177,24 +177,25 @@ public class Roulette extends VideoGames{
     		"Punta sui numeri da 25 a 36",
     	};
     	
-    	// Aggiunta riga con 3 bottni larghi 4 colonne
+    	// Aggiunta riga con 3 bottoni larghi 4 colonne - ciascun bottone comprende 12 numeri 
     	for (int i = 0; i < 3; i++) {
     	    Button extra = new Button(choiceColomns[i]);
     	    extra.setMinSize(70 * 4 + 18, 70); 											// 4 colonne + spazio
     	    extra.setStyle("-fx-background-color: white; -fx-border-color: black;");
     	    
+    	    // Punta su 12 numeri
     	    extra.setOnAction(e -> {
-    	    	scelta=selectButton(extra);
-    	    	if (scelta != null) {
-    	            numero = estraiNumeroVincente();
-    	            verifica(numero, scelta);
+    	    	chose=selectButton(extra);
+    	    	if (chose != null) {
+    	            nWinner = getWinningNumber();
+    	            winner(nWinner, chose);
     	        }
 	        });
     	    
     	    grid.add(extra, i * 4, 4, 4, 1);
     	}
     	
-    	// Array contenenti caratteristiche dei 6 bottoni
+    	// Array contenenti caratteristiche dei 6 bottoni speciali 
     	String[] choiceExtra = {
     		    "Punta 1-18",
     		    "Pari",
@@ -224,18 +225,19 @@ public class Roulette extends VideoGames{
     		        "-fx-border-color: black;"
     		    );
     		    
+        	    // Punta su bottoni speciali 
     		    b.setOnAction(e -> {
-    		    	scelta=selectButton(b);
-    		    	if (scelta != null) {
-    		            numero = estraiNumeroVincente();
-    		            verifica(numero, scelta);
+    		    	chose=selectButton(b);
+    		    	if (chose != null) {
+    		            nWinner = getWinningNumber();
+    		            winner(nWinner, chose);
     		        }
     	        });
     		    
     		    grid.add(b, i*2, 5, 2, 1); 
     		}
         
-	    Button restart = new Button("Ripunta");
+	    Button restart = new Button("Ripunta");												//Creazione pulsante per far riniziare la partita
 	    restart.setOnAction(e -> {
 	    	selectionLocked = false;        
 	        if (selectedButton != null) {
@@ -244,7 +246,6 @@ public class Roulette extends VideoGames{
 	            selectedButton = null;
 	        }
 	    	Converter();
-
 	        });
     	
     	Scene scene = new Scene(grid, 1100, 470);
@@ -257,8 +258,6 @@ public class Roulette extends VideoGames{
 
 	    VBox resultBox = new VBox(10, restart);
 	    resultBox.setPadding(new Insets(10));
-
-	    // Aggiungi il VBox come ultima riga della griglia
 	    grid.add(resultBox, 0, 6, 12, 1);	
 
 	}
@@ -272,60 +271,59 @@ public class Roulette extends VideoGames{
 	    root.setPadding(new Insets(15));
 	    root.setAlignment(Pos.CENTER);
 	    
-	    aggiornaPunteggioDaDB();
-	    Label puntiLabel = new Label("Punti disponibili: " +getScore());
-	    puntiLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+	    updateDB();
+	    Label pointsLabel = new Label("Punti disponibili: " +getScore());
+	    pointsLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-	    Label gettoniLabel = new Label("Gettoni convertiti: 0");
-	    gettoniLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+	    Label tokensLabel = new Label("Gettoni convertiti: 0");
+	    tokensLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-	    Button convertiBtn = new Button("Converti 300 punti = 1 gettone");
-	    convertiBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-	    convertiBtn.setMaxWidth(Double.MAX_VALUE);
+	    Button convertBtn = new Button("Converti 300 punti = 1 gettone");
+	    convertBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+	    convertBtn.setMaxWidth(Double.MAX_VALUE);
 
-	    Button puntaBtn = new Button("Punta i gettoni");
-	    puntaBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-	    puntaBtn.setDisable(true);
+	    Button betBtn = new Button("Punta i gettoni");
+	    betBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+	    betBtn.setDisable(true);
 
-	    final int[] gettoniConvertiti = {0};
+	    final int[] convertedTokens = {0};
 
-	    convertiBtn.setOnAction(e -> {
+	    convertBtn.setOnAction(e -> {
 
 	        if (getScore() >= 300) {												// Controllo che ci siano punti a sufficienza
 
 	        	subPoints(getNickname());  											// Aggiorna punteggio
-	            gettoniConvertiti[0]++;
+	            convertedTokens[0]++;												// Incremento contatore gettoni
 
-	            puntiLabel.setText("Punti disponibili: " + getScore());
-	            gettoniLabel.setText("Gettoni convertiti: " + gettoniConvertiti[0]);
+	            pointsLabel.setText("Punti disponibili: " + getScore());
+	            tokensLabel.setText("Gettoni convertiti: " + convertedTokens[0]);
 
-	            puntaBtn.setDisable(false);
+	            betBtn.setDisable(false);
 	        }else {
-	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);				// Allarme che indica che non ci sono abbastanza punti per giocare 
 	            alert.setTitle("Punti insufficienti");
 	            alert.setHeaderText(null);
 	            alert.setContentText("Non hai abbastanza punti per giocare!");
 	            alert.showAndWait();
 
-	            // Chiudi la finestra del gioco
+	            
+	            tokenStage.close(); 												// Chiusura di tutte le finestre aperte 
 	            primaryStage.close();
-	            return;  // Esce dal metodo
+	            return;  
 	        }
 	    });
 
-	    puntaBtn.setOnAction(e -> {
-	        gameTokens += gettoniConvertiti[0];   									// Gettoni usati nel gioco
+	    betBtn.setOnAction(e -> {
+	        gameTokens += convertedTokens[0];   									// Gettoni usati nel gioco
 	        puntataAbilitata = true; 												// Abilita le puntate
 	        tokenStage.close();
 	        primaryStage.getScene().getRoot().setDisable(false);
 	    });
 
-	    root.getChildren().addAll(puntiLabel, gettoniLabel, convertiBtn, puntaBtn);
+	    root.getChildren().addAll(pointsLabel, tokensLabel, convertBtn, betBtn);
 
 	    Scene scene = new Scene(root, 300, 230);
 	    tokenStage.setScene(scene);
-
-	    tokenStage.setOnCloseRequest(e -> e.consume());
 
 	    primaryStage.getScene().getRoot().setDisable(true);
 	    tokenStage.initModality(Modality.APPLICATION_MODAL);
@@ -340,7 +338,7 @@ public class Roulette extends VideoGames{
 	    }
 	    
 	    if (selectionLocked) {
-	        // Se già selezionato un pulsante, blocca ulteriori selezioni
+	        // Giocata singola - Se è già stato selezionato un pulsante, blocca ulteriori selezioni
 	        return null;
 	    }
 
@@ -357,14 +355,14 @@ public class Roulette extends VideoGames{
 	    return selectedNumber;
 	}
 	
-	private int estraiNumeroVincente() {
-	    return random.nextInt(36) + 1;
+	private int getWinningNumber() {
+	    return random.nextInt(36) + 1;													// Estrazione numero vincente
 	}
 
-	private void verifica(int num, String decisione) {
-	    try {
-	        int sceltaNum = Integer.parseInt(decisione);
-	        if(num == sceltaNum) {
+	private void winner(int num, String decisione) {
+	    try {																			//Controllo vincita se il numero selezionato è un numero 
+	        int choiseNum = Integer.parseInt(decisione);
+	        if(num == choiseNum) {
 	            showMessage("Numero estratto: " + num + "\nHAI VINTO!");
 	            addPoints(getNickname());
 	            return;
@@ -373,7 +371,7 @@ public class Roulette extends VideoGames{
 	        }
 	    } catch (NumberFormatException ignored) {}
 			
-		switch(decisione) {
+		switch(decisione) {																//Controllo vincita se il numero selezionato è un bottone speciale 
 		
 		case "Punta sull'intera riga 1":
 		{
@@ -512,8 +510,8 @@ public class Roulette extends VideoGames{
 	        showMessage("Hai selezionato i numeri di colore: Nero" );
 	        if(num == 2 || num == 4 || num == 6 || num == 8 || num == 10 || num == 11 || num == 13 || num == 15 || num == 17 || num == 20 || num == 22 || num == 24 || num == 26 || num == 28 || num == 29 || num == 31 || num == 33 || num == 35) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-	    	        addPoints(getNickname());
-	            }else
+					addPoints(getNickname());
+			}else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 
 			break;
@@ -524,7 +522,7 @@ public class Roulette extends VideoGames{
 
 	}
 		
-	private void aggiornaPunteggioDaDB() {
+	private void updateDB() {
 	    String nicknameDB = getNickname().isEmpty() ? "_ANONIMO_" : getNickname();
 	    String sql = "SELECT score FROM utente WHERE nickname = ?";
 
@@ -534,7 +532,7 @@ public class Roulette extends VideoGames{
 	        stmt.setString(1, nicknameDB);
 	        ResultSet rs = stmt.executeQuery();
 	        if (rs.next()) {
-	            setScore(rs.getInt("score")); // aggiorna il punteggio in memoria
+	            setScore(rs.getInt("score")); 													// Aggiorna il punteggio in memoria
 	        }
 
 	    } catch (SQLException e) {
@@ -552,9 +550,8 @@ public class Roulette extends VideoGames{
 
 	        stmt.setString(1, nicknameDB);
 	        stmt.executeUpdate();
-
-	        // Aggiorna anche in memoria
-	        setScore(getScore() - 300);
+	        																					
+	        setScore(getScore() - 300);															// Sottrae i punti spesi per la conversione con i gettoni
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
