@@ -2,6 +2,7 @@ package com.mondsciomegn.salagiochi.videogame;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import com.mondsciomegn.salagiochi.db.VideoGames;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -44,9 +46,7 @@ public class Roulette extends VideoGames{
     private boolean puntataAbilitata = false;
     private boolean selectionLocked = false;
     private String scelta;
-
-
-
+    private int numero;
     
 	public Roulette(String name, Category category) {
 		super(name, category);
@@ -97,6 +97,8 @@ public class Roulette extends VideoGames{
               }
         }
     	
+    	aggiornaPunteggioDaDB();
+    	
     	primaryStage.setTitle("Roulette Orizzontale");
     	grid.getChildren().clear();
     	grid.setHgap(5);
@@ -138,8 +140,10 @@ public class Roulette extends VideoGames{
     	        // Solo se le puntate sono abilitate
     	        btn.setOnAction(e -> {
     	        	scelta=selectButton(btn);
-    	            showMessage("Hai selezionato: " + btn.getText());
-    	        });
+    	        	if (scelta != null) {
+    	                numero = estraiNumeroVincente();
+    	                verifica(numero, scelta);
+    	            }    	        });
 
     	        grid.add(btn, col, row + 1);
     	    }
@@ -158,7 +162,10 @@ public class Roulette extends VideoGames{
     	    	    
     	    	    empty.setOnAction(e -> {
     	    	        scelta = selectButton(empty);
-    	    	        showMessage("Hai selezionato: " + empty.getText());
+    	    	        if (scelta != null) {
+    	    	            numero = estraiNumeroVincente();
+    	    	            verifica(numero, scelta);
+    	    	        }
     	    	    });
 
     	    	    grid.add(empty, 12, i + 1);
@@ -178,7 +185,10 @@ public class Roulette extends VideoGames{
     	    
     	    extra.setOnAction(e -> {
     	    	scelta=selectButton(extra);
-	            showMessage("Hai selezionato: " + extra.getText());
+    	    	if (scelta != null) {
+    	            numero = estraiNumeroVincente();
+    	            verifica(numero, scelta);
+    	        }
 	        });
     	    
     	    grid.add(extra, i * 4, 4, 4, 1);
@@ -188,13 +198,13 @@ public class Roulette extends VideoGames{
     	String[] choiceExtra = {
     		    "Punta 1-18",
     		    "Pari",
-    		    "",
-    		    "",
+    		    "Rosso",
+    		    "Nero",
     		    "Dispari",
     		    "Punta 19-36"
     		};
 
-    		String[] colorsExtra = {
+    	String [] colorsExtra = {
     		    "white",
     		    "white",
     		    "red",
@@ -216,24 +226,41 @@ public class Roulette extends VideoGames{
     		    
     		    b.setOnAction(e -> {
     		    	scelta=selectButton(b);
-    	            showMessage("Hai selezionato: " + b.getText());
+    		    	if (scelta != null) {
+    		            numero = estraiNumeroVincente();
+    		            verifica(numero, scelta);
+    		        }
     	        });
     		    
     		    grid.add(b, i*2, 5, 2, 1); 
     		}
+        
+	    Button restart = new Button("Ripunta");
+	    restart.setOnAction(e -> {
+	    	selectionLocked = false;        
+	        if (selectedButton != null) {
+	            // Rimuove il bordo giallo dal bottone selezionato
+	            selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));
+	            selectedButton = null;
+	        }
+	    	Converter();
 
-    	// Messaggi sotto
-    	grid.add(messageLabel, 0, 6, 12, 1);
+	        });
     	
     	Scene scene = new Scene(grid, 1100, 470);
-    	primaryStage.setScene(scene);
-    	primaryStage.show();
-    	
+       	primaryStage.setScene(scene);
+       	primaryStage.show();
+       	
+        grid.add(messageLabel, 0, 0, 12, 1);
+        	
     	Converter();
-    	
-    	int numero = estraiNumeroVincente();
-    	verifica(numero, scelta);
-    	
+
+	    VBox resultBox = new VBox(10, restart);
+	    resultBox.setPadding(new Insets(10));
+
+	    // Aggiungi il VBox come ultima riga della griglia
+	    grid.add(resultBox, 0, 6, 12, 1);	
+
 	}
 	
 	private void Converter() {
@@ -244,7 +271,8 @@ public class Roulette extends VideoGames{
 	    VBox root = new VBox(15);
 	    root.setPadding(new Insets(15));
 	    root.setAlignment(Pos.CENTER);
-
+	    
+	    aggiornaPunteggioDaDB();
 	    Label puntiLabel = new Label("Punti disponibili: " +getScore());
 	    puntiLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
@@ -263,7 +291,7 @@ public class Roulette extends VideoGames{
 
 	    convertiBtn.setOnAction(e -> {
 
-	        if (getScore() >= 300) {												// Contoìrollo che ci siano punti a sufficienza
+	        if (getScore() >= 300) {												// Controllo che ci siano punti a sufficienza
 
 	        	subPoints(getNickname());  											// Aggiorna punteggio
 	            gettoniConvertiti[0]++;
@@ -272,6 +300,16 @@ public class Roulette extends VideoGames{
 	            gettoniLabel.setText("Gettoni convertiti: " + gettoniConvertiti[0]);
 
 	            puntaBtn.setDisable(false);
+	        }else {
+	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	            alert.setTitle("Punti insufficienti");
+	            alert.setHeaderText(null);
+	            alert.setContentText("Non hai abbastanza punti per giocare!");
+	            alert.showAndWait();
+
+	            // Chiudi la finestra del gioco
+	            primaryStage.close();
+	            return;  // Esce dal metodo
 	        }
 	    });
 
@@ -300,6 +338,11 @@ public class Roulette extends VideoGames{
 	        showMessage("Non hai gettoni disponibili! Converti altri punti.");
 	        return null;
 	    }
+	    
+	    if (selectionLocked) {
+	        // Se già selezionato un pulsante, blocca ulteriori selezioni
+	        return null;
+	    }
 
 	    selectedButton = cell;
 	    cell.setStyle(cell.getStyle() + "-fx-border-color: yellow; -fx-border-width: 3px;");
@@ -307,7 +350,10 @@ public class Roulette extends VideoGames{
 	    // Blocca tutte le selezioni future
 	    selectionLocked = true;
 	    
-	    String selectedNumber = cell.getText();
+	    // Riduci i gettoni
+	    gameTokens--;
+	    
+	    String selectedNumber = cell.getText().trim();
 	    return selectedNumber;
 	}
 	
@@ -316,123 +362,204 @@ public class Roulette extends VideoGames{
 	}
 
 	private void verifica(int num, String decisione) {
-		if(num==Integer.valueOf(decisione)) {
-	        showMessage("HAI VINTO");
-		}
+	    try {
+	        int sceltaNum = Integer.parseInt(decisione);
+	        if(num == sceltaNum) {
+	            showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+	            addPoints(getNickname());
+	            return;
+	        }else {
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	        }
+	    } catch (NumberFormatException ignored) {}
 			
 		switch(decisione) {
 		
 		case "Punta sull'intera riga 1":
 		{
+            showMessage("Hai selezionato: Punta sull'intera riga 1" );
+            if(num == 1 || num == 4 || num == 7 || num == 10 || num == 13 || num == 16 || num == 19 || num == 22 || num == 25 || num == 28 || num == 31 || num == 34) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
 		case "Punta sull'intera riga 2":
 		{
+            showMessage("Hai selezionato: Punta sull'intera riga 2" );
+            if(num == 2 || num == 5 || num == 8 || num == 11 || num == 14 || num == 17 || num == 20 || num == 23 || num == 26 || num == 29 || num == 32 || num == 35) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+            
 			break;
 		}
 		
 		case "Punta sull'intera riga 3":
 		{
+            showMessage("Hai selezionato: Punta sull'intera riga 3" );
+            if(num == 3 || num == 6 || num == 9 || num == 12 || num == 15 || num == 18 || num == 21 || num == 24 || num == 27 || num == 30 || num == 33 || num == 36) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
-		
+	 	    
 		case "Punta sui primi 12 numeri":
 		{
+            showMessage("Hai selezionato: Punta sui primi 12 numeri" );
+            if(num > 0 && num < 13) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
 		case "Punta sui numeri da 13 a 24":
 		{
+            showMessage("Hai selezionato: Punta sui numeri da 13 a 24" );
+            if(num > 12 && num < 25) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
 		case "Punta sui numeri da 25 a 36":
 		{
+            showMessage("Hai selezionato: Punta sui numeri da 25 a 36" );
+            if(num > 24 && num < 37) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
 		case "Punta 1-18":
 		{
+            showMessage("Hai selezionato: Punta 1-18" );
+            if(num > 0 && num < 19) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
 		case "Pari":
 		{
+            showMessage("Hai selezionato: Pari" );
+            if(num % 2 == 0) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
-		case "Disari":
+		case "Dispari":
 		{
+            showMessage("Hai selezionato: dispari" );
+            if(num % 2 != 0) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
 		case "Punta 19-36":
 		{
+            showMessage("Hai selezionato: Punta 19-36" );
+            if(num > 18 && num < 37) {
+				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+    	        addPoints(getNickname());
+            }else
+	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
 		
-		case "":
+		case "Rosso":
 		{
+	        showMessage("Hai selezionato i numeri di colore: Rosso" );
+	        if(num == 1 || num == 3 || num == 5 || num == 7 || num == 9 || num == 12 || num == 14 || num == 16 || num == 18 || num == 19 || num == 21 || num == 23 || num == 25 || num == 27 || num == 30 || num == 32 || num == 34 || num == 36) {
+	        	showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+	    	    addPoints(getNickname());
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
 			break;
 		}
-		
-		
+
+		case "Nero":
+		{
+	        showMessage("Hai selezionato i numeri di colore: Nero" );
+	        if(num == 2 || num == 4 || num == 6 || num == 8 || num == 10 || num == 11 || num == 13 || num == 15 || num == 17 || num == 20 || num == 22 || num == 24 || num == 26 || num == 28 || num == 29 || num == 31 || num == 33 || num == 35) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+	    	        addPoints(getNickname());
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+
+			break;
+
 		}
+
+		}
+
+	}
+		
+	private void aggiornaPunteggioDaDB() {
+	    String nicknameDB = getNickname().isEmpty() ? "_ANONIMO_" : getNickname();
+	    String sql = "SELECT score FROM utente WHERE nickname = ?";
+
+	    try (Connection conn = DataBaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, nicknameDB);
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            setScore(rs.getInt("score")); // aggiorna il punteggio in memoria
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
-	
-	
-	/*private void checkWin(int number, int numComputer, int numWinner, String colour, String colourComputer, String colourWinner) {
-		if (number == numWinner && colour.equals(colourWinner)) {
-			showMessage("HAI VINTO!");
-            addPoints(getNickname());
-
-	    } else if (numComputer == numWinner && colourComputer.equals(colourWinner)) {
-			showMessage("HAI PERSO!");
-            addPoints("_COMPUTER_");
-
-	    } else {
-			showMessage("PAREGGIO!");
-	    }
-		
-		if(colour.equals(colourWinner)) {
-			//addPointsExtra(getNickname());
-		} 
-		
-		if(colourComputer.equals(colourWinner)) {
-			//addPointsExtra("_COMPUTER_");
-		}
-	}*/
-	
 	
 	private void subPoints(String nickname) {
-    	if(nickname.isEmpty()) {												// Gioco come anonimo
-	    	String sql  = "UPDATE utente SET score = score - 300 WHERE nickname = ?";
-	    	try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+	    String nicknameDB = nickname.isEmpty() ? "_ANONIMO_" : nickname;
+	    String sql = "UPDATE utente SET score = score - 300 WHERE nickname = ?";
 
-	            	if(nickname.isEmpty())
-	            		stmt.setString(1,"_ANONIMO_");
-                    	stmt.executeUpdate(); 									// Prova a fare l'update
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
-    	}
-    	else {																	// Il NickName è valido
-    		String sql  = "UPDATE utente SET score = score - 300 WHERE nickname = ?";
-	    	try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
+	    try (Connection conn = DataBaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-	            	stmt.setString(1,nickname);
-                    stmt.executeUpdate(); 										// Prova a fare l'update
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
-    	}
-		
+	        stmt.setString(1, nicknameDB);
+	        stmt.executeUpdate();
+
+	        // Aggiorna anche in memoria
+	        setScore(getScore() - 300);
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 		
 }
