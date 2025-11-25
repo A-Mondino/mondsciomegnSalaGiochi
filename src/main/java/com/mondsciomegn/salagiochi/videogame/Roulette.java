@@ -96,7 +96,7 @@ public class Roulette extends VideoGames{
               }
         }
     	
-    	updateDB();						// Devo considerare i punteggi del giocatore che sta giocando
+    	updateDB();										// Devo considerare i punteggi del giocatore che sta giocando
     	
     	primaryStage.setTitle("Roulette");
     	grid.getChildren().clear();
@@ -237,7 +237,7 @@ public class Roulette extends VideoGames{
     		    grid.add(b, i*2, 5, 2, 1); 
     		}
         
-	    Button restart = new Button("Ripunta");												//Creazione pulsante per far riniziare la partita
+	    Button restart = new Button("Ripunta");												// Creazione pulsante per far riniziare la partita
 	    restart.setOnAction(e -> {
 	    	selectionLocked = false;        
 	        if (selectedButton != null) {
@@ -292,7 +292,7 @@ public class Roulette extends VideoGames{
 
 	        if (getScore() >= 300) {												// Controllo che ci siano punti a sufficienza
 
-	        	sumPoints(getNickname(),-1);  											// Aggiorna punteggio
+	        	sumPoints(getNickname(),-1);  										// Aggiorna punteggio
 	            convertedTokens[0]++;												// Incremento contatore gettoni
 
 	            pointsLabel.setText("Punti disponibili: " + getScore());
@@ -360,7 +360,7 @@ public class Roulette extends VideoGames{
 	}
 
 	private void winner(int num, String decisione) {
-	    try {																			//Controllo vincita se il numero selezionato è un numero 
+	    try {																			// Controllo vincita se il numero selezionato è un numero 
 	        int choiseNum = Integer.parseInt(decisione);
 	        if(num == choiseNum) {
 	            showMessage("Numero estratto: " + num + "\nHAI VINTO!");
@@ -370,7 +370,7 @@ public class Roulette extends VideoGames{
 	        }
 	    } catch (NumberFormatException ignored) {}
 			
-		switch(decisione) {																//Controllo vincita se il numero selezionato è un bottone speciale 
+		switch(decisione) {																// Controllo vincita se il numero selezionato è un bottone speciale 
 		
 		case "Punta sull'intera riga 1":
 		{
@@ -531,7 +531,7 @@ public class Roulette extends VideoGames{
 	        stmt.setString(1, nicknameDB);
 	        ResultSet rs = stmt.executeQuery();
 	        if (rs.next()) {
-	            setScore(rs.getInt("score")); 													// Aggiorna il punteggio in memoria
+	            setScore(rs.getInt("score")); 												// Aggiorna il punteggio in memoria
 	        }
 
 	    } catch (SQLException e) {
@@ -552,7 +552,7 @@ public class Roulette extends VideoGames{
 	        stmt.setString(2, nicknameDB);
 	        stmt.executeUpdate();
 	        																					
-	        setScore(getScore());															// Somma i punti 
+	        setScore(getScore() + (300*mult));															// Aggiorna i punteggi a seconda del valore della variabile mult (la variabile assume valore positivo se incrementa i punti, negativo per decrementarli
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
