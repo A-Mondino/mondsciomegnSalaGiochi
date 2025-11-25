@@ -16,6 +16,7 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -271,6 +272,7 @@ public class Roulette extends VideoGames{
 
 	    Stage tokenStage = new Stage();
 	    tokenStage.setTitle("Converti punti in gettoni");
+	    tokenStage.setOnCloseRequest(Event::consume);							// impedisce la chiusura del pop-up
 
 	    VBox root = new VBox(15);
 	    root.setPadding(new Insets(15));
@@ -305,6 +307,14 @@ public class Roulette extends VideoGames{
 
 	            betBtn.setDisable(false);
 	        }else {
+	        	// Riconversione dei gettoni residui in punti
+	            if (convertedTokens[0] > 0) {
+	                sumPoints(getNickname(), convertedTokens[0]);	            }
+
+	            // Azzera i gettoni non usati
+	            convertedTokens[0] = 0;
+	            gameTokens = 0;
+	            
 	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);				// Allarme che indica che non ci sono abbastanza punti per giocare 
 	            alert.setTitle("Punti insufficienti");
 	            alert.setHeaderText(null);
