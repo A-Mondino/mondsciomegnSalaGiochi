@@ -110,8 +110,6 @@ public class Roulette extends VideoGames{
     	grid.setVgap(5);
     	grid.setStyle("-fx-background-color: darkgreen; -fx-padding: 20;");
 
-    	Label messageLabel = new Label("Benvenuto nella Roulette!");
-
     	// Mappa colori ufficiali roulette
     	Map<Integer, String> colors = new HashMap<>();
     	int[] redNumbers = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
@@ -257,9 +255,17 @@ public class Roulette extends VideoGames{
     	Scene scene = new Scene(grid, 1100, 470);
        	primaryStage.setScene(scene);
        	primaryStage.show();
-       	
-        grid.add(messageLabel, 0, 0, 12, 1);
-        	
+ 
+       	// Quando chiudi la finestra del gioco ritrasformi i gettoni in punti
+       	primaryStage.setOnCloseRequest(e -> {
+       	    if (gameTokens > 0) {
+       	        sumPoints(getNickname(), gameTokens);   
+       	        gameTokens = 0;
+       	        updateDB();
+       	    }
+       	});
+
+       	        	
     	Converter();
 
 	    VBox resultBox = new VBox(10, restart);
@@ -282,7 +288,7 @@ public class Roulette extends VideoGames{
 	    Label pointsLabel = new Label("Punti disponibili: " + getScore());
 	    pointsLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-	    Label tokensLabel = new Label("Gettoni convertiti: 0");
+	    Label tokensLabel = new Label("Gettoni disponibili: " + gameTokens);
 	    tokensLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
 	    Button convertBtn = new Button("Converti 300 punti = 1 gettone");
@@ -291,8 +297,8 @@ public class Roulette extends VideoGames{
 
 	    Button betBtn = new Button("Punta i gettoni");
 	    betBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-	    betBtn.setDisable(true);
-
+	    betBtn.setDisable(gameTokens <= 0);
+	    
 	    final int[] convertedTokens = {0};
 
 	    convertBtn.setOnAction(e -> {
@@ -303,17 +309,14 @@ public class Roulette extends VideoGames{
 	            convertedTokens[0]++;												// Incremento contatore gettoni
 
 	            pointsLabel.setText("Punti disponibili: " + getScore());
-	            tokensLabel.setText("Gettoni convertiti: " + convertedTokens[0]);
+	            tokensLabel.setText("Gettoni convertiti: " + (gameTokens + convertedTokens[0]));
 
 	            betBtn.setDisable(false);
 	        }else {
 	        	// Riconversione dei gettoni residui in punti
 	            if (convertedTokens[0] > 0) {
-	                sumPoints(getNickname(), convertedTokens[0]);	            }
-
-	            // Azzera i gettoni non usati
-	            convertedTokens[0] = 0;
-	            gameTokens = 0;
+	                sumPoints(getNickname(), convertedTokens[0]);	            
+	                }
 	            
 	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);				// Allarme che indica che non ci sono abbastanza punti per giocare 
 	            alert.setTitle("Punti insufficienti");
@@ -330,7 +333,7 @@ public class Roulette extends VideoGames{
 
 	    betBtn.setOnAction(e -> {
 	        gameTokens += convertedTokens[0];   									// Gettoni usati nel gioco
-	        //puntataAbilitata = true; 												// Abilita le puntate
+	        convertedTokens[0] = 0;
 	        tokenStage.close();
 	        primaryStage.getScene().getRoot().setDisable(false);
 	    });
