@@ -52,6 +52,11 @@ public class Roulette extends VideoGames{
 		setScore(600);
 	}
 	
+	public Roulette(String name, Category category, int score) {
+		super(name, category);
+		setScore(score);
+	}
+	
 	
 	public void play(String nickname) {
 		setNickname(nickname);
@@ -138,7 +143,7 @@ public class Roulette extends VideoGames{
     	        
     	        // Punta sui numeri
     	        btn.setOnAction(e -> {
-    	        	chose=selectButton(btn);
+    	        	chose = selectButton(btn);
     	        	if (chose != null) {
     	                nWinner = getWinningNumber();
     	                winner(nWinner, chose);
@@ -272,7 +277,7 @@ public class Roulette extends VideoGames{
 	    root.setAlignment(Pos.CENTER);
 	    
 	    updateDB();
-	    Label pointsLabel = new Label("Punti disponibili: " +getScore());
+	    Label pointsLabel = new Label("Punti disponibili: " + getScore());
 	    pointsLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
 	    Label tokensLabel = new Label("Gettoni convertiti: 0");
