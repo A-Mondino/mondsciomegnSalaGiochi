@@ -11,12 +11,16 @@ import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,6 +30,11 @@ public class DiceGuesser extends VideoGames{
 	
 
     private Stage primaryStage = new Stage();
+    
+    private ImageView diceUser1 = new ImageView();
+    private ImageView diceUser2 = new ImageView();
+    private ImageView diceComp1 = new ImageView();
+    private ImageView diceComp2 = new ImageView();
 	
     
 	public DiceGuesser(String name, Category category) {
@@ -77,32 +86,56 @@ public class DiceGuesser extends VideoGames{
             	  e1.printStackTrace();
               }
         }
-		
+		System.out.println(getClass().getResource("file:img/tris.jpg"));
+
 		primaryStage.setTitle("Gioco dei Dadi");
 
         Label title = new Label("Lancio dei Dadi");
-        Label playerLabel = new Label("Giocatore:");
-        Label computerLabel = new Label("Computer:");
+        
         Label message = new Label("-");
         Label message1 = new Label("-");
+
+        HBox playerBox = new HBox(10, diceUser1, diceUser2); // dadi giocatore
+        playerBox.setAlignment(Pos.CENTER);
+
+        VBox playerSection = new VBox(5, new Label("Giocatore:"), playerBox, message);
+        playerSection.setAlignment(Pos.CENTER);
+
+        HBox compBox = new HBox(10, diceComp1, diceComp2); // dadi computer
+        compBox.setAlignment(Pos.CENTER);
+
+        VBox compSection = new VBox(5, new Label("Computer:"), compBox, message1);
+        compSection.setAlignment(Pos.CENTER);
+
 
         Button throwButton = new Button("Lancia i Dadi");
 
         // Evento OnClick
         throwButton.setOnAction(e -> {
-                int sumPlayer = throwDice();
+                int dice1 = throwDice();
+                diceUser1.setImage(viewImm(dice1));
+
+                int dice2 = throwDice();
+                diceUser2.setImage(viewImm(dice2));
+
+                int sumPlayer = dice1 + dice2;
+
                 message.setText("La somma dei dadi che hai lanciato è: " + sumPlayer);
 
-                int sumComputer = throwDice();
+                int dice3 = throwDice();
+                diceComp1.setImage(viewImm(dice3));
+
+                int dice4 = throwDice();
+                diceComp2.setImage(viewImm(dice4));
+
+                int sumComputer = dice3 + dice4;
                 message1.setText("La somma dei dadi lanciati dall'avversario è: " + sumComputer);
 
                 checkHigherDice(sumPlayer, sumComputer);
         });
         
-        VBox center = new VBox(10);
-        center.setStyle("-fx-alignment: center;");
-        center.getChildren().addAll(title, playerLabel, message,
-        	    computerLabel, message1);
+        VBox center = new VBox(20, title, playerSection, compSection);
+        center.setAlignment(Pos.CENTER);
 
         BorderPane layout = new BorderPane();
         layout.setCenter(center);
@@ -110,7 +143,7 @@ public class DiceGuesser extends VideoGames{
         BorderPane.setAlignment(throwButton, javafx.geometry.Pos.CENTER);
         layout.setStyle("-fx-padding: 20;");
 
-        Scene scene = new Scene(layout, 300, 300);
+        Scene scene = new Scene(layout, 350, 450);
         primaryStage.setScene(scene);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
         primaryStage.showAndWait();
@@ -120,13 +153,11 @@ public class DiceGuesser extends VideoGames{
 	
 	private static int throwDice() {
 		Random ran = new Random();			//Lancio casuale dei dadi 
-		int sum = 0, dice1, dice2;
+		int dice;
 		
-		dice1 = ran.nextInt(6) + 1;
-		dice2 = ran.nextInt(6) + 1;
-		sum = dice1 + dice2;
+		dice = ran.nextInt(6) + 1;
 		
-		return sum;
+		return dice;
 	}
 	
 	
@@ -140,10 +171,13 @@ public class DiceGuesser extends VideoGames{
 	            addPoints(getNickname());
 			}else 
 				if(sum == sumC) 
-					showMessage("PAREGGIO!");
-				
-			
+					showMessage("PAREGGIO!");	
 		}
 	}
+	
+	private Image viewImm(int dice) {
+	    String path = "file:img/1.jpg";
+	    return new Image(path, 80, 80, true, true);	}
+
 
 }
