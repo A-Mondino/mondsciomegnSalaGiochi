@@ -44,8 +44,8 @@ public class Roulette extends VideoGames{
     
     private int gameTokens = 0;   								// Gettoni che il giocatore converte
     private boolean selectionLocked = false;
-    private boolean puntataAbilitata = false;
-    private String chose;
+    //private boolean puntataAbilitata = false;
+    private String choice;
     private int nWinner;
     
 	public Roulette(String name, Category category) {
@@ -144,10 +144,10 @@ public class Roulette extends VideoGames{
     	        
     	        // Punta sui numeri
     	        btn.setOnAction(e -> {
-    	        	chose = selectButton(btn);
-    	        	if (chose != null) {
+    	        	choice = selectButton(btn);
+    	        	if (choice != null) {
     	                nWinner = getWinningNumber();
-    	                winner(nWinner, chose);
+    	                winner(nWinner, choice);
     	            }    	        });
 
     	        grid.add(btn, col, row + 1);
@@ -167,17 +167,17 @@ public class Roulette extends VideoGames{
     	    	    
         	        // Punta sulle righe
     	    	    empty.setOnAction(e -> {
-    	    	        chose = selectButton(empty);
-    	    	        if (chose != null) {
+    	    	        choice = selectButton(empty);
+    	    	        if (choice != null) {
     	    	            nWinner = getWinningNumber();
-    	    	            winner(nWinner, chose);
+    	    	            winner(nWinner, choice);
     	    	        }
     	    	    });
 
     	    	    grid.add(empty, 12, i + 1);
     	    	}
         	
-    	String[] choiceColomns = {
+    	String[] choiceColumns = {
     		"Punta sui primi 12 numeri",
     		"Punta sui numeri da 13 a 24",
     		"Punta sui numeri da 25 a 36",
@@ -185,16 +185,16 @@ public class Roulette extends VideoGames{
     	
     	// Aggiunta riga con 3 bottoni larghi 4 colonne - ciascun bottone comprende 12 numeri 
     	for (int i = 0; i < 3; i++) {
-    	    Button extra = new Button(choiceColomns[i]);
+    	    Button extra = new Button(choiceColumns[i]);
     	    extra.setMinSize(70 * 4 + 18, 70); 											// 4 colonne + spazio
     	    extra.setStyle("-fx-background-color: white; -fx-border-color: black;");
     	    
     	    // Punta su 12 numeri
     	    extra.setOnAction(e -> {
-    	    	chose=selectButton(extra);
-    	    	if (chose != null) {
+    	    	choice=selectButton(extra);
+    	    	if (choice != null) {
     	            nWinner = getWinningNumber();
-    	            winner(nWinner, chose);
+    	            winner(nWinner, choice);
     	        }
 	        });
     	    
@@ -233,10 +233,10 @@ public class Roulette extends VideoGames{
     		    
         	    // Punta su bottoni speciali 
     		    b.setOnAction(e -> {
-    		    	chose=selectButton(b);
-    		    	if (chose != null) {
+    		    	choice=selectButton(b);
+    		    	if (choice != null) {
     		            nWinner = getWinningNumber();
-    		            winner(nWinner, chose);
+    		            winner(nWinner, choice);
     		        }
     	        });
     		    
@@ -330,7 +330,7 @@ public class Roulette extends VideoGames{
 
 	    betBtn.setOnAction(e -> {
 	        gameTokens += convertedTokens[0];   									// Gettoni usati nel gioco
-	        puntataAbilitata = true; 												// Abilita le puntate
+	        //puntataAbilitata = true; 												// Abilita le puntate
 	        tokenStage.close();
 	        primaryStage.getScene().getRoot().setDisable(false);
 	    });
@@ -374,10 +374,10 @@ public class Roulette extends VideoGames{
 	    return random.nextInt(36) + 1;													// Estrazione numero vincente
 	}
 
-	private void winner(int num, String decisione) {
+	private void winner(int num, String decision) {
 	    try {																			// Controllo vincita se il numero selezionato è un numero 
-	        int choiseNum = Integer.parseInt(decisione);
-	        if(num == choiseNum) {
+	        int choiceNum = Integer.parseInt(decision);
+	        if(num == choiceNum) {
 	            showMessage("Numero estratto: " + num + "\nHAI VINTO!");
 	            sumPoints(getNickname(),2);	            return;
 	        }else {
@@ -385,7 +385,7 @@ public class Roulette extends VideoGames{
 	        }
 	    } catch (NumberFormatException ignored) {}
 			
-		switch(decisione) {																// Controllo vincita se il numero selezionato è un bottone speciale 
+		switch(decision) {																// Controllo vincita se il numero selezionato è un bottone speciale 
 		
 		case "Punta sull'intera riga 1":
 		{
