@@ -77,7 +77,7 @@ public class DiceGuesser extends VideoGames{
             try (Connection conn = DataBaseConnection.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(sql)) {
                     try {
-                        stmt.executeUpdate(); 											// Prova a inserire l'utente
+                        stmt.executeUpdate(); 												// Prova a inserire l'utente
                     } catch (SQLException ex) { 
                     	ex.printStackTrace();
                     }
@@ -86,8 +86,6 @@ public class DiceGuesser extends VideoGames{
             	  e1.printStackTrace();
               }
         }
-		System.out.println(getClass().getResource("file:img/tris.jpg"));
-
 		primaryStage.setTitle("Gioco dei Dadi");
 
         Label title = new Label("Lancio dei Dadi");
@@ -95,13 +93,13 @@ public class DiceGuesser extends VideoGames{
         Label message = new Label("-");
         Label message1 = new Label("-");
 
-        HBox playerBox = new HBox(10, diceUser1, diceUser2); // dadi giocatore
+        HBox playerBox = new HBox(10, diceUser1, diceUser2); 								// dadi giocatore
         playerBox.setAlignment(Pos.CENTER);
 
         VBox playerSection = new VBox(5, new Label("Giocatore:"), playerBox, message);
         playerSection.setAlignment(Pos.CENTER);
 
-        HBox compBox = new HBox(10, diceComp1, diceComp2); // dadi computer
+        HBox compBox = new HBox(10, diceComp1, diceComp2); 									// dadi computer
         compBox.setAlignment(Pos.CENTER);
 
         VBox compSection = new VBox(5, new Label("Computer:"), compBox, message1);
@@ -110,7 +108,6 @@ public class DiceGuesser extends VideoGames{
 
         Button throwButton = new Button("Lancia i Dadi");
 
-        // Evento OnClick
         throwButton.setOnAction(e -> {
                 int dice1 = throwDice();
                 diceUser1.setImage(viewImm(dice1));
@@ -152,7 +149,7 @@ public class DiceGuesser extends VideoGames{
 	
 	
 	private static int throwDice() {
-		Random ran = new Random();			//Lancio casuale dei dadi 
+		Random ran = new Random();			//Lancio casuale del dado 
 		int dice;
 		
 		dice = ran.nextInt(6) + 1;
@@ -176,8 +173,16 @@ public class DiceGuesser extends VideoGames{
 	}
 	
 	private Image viewImm(int dice) {
-	    String path = "file:img/1.jpg";
-	    return new Image(path, 80, 80, true, true);	}
+	    // Percorso per il caricamento delle immagini
+	    String imgPath = getClass()
+	            .getResource("/com/mondsciomegn/salagiochi/gui/") 					// Percordo esatto per arrivare alla cartella gui 
+	            .toString()															// Converte percorso in lista
+	            .replace("gui/", "gui/img/");  										// Cambiamo percorso della stringa per puntare alla cartella "img"
+
+	    String fullPath = imgPath + dice + ".jpg";
+	    return new Image(fullPath, 80, 80, true, true);
+	}
+
 
 
 }
