@@ -44,7 +44,6 @@ public class Roulette extends VideoGames{
     
     private int gameTokens = 0;   								// Gettoni che il giocatore converte
     private boolean selectionLocked = false;
-    //private boolean puntataAbilitata = false;
     private String choice;
     private int nWinner;
     
@@ -115,8 +114,10 @@ public class Roulette extends VideoGames{
     	int[] redNumbers = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
     	int[] blackNumbers = {2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
 
-    	for (int r : redNumbers) colors.put(r, "red");
-    	for (int b : blackNumbers) colors.put(b, "black");
+    	for (int r : redNumbers)
+    		colors.put(r, "red");
+    	for (int b : blackNumbers) 
+    		colors.put(b, "black");
 
     	// Creazione di tre righe orizzontali contenenti i nuemri di gioco, perchè verticalmente era troppo scomodo
     	int[][] layout = {
@@ -152,28 +153,28 @@ public class Roulette extends VideoGames{
     	    }
     	}
 
-    	    String[] choiceRow = {
-    	    	    "Punta sull'intera riga 1",
-    	    	    "Punta sull'intera riga 2",
-    	    	    "Punta sull'intera riga 3",
-    	    	};
+	    String[] choiceRow = {
+	    	    "Punta sull'intera riga 1",
+	    	    "Punta sull'intera riga 2",
+	    	    "Punta sull'intera riga 3",
+	    	};
 
-    	    	for (int i = 0; i < 3; i++) {
-    	    	    Button empty = new Button(choiceRow[i]);
-    	    	    empty.setMinSize(70, 70);
-    	    	    empty.setStyle("-fx-background-color: white; -fx-border-color: white;");
-    	    	    
-        	        // Punta sulle righe
-    	    	    empty.setOnAction(e -> {
-    	    	        choice = selectButton(empty);
-    	    	        if (choice != null) {
-    	    	            nWinner = getWinningNumber();
-    	    	            winner(nWinner, choice);
-    	    	        }
-    	    	    });
+    	for (int i = 0; i < 3; i++) {
+    	    Button empty = new Button(choiceRow[i]);
+    	    empty.setMinSize(70, 70);
+    	    empty.setStyle("-fx-background-color: white; -fx-border-color: white;");
+    	    
+	        // Punta sulle righe
+    	    empty.setOnAction(e -> {
+    	        choice = selectButton(empty);
+    	        if (choice != null) {
+    	            nWinner = getWinningNumber();
+    	            winner(nWinner, choice);
+    	        }
+    	    });
 
-    	    	    grid.add(empty, 12, i + 1);
-    	    	}
+    	    grid.add(empty, 12, i + 1);
+    	}
         	
     	String[] choiceColumns = {
     		"Punta sui primi 12 numeri",
@@ -218,28 +219,28 @@ public class Roulette extends VideoGames{
     		    "white"
     		};
     		
-    		// Aggiunta riga con bottini larghi 2 colonne
-    		for (int i = 0; i < 6; i++) {
-    		    Button b = new Button(choiceExtra[i]);
-        	    b.setMinSize(70 * 2 + 7, 70); 												// 2 colonne + spazio
-    		    b.setStyle(
-    		        "-fx-font-size: 16px;" +
-    		        "-fx-font-weight: bold;" +
-    		        "-fx-background-color: " + colorsExtra[i] + ";" +
-    		        "-fx-border-color: black;"
-    		    );
-    		    
-        	    // Punta su bottoni speciali 
-    		    b.setOnAction(e -> {
-    		    	choice=selectButton(b);
-    		    	if (choice != null) {
-    		            nWinner = getWinningNumber();
-    		            winner(nWinner, choice);
-    		        }
-    	        });
-    		    
-    		    grid.add(b, i*2, 5, 2, 1); 
-    		}
+		// Aggiunta riga con bottini larghi 2 colonne
+		for (int i = 0; i < 6; i++) {
+		    Button b = new Button(choiceExtra[i]);
+    	    b.setMinSize(70 * 2 + 7, 70); 												// 2 colonne + spazio
+		    b.setStyle(
+		        "-fx-font-size: 16px;" +
+		        "-fx-font-weight: bold;" +
+		        "-fx-background-color: " + colorsExtra[i] + ";" +
+		        "-fx-border-color: black;"
+		    );
+		    
+    	    // Punta su bottoni speciali 
+		    b.setOnAction(e -> {
+		    	choice=selectButton(b);
+		    	if (choice != null) {
+		            nWinner = getWinningNumber();
+		            winner(nWinner, choice);
+		        }
+	        });
+		    
+		    grid.add(b, i*2, 5, 2, 1); 
+		}
         
 	    Button restart = new Button("Ripunta");												// Creazione pulsante per far riniziare la partita
 	    restart.setOnAction(e -> {
@@ -250,10 +251,11 @@ public class Roulette extends VideoGames{
 	            selectedButton = null;
 	        }
 	    	Converter();
-	        });
+	    });
     	
     	Scene scene = new Scene(grid, 1100, 470);
        	primaryStage.setScene(scene);
+       	startTimer(primaryStage);
        	primaryStage.show();
  
        	// Quando chiudi la finestra del gioco ritrasformi i gettoni in punti
@@ -263,6 +265,7 @@ public class Roulette extends VideoGames{
        	        gameTokens = 0;
        	        updateDB();
        	    }
+       	    stopTimer();
        	});
 
        	        	
@@ -316,7 +319,7 @@ public class Roulette extends VideoGames{
 	        	// Riconversione dei gettoni residui in punti
 	            if (convertedTokens[0] > 0) {
 	                sumPoints(getNickname(), convertedTokens[0]);	            
-	                }
+	            }
 	            
 	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);				// Allarme che indica che non ci sono abbastanza punti per giocare 
 	            alert.setTitle("Punti insufficienti");
@@ -327,6 +330,7 @@ public class Roulette extends VideoGames{
 	            
 	            tokenStage.close(); 												// Chiusura di tutte le finestre aperte 
 	            primaryStage.close();
+	            stopTimer();
 	            return;  
 	        }
 	    });

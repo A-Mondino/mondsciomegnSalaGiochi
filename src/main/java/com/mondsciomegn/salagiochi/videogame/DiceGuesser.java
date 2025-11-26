@@ -86,6 +86,7 @@ public class DiceGuesser extends VideoGames{
             	  e1.printStackTrace();
               }
         }
+		
 		primaryStage.setTitle("Gioco dei Dadi");
 
         Label title = new Label("Lancio dei Dadi");
@@ -143,7 +144,11 @@ public class DiceGuesser extends VideoGames{
         Scene scene = new Scene(layout, 350, 450);
         primaryStage.setScene(scene);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
-        primaryStage.showAndWait();
+        startTimer(primaryStage);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> {
+            stopTimer();
+        });
 		
 	}
 	

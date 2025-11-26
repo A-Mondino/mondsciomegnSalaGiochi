@@ -56,7 +56,7 @@ public class Battleship extends VideoGames {
     private GridPane player = new GridPane();				// Servono per la visualizzazione grafica
     private GridPane computer = new GridPane();
     
-    			
+    private boolean tutorial = false;			
   
     
     private Integer[] currentShip = new Integer[2];	
@@ -83,6 +83,7 @@ public class Battleship extends VideoGames {
 	public void play(String nickname) {
 		setNickname(nickname);
     	Dialog<ButtonType> dialog = new Dialog<>();
+    	
     	dialog.setTitle("Dettagli Gioco");
     	dialog.setHeaderText("Istruzioni:");
     	dialog.setContentText(
@@ -91,13 +92,17 @@ public class Battleship extends VideoGames {
     	
     	ButtonType play = new ButtonType("Gioca", ButtonBar.ButtonData.OK_DONE);
     	ButtonType cancel = new ButtonType("Annulla", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-    	dialog.getDialogPane().getButtonTypes().setAll(play, cancel);
+    	ButtonType tutorial = new ButtonType("Tutorial", ButtonBar.ButtonData.HELP_2);
+    	
+    	dialog.getDialogPane().getButtonTypes().setAll(tutorial, play, cancel);
 
     	Optional<ButtonType> result = dialog.showAndWait();
     	if (!result.isPresent() || result.get() == cancel) {
     	    return;
     	}
+    	else 
+    		if(result.get() == tutorial)
+    			this.tutorial = true;
 
     	startGame();
 
@@ -208,7 +213,11 @@ public class Battleship extends VideoGames {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
+        startTimer(primaryStage);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> {
+            stopTimer();
+        });
         setNumberOfBoats();					// Inizializzo qui la quantità di barche per ogni tipo		        
 	}
 	
@@ -356,11 +365,13 @@ public class Battleship extends VideoGames {
 					setPlayerGrid();									// Sistemo la griglia di supporto
 					placeComputerShips();								// Faccio posizionare le barche al pc
 					enterBattlePhase();									// Inizia la fase di gioco
-					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			        alert.setTitle("FUOCO!!!!");
-			        alert.setHeaderText("È ARRIVATO IL MOMENTO DI SPARARE AL NEMICO!!!");
-			        alert.setContentText("premi in una qualunque cella del nemico!\nATTENZIONE: Se mancherai una nave nemica, concederai la mossa la computer!");
-			        alert.showAndWait();
+					if(tutorial) {
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				        alert.setTitle("FUOCO!!!!");
+				        alert.setHeaderText("È ARRIVATO IL MOMENTO DI SPARARE AL NEMICO!!!");
+				        alert.setContentText("premi in una qualunque cella del nemico!\nATTENZIONE: Se mancherai una nave nemica, concederai la mossa la computer!");
+				        alert.showAndWait();
+					}
 				}
 				return true;
 			}			
@@ -389,15 +400,18 @@ public class Battleship extends VideoGames {
 		        alert.setContentText(null);
 		        alert.showAndWait();
 		        primaryStage.close();
+		        stopTimer();
 				addPoints(getNickname());		// Calcolo i punti
 			}
 		}
 		else {			// Non ho colpito niente, è il turno del computer a sparare
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	        alert.setTitle("MANCATO!!!!");
-	        alert.setHeaderText("Hai trovato un buco nell'acqua xD");
-	        alert.setContentText("ora il computer ti sparerà");
-	        alert.showAndWait();
+			if(tutorial) {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		        alert.setTitle("MANCATO!!!!");
+		        alert.setHeaderText("Hai trovato un buco nell'acqua xD");
+		        alert.setContentText("ora il computer ti sparerà");
+		        alert.showAndWait();
+			}
 			computerGrid[row][col].setStyle("-fx-background-color: rgba(0,0,255,0.3); -fx-font-size: 20px;");	// Coloro la casella di blue
 			exitBattlePhase();
 			computerAttack();
@@ -423,11 +437,13 @@ public class Battleship extends VideoGames {
 		    if(tmpPlayer[row][col] != 'r' && (tmpPlayer[row][col] != '-' && tmpPlayer[row][col] != 'm')) {		// Se ha beccato una cella con qualcosa dentro, che non era già stata rivelata o mancata
 		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");	// Coloro la cella di rossa visto che è un colpo andato a segno
 		    	tmpPlayer[row][col] = 'r';  // Significa che ho preso una barca, allora la rivelo	    		
-		    	Alert alert = new Alert(Alert.AlertType.INFORMATION);	// Informa l'utente del cambio di turno
-		        alert.setTitle("COLPITO!!!!");
-		        alert.setHeaderText("Il computer ti ha colpito!!!");
-		        alert.setContentText(null);
-		        alert.showAndWait();
+		    	if(tutorial) {
+			    	Alert alert = new Alert(Alert.AlertType.INFORMATION);	// Informa l'utente del cambio di turno
+			        alert.setTitle("COLPITO!!!!");
+			        alert.setHeaderText("Il computer ti ha colpito!!!");
+			        alert.setContentText(null);
+			        alert.showAndWait();
+		    	}
 				
 		    }
 		    else if(tmpPlayer[row][col] == '-') {		// Altrimenti se ha beccato una casella vuota
@@ -444,6 +460,7 @@ public class Battleship extends VideoGames {
 		        alert.setContentText("Il computer ha vinto");
 		        alert.showAndWait();
 		        primaryStage.close();
+		        stopTimer();
 				addPoints("_COMPUTER_");
 				return;
 		    }

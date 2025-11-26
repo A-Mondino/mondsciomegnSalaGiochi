@@ -137,11 +137,18 @@ public class Tris extends VideoGames{
 		             });
 	            }
 	        }
-
+	        
+	        
 	        Scene scene = new Scene(grid, 300, 300);
 	        primaryStage.setScene(scene);
 	        primaryStage.initModality(Modality.APPLICATION_MODAL);
-	        primaryStage.showAndWait();
+	        startTimer(primaryStage);
+	        primaryStage.show();
+	        
+	        
+	        primaryStage.setOnCloseRequest(event -> {
+	            stopTimer();
+	        });
 	    }
 
 	    
@@ -154,6 +161,7 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Hai vinto!");
 	            primaryStage.close();
+	            stopTimer();
 	            addPoints(getNickname());					// E assegno i punti
 	            return true;
 	        }
@@ -169,6 +177,7 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Pareggio!");
 	            primaryStage.close();
+	            stopTimer();
 	            
 	        } else {								// Altrimenti ho trovato una mossa da fare 
 		        int row = move[0];
@@ -181,6 +190,7 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Hai perso!");
 	            primaryStage.close();
+	            stopTimer();
 	            addPoints("_COMPUTER_");
 	        }
 	        
