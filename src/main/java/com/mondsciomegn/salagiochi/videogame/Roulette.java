@@ -241,18 +241,7 @@ public class Roulette extends VideoGames{
 		    
 		    grid.add(b, i*2, 5, 2, 1); 
 		}
-        
-	    Button restart = new Button("Ripunta");												// Creazione pulsante per far riniziare la partita
-	    restart.setOnAction(e -> {
-	    	selectionLocked = false;        
-	        if (selectedButton != null) {
-	            // Rimuove il bordo giallo dal bottone selezionato
-	            selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));
-	            selectedButton = null;
-	        }
-	    	Converter();
-	    });
-    	
+   
     	Scene scene = new Scene(grid, 1100, 470);
        	primaryStage.setScene(scene);
        	startTimer(primaryStage);
@@ -261,7 +250,7 @@ public class Roulette extends VideoGames{
        	// Quando chiudi la finestra del gioco ritrasformi i gettoni in punti
        	primaryStage.setOnCloseRequest(e -> {
        	    if (gameTokens > 0) {
-       	        sumPoints(getNickname(), gameTokens);   
+       	        sumPoints(getNickname(), gameTokens, 0);   
        	        gameTokens = 0;
        	        updateDB();
        	    }
@@ -271,14 +260,11 @@ public class Roulette extends VideoGames{
        	        	
     	Converter();
 
-	    VBox resultBox = new VBox(10, restart);
-	    resultBox.setPadding(new Insets(10));
-	    grid.add(resultBox, 0, 6, 12, 1);	
+	 
 
 	}
 	
 	private void Converter() {
-
 	    Stage tokenStage = new Stage();
 	    tokenStage.setTitle("Converti punti in gettoni");
 	    tokenStage.setOnCloseRequest(Event::consume);							// impedisce la chiusura del pop-up
@@ -302,23 +288,23 @@ public class Roulette extends VideoGames{
 	    betBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 	    betBtn.setDisable(gameTokens <= 0);
 	    
-	    final int[] convertedTokens = {0};
+	    
 
 	    convertBtn.setOnAction(e -> {
 
 	        if (getScore() >= 300) {												// Controllo che ci siano punti a sufficienza
 
-	        	sumPoints(getNickname(),-1);  										// Aggiorna punteggio
-	            convertedTokens[0]++;												// Incremento contatore gettoni
+	        	sumPoints(getNickname(),-1, 0);  										// Aggiorna punteggio
+	            gameTokens++;														// Incremento contatore gettoni
 
 	            pointsLabel.setText("Punti disponibili: " + getScore());
-	            tokensLabel.setText("Gettoni convertiti: " + (gameTokens + convertedTokens[0]));
+	            tokensLabel.setText("Gettoni convertiti: " + gameTokens);
 
 	            betBtn.setDisable(false);
 	        }else {
 	        	// Riconversione dei gettoni residui in punti
-	            if (convertedTokens[0] > 0) {
-	                sumPoints(getNickname(), convertedTokens[0]);	            
+	            if (gameTokens > 0) {
+	                sumPoints(getNickname(), gameTokens, 0);	            
 	            }
 	            
 	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);				// Allarme che indica che non ci sono abbastanza punti per giocare 
@@ -336,8 +322,6 @@ public class Roulette extends VideoGames{
 	    });
 
 	    betBtn.setOnAction(e -> {
-	        gameTokens += convertedTokens[0];   									// Gettoni usati nel gioco
-	        convertedTokens[0] = 0;
 	        tokenStage.close();
 	        primaryStage.getScene().getRoot().setDisable(false);
 	    });
@@ -369,9 +353,7 @@ public class Roulette extends VideoGames{
 	    
 	    // Blocca tutte le selezioni future
 	    selectionLocked = true;
-	    
-	    // Riduci i gettoni
-	    gameTokens--;
+
 	    
 	    String selectedNumber = cell.getText().trim();
 	    return selectedNumber;
@@ -386,7 +368,13 @@ public class Roulette extends VideoGames{
 	        int choiceNum = Integer.parseInt(decision);
 	        if(num == choiceNum) {
 	            showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-	            sumPoints(getNickname(),2);	            return;
+	            sumPoints(getNickname(),36, gameTokens*300);	            				// Se indovini il numero moltiplichi i tuoi punti x 36 + guadagni 300 punti per ogni token Puntato
+	            selectionLocked = false;
+	            // Rimuove il bordo giallo dal bottone selezionato
+	            selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));
+	            selectedButton = null;
+	    		Converter();
+	            return;
 	        }else {
 	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	        }
@@ -394,153 +382,159 @@ public class Roulette extends VideoGames{
 			
 		switch(decision) {																// Controllo vincita se il numero selezionato è un bottone speciale 
 		
-		case "Punta sull'intera riga 1":
-		{
-            showMessage("Hai selezionato: Punta sull'intera riga 1" );
-            if(num == 1 || num == 4 || num == 7 || num == 10 || num == 13 || num == 16 || num == 19 || num == 22 || num == 25 || num == 28 || num == 31 || num == 34) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Punta sull'intera riga 2":
-		{
-            showMessage("Hai selezionato: Punta sull'intera riga 2" );
-            if(num == 2 || num == 5 || num == 8 || num == 11 || num == 14 || num == 17 || num == 20 || num == 23 || num == 26 || num == 29 || num == 32 || num == 35) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-            
-			break;
-		}
-		
-		case "Punta sull'intera riga 3":
-		{
-            showMessage("Hai selezionato: Punta sull'intera riga 3" );
-            if(num == 3 || num == 6 || num == 9 || num == 12 || num == 15 || num == 18 || num == 21 || num == 24 || num == 27 || num == 30 || num == 33 || num == 36) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-	 	    
-		case "Punta sui primi 12 numeri":
-		{
-            showMessage("Hai selezionato: Punta sui primi 12 numeri" );
-            if(num > 0 && num < 13) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Punta sui numeri da 13 a 24":
-		{
-            showMessage("Hai selezionato: Punta sui numeri da 13 a 24" );
-            if(num > 12 && num < 25) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Punta sui numeri da 25 a 36":
-		{
-            showMessage("Hai selezionato: Punta sui numeri da 25 a 36" );
-            if(num > 24 && num < 37) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Punta 1-18":
-		{
-            showMessage("Hai selezionato: Punta 1-18" );
-            if(num > 0 && num < 19) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Pari":
-		{
-            showMessage("Hai selezionato: Pari" );
-            if(num % 2 == 0) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Dispari":
-		{
-            showMessage("Hai selezionato: dispari" );
-            if(num % 2 != 0) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-    	        sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Punta 19-36":
-		{
-            showMessage("Hai selezionato: Punta 19-36" );
-            if(num > 18 && num < 37) {
-				showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-				sumPoints(getNickname(),1);
-            }else
-	            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-		
-		case "Rosso":
-		{
-	        showMessage("Hai selezionato i numeri di colore: Rosso" );
-	        if(num == 1 || num == 3 || num == 5 || num == 7 || num == 9 || num == 12 || num == 14 || num == 16 || num == 18 || num == 19 || num == 21 || num == 23 || num == 25 || num == 27 || num == 30 || num == 32 || num == 34 || num == 36) {
-	        	showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-	        	sumPoints(getNickname(),1);
+			case "Punta sull'intera riga 1":
+			{
+	            showMessage("Hai selezionato: Punta sull'intera riga 1" );
+	            if(num == 1 || num == 4 || num == 7 || num == 10 || num == 13 || num == 16 || num == 19 || num == 22 || num == 25 || num == 28 || num == 31 || num == 34) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
-		}
-
-		case "Nero":
-		{
-	        showMessage("Hai selezionato i numeri di colore: Nero" );
-	        if(num == 2 || num == 4 || num == 6 || num == 8 || num == 10 || num == 11 || num == 13 || num == 15 || num == 17 || num == 20 || num == 22 || num == 24 || num == 26 || num == 28 || num == 29 || num == 31 || num == 33 || num == 35) {
+	
+				break;
+			}
+			
+			case "Punta sull'intera riga 2":
+			{
+	            showMessage("Hai selezionato: Punta sull'intera riga 2" );
+	            if(num == 2 || num == 5 || num == 8 || num == 11 || num == 14 || num == 17 || num == 20 || num == 23 || num == 26 || num == 29 || num == 32 || num == 35) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(),1);
-			}else
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-
-			break;
+	            
+				break;
+			}
+			
+			case "Punta sull'intera riga 3":
+			{
+	            showMessage("Hai selezionato: Punta sull'intera riga 3" );
+	            if(num == 3 || num == 6 || num == 9 || num == 12 || num == 15 || num == 18 || num == 21 || num == 24 || num == 27 || num == 30 || num == 33 || num == 36) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+		 	    
+			case "Punta sui primi 12 numeri":
+			{
+	            showMessage("Hai selezionato: Punta sui primi 12 numeri" );
+	            if(num > 0 && num < 13) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Punta sui numeri da 13 a 24":
+			{
+	            showMessage("Hai selezionato: Punta sui numeri da 13 a 24" );
+	            if(num > 12 && num < 25) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Punta sui numeri da 25 a 36":
+			{
+	            showMessage("Hai selezionato: Punta sui numeri da 25 a 36" );
+	            if(num > 24 && num < 37) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Punta 1-18":
+			{
+	            showMessage("Hai selezionato: Punta 1-18" );
+	            if(num > 0 && num < 19) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens, gameTokens*(300/3));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Pari":
+			{
+	            showMessage("Hai selezionato: Pari" );
+	            if(num % 2 == 0) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Dispari":
+			{
+	            showMessage("Hai selezionato: dispari" );
+	            if(num % 2 != 0) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+	    	        sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Punta 19-36":
+			{
+	            showMessage("Hai selezionato: Punta 19-36" );
+	            if(num > 18 && num < 37) {
+					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+					sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+	            }else
+		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+			
+			case "Rosso":
+			{
+		        showMessage("Hai selezionato i numeri di colore: Rosso" );
+		        if(num == 1 || num == 3 || num == 5 || num == 7 || num == 9 || num == 12 || num == 14 || num == 16 || num == 18 || num == 19 || num == 21 || num == 23 || num == 25 || num == 27 || num == 30 || num == 32 || num == 34 || num == 36) {
+		        	showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+		        	sumPoints(getNickname(), gameTokens, gameTokens*(300/3));
+		            }else
+			            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+			}
+	
+			case "Nero":
+			{
+		        showMessage("Hai selezionato i numeri di colore: Nero" );
+		        if(num == 2 || num == 4 || num == 6 || num == 8 || num == 10 || num == 11 || num == 13 || num == 15 || num == 17 || num == 20 || num == 22 || num == 24 || num == 26 || num == 28 || num == 29 || num == 31 || num == 33 || num == 35) {
+						showMessage("Numero estratto: " + num + "\nHAI VINTO!");
+						sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+				}else
+			            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
+	
+				break;
+	
+			}
 
 		}
-
-		}
-
+		gameTokens = 0;
+		
+		selectionLocked = false;
+        // Rimuove il bordo giallo dal bottone selezionato
+        selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));
+        selectedButton = null;
+		Converter();
 	}
 		
 	private void updateDB() {
@@ -563,18 +557,18 @@ public class Roulette extends VideoGames{
 
 	
 	
-	private void sumPoints(String nickname, int mult) {
+	private void sumPoints(String nickname, int mult, int extra) {
 	    String nicknameDB = nickname.isEmpty() ? "_ANONIMO_" : nickname;
 	    String sql = "UPDATE utente SET score = ? WHERE nickname = ?";
 
 	    try (Connection conn = DataBaseConnection.getConnection();
 	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-	    	stmt.setInt(1, getScore() + (300*mult));
+	    	stmt.setInt(1,(getScore() + (300*mult) + extra));
 	        stmt.setString(2, nicknameDB);
 	        stmt.executeUpdate();
 	        																					
-	        setScore(getScore() + (300*mult));															// Aggiorna i punteggi a seconda del valore della variabile mult (la variabile assume valore positivo se incrementa i punti, negativo per decrementarli
+	        setScore((int) (getScore() + (300*mult) + extra));												// Aggiorna i punteggi a seconda del valore della variabile mult (la variabile assume valore positivo se incrementa i punti, negativo per decrementarli
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
