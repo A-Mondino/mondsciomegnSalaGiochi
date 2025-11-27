@@ -177,7 +177,7 @@ public class DiceGuesser extends VideoGames{
 		}
 	}
 	
-	private Image viewImm(int dice) {
+	private Image viewImage(int dice) {
 	    // Percorso per il caricamento delle immagini
 	    String imgPath = getClass()
 	            .getResource("/com/mondsciomegn/salagiochi/gui/") 					// Percordo esatto per arrivare alla cartella gui 
