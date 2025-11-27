@@ -110,23 +110,23 @@ public class Room extends Application{
        switch (room) {
 	        case -1:	    
 	        	roomLabel.setText("Tabellone");
-	        	roomL(root);
+	        	roomL();
 	            break;
 	            
 	        case 0:
 	        	roomLabel.setText("Benvenuto in sala giochi!!");
-	        	roomM(root);												// Main Room
+	        	roomM();												// Main Room
 	            break;
 	            
 	        case 1:	  
 	        	roomLabel.setText("VideoGames");
-	        	roomR(root);
+	        	roomR();
 	            break;
 		} 
 	}
 
 		
-	private void roomL(BorderPane root) {
+	private void roomL() {
 		root.getTop().setVisible(false);
 
         StackPane centerPane = new StackPane(boxTitle());
@@ -174,7 +174,7 @@ public class Room extends Application{
 	}
 		
 	
-	private void roomM(BorderPane root) {
+	private void roomM() {
 		primaryStage.setTitle("Sala Giochi");							// Titolo 
         String imagePath = getClass().getResource("./img/room.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
@@ -398,7 +398,7 @@ public class Room extends Application{
     }
 	
 	
-	private void roomR(BorderPane root) {
+	private void roomR() {
 		root.getTop().setVisible(false);        
 
         StackPane centerPane = new StackPane(boxTitle());
