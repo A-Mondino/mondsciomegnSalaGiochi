@@ -111,20 +111,20 @@ public class DiceGuesser extends VideoGames{
 
         throwButton.setOnAction(e -> {
                 int dice1 = throwDice();
-                diceUser1.setImage(viewImm(dice1));
+                diceUser1.setImage(viewImage(dice1));
 
                 int dice2 = throwDice();
-                diceUser2.setImage(viewImm(dice2));
+                diceUser2.setImage(viewImage(dice2));
 
                 int sumPlayer = dice1 + dice2;
 
                 message.setText("La somma dei dadi che hai lanciato è: " + sumPlayer);
 
                 int dice3 = throwDice();
-                diceComp1.setImage(viewImm(dice3));
+                diceComp1.setImage(viewImage(dice3));
 
                 int dice4 = throwDice();
-                diceComp2.setImage(viewImm(dice4));
+                diceComp2.setImage(viewImage(dice4));
 
                 int sumComputer = dice3 + dice4;
                 message1.setText("La somma dei dadi lanciati dall'avversario è: " + sumComputer);
@@ -177,7 +177,7 @@ public class DiceGuesser extends VideoGames{
 		}
 	}
 	
-	private Image viewImm(int dice) {
+	private Image viewImage(int dice) {
 	    // Percorso per il caricamento delle immagini
 	    String imgPath = getClass()
 	            .getResource("/com/mondsciomegn/salagiochi/gui/") 					// Percordo esatto per arrivare alla cartella gui 
