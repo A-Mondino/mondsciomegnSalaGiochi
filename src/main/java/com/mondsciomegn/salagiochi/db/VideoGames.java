@@ -25,7 +25,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 
 
-public abstract class VideoGames {
+public class VideoGames {
 	private final int id = 0;
 	private String name;
 	private Category category;
@@ -57,7 +57,7 @@ public abstract class VideoGames {
 	}
 	
 	
-	public abstract void play(String nickName);
+	public void play(String nickName) {}
 	
 	
 	protected void startTimer(Stage mainStage) {
@@ -97,7 +97,6 @@ public abstract class VideoGames {
 	    root.layout();									// E dei layout della root 
 
 	    double timerWidth = root.getWidth();			// Senza quelle due funzioni questi due calcoli vengono sbagliati
-//	    double timerHeight = root.getHeight();
 
 	    double timerX = screenBounds.getMaxX() - timerWidth - 20; // 10px margine dal bordo
 	    double timerY = screenBounds.getMinY() + 20;              // 10px dal top
@@ -117,34 +116,21 @@ public abstract class VideoGames {
 	}
 	
 	protected void addPoints(String nickname) {
-    	if(nickname.isEmpty()) {												// Gioco come anonimo
-	    	String sql  = "UPDATE utente SET score = ? WHERE nickname = ?";
-	    	try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-	            	stmt.setInt(1, getScore());    								 // Assegna il punteggio
-	            	if(nickname.isEmpty())
-	            		stmt.setString(2,"_ANONIMO_");
-                    stmt.executeUpdate(); 										// Prova a fare l'update
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
-    	}
-    	else {																	// Il NickName è valido
-    		String sql  = "UPDATE utente SET score = score + ? WHERE nickname = ?";
-	    	try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-	            	stmt.setInt(1, getScore());    								// Assegna il punteggio
-	            	stmt.setString(2,nickname);
-                    stmt.executeUpdate(); 										// Prova a fare l'update
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
-    	}
+		boolean isAnonimous = (nickname == null) || nickname.isEmpty();		// Controllo se sta giocando in anonimo
 		
+		String finalNickname = isAnonimous ? "_ANONIMO_" : nickname;		
+		String sql  = isAnonimous 											// In base all'anonimo setto il nickname della query
+				? "UPDATE utente SET score = ? WHERE nickname = ?"
+				: "UPDATE utente SET score = score + ? WHERE nickname = ?"; 
+
+	    try (Connection conn = DataBaseConnection.getConnection();
+	                PreparedStatement stmt = conn.prepareStatement(sql)) {
+        	stmt.setInt(1, getScore());    								 	// Assegna il punteggio
+    		stmt.setString(2,finalNickname);
+            stmt.executeUpdate(); 											// Prova a fare l'update
+	    } catch (SQLException e) {
+        	e.printStackTrace();
+        }		
 	}
 	
 

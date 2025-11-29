@@ -1,17 +1,13 @@
 package com.mondsciomegn.salagiochi.gui;
 
-import java.lang.ProcessHandle.Info;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 
-import org.h2.command.dml.Insert;
-
-import com.mondsciomegn.salagiochi.*;
 import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.DataBaseContainer;
@@ -57,10 +53,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleStringProperty;
 
 
 public class Room extends Application{
@@ -110,23 +103,23 @@ public class Room extends Application{
        switch (room) {
 	        case -1:	    
 	        	roomLabel.setText("Tabellone");
-	        	roomL(root);
+	        	roomL();
 	            break;
 	            
 	        case 0:
 	        	roomLabel.setText("Benvenuto in sala giochi!!");
-	        	roomM(root);												// Main Room
+	        	roomM();												// Main Room
 	            break;
 	            
 	        case 1:	  
 	        	roomLabel.setText("VideoGames");
-	        	roomR(root);
+	        	roomR();
 	            break;
 		} 
 	}
 
 		
-	private void roomL(BorderPane root) {
+	private void roomL() {
 		root.getTop().setVisible(false);
 
         StackPane centerPane = new StackPane(boxTitle());
@@ -174,7 +167,7 @@ public class Room extends Application{
 	}
 		
 	
-	private void roomM(BorderPane root) {
+	private void roomM() {
 		primaryStage.setTitle("Sala Giochi");							// Titolo 
         String imagePath = getClass().getResource("./img/room.jpg").toExternalForm();
         BackgroundImage bgImage = new BackgroundImage(
@@ -232,9 +225,9 @@ public class Room extends Application{
                 formGrid.setAlignment(Pos.CENTER);
                 
                 VBox formLoginBox =  new VBox();		
-                formLoginBox = loginBox(popupStage, nickName);			// Carico il form
+                formLoginBox = loginBox(popupStage);			// Carico il form
                 VBox formRegisterBox = new VBox();
-                formRegisterBox = registerBox(popupStage);				// Carico il form
+                formRegisterBox = registerBox();				// Carico il form
                 	
                 formGrid.add(formRegisterBox, 0, 0); 					// cella (0,0)
                 formGrid.add(formLoginBox, 1, 0);    					// cella (0,1)
@@ -398,7 +391,7 @@ public class Room extends Application{
     }
 	
 	
-	private void roomR(BorderPane root) {
+	private void roomR() {
 		root.getTop().setVisible(false);        
 
         StackPane centerPane = new StackPane(boxTitle());
@@ -446,7 +439,7 @@ public class Room extends Application{
 	}
 	
 	
-	private VBox registerBox(Stage popupStage) {		
+	private VBox registerBox() {		
 		VBox registerBox = new VBox(10);
         registerBox.setAlignment(Pos.CENTER);
         registerBox.setPadding(new Insets(20));
@@ -551,7 +544,7 @@ public class Room extends Application{
 	}
 
 	
-	private VBox loginBox(Stage popupStage, Label nickname) {		
+	private VBox loginBox(Stage popupStage) {		
 		VBox loginBox = new VBox(10);
         loginBox.setAlignment(Pos.CENTER);
         loginBox.setPadding(new Insets(20));

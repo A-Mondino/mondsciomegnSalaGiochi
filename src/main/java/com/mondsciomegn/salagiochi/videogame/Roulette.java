@@ -51,12 +51,7 @@ public class Roulette extends VideoGames{
 		super(name, category);
 		setScore(600);
 	}
-	
-	public Roulette(String name, Category category, int score) {
-		super(name, category);
-		setScore(score);
-	}
-	
+
 	
 	public void play(String nickname) {
 		setNickname(nickname);

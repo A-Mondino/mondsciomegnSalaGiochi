@@ -43,11 +43,6 @@ public class Tris extends VideoGames{
 			super(name, category);
 			setScore(300);
 		}
-		
-		public Tris(String name, Category category,int score) {
-			super(name, category);
-			setScore(score);
-		}
 
 	 	private Button[][] buttons = new Button[3][3];		// Griglia del tris
 	    private char[][] playGrid = new char[3][3];			// Matrice di supporto

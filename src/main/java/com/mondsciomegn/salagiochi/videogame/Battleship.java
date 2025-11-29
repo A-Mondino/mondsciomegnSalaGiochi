@@ -2,7 +2,6 @@ package com.mondsciomegn.salagiochi.videogame;
 
 
 
-import java.io.StreamCorruptedException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,6 +14,7 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,15 +38,10 @@ public class Battleship extends VideoGames {
 		super(name, category);
 		setScore(1000);
 	}
-	public Battleship(String name, Category category,int score) {
-		super(name, category);
-		setScore(score);
-	}
 	
 	
-	
-	private final int N = 9;
-	private final int BOAT_TYPE = 4;
+	private static final int N = 9;
+	private static final int BOAT_TYPE = 4;
 	
 	private Button[][] playerGrid = new Button[N][N];		// Griglia del Giocatore
 	private Character[][] tmpPlayer = new Character[N][N];
@@ -56,7 +51,7 @@ public class Battleship extends VideoGames {
     private GridPane player = new GridPane();				// Servono per la visualizzazione grafica
     private GridPane computer = new GridPane();
     
-    private boolean tutorial = false;			
+    private boolean tutorialFlag = false;			
   
     
     private Integer[] currentShip = new Integer[2];	
@@ -75,9 +70,9 @@ public class Battleship extends VideoGames {
     private Stage primaryStage = new Stage();
     private Stage boatStage = new Stage();					// Finestra da cui scegliere le barche 
 	
-    private final int MAXH = 700;
-    private final int MAXW = 700;
-    private final int DIV = 13;
+    private static final int MAXH = 700;
+    private static final int MAXW = 700;
+    private static final int DIV = 13;
 
 	@Override
 	public void play(String nickname) {
@@ -102,7 +97,7 @@ public class Battleship extends VideoGames {
     	}
     	else 
     		if(result.get() == tutorial)
-    			this.tutorial = true;
+    			this.tutorialFlag = true;
 
     	startGame();
 
@@ -113,19 +108,15 @@ public class Battleship extends VideoGames {
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
 	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
 	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
-            
-            try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-                    try {
-                        stmt.executeUpdate(); 		// Prova a inserire l'utente
-
-                    } catch (SQLException ex) { 
-                    	ex.printStackTrace();
-                    }
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
+	        try (Connection conn = DataBaseConnection.getConnection();
+	                PreparedStatement stmt = conn.prepareStatement(sql)) {
+	                
+	                    stmt.executeUpdate(); 		// Prova a inserire l'utente
+	
+	               
+	          } catch (SQLException e) {
+	        	  e.printStackTrace();
+	          }
         }
     	
     	
@@ -179,7 +170,7 @@ public class Battleship extends VideoGames {
         }
 
         for (int i = 0; i < N; i++) 							// Disattivo i bottoni del computer per impedire all'utente che prema li prima del dovuto
-		    for (int j = 0; j < N; j++) 
+        	for (int j = 0; j < N; j++) 
 		        computerGrid[i][j].setDisable(true);
         
         
@@ -277,8 +268,7 @@ public class Battleship extends VideoGames {
 				boatStage.setOnHidden(event -> primaryStage.getScene().getRoot().setDisable(false));
 				totalPlayerShips[currentShip[0]-2]--;						// La tolgo dall'elenco totale
 				boatsLabel[currentShip[0]-2].setText("x" + totalPlayerShips[currentShip[0]-2]);		// Aggiorno l'etichetta
-				if(totalPlayerShips[currentShip[0]-2] == 0)					// Se il contatore delle barche di quella grandezza è a zero
-					if(!boats[boatLength-2].isDisable())
+				if(totalPlayerShips[currentShip[0]-2] == 0 && !boats[boatLength-2].isDisable())
 						boats[boatLength-2].setDisable(true);			// disabilito il bottone se non era già disabilitato
 				
 				boatStage.close();
@@ -308,9 +298,7 @@ public class Battleship extends VideoGames {
 		
 		Scene s = new Scene(boatBox, 300, 300);
 		boatStage.setScene(s);
-		boatStage.setOnCloseRequest(e -> {							// Questo impedisce la chiusura della finestra delle barche
-			e.consume();
-		});
+		boatStage.setOnCloseRequest(Event::consume);
 
 	    boatStage.setX(primaryStage.getX() - s.getWidth() - 10);	// Questo serve per aprire la finestra a sx di quella principale
 	    boatStage.setY(primaryStage.getY());
@@ -365,7 +353,7 @@ public class Battleship extends VideoGames {
 					setPlayerGrid();									// Sistemo la griglia di supporto
 					placeComputerShips();								// Faccio posizionare le barche al pc
 					enterBattlePhase();									// Inizia la fase di gioco
-					if(tutorial) {
+					if(tutorialFlag) {
 						Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				        alert.setTitle("FUOCO!!!!");
 				        alert.setHeaderText("È ARRIVATO IL MOMENTO DI SPARARE AL NEMICO!!!");
@@ -405,7 +393,7 @@ public class Battleship extends VideoGames {
 			}
 		}
 		else {			// Non ho colpito niente, è il turno del computer a sparare
-			if(tutorial) {
+			if(tutorialFlag) {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		        alert.setTitle("MANCATO!!!!");
 		        alert.setHeaderText("Hai trovato un buco nell'acqua xD");
@@ -437,7 +425,7 @@ public class Battleship extends VideoGames {
 		    if(tmpPlayer[row][col] != 'r' && (tmpPlayer[row][col] != '-' && tmpPlayer[row][col] != 'm')) {		// Se ha beccato una cella con qualcosa dentro, che non era già stata rivelata o mancata
 		    	playerGrid[row][col].setStyle("-fx-background-color: rgba(255,0,0,0.3); -fx-font-size: 20px;");	// Coloro la cella di rossa visto che è un colpo andato a segno
 		    	tmpPlayer[row][col] = 'r';  // Significa che ho preso una barca, allora la rivelo	    		
-		    	if(tutorial) {
+		    	if(tutorialFlag) {
 			    	Alert alert = new Alert(Alert.AlertType.INFORMATION);	// Informa l'utente del cambio di turno
 			        alert.setTitle("COLPITO!!!!");
 			        alert.setHeaderText("Il computer ti ha colpito!!!");
@@ -482,8 +470,7 @@ public class Battleship extends VideoGames {
 	private boolean checkPlayerWin() {		// Se tutte le barche sono state rivelate, il pc ha perso
 	    for (int i = 1; i < N; i++)
 	        for (int j = 1; j < N; j++)
-	            if (tmpComputer[i][j] != '-')       // c'è una barca
-	                if (computerGrid[i][j].getText().isEmpty())
+	            if (tmpComputer[i][j] != '-' && computerGrid[i][j].getText().isEmpty())
 	                    return false;
 	    return true;
 	}
@@ -672,7 +659,7 @@ public class Battleship extends VideoGames {
 	    
 	    // --- Sinistra (col - i) ---
 	    // C'è spazio fino all'inizio della griglia (ultima cella: col - shipLen + 1)
-	    if (!canPlace && col - shipLen + 1 >= 0) {
+	    if (col - shipLen + 1 >= 0) {
 	        boolean isClear = true;
 	        for (int i = 1; i < shipLen; i++) {
 	            if (!playerGrid[row][col - i].getText().isEmpty()) {
@@ -685,7 +672,7 @@ public class Battleship extends VideoGames {
 
 	    // --- Giù (row + i) ---
 	    // C'è spazio fino alla fine della griglia (ultima cella: row + shipLen - 1)
-	    if (!canPlace && row + shipLen <= N) {
+	    if (row + shipLen <= N) {
 	        boolean isClear = true;
 	        for (int i = 1; i < shipLen; i++) {
 	            if (!playerGrid[row + i][col].getText().isEmpty()) {
@@ -698,7 +685,7 @@ public class Battleship extends VideoGames {
 	    
 	    // --- Su (row - i) ---
 	    // C'è spazio fino all'inizio della griglia (ultima cella: row - shipLen + 1)
-	    if (!canPlace && row - shipLen + 1 >= 0) {
+	    if (row - shipLen + 1 >= 0) {
 	        boolean isClear = true;
 	        for (int i = 1; i < shipLen; i++) {
 	            if (!playerGrid[row - i][col].getText().isEmpty()) {
@@ -801,7 +788,6 @@ public class Battleship extends VideoGames {
 		}
 		resetBackGrid();
 		currentShip[1] = 0;
-		return;
 	}
 	
 	private boolean checkForAllBoatsDown() {		

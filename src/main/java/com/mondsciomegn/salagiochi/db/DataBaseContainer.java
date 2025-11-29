@@ -9,6 +9,8 @@ import com.mondsciomegn.salagiochi.videogame.Tris;
 
 public class DataBaseContainer {
 	
+	private DataBaseContainer() {}
+	
 	 public static List<User> getAllUsers() {
 	        List<User> users = new ArrayList<>();
 
@@ -47,13 +49,7 @@ public class DataBaseContainer {
 	             ResultSet rs = stmt.executeQuery(query)) {
 	        	
 	            while (rs.next()) {
-	            	Category cat = new Category(rs.getString("categoria"));
-	                VideoGames v = new Tris(
-	                        rs.getString("nome"),
-	                        cat,
-	                        rs.getInt("score")
-	                );
-	                games.add(v);
+	                games.add(new VideoGames(rs.getString("nome"), new Category(rs.getString("categoria"))));
 	            }
 
 	        } catch (SQLException e) {
