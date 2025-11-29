@@ -4,13 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -19,10 +15,10 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import java.sql.Timestamp;
+import java.util.Date;
 
 
 public class VideoGames {
@@ -131,6 +127,29 @@ public class VideoGames {
 	    } catch (SQLException e) {
         	e.printStackTrace();
         }		
+	}
+	
+	protected void registerGame(String nickname, int mult) {
+		// Controllo se il nickname è nullo o vuoto
+	    String finalNickname = (nickname == null || nickname.isEmpty()) ? "_ANONIMO_" : nickname;
+
+	    String sql = "INSERT INTO activityLog (nickname, videogioco, data_partita, score) VALUES (?, ?, ?, ?)";
+	    
+	    try (Connection conn = DataBaseConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	        stmt.setString(1, finalNickname);                  // nickname del giocatore
+	        stmt.setString(2, this.name);                      // nome del videogioco
+	        stmt.setTimestamp(3, new Timestamp(new Date().getTime()));  // data corrente
+	        stmt.setInt(4, this.score * mult);                        // punteggio del videogioco
+
+	        stmt.executeUpdate();                               // eseguo l'inserimento
+	        //System.out.println("Gioco registrato correttamente!");
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        showMessage("Errore durante la registrazione della partita!");
+	    }
 	}
 	
 

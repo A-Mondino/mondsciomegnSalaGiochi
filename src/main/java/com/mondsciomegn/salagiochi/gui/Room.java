@@ -2,12 +2,13 @@ package com.mondsciomegn.salagiochi.gui;
 
 
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import com.mondsciomegn.salagiochi.db.ActivityLog;
 import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.DataBaseContainer;
@@ -127,25 +128,30 @@ public class Room extends Application{
         
 		TableView<User> userTable = new TableView<>();
 	    TableView<VideoGames> gameTable = new TableView<>();
+	    TableView<ActivityLog> activityLogTable = new TableView<>();
 	    
 	    double tableWidth = 500;							// Solo per uniformità di grandezza delle tabelle che hanno num di colonne diverse
 	   
 	    addUserColumns(userTable); 										// Aggiunta delle colonne
 	    userTable.getColumns().get(2).setVisible(false);				// Nascondo la password
 	    addGameColumns(gameTable);
-	   
+	    addActivityLogColumns(activityLogTable);
+	    
 	    
 	    userTable.getItems().addAll(DataBaseContainer.getAllUsers());	// Aggiunta dei dati
 	    gameTable.getItems().addAll(DataBaseContainer.getAllGames());
-	    
+	    activityLogTable.getItems().addAll(DataBaseContainer.getAllActivity());
 	   
 	    userTable.setPrefWidth(tableWidth);
 	    gameTable.setPrefWidth(tableWidth);
+	   // activityLogTable.setPrefWidth(tableWidth);
+	    
 	    StackPane userPane = new StackPane(userTable);					// Creazione StackPane per ogni tabella
 	    StackPane gamePane = new StackPane(gameTable);
+	    StackPane activityPane = new StackPane(activityLogTable);
 	    userPane.setAlignment(Pos.CENTER);
 	    gamePane.setAlignment(Pos.CENTER);
-
+	    activityPane.setAlignment(Pos.CENTER);
 	    
 	    GridPane grid = new GridPane();									// Creazione della griglia 2x2
 	    grid.setPadding(new Insets(20));
@@ -154,8 +160,8 @@ public class Room extends Application{
 
 	    // Posiziona le tabelle nella prima riga
 	    grid.add(userTable, 0, 0);										// colonna 0, riga 0
-	    grid.add(gameTable, 1, 0); 										// colonna 1, riga 0
-
+	    grid.add(activityPane, 0, 1, 2, 1); 							// colonna 0, riga 1, colspan 2, rowspan 1
+	    grid.add(gameTable, 1, 0);										// colonna 1, riga 0
 	    
 	    BorderPane.setAlignment(grid, Pos.CENTER);						// Centra la griglia nella stanza
 	    
@@ -704,6 +710,31 @@ public class Room extends Application{
 	    );
 	    
 	    table.getColumns().addAll(colNick, colName, colPassword, colScore);
+	}
+	
+	private void addActivityLogColumns(TableView<ActivityLog> table) {
+
+	    TableColumn<ActivityLog, String> colNick = new TableColumn<>("NickName");
+	    colNick.setCellValueFactory(data ->
+	        new SimpleStringProperty(data.getValue().getUser().getNickname())
+	    );
+
+	    TableColumn<ActivityLog, String> colVideoGame = new TableColumn<>("VideoGioco");
+	    colVideoGame.setCellValueFactory(data ->
+	        new SimpleStringProperty(data.getValue().getVideogame().getName())
+	    );
+	    
+	    TableColumn<ActivityLog, String> colDate = new TableColumn<>("Data");
+	    colDate.setCellValueFactory(data ->
+	    	new SimpleStringProperty(data.getValue().getDateGame().toString())
+	    );
+
+	    TableColumn<ActivityLog, Integer> colScore = new TableColumn<>("Score");
+	    colScore.setCellValueFactory(data ->
+	        new SimpleIntegerProperty(data.getValue().getScore()).asObject()
+	    );
+	    
+	    table.getColumns().addAll(colNick, colVideoGame, colDate, colScore);
 	}
 	
 

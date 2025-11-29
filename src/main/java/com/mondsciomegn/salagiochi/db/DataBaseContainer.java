@@ -59,5 +59,29 @@ public class DataBaseContainer {
 	        return games;
 	  }
 
+	public static List<ActivityLog> getAllActivity() {
+		List<ActivityLog> activity = new ArrayList<>();
+		String query = "SELECT * FROM activityLog ORDER BY data_partita DESC";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+        	
+            while (rs.next()) {
+            	activity.add(
+            			new ActivityLog(
+            					new User(rs.getString("nickname")),
+            					new VideoGames(rs.getString("videogioco"), null),
+            					rs.getDate("data_partita"),
+            					rs.getInt("score")
+            					));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return activity;
+	}
+
 	 
 }

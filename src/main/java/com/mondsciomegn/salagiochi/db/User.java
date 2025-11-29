@@ -20,9 +20,11 @@ public class User {
     public User(String nickname, String name, int score) {
         this.nickname = nickname;
         this.name = name;
-        this.score = 0;
+        this.score = score;
     }
-    
+    public User (String nickname) {
+    	this.nickname = nickname;
+    }
     
     public User(String nickname, String name, String password) {
         this.nickname = nickname;

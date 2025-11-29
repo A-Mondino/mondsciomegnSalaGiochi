@@ -1,16 +1,16 @@
 package com.mondsciomegn.salagiochi.db;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 
 public class ActivityLog {
 	private User user;
 	private VideoGames videogame;
-	private LocalDateTime dateGame;
+	private Date dateGame;
 	private int score;
 	
 	
-	public ActivityLog(User user, VideoGames videogame, LocalDateTime dateGame, int score) {
+	public ActivityLog(User user, VideoGames videogame, Date dateGame, int score) {
 		this.user = user;
 		this.videogame = videogame;
 		this.dateGame = dateGame;
@@ -38,12 +38,12 @@ public class ActivityLog {
 	}
 	
 	
-	public LocalDateTime getDateGame() {
+	public Date getDateGame() {
 		return dateGame;
 	}
 	
 	
-	public void setDateGame(LocalDateTime dateGame) {
+	public void setDateGame(Date dateGame) {
 		this.dateGame = dateGame;
 	}
 	

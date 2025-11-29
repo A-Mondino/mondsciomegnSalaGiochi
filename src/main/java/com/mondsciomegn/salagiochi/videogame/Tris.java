@@ -156,6 +156,7 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Hai vinto!");
 	            primaryStage.close();
+	            registerGame(getNickname(), 1);
 	            stopTimer();
 	            addPoints(getNickname());					// E assegno i punti
 	            return true;
@@ -173,7 +174,7 @@ public class Tris extends VideoGames{
 	            showMessage("Pareggio!");
 	            primaryStage.close();
 	            stopTimer();
-	            
+	            registerGame(getNickname(), 0);
 	        } else {								// Altrimenti ho trovato una mossa da fare 
 		        int row = move[0];
 		        int col = move[1];
@@ -187,6 +188,7 @@ public class Tris extends VideoGames{
 	            primaryStage.close();
 	            stopTimer();
 	            addPoints("_COMPUTER_");
+	            registerGame(getNickname(), 0);
 	        }
 	        
 	    }

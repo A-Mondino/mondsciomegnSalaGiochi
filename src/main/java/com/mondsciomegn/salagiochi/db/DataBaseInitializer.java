@@ -33,18 +33,13 @@ public class DataBaseInitializer {
                 " );" ;
         
         
-        String checkpoint =
-        		"CREATE TABLE IF NOT EXISTS checkpoint (" +
-        		"id INT AUTO_INCREMENT PRIMARY KEY," +
-                "punti INT " +
-                " );" ;
-        
-        
         String activityLog =
         		"CREATE TABLE IF NOT EXISTS activityLog (" +
         		"id INT AUTO_INCREMENT PRIMARY KEY," +
+        		"nickname  VARCHAR(30)," +
+        		"videogioco  VARCHAR(30)," +
                 "data_partita TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-        		"punteggio INT" +
+        		"score INT" +
                 " );" ;
         
         
@@ -80,12 +75,11 @@ public class DataBaseInitializer {
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
         	
-        	stmt.execute("DROP TABLE videogioco");        	
-        	
+        	stmt.execute("DROP TABLE videogioco");  
+        	stmt.execute("DROP TABLE activityLog");  
         	stmt.execute(user);
             stmt.execute(videogame);
             stmt.execute(category);
-            stmt.execute(checkpoint);
             stmt.execute(activityLog);
             stmt.executeUpdate(createUsers);
             stmt.executeUpdate(createCategorys);
