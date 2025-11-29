@@ -390,7 +390,7 @@ public class Battleship extends VideoGames {
 		        primaryStage.close();
 		        stopTimer();
 				addPoints(getNickname());		// Calcolo i punti
-				registerGame(getNickname(), 1);
+				registerGame(getNickname(), getScore());
 			}
 		}
 		else {			// Non ho colpito niente, è il turno del computer a sparare

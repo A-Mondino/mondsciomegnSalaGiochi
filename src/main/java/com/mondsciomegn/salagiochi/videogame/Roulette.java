@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
+import com.mondsciomegn.salagiochi.db.User;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
 import javafx.event.Event;
@@ -32,6 +33,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Roulette extends VideoGames{
@@ -245,7 +247,7 @@ public class Roulette extends VideoGames{
        	// Quando chiudi la finestra del gioco ritrasformi i gettoni in punti
        	primaryStage.setOnCloseRequest(e -> {
        	    if (gameTokens > 0) {
-       	        sumPoints(getNickname(), gameTokens, 0);   
+       	        sumPoints(getNickname(),0);   
        	        gameTokens = 0;
        	        updateDB();
        	    }
@@ -262,8 +264,7 @@ public class Roulette extends VideoGames{
 	private void Converter() {
 	    Stage tokenStage = new Stage();
 	    tokenStage.setTitle("Converti punti in gettoni");
-	    tokenStage.setOnCloseRequest(Event::consume);							// impedisce la chiusura del pop-up
-
+	    
 	    VBox root = new VBox(15);
 	    root.setPadding(new Insets(15));
 	    root.setAlignment(Pos.CENTER);
@@ -282,16 +283,16 @@ public class Roulette extends VideoGames{
 	    Button betBtn = new Button("Punta i gettoni");
 	    betBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 	    betBtn.setDisable(gameTokens <= 0);
-	    
-	    
+	    Button exitBtn = new Button("Esci");
+	    exitBtn.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+	   	    
 
 	    convertBtn.setOnAction(e -> {
 
 	        if (getScore() >= 300) {												// Controllo che ci siano punti a sufficienza
-
-	        	sumPoints(getNickname(),-1, 0);  										// Aggiorna punteggio
-	            gameTokens++;														// Incremento contatore gettoni
-
+	        															// Incremento contatore gettoni
+	        	sumPoints(getNickname(), (-gameTokens-1));  							// Aggiorna punteggio -2 perchè devo la funzione è pensata x rifdare i punti persi, quindi devo toglierne due
+	        	gameTokens++;													
 	            pointsLabel.setText("Punti disponibili: " + getScore());
 	            tokensLabel.setText("Gettoni convertiti: " + gameTokens);
 
@@ -299,7 +300,7 @@ public class Roulette extends VideoGames{
 	        }else {
 	        	// Riconversione dei gettoni residui in punti
 	            if (gameTokens > 0) {
-	                sumPoints(getNickname(), gameTokens, 0);	            
+	                sumPoints(getNickname(), 0);	            
 	            }
 	            
 	        	Alert alert = new Alert(Alert.AlertType.INFORMATION);				// Allarme che indica che non ci sono abbastanza punti per giocare 
@@ -320,11 +321,31 @@ public class Roulette extends VideoGames{
 	        tokenStage.close();
 	        primaryStage.getScene().getRoot().setDisable(false);
 	    });
-
-	    root.getChildren().addAll(pointsLabel, tokensLabel, convertBtn, betBtn);
+	    
+	    exitBtn.setOnAction(e -> {
+            if (gameTokens > 0) {
+       	        sumPoints(getNickname(), 0);   
+       	        gameTokens = 0;
+       	        updateDB();
+       	    }
+            tokenStage.close();
+            primaryStage.close();
+            stopTimer();
+	    });
+	    
+	    HBox tmp = new HBox(exitBtn, betBtn);
+	    tmp.setSpacing(10);									// Spazio tra i bottoni
+	    tmp.setAlignment(Pos.CENTER);
+	    
+	    root.setStyle("-fx-background-color: #A5D6A7; -fx-background-radius: 20px; -fx-padding: 20px;");
+	    root.getChildren().addAll(pointsLabel, tokensLabel, convertBtn, tmp);
 
 	    Scene scene = new Scene(root, 300, 230);
+	    scene.setFill(null);
+	    tokenStage.initStyle(StageStyle.TRANSPARENT);
 	    tokenStage.setScene(scene);
+	    
+	   
 
 	    primaryStage.getScene().getRoot().setDisable(true);
 	    tokenStage.initModality(Modality.APPLICATION_MODAL);
@@ -363,7 +384,7 @@ public class Roulette extends VideoGames{
 	        int choiceNum = Integer.parseInt(decision);
 	        if(num == choiceNum) {
 	            showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-	            sumPoints(getNickname(),36, gameTokens*300);	            				// Se indovini il numero moltiplichi i tuoi punti x 36 + guadagni 300 punti per ogni token Puntato
+	            sumPoints(getNickname(),36);	            				// Se indovini il numero moltiplichi i tuoi punti x 36 + guadagni 300 punti per ogni token Puntato
 	            selectionLocked = false;
 	            // Rimuove il bordo giallo dal bottone selezionato
 	            selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));
@@ -379,10 +400,11 @@ public class Roulette extends VideoGames{
 		
 			case "Punta sull'intera riga 1":
 			{
-	            showMessage("Hai selezionato: Punta sull'intera riga 1" );
+	            //showMessage("Hai selezionato: Punta sull'intera riga 1" );
 	            if(num == 1 || num == 4 || num == 7 || num == 10 || num == 13 || num == 16 || num == 19 || num == 22 || num == 25 || num == 28 || num == 31 || num == 34) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+					sumPoints(getNickname(), 11);
+					registerGame(getNickname(), (11+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -391,10 +413,11 @@ public class Roulette extends VideoGames{
 			
 			case "Punta sull'intera riga 2":
 			{
-	            showMessage("Hai selezionato: Punta sull'intera riga 2" );
+	            //showMessage("Hai selezionato: Punta sull'intera riga 2" );
 	            if(num == 2 || num == 5 || num == 8 || num == 11 || num == 14 || num == 17 || num == 20 || num == 23 || num == 26 || num == 29 || num == 32 || num == 35) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+					sumPoints(getNickname(), 11);
+					registerGame(getNickname(), (11+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	            
@@ -403,10 +426,11 @@ public class Roulette extends VideoGames{
 			
 			case "Punta sull'intera riga 3":
 			{
-	            showMessage("Hai selezionato: Punta sull'intera riga 3" );
+	            //showMessage("Hai selezionato: Punta sull'intera riga 3" );
 	            if(num == 3 || num == 6 || num == 9 || num == 12 || num == 15 || num == 18 || num == 21 || num == 24 || num == 27 || num == 30 || num == 33 || num == 36) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+					sumPoints(getNickname(), 11);
+					registerGame(getNickname(), (11+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -415,10 +439,11 @@ public class Roulette extends VideoGames{
 		 	    
 			case "Punta sui primi 12 numeri":
 			{
-	            showMessage("Hai selezionato: Punta sui primi 12 numeri" );
+	            //showMessage("Hai selezionato: Punta sui primi 12 numeri" );
 	            if(num > 0 && num < 13) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+					sumPoints(getNickname(), 11);
+					registerGame(getNickname(), (11+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -427,10 +452,11 @@ public class Roulette extends VideoGames{
 			
 			case "Punta sui numeri da 13 a 24":
 			{
-	            showMessage("Hai selezionato: Punta sui numeri da 13 a 24" );
+	            //showMessage("Hai selezionato: Punta sui numeri da 13 a 24" );
 	            if(num > 12 && num < 25) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+					sumPoints(getNickname(), 11);
+					registerGame(getNickname(), (11+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -439,10 +465,11 @@ public class Roulette extends VideoGames{
 			
 			case "Punta sui numeri da 25 a 36":
 			{
-	            showMessage("Hai selezionato: Punta sui numeri da 25 a 36" );
+	            //showMessage("Hai selezionato: Punta sui numeri da 25 a 36" );
 	            if(num > 24 && num < 37) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/2));
+					sumPoints(getNickname(), 11);
+					registerGame(getNickname(), (11+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -451,10 +478,11 @@ public class Roulette extends VideoGames{
 			
 			case "Punta 1-18":
 			{
-	            showMessage("Hai selezionato: Punta 1-18" );
+	            //showMessage("Hai selezionato: Punta 1-18" );
 	            if(num > 0 && num < 19) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens, gameTokens*(300/3));
+					sumPoints(getNickname(), 1);
+					registerGame(getNickname(), (1+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -463,10 +491,11 @@ public class Roulette extends VideoGames{
 			
 			case "Pari":
 			{
-	            showMessage("Hai selezionato: Pari" );
+	            //showMessage("Hai selezionato: Pari" );
 	            if(num % 2 == 0) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+					sumPoints(getNickname(), 1);
+					registerGame(getNickname(), (1+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -475,10 +504,11 @@ public class Roulette extends VideoGames{
 			
 			case "Dispari":
 			{
-	            showMessage("Hai selezionato: dispari" );
+	            //showMessage("Hai selezionato: dispari" );
 	            if(num % 2 != 0) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-	    	        sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+	    	        sumPoints(getNickname(), 1);
+	    	        registerGame(getNickname(), (1+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -487,10 +517,11 @@ public class Roulette extends VideoGames{
 			
 			case "Punta 19-36":
 			{
-	            showMessage("Hai selezionato: Punta 19-36" );
+	            //showMessage("Hai selezionato: Punta 19-36" );
 	            if(num > 18 && num < 37) {
 					showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-					sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+					sumPoints(getNickname(), 1);
+					registerGame(getNickname(), (1+ gameTokens)*300);
 	            }else
 		            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -499,10 +530,11 @@ public class Roulette extends VideoGames{
 			
 			case "Rosso":
 			{
-		        showMessage("Hai selezionato i numeri di colore: Rosso" );
+		        //showMessage("Hai selezionato i numeri di colore: Rosso" );
 		        if(num == 1 || num == 3 || num == 5 || num == 7 || num == 9 || num == 12 || num == 14 || num == 16 || num == 18 || num == 19 || num == 21 || num == 23 || num == 25 || num == 27 || num == 30 || num == 32 || num == 34 || num == 36) {
 		        	showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-		        	sumPoints(getNickname(), gameTokens, gameTokens*(300/3));
+		        	sumPoints(getNickname(), 1);
+		        	registerGame(getNickname(), (1+ gameTokens)*300);
 		            }else
 			            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
 	
@@ -511,23 +543,21 @@ public class Roulette extends VideoGames{
 	
 			case "Nero":
 			{
-		        showMessage("Hai selezionato i numeri di colore: Nero" );
+		        //showMessage("Hai selezionato i numeri di colore: Nero" );
 		        if(num == 2 || num == 4 || num == 6 || num == 8 || num == 10 || num == 11 || num == 13 || num == 15 || num == 17 || num == 20 || num == 22 || num == 24 || num == 26 || num == 28 || num == 29 || num == 31 || num == 33 || num == 35) {
 						showMessage("Numero estratto: " + num + "\nHAI VINTO!");
-						sumPoints(getNickname(), gameTokens,  gameTokens*(300/3));
+						sumPoints(getNickname(), 1);
+						registerGame(getNickname(), (1+ gameTokens)*300);
 				}else
 			            showMessage("Numero estratto: " + num + "\nHAI PERSO!");
-	
 				break;
-	
 			}
 
 		}
 		gameTokens = 0;
 		
 		selectionLocked = false;
-        // Rimuove il bordo giallo dal bottone selezionato
-        selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));
+        selectedButton.setStyle(selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", ""));			// Rimuove il bordo giallo dal bottone selezionato
         selectedButton = null;
 		Converter();
 	}
@@ -552,18 +582,18 @@ public class Roulette extends VideoGames{
 
 	
 	
-	private void sumPoints(String nickname, int mult, int extra) {
+	private void sumPoints(String nickname, int mult) {
 	    String nicknameDB = nickname.isEmpty() ? "_ANONIMO_" : nickname;
 	    String sql = "UPDATE utente SET score = ? WHERE nickname = ?";
 
 	    try (Connection conn = DataBaseConnection.getConnection();
 	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-	    	stmt.setInt(1,(getScore() + (300*mult) + extra));
-	        stmt.setString(2, nicknameDB);
+	    	stmt.setInt(1,getScore() + (300*(gameTokens + mult)) );						// Restituisce prima tutti i punti giocati, poi aggiunge il moltiplicatore in base al tipo di vincita
+	        stmt.setString(2, nicknameDB);	
 	        stmt.executeUpdate();
 	        																					
-	        setScore((int) (getScore() + (300*mult) + extra));												// Aggiorna i punteggi a seconda del valore della variabile mult (la variabile assume valore positivo se incrementa i punti, negativo per decrementarli
+	        setScore(getScore() + (300*(gameTokens + mult)) );							// Aggiorna i punteggi a seconda del valore della variabile mult (la variabile assume valore positivo se incrementa i punti, negativo per decrementarli
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();

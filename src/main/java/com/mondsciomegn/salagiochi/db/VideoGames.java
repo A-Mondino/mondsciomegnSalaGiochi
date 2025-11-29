@@ -129,7 +129,7 @@ public class VideoGames {
         }		
 	}
 	
-	protected void registerGame(String nickname, int mult) {
+	protected void registerGame(String nickname, int gameScore) {
 		// Controllo se il nickname è nullo o vuoto
 	    String finalNickname = (nickname == null || nickname.isEmpty()) ? "_ANONIMO_" : nickname;
 
@@ -141,7 +141,7 @@ public class VideoGames {
 	        stmt.setString(1, finalNickname);                  // nickname del giocatore
 	        stmt.setString(2, this.name);                      // nome del videogioco
 	        stmt.setTimestamp(3, new Timestamp(new Date().getTime()));  // data corrente
-	        stmt.setInt(4, this.score * mult);                        // punteggio del videogioco
+	        stmt.setInt(4, gameScore);                        // punteggio del videogioco
 
 	        stmt.executeUpdate();                               // eseguo l'inserimento
 	        //System.out.println("Gioco registrato correttamente!");

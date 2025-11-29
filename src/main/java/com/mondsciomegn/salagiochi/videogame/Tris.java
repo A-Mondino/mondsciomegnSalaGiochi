@@ -156,7 +156,7 @@ public class Tris extends VideoGames{
 	            gameOver = true;
 	            showMessage("Hai vinto!");
 	            primaryStage.close();
-	            registerGame(getNickname(), 1);
+	            registerGame(getNickname(), getScore());
 	            stopTimer();
 	            addPoints(getNickname());					// E assegno i punti
 	            return true;

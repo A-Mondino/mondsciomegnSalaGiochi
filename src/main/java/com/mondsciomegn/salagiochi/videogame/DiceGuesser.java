@@ -172,7 +172,7 @@ public class DiceGuesser extends VideoGames{
 			if(sum > sumC) {
 				showMessage("HAI VINTO!");
 	            addPoints(getNickname());
-	            registerGame(getNickname(), 1);
+	            registerGame(getNickname(), getScore());
 			}else {
 					showMessage("PAREGGIO!");
 					registerGame(getNickname(), 0);
