@@ -167,13 +167,16 @@ public class DiceGuesser extends VideoGames{
 		if(sum < sumC) {
 			showMessage("HAI PERSO!");
             addPoints("_COMPUTER_");
+            registerGame(getNickname(), 0);
 		}else {
 			if(sum > sumC) {
 				showMessage("HAI VINTO!");
 	            addPoints(getNickname());
-			}else 
-				if(sum == sumC) 
-					showMessage("PAREGGIO!");	
+	            registerGame(getNickname(), 1);
+			}else {
+					showMessage("PAREGGIO!");
+					registerGame(getNickname(), 0);
+				}
 		}
 	}
 	
