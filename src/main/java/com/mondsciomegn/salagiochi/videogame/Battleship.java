@@ -30,6 +30,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Battleship extends VideoGames {
@@ -295,12 +296,12 @@ public class Battleship extends VideoGames {
 		}
 		
 		
-		
-		Scene s = new Scene(boatBox, 300, 300);
+		boatBox.setStyle("-fx-background-radius: 20px; -fx-padding: 20px;");
+		Scene s = new Scene(boatBox, 250, 250);
 		boatStage.setScene(s);
-		boatStage.setOnCloseRequest(Event::consume);
+		boatStage.initStyle(StageStyle.TRANSPARENT);
 
-	    boatStage.setX(primaryStage.getX() - s.getWidth() - 10);	// Questo serve per aprire la finestra a sx di quella principale
+	    boatStage.setX(primaryStage.getX() - s.getWidth() );	// Questo serve per aprire la finestra a sx di quella principale
 	    boatStage.setY(primaryStage.getY());
 
 	    primaryStage.getScene().getRoot().setDisable(true);
