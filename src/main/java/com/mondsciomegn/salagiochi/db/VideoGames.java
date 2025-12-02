@@ -22,7 +22,6 @@ import java.util.Date;
 
 
 public class VideoGames {
-	private final int id = 0;
 	private String name;
 	private Category category;
 	private int score = 0;
@@ -107,9 +106,11 @@ public class VideoGames {
 		return time;
 	}
 	
+	
 	public void addtime(int x) {
 		this.time += x;
 	}
+	
 	
 	protected void addPoints(String nickname) {
 		boolean isAnonimous = (nickname == null) || nickname.isEmpty();		// Controllo se sta giocando in anonimo
@@ -128,6 +129,7 @@ public class VideoGames {
         	e.printStackTrace();
         }		
 	}
+	
 	
 	protected void registerGame(String nickname, int gameScore) {
 		// Controllo se il nickname è nullo o vuoto
@@ -160,11 +162,6 @@ public class VideoGames {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-	
-	
-	public int getId() {
-		return id;
-	}
 	
 	
 	public int getScore() {
