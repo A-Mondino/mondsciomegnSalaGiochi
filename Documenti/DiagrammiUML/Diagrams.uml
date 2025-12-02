@@ -56,9 +56,9 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_qm6xIK61EfCy9KboeOQdTw" name="password" visibility="private" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_HbG0QMOpEfCraf0ssTm2NA" name="score" visibility="private">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_KR4FIM9yEfCkKYFXPFmpnQ" name="score" visibility="private" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Mdg-MMOpEfCraf0ssTm2NA" name="LiteralInteger1"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_NYreAM9yEfCkKYFXPFmpnQ" name="LiteralInteger1"/>
       </ownedAttribute>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_-1TEoK8mEfC_voNdGTc-gQ" name="addScore">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_--KwQMFPEfCZUZ7PVYJSjg" name="Points">
@@ -91,17 +91,17 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XrfLcK7BEfCy9KboeOQdTw" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XrgZkK7BEfCy9KboeOQdTw" name="LiteralUnlimitedNatural1" value="*"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_n3ofYK7AEfCy9KboeOQdTw" name="dateGame" visibility="private" type="_0FcgEK7AEfCy9KboeOQdTw" isUnique="false">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_n3ofYK7AEfCy9KboeOQdTw" name="dateGame" visibility="private" type="_aax30M9xEfCkKYFXPFmpnQ" isUnique="false">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Z6TzcK7BEfCy9KboeOQdTw" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Z6WPsK7BEfCy9KboeOQdTw" name="LiteralUnlimitedNatural1" value="*"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_5IdG8K7AEfCy9KboeOQdTw" name="score" visibility="private" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZXHm0K7BEfCy9KboeOQdTw" name="LiteralInteger1" value="1"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZXI08K7BEfCy9KboeOQdTw" name="LiteralUnlimitedNatural1" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dWMgEM9xEfCkKYFXPFmpnQ" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dWOVQM9xEfCkKYFXPFmpnQ" name="LiteralUnlimitedNatural1" value="1"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_eJUmIM9xEfCkKYFXPFmpnQ" name="LiteralInteger2"/>
       </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:DataType" xmi:id="_0FcgEK7AEfCy9KboeOQdTw" name="LocalDateTime"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_PpPW0K7CEfCy9KboeOQdTw" memberEnd="_PpP94q7CEfCy9KboeOQdTw _PpQk8q7CEfCy9KboeOQdTw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PpP94K7CEfCy9KboeOQdTw" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_PpP94a7CEfCy9KboeOQdTw" key="nature" value="UML_Nature"/>
@@ -211,10 +211,7 @@ user not logged</body>
       <ownedEnd xmi:type="uml:Property" xmi:id="_iMJS468mEfC_voNdGTc-gQ" type="_-1qqwK6nEfCy9KboeOQdTw" association="_iMIEwK8mEfC_voNdGTc-gQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_S4DPUMFREfCZUZ7PVYJSjg" name="void"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_eUUo4MFSEfCZUZ7PVYJSjg" name="VideoGames" isAbstract="true">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_r3BY4MFSEfCZUZ7PVYJSjg" name="id" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </ownedAttribute>
+    <packagedElement xmi:type="uml:Class" xmi:id="_eUUo4MFSEfCZUZ7PVYJSjg" name="VideoGames">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_zUf3EMFSEfCZUZ7PVYJSjg" name="name" visibility="private" isUnique="false">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
@@ -247,7 +244,7 @@ user not logged</body>
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_V6iG4MFnEfCZUZ7PVYJSjg" name="play" isAbstract="true">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_V6iG4MFnEfCZUZ7PVYJSjg" name="play">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZIsE8MFnEfCZUZ7PVYJSjg" name="nickname">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
@@ -259,6 +256,15 @@ user not logged</body>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_Jt9rcMtvEfCRMvaWv37CsQ" name="stopTimer" visibility="protected">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_Jt9rcstvEfCRMvaWv37CsQ" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8_ZicM9xEfCkKYFXPFmpnQ" name="registerGame" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_8_Zicc9xEfCkKYFXPFmpnQ" name="" type="_S4DPUMFREfCZUZ7PVYJSjg" isUnique="false" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_CUzg4M9yEfCkKYFXPFmpnQ" name="nickname">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Fz6FAM9yEfCkKYFXPFmpnQ" name="gameScore">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
         </ownedParameter>
       </ownedOperation>
@@ -343,7 +349,7 @@ user not logged</body>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_HJqRUMSNEfCqSKsHiCFc3g" name="primaryStage" visibility="private" type="_u5cIMMObEfCu7J_A4pSypA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_MTTEoMSNEfCqSKsHiCFc3g" name="boatStage" visibility="private" type="_u5cIMMObEfCu7J_A4pSypA"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_j-mGoMtvEfCRMvaWv37CsQ" name="tutorial" visibility="private">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_j-mGoMtvEfCRMvaWv37CsQ" name="tutorialFlag" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
         <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_twhTsMtvEfCRMvaWv37CsQ" name="LiteralBoolean1"/>
       </ownedAttribute>
@@ -628,9 +634,6 @@ user not logged</body>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_qZi0AMtzEfCRMvaWv37CsQ" name="mult">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
         </ownedParameter>
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_r6NVgMtzEfCRMvaWv37CsQ" name="extra">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-        </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_hDfS8MFUEfCZUZ7PVYJSjg" name="Tris">
@@ -696,9 +699,7 @@ user not logged</body>
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_onbAoMFjEfCZUZ7PVYJSjg" name="LiteralBoolean1" value="true"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_9FelkMOaEfCu7J_A4pSypA" name="currentNickName" visibility="private" isUnique="false">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_9FelkMOaEfCu7J_A4pSypA" name="currentNickName" visibility="private" type="_bw2dcM9yEfCkKYFXPFmpnQ" isUnique="false"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_5DfhYMObEfCu7J_A4pSypA" name="primaryStage" visibility="private" type="_u5cIMMObEfCu7J_A4pSypA">
         <defaultValue xmi:type="uml:LiteralNull" xmi:id="_DB98sMOcEfCu7J_A4pSypA" name="LiteralNull1"/>
       </ownedAttribute>
@@ -765,12 +766,25 @@ user not logged</body>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_rZO0AMOfEfCu7J_A4pSypA" name="" type="_pVZUAMOfEfCu7J_A4pSypA" isUnique="false" direction="return"/>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_79MVkMOfEfCu7J_A4pSypA" name="addGameColumns" visibility="private">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_79MVkcOfEfCu7J_A4pSypA" name="gameTable" type="_5q47wMOfEfCu7J_A4pSypA" isUnique="false"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_79MVksOfEfCu7J_A4pSypA" name="" type="_S4DPUMFREfCZUZ7PVYJSjg" isUnique="false" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_uL4OUM9yEfCkKYFXPFmpnQ" name="gameTable" type="_5q47wMOfEfCu7J_A4pSypA">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xnW2sM9yEfCkKYFXPFmpnQ" name="LiteralInteger1" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xnXdwM9yEfCkKYFXPFmpnQ" name="LiteralUnlimitedNatural1" value="*"/>
+        </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_MKBwkMOgEfCu7J_A4pSypA" name="addUserColumns" visibility="private">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_MKBwkcOgEfCu7J_A4pSypA" name="gameTable" type="_5q47wMOfEfCu7J_A4pSypA" isUnique="false"/>
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_MKBwksOgEfCu7J_A4pSypA" name="" type="_S4DPUMFREfCZUZ7PVYJSjg" isUnique="false" direction="return"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2G49EM9yEfCkKYFXPFmpnQ" name="addUserColumns" visibility="private">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2G5kIM9yEfCkKYFXPFmpnQ" name="" type="_S4DPUMFREfCZUZ7PVYJSjg" isUnique="false" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_-_ShIM9yEfCkKYFXPFmpnQ" name="table" type="_5q47wMOfEfCu7J_A4pSypA">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AvpEcM9zEfCkKYFXPFmpnQ" name="LiteralInteger1" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_AvyOYM9zEfCkKYFXPFmpnQ" name="LiteralUnlimitedNatural1" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_G6L7IM9zEfCkKYFXPFmpnQ" name="addActivityLogColumns" visibility="private">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_G6L7Ic9zEfCkKYFXPFmpnQ" name="" type="_S4DPUMFREfCZUZ7PVYJSjg" isUnique="false" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_G6L7Is9zEfCkKYFXPFmpnQ" name="table" type="_5q47wMOfEfCu7J_A4pSypA">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G6L7I89zEfCkKYFXPFmpnQ" name="LiteralInteger1" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G6L7JM9zEfCkKYFXPFmpnQ" name="LiteralUnlimitedNatural1" value="*"/>
+        </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_01Xx8MFoEfCZUZ7PVYJSjg" name="DataBaseConnection">
@@ -961,6 +975,8 @@ user not logged</body>
     <packagedElement xmi:type="uml:Actor" xmi:id="_HXl7AMnwEfC_hMhCtjrAQg" name="Player"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_LxjeYMtwEfCRMvaWv37CsQ" name="ImageView"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_2-gbUMtxEfCRMvaWv37CsQ" name="Image"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_aax30M9xEfCkKYFXPFmpnQ" name="Date"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_bw2dcM9yEfCkKYFXPFmpnQ" name="StringProperty"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_3gt1cK6yEfCy9KboeOQdTw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3gw4wK6yEfCy9KboeOQdTw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
