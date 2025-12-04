@@ -39,6 +39,13 @@ import javafx.scene.control.Dialog;
 
 public class Tris extends VideoGames{
 		
+		/**
+		 * Costruttore della classe Tris,
+		 * Inizializza il punteggio a 300.
+		 * 
+		 * @param name nome del gioco 
+		 * @param category categoria a cui è associato il gioco 
+		 */
 		public Tris(String name, Category category) {
 			super(name, category);
 			setScore(300);
@@ -55,7 +62,12 @@ public class Tris extends VideoGames{
 	    private Stage primaryStage = new Stage();
 	    
 	    
-	    @Override
+	    /**
+	     * Avvia la procedura di inizio del gioco facendo visualizzare le istruzioni.
+	     * Se il giocatore decide di giocare avvia la partita altrimenti ritorna alla finestra VideoGames
+	     *	 
+	     * @param nickname nickname del giocatore.
+	     */
 	    public void play(String nickName) {
 	    	setNickname(nickName);
 	    	Dialog<ButtonType> dialog = new Dialog<>();
@@ -84,7 +96,10 @@ public class Tris extends VideoGames{
 
 	    }
 
-
+	    /**
+	     * Avvio del gioco, gestisce sia l'interfaccia grafica che la logica effettiva del gioco.
+	     * Il metodo inizializza una griglia 3x3 composta da pulsanti che rappresentano la griglia di gioco.
+	     */
 	    private void startGame() {
 	    		
 	    	if(getNickname().isEmpty()) {									// Significa che qualcuno sta giocando in anonimo
@@ -146,7 +161,14 @@ public class Tris extends VideoGames{
 	        });
 	    }
 
-	    
+	    /**
+	     * Giocata del giocatore (turno del giocatore)
+	     * 
+	     * @param row numero della riga dove posizionare la giocata
+	     * @param col numero della colonna dove posizionare la giocata
+	     * @return  true se la giocata è andata a buon fine e la partita termina con una vittoria
+	     * 			false in caso di errore 
+	     */
 	    private Boolean playerMove(int row, int col) {	
 	    	//...serve solo per evitare un errore che si verificava perchè la mossa del computer veniva fatta lo stesso dopo il primaryStage.hide();
 	        playGrid[row][col] = 'X';						// Setto la matrice di supporto con il segno del giocatore
@@ -166,6 +188,9 @@ public class Tris extends VideoGames{
 	    }
 
 
+	    /**
+	     * Giocata del computer (turno del computer) 
+	     */
 		private void computerMove() {	
 	        int[] move = move();
 
@@ -193,7 +218,12 @@ public class Tris extends VideoGames{
 	        
 	    }
 
-		
+		/**
+		 * Seleziona una mossa valida per il computer scegliendo tra le celle ancora libere nella 
+		 * griglia di gioco. Le celle ancora disponibili sono salvate in una lista. 
+		 * @return  null se non sono più disponibili celle di gioco oppure
+		 * 			restituisce una posizione libera scelta dal computer come giocata
+		 */
 	    private int[] move() {						// AGGIUNGERE MATRICE PRIORITA PER MOSSA NOT DUMB
 	        List<int[]> unused = new ArrayList<>();
 	        for (int i = 0; i < 3; i++) {
@@ -209,7 +239,13 @@ public class Tris extends VideoGames{
 	        return unused.get(random.nextInt(unused.size()));
 	    }
 
-	    
+	    /**
+	     * Controllo del gioco per stabilire se si è verificata una vittoria 
+	     * 
+	     * @param symbol simbolo per verificare vittoria (X = simbolo giocatore / O = simbolo computer)
+	     * @return  true in caso di vittoria, termina il gioco 
+	     * 			false vittoria non verifica, continuo del gioco 
+	     */
 	    private boolean gameCheck(char symbol) {
 	        for (int i = 0; i < 3; i++) 
 	            if (playGrid[i][0] == symbol && playGrid[i][1] == symbol && playGrid[i][2] == symbol)
