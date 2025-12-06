@@ -82,8 +82,12 @@ public class Room extends Application{
         launch(args); 										// Avvia l'applicazione JavaFX
     }
 	
-	
-	private void switchRoom(int direction) { 				// Metodo per cambiare stanza
+	/**
+	 * Gestisce il cambiamento delle stanze
+	 * 
+	 * @param direction numero con la direzione della stanza in cui ci si sposta
+	 */
+	private void switchRoom(int direction) { 				
         currentRoom += direction;
 
         // Limita le stanze a 3 (sinistra, centrale, destra)
@@ -96,7 +100,11 @@ public class Room extends Application{
         showRoom(currentRoom); 
     }
 
-	
+	/**
+	 * Gestisce la visione delle stanze 
+	 * 
+	 * @param room numero che indica la stanza da visualizzare
+	 */
 	private void showRoom(int room) {
        root.setCenter(null);
        roomLabel.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
@@ -119,7 +127,9 @@ public class Room extends Application{
 		} 
 	}
 
-		
+	/**
+	 * Gestisce la grafica della stanza "Tabellone" 	
+	 */
 	private void roomL() {
 		root.getTop().setVisible(false);
 
@@ -172,7 +182,9 @@ public class Room extends Application{
 	    root.setCenter(centerContent);
 	}
 		
-	
+	/**
+	 * Gestisce la grafica della stanza "Sala Giochi"
+	 */
 	private void roomM() {
 		primaryStage.setTitle("Sala Giochi");							// Titolo 
         String imagePath = getClass().getResource("./img/room.jpg").toExternalForm();
@@ -396,7 +408,9 @@ public class Room extends Application{
         primaryStage.show();
     }
 	
-	
+	/**
+	 * Gestisce la grafica della stanza "VideoGames"
+	 */
 	private void roomR() {
 		root.getTop().setVisible(false);        
 
@@ -444,7 +458,9 @@ public class Room extends Application{
 	    
 	}
 	
-	
+	/**
+	 * Gestisce la registrazione di un nuovo utente
+	 */
 	private VBox registerBox() {		
 		VBox registerBox = new VBox(10);
         registerBox.setAlignment(Pos.CENTER);
@@ -549,7 +565,11 @@ public class Room extends Application{
 		return registerBox;
 	}
 
-	
+	/**
+	 * Gestisce il login del giocatore 
+	 * 
+	 * @param popupStage finestra per effettuare il login del giocatore
+	 */
 	private VBox loginBox(Stage popupStage) {		
 		VBox loginBox = new VBox(10);
         loginBox.setAlignment(Pos.CENTER);
@@ -663,7 +683,11 @@ public class Room extends Application{
 	    return pane;
 	}
 	
-	
+	/** 
+	 * Gestisce l'aggiunta di colonne nella tabella dei giochi 
+	 * 
+	 * @param gameTable tabella a cui aggiungere le colonne
+	 */
 	@SuppressWarnings("unchecked")
 	private void addGameColumns(TableView<VideoGames> gameTable) {
 		TableColumn<VideoGames, String> name = new TableColumn<>("Gioco");
@@ -685,7 +709,11 @@ public class Room extends Application{
 		gameTable.getColumns().addAll(name,category, desc, score);
 	}	
 	
-	
+	/**
+	 * Gestisce l'aggiunta di colonne nella tabella dei giocatori 
+	 * 
+	 * @param table tabella a cui aggiungere le colonne
+	 */
 	@SuppressWarnings("unchecked")
 	private void addUserColumns(TableView<User> table) {
 
@@ -712,6 +740,11 @@ public class Room extends Application{
 	    table.getColumns().addAll(colNick, colName, colPassword, colScore);
 	}
 	
+	/**
+	 * Gestisce l'aggiunta di colonne nella tabella delle attività
+	 * 
+	 * @param table tabella a cui aggiungere le colonne
+	 */
 	private void addActivityLogColumns(TableView<ActivityLog> table) {
 
 	    TableColumn<ActivityLog, String> colNick = new TableColumn<>("NickName");
