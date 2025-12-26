@@ -36,13 +36,24 @@ public class DiceGuesser extends VideoGames{
     private ImageView diceComp1 = new ImageView();
     private ImageView diceComp2 = new ImageView();
 	
-    
+    /**
+     * Costruttore della classe DiceGuesser,
+     * Inizializza il punteggio a 50.
+     *  
+     * @param name nome del gioco.
+     * @param category categoria a cui è associato il gioco.
+     */
 	public DiceGuesser(String name, Category category) {
 		super(name, category);
 		setScore(50);
 	}
 	
-	
+	/**
+	 * Avvia la procedura di inizio del gioco facendo visualizzare le istruzioni.
+	 * Se il giocatore decide di giocare avvia la partita altrimenti ritorna alla finestra VideoGames
+	 * 
+	 * @param nickname nickname del giocatore.
+	 */
 	public void play(String nickname) { 
 		setNickname(nickname);
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -67,7 +78,11 @@ public class DiceGuesser extends VideoGames{
     	startGame();
 	}
 	
-	
+	/**
+	 * Avvio del gioco, gestisce sia l'interfaccia grafica che la logica effettiva del gioco.
+	 * Prepara la finestra di gioco e visualizza sia i dati estratti dal giocatore che quelli 
+	 * del computer, facendo visualizzare anche l'immagine dei dadi   
+	 */
 	private void startGame() {
 		if(getNickname().isEmpty()) {														// Significa che qualcuno sta giocando in anonimo
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
@@ -152,7 +167,11 @@ public class DiceGuesser extends VideoGames{
 		
 	}
 	
-	
+	/**
+	 * Estrae casualmente il dado 
+	 * 
+	 * @return dice il valore del dado estratto 
+	 */
 	private static int throwDice() {
 		Random ran = new Random();			//Lancio casuale del dado 
 		int dice;
@@ -162,7 +181,13 @@ public class DiceGuesser extends VideoGames{
 		return dice;
 	}
 	
-	
+	/**
+	 * Controlli del gioco e assegnamento dei punti a seconda del risultato e del nickname con il 
+	 * quale il giocatore ha effettuato il gioco  
+	 * 
+	 * @param sum somma dei dadi estratti dal giocatore 
+	 * @param sumC somma dei dadi estratti dal computer 
+	 */
 	private void checkHigherDice(int sum, int sumC) {
 		if(sum < sumC) {
 			showMessage("HAI PERSO!");
@@ -180,6 +205,12 @@ public class DiceGuesser extends VideoGames{
 		}
 	}
 	
+	/**
+	 * Visualizzazione dell'immagine dei dadi estratti 
+	 * 
+	 * @param dice numero del dado estratto 
+	 * @return immagine che corrisponde al dado estratto 
+	 */
 	private Image viewImage(int dice) {
 	    // Percorso per il caricamento delle immagini
 	    String imgPath = getClass()

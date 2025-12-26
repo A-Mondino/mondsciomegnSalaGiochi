@@ -49,12 +49,24 @@ public class Roulette extends VideoGames{
     private String choice;
     private int nWinner;
     
+    /**
+     * Costruttore della classe Roulette,
+	 * Inizializza il punteggio a 600.
+	 * 
+     * @param name nome del gioco
+     * @param category categoria a cui è associato il gioco 
+     */
 	public Roulette(String name, Category category) {
 		super(name, category);
 		setScore(600);
 	}
 
-	
+	/**
+	 * Avvia la procedura di inizio del gioco facendo visualizzare le istruzioni.
+	 * Se il giocatore decide di giocare avvia la partita altrimenti ritorna alla finestra VideoGames
+	 *     	 
+	 * @param nickname nickname del giocatore.
+	 */
 	public void play(String nickname) {
 		setNickname(nickname);
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -77,7 +89,13 @@ public class Roulette extends VideoGames{
     	startGame();
 	}
 	
-	
+	/**
+	 * Avvio del gioco, gestisce sia l'interfaccia grafica (griglia di gioco) che la logica effettiva del gioco.
+	 * Genera i pulsanti numerici della roulette, con i rispettivi colori, e crea anche i pulsanti per le azioni 
+	 * "speciali" (es: seleziona un'intera riga). 
+	 * Viene richiamato il metodo per la conversione dei punti in gettoni per poter effettuare una puntata e 
+	 * iniziare la partita.
+	 */
 	private void startGame() {
     	if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
@@ -261,6 +279,10 @@ public class Roulette extends VideoGames{
 
 	}
 	
+	/**
+	 * Conversione dei punti in gettoni per poter puntare durante le partite di gioco.
+	 * Operazione essenziale se il giocatore vuole giocare al gioco.
+	 */
 	private void Converter() {
 	    Stage tokenStage = new Stage();
 	    tokenStage.setTitle("Converti punti in gettoni");
@@ -352,7 +374,15 @@ public class Roulette extends VideoGames{
 	    tokenStage.showAndWait();
 	}
 	
-	
+	/**
+	 * Gestisce la decisione della puntata del giocatore sull'area di gioco, evidenziando la scelta effettuata.
+	 * Verifica se il giocatore ha abbastanza punti, altrimenti non può giocare ed esce in automatico dal gioco.
+	 *  
+	 * 
+	 * @param cell cella selezionata del giocatore 
+	 * @return  la stringa associata al pulsante selezionato oppre 
+	 * 			null in caso di errore
+	 */
 	private String selectButton(Button cell) {
 	    if (gameTokens <= 0) {
 	        showMessage("Non hai gettoni disponibili! Converti altri punti.");
@@ -375,10 +405,22 @@ public class Roulette extends VideoGames{
 	    return selectedNumber;
 	}
 	
+	/**
+	 * Estrazione del numero vincente 
+	 * 
+	 * @return restituisce il valore del numero vincente 
+	 */
 	private int getWinningNumber() {
 	    return random.nextInt(36) + 1;													// Estrazione numero vincente
 	}
 
+	/**
+	 * Controlla se il giocatore ha puntato sulla scelta vincente e in caso affermativo 
+	 * assegna i punteggi di vittoria a seconda del nickname utilizzato dall'utente
+	 * 
+	 * @param num numero vincente estratto 
+	 * @param decision scelta su cui ha puntato l'utente durante il gioco  
+	 */
 	private void winner(int num, String decision) {
 	    try {																			// Controllo vincita se il numero selezionato è un numero 
 	        int choiceNum = Integer.parseInt(decision);
@@ -562,6 +604,9 @@ public class Roulette extends VideoGames{
 		Converter();
 	}
 		
+	/**
+	 * Individua il punteggio del giocatore, secondo il nickname con cui sta giocando e ggiorna il valore del punteggio dal database.
+	 */
 	private void updateDB() {
 	    String nicknameDB = getNickname().isEmpty() ? "_ANONIMO_" : getNickname();
 	    String sql = "SELECT score FROM utente WHERE nickname = ?";
@@ -581,7 +626,12 @@ public class Roulette extends VideoGames{
 	}
 
 	
-	
+	/**
+	 * Gestione dei punteggi del giocatore, li diminuisce in caso di trasformazione dei punti in gettoni o li aumenta in caso di vincita.
+	 * 
+	 * @param nickname nickname del giocatore.
+	 * @param mult moltiplicatore, intero che indica il valore per cui moltiplicare il punteggio per modificare i punti dei giocatori 
+	 */
 	private void sumPoints(String nickname, int mult) {
 	    String nicknameDB = nickname.isEmpty() ? "_ANONIMO_" : nickname;
 	    String sql = "UPDATE utente SET score = ? WHERE nickname = ?";

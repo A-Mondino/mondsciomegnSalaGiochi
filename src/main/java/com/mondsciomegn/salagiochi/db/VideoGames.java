@@ -22,7 +22,6 @@ import java.util.Date;
 
 
 public class VideoGames {
-	private final int id = 0;
 	private String name;
 	private Category category;
 	private int score = 0;
@@ -30,6 +29,12 @@ public class VideoGames {
 	private String nickname = null;
 	private Stage timerStage = new Stage();
 	
+	/**
+	 * Costruttore della classe VideoGames,
+     *  
+     * @param name nome del gioco.
+     * @param category categoria a cui è associato il gioco.
+	 */
 	public VideoGames(String name, Category category) {
 		this.name = name;
 		this.category = category;
@@ -55,7 +60,9 @@ public class VideoGames {
 	
 	public void play(String nickName) {}
 	
-	
+	/**
+	 * Gestisce l'avvio del timer
+	 */
 	protected void startTimer(Stage mainStage) {
 		time = 0;
 	    Label label = new Label("Secondi: " + time);
@@ -101,16 +108,25 @@ public class VideoGames {
 	    timerStage.setY(timerY);
 	}
 
-	
+	/**
+	 * Gestisce la fermata del timer
+	 * @return il tempo di gioco dall'avvio alla fermata del timer (in secondi)
+	 */
 	protected int stopTimer() {
 		timerStage.close();
 		return time;
 	}
 	
+	
 	public void addtime(int x) {
 		this.time += x;
 	}
 	
+	/**
+	 * Gestisce l'aumento dei punteggi in caso di vittoria dei giochi. 
+	 * 
+	 * @param nickname nome con cui il giocatore sta giocando. se null signufica che sta giocando in anonimo
+	 */
 	protected void addPoints(String nickname) {
 		boolean isAnonimous = (nickname == null) || nickname.isEmpty();		// Controllo se sta giocando in anonimo
 		
@@ -129,6 +145,12 @@ public class VideoGames {
         }		
 	}
 	
+	/**
+	 * Gestisce la registrazione delle partite per inserirle nella tabella 
+	 *  
+	 * @param nickname nome con cui il giocatore sta giocando (se null, sta giocando in anonimo)
+	 * @param gameScore numero del punteggio del gioco a cui sta giocando 
+	 */
 	protected void registerGame(String nickname, int gameScore) {
 		// Controllo se il nickname è nullo o vuoto
 	    String finalNickname = (nickname == null || nickname.isEmpty()) ? "_ANONIMO_" : nickname;
@@ -152,7 +174,11 @@ public class VideoGames {
 	    }
 	}
 	
-
+	/**
+	 * Formattazioni della finestra di messaggio 
+	 * 
+	 * @param msg messaggio da visualizzare in finestra
+	 */
     protected void showMessage(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Risultato");
@@ -160,11 +186,6 @@ public class VideoGames {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-	
-	
-	public int getId() {
-		return id;
-	}
 	
 	
 	public int getScore() {

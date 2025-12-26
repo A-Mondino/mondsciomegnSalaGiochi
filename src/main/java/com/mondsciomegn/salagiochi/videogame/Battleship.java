@@ -34,6 +34,13 @@ import javafx.stage.StageStyle;
 
 public class Battleship extends VideoGames {
 	
+	   /**
+     * Costruttore della classe Battleship,
+     * Inizializza il punteggio a 1000.
+     *  
+     * @param name nome del gioco.
+     * @param category categoria a cui è associato il gioco.
+     */
 	public Battleship(String name, Category category) {
 		super(name, category);
 		setScore(1000);
@@ -74,7 +81,12 @@ public class Battleship extends VideoGames {
     private static final int MAXW = 700;
     private static final int DIV = 13;
 
-	@Override
+	/**
+	 * Avvia la procedura di inizio del gioco facendo visualizzare le istruzioni.
+	 * Se il giocatore decide di giocare avvia la partita altrimenti ritorna alla finestra VideoGames
+	 * 
+	 * @param nickname nickname del giocatore.
+	 */
 	public void play(String nickname) {
 		setNickname(nickname);
     	Dialog<ButtonType> dialog = new Dialog<>();
@@ -103,6 +115,11 @@ public class Battleship extends VideoGames {
 
     }
 	
+	/**
+	 * Avvio una nuova partita di battaglia navale, sono presenti le funzioni per la gestione dell'interfaccia grafica.
+	 * Inizializzazione e creazione della griglia di gioco, preprazione di tutti gli elementi necessari prima del  
+	 * posizionamento delle barca  
+	 */
 	private void startGame() {
 		if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
             String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
@@ -212,7 +229,9 @@ public class Battleship extends VideoGames {
         setNumberOfBoats();					// Inizializzo qui la quantità di barche per ogni tipo		        
 	}
 	
-	
+	/**
+	 * Inizializzazione di tutte le tipologie di navi 
+	 */
 	private void setNumberOfBoats() {	
 		totalPlayerShips[0] = 1;			// Barche da 2 
 		totalPlayerShips[1] = 2;			// Da 3
@@ -228,7 +247,9 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	
+	/**
+	 * Gestisce la finestra delle navi pronte per essere posizionate nel campo di gioco 
+	 */
 	private void putAllBoatdown() {
 		boatStage.setTitle("Navi della flotta");
 		
@@ -309,7 +330,14 @@ public class Battleship extends VideoGames {
 	
 	}
 	
-	
+	/**
+	 * Gestione della logica di posizionamento delle navi all'interno dell'area di gioco.
+	 * 
+	 * @param row numero della riga dove il gocatore vuole posizionare la nave
+	 * @param col numero della colonna dove il giocatore vuole posizionare la nave
+	 * @return  true se la nave è stata posizionata correttamente
+	 * 			false se la nave non può essere posizionata nella posizione richiesta
+	 */
 	private boolean playerBoatDown(int row, int col) {
 		if(currentShip[0] != 0) {											// Se ho una barca da inserire
 			if(!canPlaceShip(row,col)) 										// Controllo che io abbia spazio per metterla
@@ -368,7 +396,13 @@ public class Battleship extends VideoGames {
 		return true;
 	}
 	
-	
+	/**
+	 * Gestisce l'attacco del giocatore nell'area di gioco dell'avversario. 
+	 * Sono presenti i controlli del gioco per capire se il giocatore ha colpito una nave oppure no.
+	 * 
+	 * @param row numero della riga dove si vuole effettuare l'attacco
+	 * @param col numero della colonna dove si vuole eggettuare l'attacco
+	 */
 	private void playerAttack(int row, int col) {
 		if(tmpComputer[row][col] != '-') {			// Se colpisco qualcosa nella girglia del computer
 			char id = tmpComputer[row][col];		// Memorizzo l'id di cosa ho colpito
@@ -408,7 +442,11 @@ public class Battleship extends VideoGames {
 			
 	}
 	
-	
+	/**
+	 * Permette di visualizzare, con caratteristiche diverse, la nave dell'avversario quando è affondata.
+	 * 
+	 * @param index identificatore della nave affondata
+	 */
 	private void sunkenShips(char index) {
 		for (int i = 1; i < N; i++) 
 	        for (int j = 1; j < N; j++) 
@@ -417,7 +455,10 @@ public class Battleship extends VideoGames {
 		
 	}
 	
-	
+	/**
+	 * Gestisce l'attacco del computer nell'area di gioco del giocatore. 
+	 * Gestione della scelta di attacco in maniera casuale 
+	 */
 	private void computerAttack() {
 		Random rand = new Random();
 		while(true) {
@@ -458,7 +499,12 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	
+	/**
+	 * Controlla se il computer ha vinto la partita
+	 * 
+	 * @return  true se tutte le navi del giocatore sono state abbattute 
+	 * 			false in caso contrario 
+	 */
 	private boolean checkComputerWin() {	// Se tutte le barche sono state rivelate, il giocatore ha perso
 	    for (int i = 1; i < N; i++)
 	        for (int j = 1; j < N; j++)
@@ -468,7 +514,12 @@ public class Battleship extends VideoGames {
 	    return true;
 	}
 	
-	
+	/**
+	 * Controlla se il giocatore ha vinto la partita
+	 * 
+	 * @return  true se tutte le navi dell'avversario sono state abbattute 
+	 * 			false in caso contrario 
+	 */
 	private boolean checkPlayerWin() {		// Se tutte le barche sono state rivelate, il pc ha perso
 	    for (int i = 1; i < N; i++)
 	        for (int j = 1; j < N; j++)
@@ -478,7 +529,9 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	
+	/**
+	 * Modifica il colore della cella nell'area di gioco del giocatore se l'avversario ha colpito una nave
+	 */
 	private void colorCells() {
 		for (int i = 1; i < N; i++)
 	        for (int j = 1; j < N; j++)
@@ -519,7 +572,9 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	
+	/**
+	 * Gestisce il posizionamento delle navi del computer in maniera casuale 
+	 */
 	private void placeComputerShips() {
 		Random rand = new Random();
 	    int idIndex = 0; 								// Per scorrere gli ID univoci
@@ -582,7 +637,18 @@ public class Battleship extends VideoGames {
 	}
 	
 
-
+	/**
+	 * Gestisce la logica di posizionamento delle navi del computer 
+	 * 
+	 * @param row numero, casuale, della riga dove il computer vuole posizionare la nave
+	 * @param col numero, casuale, della colonna dove il computer vuole posizionare la nave
+	 * @param size lunghezza della nave
+	 * @param horizontal 	true se il computer vuole posizionare la nave in orizzontale
+	 * 						false se la vuole posizionare in verticale
+	 * 
+	 * @return 	true se la nave è stata posizionata correttamente
+	 * 			false se la nave non può essere posizionata nella posizione richiesta
+	 */
 	private boolean canPlaceComputerShip(int row, int col, int size, boolean horizontal) {
 	    if (horizontal) {
 	        if (col + size > N) // Uscirebbe dai bordi
@@ -633,7 +699,14 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	
+	/**
+	 * Controlla se la nave può essere posizionata in una determinata cella
+	 * 
+	 * @param row numero della riga della cella dove si vuole partire per posizionare la nave
+	 * @param col numero della colona della cella dove si vuole partire per posizionare la nave
+	 * @return  true se la nave può essere posizionata a partire da quella cella
+	 * 			false altrimenti
+	 */
 	private boolean canPlaceShip(int row, int col) {
 		
 	    int shipLen = currentShip[1];			// Controllo se la lunghezza che manca della barca ci sta
@@ -702,7 +775,13 @@ public class Battleship extends VideoGames {
 	}
 	
 	
-	
+	/**
+	 * Gestisce la scelta di posizionamento delle navi, evidenziando le possibili direzioni (su, giù, destra e sinistra)
+	 * dove si può piazzare la nave
+	 * 
+	 * @param row numero della riga della cella dove si vuole partire per posizionare la nave
+	 * @param col numero della colona della cella dove si vuole partire per posizionare la nave
+	 */
 	private void highlightValidDirections(int row, int col) {
 	  
 	    int shipLen = currentShip[0];		
@@ -759,7 +838,18 @@ public class Battleship extends VideoGames {
 	    colorDirection(row, col, 0, 1, shipLen, canRight);
 	}
 
-	
+	/**
+	 * Colora lo sfondo delle celle di verde se in quella direzione è possibile piazzare la barca altrimenti se non è possibili piazzarla (es: non c'è abbastanza spazio)
+	 * colora lo sfondo delle celle in quella direzione di rosse. Il numero di celle colorate dipende dalla lunghezza della nave.
+	 * 
+	 * @param row numero della riga della cella dove si vuole partire per posizionare la nave
+	 * @param col numero della colonna della cella dove si vuole partire per posizionare la nave
+	 * @param dr incremento riga per direzione
+	 * @param dc incremento colonna per direzione
+	 * @param len lunghezza della nave
+	 * @param valid true se la direzione in cui si vuole posizionare la nave è valida 
+	 * 				false altrimenti
+	 */
 	private void colorDirection(int row, int col, int dr, int dc, int len, boolean valid) {
 	    String color = valid ? "rgba(0,255,0,0.3)" : "rgba(255,0,0,0.3)";			// In base al flag di validità coloro di verde altrimenti rosso
 	    
@@ -792,6 +882,12 @@ public class Battleship extends VideoGames {
 		currentShip[1] = 0;
 	}
 	
+	/**
+	 * Controlla se tutte le navi del giocatore sono state affodate
+	 * 
+	 * @return  true se tutte le navi sono state affondate 
+	 * 			false altrimenti
+	 */
 	private boolean checkForAllBoatsDown() {		
 		for(int i = 0; i < 4; i++)
 			if(totalPlayerShips[i] != 0)			// Se anche solo una non è finita ritorno falso
@@ -799,7 +895,6 @@ public class Battleship extends VideoGames {
 			
 		return true;
 	}
-	
 	
 	private void resetBackGround() {		// x il colore
 		 for (int i = 1; i < N; i++) {
