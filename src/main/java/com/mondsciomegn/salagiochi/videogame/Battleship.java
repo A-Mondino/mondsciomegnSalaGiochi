@@ -14,7 +14,6 @@ import com.mondsciomegn.salagiochi.db.Category;
 import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -608,7 +607,7 @@ public class Battleship extends VideoGames {
 	private void resetBackGrid() {		// x la matrice di supporto
 		for (int i = 1; i < N; i++)
 	        for (int j = 1; j < N; j++)
-	            if (playerGrid[i][j].getText().isBlank())
+	            if (playerGrid[i][j].getText().isEmpty())
 	                tmpPlayer[i][j] = 'k';
 	            else
 	                tmpPlayer[i][j] = 'x';

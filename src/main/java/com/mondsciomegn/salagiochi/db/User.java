@@ -9,7 +9,6 @@ public class User {
 
     
     public User(String nickname, String name, String password, int score) {
-        if (nickname == null) throw new IllegalArgumentException("NickName non valido");
         this.nickname = nickname;
         this.name = name;
         this.password = password;
@@ -76,10 +75,10 @@ public class User {
     }
     
     
-    public void addScore(int Points) {
-    	if(Points < 0) 
+    public void addScore(int points) {
+    	if(points < 0) 
     		throw new IllegalArgumentException("Lo score inserito non è valido");
-    	this.score += Points;
+    	this.score += points;
     }
     
     

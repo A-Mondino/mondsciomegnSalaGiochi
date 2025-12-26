@@ -1,0 +1,936 @@
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:6:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:6:	DataClass:	DataClass: The class 'ActivityLog' is suspected to be a Data Class (WOC=0.000%, NOPA=0, NOAM=8, WMC=9)
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:7:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:8:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:9:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:9:	ReplaceJavaUtilDate:	ReplaceJavaUtilDate: Usage of java.util.Date should be replaced with classes from java.time
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:10:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:13:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:13:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'dateGame' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:13:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'score' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:13:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'user' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:13:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'videogame' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:13:	ReplaceJavaUtilDate:	ReplaceJavaUtilDate: Usage of java.util.Date should be replaced with classes from java.time
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:26:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'user' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:36:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'videogame' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:46:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'dateGame' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:46:	ReplaceJavaUtilDate:	ReplaceJavaUtilDate: Usage of java.util.Date should be replaced with classes from java.time
+src/main/java/com/mondsciomegn/salagiochi/db/ActivityLog.java:56:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'score' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:9:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:9:	DataClass:	DataClass: The class 'Category' is suspected to be a Data Class (WOC=20.000%, NOPA=0, NOAM=4, WMC=13)
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:10:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:11:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:14:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:14:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'description' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:14:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:16:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:22:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:22:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:24:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:27:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:32:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:36:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:40:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:50:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:60:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'description' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/Category.java:65:	MissingOverride:	MissingOverride: The method 'toString()' is missing an @Override annotation.
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:4:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:4:	DataClass:	DataClass: The class 'CheckPoint' is suspected to be a Data Class (WOC=0.000%, NOPA=0, NOAM=4, WMC=7)
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:5:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:5:	ShortVariable:	ShortVariable: Avoid variables with short names like id
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:6:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:9:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:9:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'id' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:9:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'points' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:9:	ShortVariable:	ShortVariable: Avoid variables with short names like id
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:11:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:22:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'id' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:22:	ShortVariable:	ShortVariable: Avoid variables with short names like id
+src/main/java/com/mondsciomegn/salagiochi/db/CheckPoint.java:32:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'points' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseConnection.java:8:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseConnection.java:8:	UseUtilityClass:	UseUtilityClass: All methods are static. Consider adding a private no-args constructor to prevent instantiation.
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseConnection.java:9:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseConnection.java:10:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseConnection.java:11:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseConnection.java:14:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:7:	UnnecessaryImport:	UnnecessaryImport: Unused import 'com.mondsciomegn.salagiochi.videogame.Tris'
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:10:	ClassWithOnlyPrivateConstructorsShouldBeFinal:	ClassWithOnlyPrivateConstructorsShouldBeFinal: This class has only private constructors and may be final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:10:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:14:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:15:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'users' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:17:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'query' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:21:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:24:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:24:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'u' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:24:	ShortVariable:	ShortVariable: Avoid variables with short names like u
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:34:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:41:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:43:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'games' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:45:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'query' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:49:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:56:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:62:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:63:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'activity' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:64:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'query' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:68:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseContainer.java:81:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:8:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:8:	UseUtilityClass:	UseUtilityClass: All methods are static. Consider adding a private no-args constructor to prevent instantiation.
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:9:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:11:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'user' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:17:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal " );" appears 4 times in this file; the first occurrence is on line 17
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:20:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'videogame' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:29:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'category' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:36:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'activityLog' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:46:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'createCategorys' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:49:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "UNION ALL " appears 5 times in this file; the first occurrence is on line 49
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:57:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'createVideogames' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:70:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'createUsers' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/DataBaseInitializer.java:89:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:4:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:4:	DataClass:	DataClass: The class 'User' is suspected to be a Data Class (WOC=11.111%, NOPA=0, NOAM=8, WMC=19)
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:4:	ShortClassName:	ShortClassName: Avoid short class names like User
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:5:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:6:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:7:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:8:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:8:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'score'
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:11:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:11:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:11:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:11:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'password' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:11:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'score' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:12:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:20:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:20:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:20:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:20:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'score' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:25:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:25:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:29:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:29:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:29:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:29:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'password' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:42:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:52:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:62:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'password' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:72:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'score' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:74:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:79:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:79:	FormalParameterNamingConventions:	FormalParameterNamingConventions: The method parameter name 'Points' doesn't match '[a-z][a-zA-Z0-9]*'
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:79:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'Points' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/User.java:81:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:24:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:25:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:25:	FinalFieldCouldBeStatic:	FinalFieldCouldBeStatic: The final field id could be made static
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:25:	ShortVariable:	ShortVariable: Avoid variables with short names like id
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:26:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:27:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:28:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:28:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'score'
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:29:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:29:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'time'
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:30:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:30:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'nickname'
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:31:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:31:	ImmutableField:	ImmutableField: Field 'timerStage' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:33:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:33:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'category' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:33:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:37:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:43:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:47:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:51:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:56:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:56:	UncommentedEmptyMethodBody:	UncommentedEmptyMethodBody: Document empty method body
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:59:	CommentRequired:	CommentRequired: Protected method constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:61:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'label' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:65:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'timeline' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:74:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'root' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:83:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'scene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:89:	LawOfDemeter:	LawOfDemeter: Call to `getVisualBounds` on foreign value `Screen.getPrimary()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:89:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'screenBounds' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:95:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'timerWidth' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:97:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'timerX' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:98:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'timerY' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:105:	CommentRequired:	CommentRequired: Protected method constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:110:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:110:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'x' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:110:	ShortVariable:	ShortVariable: Avoid variables with short names like x
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:114:	CommentRequired:	CommentRequired: Protected method constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:114:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:115:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'isAnonimous' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:117:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'finalNickname' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:118:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:128:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:132:	CommentRequired:	CommentRequired: Protected method constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:132:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'gameScore' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:132:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:134:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'finalNickname' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:136:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:143:	ReplaceJavaUtilDate:	ReplaceJavaUtilDate: Usage of java.util.Date should be replaced with classes from java.time
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:143:	ReplaceJavaUtilDate:	ReplaceJavaUtilDate: Usage of java.util.Date should be replaced with classes from java.time
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:150:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:156:	CommentRequired:	CommentRequired: Protected method constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:156:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'msg' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:157:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:175:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'score' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:185:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:195:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'category' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/db/VideoGames.java:205:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:1:	CouplingBetweenObjects:	CouplingBetweenObjects: A value of 35 may denote a high amount of coupling within the class (threshold: 20)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:1:	ExcessiveImports:	ExcessiveImports: A high number of imports (52) can indicate a high degree of coupling within an object; current threshold is 30.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:5:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.sql.Date'
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:60:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:60:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:60:	ShortClassName:	ShortClassName: Avoid short class names like Room
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:60:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:61:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:61:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'currentRoom'
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:62:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:63:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:63:	ImmutableField:	ImmutableField: Field 'currentNickName' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:65:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:65:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'primaryStage'
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:66:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:66:	ImmutableField:	ImmutableField: Field 'root' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:67:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:67:	ImmutableField:	ImmutableField: Field 'roomLabel' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:68:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:68:	FinalFieldCouldBeStatic:	FinalFieldCouldBeStatic: The final field roomH could be made static
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:69:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:69:	FinalFieldCouldBeStatic:	FinalFieldCouldBeStatic: The final field roomW could be made static
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:70:	CommentDefaultAccessModifier:	CommentDefaultAccessModifier: Missing commented default access modifier on field 'scene'
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:70:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:74:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'primaryStage' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:80:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:80:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'args' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:86:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'direction' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:91:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:93:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 1 in if statements
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:94:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:100:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'room' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:104:	NonExhaustiveSwitch:	NonExhaustiveSwitch: Switch statements or expressions should be exhaustive, add a default case (or missing enum branches)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:126:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:129:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'userTable' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:130:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'gameTable' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:131:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'activityLogTable' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:133:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tableWidth' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:136:	LawOfDemeter:	LawOfDemeter: Call to `getColumns` on foreign value `userTable` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:136:	LawOfDemeter:	LawOfDemeter: Call to `get` on foreign value `userTable.getColumns()` (degree 2)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:141:	LawOfDemeter:	LawOfDemeter: Call to `getItems` on foreign value `userTable` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:142:	LawOfDemeter:	LawOfDemeter: Call to `getItems` on foreign value `gameTable` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:143:	LawOfDemeter:	LawOfDemeter: Call to `getItems` on foreign value `activityLogTable` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:149:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'userPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:150:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'gamePane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:151:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'activityPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:156:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'grid' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:169:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:170:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerContent' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:176:	CognitiveComplexity:	CognitiveComplexity: The method 'roomM()' has a cognitive complexity of 22, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:176:	NcssCount:	NcssCount: The method 'roomM()' has a NCSS line count of 81.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:178:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'imagePath' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:179:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'bgImage' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:196:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'toolbar' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:199:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 10;" appears 5 times in this file; the first occurrence is on line 199
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:201:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tmp' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:203:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'imageView' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:210:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:210:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'spacer' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:213:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'nickName' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:214:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "-fx-font-size: 20px; -fx-font-weight: bold;" appears 4 times in this file; the first occurrence is on line 214
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:217:	LawOfDemeter:	LawOfDemeter: Call to `getItems` on foreign value `toolbar` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:222:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'popupStage' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:224:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:224:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:227:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'formGrid' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:233:	UnusedAssignment:	UnusedAssignment: The initializer for variable 'formLoginBox' is never used (overwritten on line 234)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:235:	UnusedAssignment:	UnusedAssignment: The initializer for variable 'formRegisterBox' is never used (overwritten on line 236)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:241:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerContent' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:244:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'popupScene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:251:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'title' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:254:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'logOut' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:259:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'confirmAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:265:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:269:	EmptyControlStatement:	EmptyControlStatement: Empty else statement
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:275:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'deleteAccount' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:280:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'confirmDelete' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:286:	LawOfDemeter:	LawOfDemeter: Call to `getButtonTypes` on foreign value `confirmDelete` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:287:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:296:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:297:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'err' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:300:	EmptyControlStatement:	EmptyControlStatement: Empty else statement
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:305:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:309:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'popupScene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:324:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:330:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'grid' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:338:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:342:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `box` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:346:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'label' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:350:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `box` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:354:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:356:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:356:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerContent' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:356:	UselessParentheses:	UselessParentheses: Useless parentheses around `400 + extraPadding`.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:361:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'leftArrow' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:366:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'leftAnchor' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:367:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'leftPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:368:	UnnecessaryCast:	UnnecessaryCast: Unnecessary cast (double)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:374:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `leftAnchor` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:378:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rightArrow' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:383:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rightAnchor' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:384:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rightPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:385:	UnnecessaryCast:	UnnecessaryCast: Unnecessary cast (double)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:391:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `rightAnchor` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:403:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerPane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:406:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'grid' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:411:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'col' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:413:	LawOfDemeter:	LawOfDemeter: Call to `getColumnConstraints` on foreign value `grid` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:415:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'row' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:417:	LawOfDemeter:	LawOfDemeter: Call to `getRowConstraints` on foreign value `grid` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:441:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'centerContent' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:448:	CognitiveComplexity:	CognitiveComplexity: The method 'registerBox()' has a cognitive complexity of 24, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:449:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'registerBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:454:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'regTitle' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:457:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'regNickname' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:459:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'regUser' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:461:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'regPass' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:463:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'regPassConf' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:465:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'regButton' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:469:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'infoAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:470:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'errorAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:471:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'warningAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:478:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:486:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'newUser' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:488:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:512:	UseUnderscoresInNumericLiterals:	UseUnderscoresInNumericLiterals: Number 23505 should separate every third digit with an underscore
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:523:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:531:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:534:	AvoidCatchingGenericException:	AvoidCatchingGenericException: Avoid catching Exception in try-catch block
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:535:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:547:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `registerBox` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:553:	CognitiveComplexity:	CognitiveComplexity: The method 'loginBox(Stage)' has a cognitive complexity of 23, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:553:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'popupStage' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:554:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'loginBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:559:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'logTitle' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:562:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'logUser' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:564:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'logPass' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:566:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'logButton' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:570:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'infoAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:571:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'errorAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:572:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'warningAlert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:582:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:588:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rs' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:588:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:599:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql1' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:603:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rs1' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:618:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:622:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:625:	AvoidCatchingGenericException:	AvoidCatchingGenericException: Avoid catching Exception in try-catch block
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:626:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:635:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `loginBox` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:641:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:647:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `box` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:652:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'imagePath' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:652:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'onClick' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:653:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'img' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:654:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'imgView' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:661:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'pane' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:668:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'gameTable' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:669:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'name' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:673:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'score' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:677:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'category' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:681:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'desc' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:683:	LawOfDemeter:	LawOfDemeter: Call to `getCategory` on foreign value `data.getValue()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:685:	LawOfDemeter:	LawOfDemeter: Call to `getColumns` on foreign value `gameTable` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:690:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'table' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:692:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colNick' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:697:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colName' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:702:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colPassword' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:707:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colScore' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:712:	LawOfDemeter:	LawOfDemeter: Call to `getColumns` on foreign value `table` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:715:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'table' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:717:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colNick' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:719:	LawOfDemeter:	LawOfDemeter: Call to `getUser` on foreign value `data.getValue()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:722:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colVideoGame' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:724:	LawOfDemeter:	LawOfDemeter: Call to `getVideogame` on foreign value `data.getValue()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:727:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colDate' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:729:	LawOfDemeter:	LawOfDemeter: Call to `getDateGame` on foreign value `data.getValue()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:732:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colScore' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/gui/Room.java:737:	LawOfDemeter:	LawOfDemeter: Call to `getColumns` on foreign value `table` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:17:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.event.Event'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:36:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:36:	CyclomaticComplexity:	CyclomaticComplexity: The class 'Battleship' has a total cyclomatic complexity of 170 (highest 19).
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:36:	TooManyFields:	TooManyFields: Too many fields
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:36:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:38:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:38:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'category' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:38:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:40:	ConstructorCallsOverridableMethod:	ConstructorCallsOverridableMethod: Overridable method called during object construction: VideoGames.setScore(int) 
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:44:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:44:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:44:	ShortVariable:	ShortVariable: Avoid variables with short names like N
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:45:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:45:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:47:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:47:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:47:	ImmutableField:	ImmutableField: Field 'playerGrid' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:48:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:48:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:48:	ImmutableField:	ImmutableField: Field 'tmpPlayer' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:49:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:49:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:49:	ImmutableField:	ImmutableField: Field 'computerGrid' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:50:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:50:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:50:	ImmutableField:	ImmutableField: Field 'tmpComputer' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:52:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:52:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:52:	ImmutableField:	ImmutableField: Field 'player' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:53:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:53:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:53:	ImmutableField:	ImmutableField: Field 'computer' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:55:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:55:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:55:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'tutorialFlag'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:58:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:58:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:58:	ImmutableField:	ImmutableField: Field 'currentShip' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:59:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:60:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:60:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:60:	ImmutableField:	ImmutableField: Field 'totalPlayerShips' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:61:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:61:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:61:	ImmutableField:	ImmutableField: Field 'totalComputerShips' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:61:	LongVariable:	LongVariable: Avoid excessively long variable names like totalComputerShips
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:63:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:63:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:63:	ImmutableField:	ImmutableField: Field 'computerShipSizes' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:63:	UseConcurrentHashMap:	UseConcurrentHashMap: If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:64:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:64:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:64:	ImmutableField:	ImmutableField: Field 'computerShipHits' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:64:	UseConcurrentHashMap:	UseConcurrentHashMap: If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:65:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:65:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:65:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:68:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:68:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:69:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:69:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:71:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:71:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:71:	ImmutableField:	ImmutableField: Field 'primaryStage' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:72:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:72:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:72:	ImmutableField:	ImmutableField: Field 'boatStage' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:74:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:74:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:75:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:75:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:76:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:76:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:79:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:81:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dialog' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:89:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'play' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:90:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cancel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:91:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tutorial' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:93:	LawOfDemeter:	LawOfDemeter: Call to `getButtonTypes` on foreign value `dialog.getDialogPane()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:95:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:96:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:100:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:101:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:107:	CognitiveComplexity:	CognitiveComplexity: The method 'startGame()' has a cognitive complexity of 18, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:107:	CyclomaticComplexity:	CyclomaticComplexity: The method 'startGame()' has a cyclomatic complexity of 13.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:107:	NcssCount:	NcssCount: The method 'startGame()' has a NCSS line count of 72.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:109:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:119:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:131:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "-fx-font-size: 20px;" appears 7 times in this file; the first occurrence is on line 131
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:151:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colLabel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:151:	UselessParentheses:	UselessParentheses: Useless parentheses around `j - 1`.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:159:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rowLabel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:173:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:173:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:174:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:179:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'p' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:179:	ShortVariable:	ShortVariable: Avoid variables with short names like p
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:182:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:182:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:187:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'playerBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:191:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'computerBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:198:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'root' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:205:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'scene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:236:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'boatBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:241:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'boats' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:242:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'boatsLabel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:245:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:245:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'row' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:258:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `row` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:259:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `boatBox` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:273:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:300:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:300:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:314:	CognitiveComplexity:	CognitiveComplexity: The method 'playerBoatDown(int, int)' has a cognitive complexity of 24, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:314:	CyclomaticComplexity:	CyclomaticComplexity: The method 'playerBoatDown(int, int)' has a cyclomatic complexity of 10.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:314:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:314:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:317:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:317:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:319:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:326:	AvoidDeeplyNestedIfStmts:	AvoidDeeplyNestedIfStmts: Deeply nested if..then statements are hard to read
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:326:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 1 in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:327:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:329:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 'k' in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:330:	AvoidDeeplyNestedIfStmts:	AvoidDeeplyNestedIfStmts: Deeply nested if..then statements are hard to read
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:337:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:337:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:339:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:339:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:348:	AvoidDeeplyNestedIfStmts:	AvoidDeeplyNestedIfStmts: Deeply nested if..then statements are hard to read
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:348:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:358:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:365:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:373:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:373:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:374:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as '-' in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:374:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:375:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'id' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:375:	ShortVariable:	ShortVariable: Avoid variables with short names like id
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:377:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:380:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:382:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:386:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:399:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:413:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'index' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:414:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:415:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:417:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:423:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rand' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:425:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'row' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:426:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'col' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:427:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:427:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:427:	UselessParentheses:	UselessParentheses: Useless parentheses around `tmpPlayer[row][col] != '-' && tmpPlayer[row][co...`.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:431:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:431:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:439:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as '-' in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:443:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:447:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:447:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:464:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:465:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:466:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as '-' in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:467:	CollapsibleIfStatements:	CollapsibleIfStatements: This if statement could be combined with its parent
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:468:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:468:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:474:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:475:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:477:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:477:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:484:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:485:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:487:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:492:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:493:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:494:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:495:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:497:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:502:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:503:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:504:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:507:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:508:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:513:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:514:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:517:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:518:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:524:	CognitiveComplexity:	CognitiveComplexity: The method 'placeComputerShips()' has a cognitive complexity of 37, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:524:	CyclomaticComplexity:	CyclomaticComplexity: The method 'placeComputerShips()' has a cyclomatic complexity of 15.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:524:	NPathComplexity:	NPathComplexity: The method 'placeComputerShips()' has an NPath complexity of 486, current threshold is 200
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:525:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rand' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:528:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:529:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:533:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'shipSize' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:534:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'shipsToPlace' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:538:	AssignmentInOperand:	AssignmentInOperand: Avoid assignment to idIndex in operand
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:538:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'shipID' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:545:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'row' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:546:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'col' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:547:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'horizontal' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:551:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:551:	ShortVariable:	ShortVariable: Avoid variables with short names like r
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:552:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:552:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:562:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:563:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:567:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:568:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:570:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colLabel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:570:	UselessParentheses:	UselessParentheses: Useless parentheses around `j - 1`.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:571:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:573:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:576:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:577:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:578:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:579:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:587:	CognitiveComplexity:	CognitiveComplexity: The method 'canPlaceComputerShip(int, int, int, boolean)' has a cognitive complexity of 18, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:587:	CyclomaticComplexity:	CyclomaticComplexity: The method 'canPlaceComputerShip(int, int, int, boolean)' has a cyclomatic complexity of 10.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:587:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:587:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'horizontal' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:587:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:587:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'size' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:590:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:590:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:592:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:594:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:594:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:597:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:597:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:599:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:601:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:601:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:609:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:610:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:612:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:614:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:618:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'cellCol' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:618:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'cellRow' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:618:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:618:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:620:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'deltaRow' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:622:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'deltaCol' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:631:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 1 in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:631:	SimplifyBooleanReturns:	SimplifyBooleanReturns: This if statement can be replaced by `return {condition};`
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:632:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:632:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:638:	CognitiveComplexity:	CognitiveComplexity: The method 'canPlaceShip(int, int)' has a cognitive complexity of 34, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:638:	CyclomaticComplexity:	CyclomaticComplexity: The method 'canPlaceShip(int, int)' has a cyclomatic complexity of 19.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:638:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:638:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:638:	NPathComplexity:	NPathComplexity: The method 'canPlaceShip(int, int)' has an NPath complexity of 513, current threshold is 200
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:640:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'shipLen' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:640:	PrematureDeclaration:	PrematureDeclaration: Declaration of 'shipLen' can be moved closer to its usages
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:643:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:643:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:645:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 1 in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:646:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:646:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:648:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canPlace' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:648:	PrematureDeclaration:	PrematureDeclaration: Declaration of 'canPlace' can be moved closer to its usages
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:660:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:660:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:673:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:673:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:686:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:686:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:699:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:699:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:707:	CognitiveComplexity:	CognitiveComplexity: The method 'highlightValidDirections(int, int)' has a cognitive complexity of 28, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:707:	CyclomaticComplexity:	CyclomaticComplexity: The method 'highlightValidDirections(int, int)' has a cyclomatic complexity of 17.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:707:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:707:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:707:	NPathComplexity:	NPathComplexity: The method 'highlightValidDirections(int, int)' has an NPath complexity of 1296, current threshold is 200
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:709:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'shipLen' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:710:	OneDeclarationPerLine:	OneDeclarationPerLine: Use one line for each declaration, it enhances code readability.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:714:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:714:	ShortVariable:	ShortVariable: Avoid variables with short names like r
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:717:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:725:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:725:	ShortVariable:	ShortVariable: Avoid variables with short names like r
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:728:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:736:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:736:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:739:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:747:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:747:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:750:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'dc' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'dr' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'len' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'valid' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	ShortVariable:	ShortVariable: Avoid variables with short names like dc
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:764:	ShortVariable:	ShortVariable: Avoid variables with short names like dr
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:765:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'color' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:768:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:768:	ShortVariable:	ShortVariable: Avoid variables with short names like r
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:769:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:769:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:771:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:780:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:780:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:782:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 1 in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:783:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:785:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:786:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 1 in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:787:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:789:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:797:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:799:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:799:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:809:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Battleship.java:811:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:29:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:32:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:32:	ImmutableField:	ImmutableField: Field 'primaryStage' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:34:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:34:	ImmutableField:	ImmutableField: Field 'diceUser1' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:35:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:35:	ImmutableField:	ImmutableField: Field 'diceUser2' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:36:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:36:	ImmutableField:	ImmutableField: Field 'diceComp1' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:37:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:37:	ImmutableField:	ImmutableField: Field 'diceComp2' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:40:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:40:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'category' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:40:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:42:	ConstructorCallsOverridableMethod:	ConstructorCallsOverridableMethod: Overridable method called during object construction: VideoGames.setScore(int) 
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:46:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:46:	MissingOverride:	MissingOverride: The method 'play(String)' is missing an @Override annotation.
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:48:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dialog' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:57:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'play' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:58:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cancel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:60:	LawOfDemeter:	LawOfDemeter: Call to `getButtonTypes` on foreign value `dialog.getDialogPane()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:62:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:63:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:73:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:82:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:86:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:92:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'title' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:94:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'message' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:95:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'message1' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:97:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'playerBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:100:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'playerSection' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:103:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'compBox' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:106:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'compSection' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:110:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'throwButton' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:113:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dice1' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:116:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dice2' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:119:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sumPlayer' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:123:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dice3' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:126:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dice4' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:129:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sumComputer' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:135:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'center' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:138:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'layout' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:141:	UnnecessaryFullyQualifiedName:	UnnecessaryFullyQualifiedName: Unnecessary qualifier 'javafx.geometry': 'Pos' is already in scope because it is imported in this file
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:144:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'scene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:157:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'ran' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:158:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dice' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:166:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'sum' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:166:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'sumC' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:183:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'dice' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:185:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'imgPath' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/DiceGuesser.java:190:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'fullPath' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:1:	ExcessiveImports:	ExcessiveImports: A high number of imports (32) can indicate a high degree of coupling within an object; current threshold is 30.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:7:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.ArrayList'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:9:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.List'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:13:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.Scanner'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:17:	UnnecessaryImport:	UnnecessaryImport: Unused import 'com.mondsciomegn.salagiochi.db.User'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:20:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.event.Event'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:32:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.layout.Priority'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:39:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:39:	CyclomaticComplexity:	CyclomaticComplexity: The class 'Roulette' has a total cyclomatic complexity of 126 (highest 99).
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:41:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:41:	ImmutableField:	ImmutableField: Field 'random' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:43:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:43:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'selectedButton'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:44:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:44:	ImmutableField:	ImmutableField: Field 'grid' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:45:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:45:	ImmutableField:	ImmutableField: Field 'primaryStage' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:47:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:47:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'gameTokens'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:48:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:48:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'selectionLocked'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:49:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:50:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:52:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:52:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'category' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:52:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:54:	ConstructorCallsOverridableMethod:	ConstructorCallsOverridableMethod: Overridable method called during object construction: VideoGames.setScore(int) 
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:58:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:58:	MissingOverride:	MissingOverride: The method 'play(String)' is missing an @Override annotation.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:60:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dialog' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:67:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'play' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:68:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cancel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:70:	LawOfDemeter:	LawOfDemeter: Call to `getButtonTypes` on foreign value `dialog.getDialogPane()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:72:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:73:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:81:	CognitiveComplexity:	CognitiveComplexity: The method 'startGame()' has a cognitive complexity of 28, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:81:	CyclomaticComplexity:	CyclomaticComplexity: The method 'startGame()' has a cyclomatic complexity of 11.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:81:	NcssCount:	NcssCount: The method 'startGame()' has a NCSS line count of 61.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:83:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:93:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:97:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:104:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `grid` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:110:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colors' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:110:	UseConcurrentHashMap:	UseConcurrentHashMap: If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:111:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'redNumbers' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:112:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'blackNumbers' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:114:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:114:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:116:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:116:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'b' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:119:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:120:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'layout' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:129:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'num' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:130:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'color' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:132:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:132:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'btn' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:153:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'choiceRow' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:160:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:160:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'empty' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:176:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'choiceColumns' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:182:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:184:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:184:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'extra' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:201:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'choiceExtra' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:210:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'colorsExtra' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:211:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "white" appears 4 times in this file; the first occurrence is on line 211
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:221:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:221:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'b' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:221:	ShortVariable:	ShortVariable: Avoid variables with short names like b
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:242:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'scene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:264:	MethodNamingConventions:	MethodNamingConventions: The instance method name 'Converter' doesn't match '[a-z][a-zA-Z0-9]*'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:265:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tokenStage' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:268:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'root' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:273:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'pointsLabel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:276:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tokensLabel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:279:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'convertBtn' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:283:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'betBtn' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:286:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'exitBtn' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:292:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 300 in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:294:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:294:	UselessParentheses:	UselessParentheses: Useless parentheses around `-gameTokens - 1`.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:306:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'alert' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:316:	UnnecessaryReturn:	UnnecessaryReturn: Unnecessary return statement
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:336:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tmp' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:341:	LawOfDemeter:	LawOfDemeter: Call to `getChildren` on foreign value `root` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:343:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'scene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:356:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'cell' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:359:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:363:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:364:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:374:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'selectedNumber' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:374:	UnnecessaryLocalBeforeReturn:	UnnecessaryLocalBeforeReturn: Consider simply returning the value vs storing it in local variable 'selectedNumber'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:374:	VariableCanBeInlined:	VariableCanBeInlined: Consider simply using the value vs. storing it in local variable 'selectedNumber'.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:382:	CognitiveComplexity:	CognitiveComplexity: The method 'winner(int, String)' has a cognitive complexity of 50, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:382:	CyclomaticComplexity:	CyclomaticComplexity: The method 'winner(int, String)' has a cyclomatic complexity of 99.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:382:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'decision' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:382:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'num' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:382:	NcssCount:	NcssCount: The method 'winner(int, String)' has a NCSS line count of 115.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:384:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'choiceNum' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:386:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "Numero estratto: " appears 26 times in this file; the first occurrence is on line 386
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:386:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "\nHAI VINTO!" appears 13 times in this file; the first occurrence is on line 386
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:387:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:391:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:395:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "\nHAI PERSO!" appears 13 times in this file; the first occurrence is on line 395
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:399:	NonExhaustiveSwitch:	NonExhaustiveSwitch: Switch statements or expressions should be exhaustive, add a default case (or missing enum branches)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:409:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:422:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:435:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:448:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:461:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:474:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:487:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:500:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:508:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:513:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:526:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:539:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:552:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:561:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:566:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'nicknameDB' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:567:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:573:	CloseResource:	CloseResource: Ensure that resources like this ResultSet object are closed after use
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:573:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'rs' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:573:	ShortVariable:	ShortVariable: Avoid variables with short names like rs
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:579:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:585:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'mult' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:585:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickname' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:586:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'nicknameDB' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:587:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:592:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:596:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Roulette.java:599:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:1:	ExcessiveImports:	ExcessiveImports: A high number of imports (31) can indicate a high degree of coupling within an object; current threshold is 30.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:5:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.sql.ResultSet'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:11:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.Scanner'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:17:	UnnecessaryImport:	UnnecessaryImport: Unused import 'com.mondsciomegn.salagiochi.db.User'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:20:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.application.Platform'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:21:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.geometry.Pos'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:23:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.control.Alert'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:27:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.control.Label'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:28:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.image.Image'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:29:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.image.ImageView'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:31:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.layout.HBox'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:32:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javafx.scene.layout.VBox'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:36:	UnnecessaryImport:	UnnecessaryImport: Duplicate import 'javafx.scene.control.ButtonType'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:37:	UnnecessaryImport:	UnnecessaryImport: Duplicate import 'javafx.scene.control.Dialog'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:40:	CommentRequired:	CommentRequired: Class comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:40:	ShortClassName:	ShortClassName: Avoid short class names like Tris
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:42:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:42:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'category' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:42:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'name' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:44:	ConstructorCallsOverridableMethod:	ConstructorCallsOverridableMethod: Overridable method called during object construction: VideoGames.setScore(int) 
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:47:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:47:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:47:	ImmutableField:	ImmutableField: Field 'buttons' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:48:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:48:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:48:	ImmutableField:	ImmutableField: Field 'playGrid' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:50:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:50:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:50:	ImmutableField:	ImmutableField: Field 'grid' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:52:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:52:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:52:	RedundantFieldInitializer:	RedundantFieldInitializer: Avoid using redundant field initializer for 'gameOver'
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:53:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:53:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:53:	ImmutableField:	ImmutableField: Field 'random' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:55:	CommentRequired:	CommentRequired: Field comments are required
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:55:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:55:	ImmutableField:	ImmutableField: Field 'primaryStage' may be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:59:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nickName' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:61:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'dialog' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:73:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'play' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:74:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cancel' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:76:	LawOfDemeter:	LawOfDemeter: Call to `getButtonTypes` on foreign value `dialog.getDialogPane()` (degree 1)
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:78:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:79:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:88:	CognitiveComplexity:	CognitiveComplexity: The method 'startGame()' has a cognitive complexity of 21, current threshold is 15
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:91:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sql' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:101:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:105:	AvoidPrintStackTrace:	AvoidPrintStackTrace: Avoid printStackTrace(); use a logger call instead.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:129:	CollapsibleIfStatements:	CollapsibleIfStatements: This if statement could be combined with its parent
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:130:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:137:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'scene' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:150:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'col' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:150:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'row' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:151:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:162:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:170:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'move' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:172:	CommentSize:	CommentSize: Comment is too large: Line too long
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:179:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'row' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:180:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'col' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:198:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'unused' could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:201:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as ' ' in if statements
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:207:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:207:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:207:	ReturnEmptyCollectionRatherThanNull:	ReturnEmptyCollectionRatherThanNull: Return an empty collection rather than null.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:213:	CyclomaticComplexity:	CyclomaticComplexity: The method 'gameCheck(char)' has a cyclomatic complexity of 15.
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:213:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'symbol' is not assigned and could be declared final
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:213:	NPathComplexity:	NPathComplexity: The method 'gameCheck(char)' has an NPath complexity of 213, current threshold is 200
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:214:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:216:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:216:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:218:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:220:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:220:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:223:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:223:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:225:	SimplifyBooleanReturns:	SimplifyBooleanReturns: This if statement can be replaced by `return {condition};`
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:226:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+src/main/java/com/mondsciomegn/salagiochi/videogame/Tris.java:226:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method

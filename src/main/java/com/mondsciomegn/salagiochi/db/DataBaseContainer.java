@@ -10,7 +10,7 @@ import com.mondsciomegn.salagiochi.videogame.Tris;
 public class DataBaseContainer {
 	
 	private DataBaseContainer() {}
-	
+
 	 public static List<User> getAllUsers() {
 	        List<User> users = new ArrayList<>();
 
