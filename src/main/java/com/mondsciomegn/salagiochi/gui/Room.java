@@ -16,6 +16,7 @@ import com.mondsciomegn.salagiochi.db.DataBaseInitializer;
 import com.mondsciomegn.salagiochi.db.User;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 import com.mondsciomegn.salagiochi.videogame.*;
+import com.mondsciomegn.salagiochi.videogame.battleship.Battleship;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;

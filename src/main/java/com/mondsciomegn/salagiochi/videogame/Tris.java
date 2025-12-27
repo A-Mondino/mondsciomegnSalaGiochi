@@ -101,25 +101,6 @@ public class Tris extends VideoGames{
 	     * Il metodo inizializza una griglia 3x3 composta da pulsanti che rappresentano la griglia di gioco.
 	     */
 	    private void startGame() {
-	    		
-	    	if(getNickname().isEmpty()) {									// Significa che qualcuno sta giocando in anonimo
-                String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
-		  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
-		  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
-                
-                try (Connection conn = DataBaseConnection.getConnection();
-                        PreparedStatement stmt = conn.prepareStatement(sql)) {
-                        try {
-                            stmt.executeUpdate(); 							// Prova a inserire l'utente
-
-                        } catch (SQLException ex) { 
-                        	ex.printStackTrace();
-                        }
-                       
-                  } catch (SQLException e1) {
-                	  e1.printStackTrace();
-                  }
-            }
 	    	
 	        primaryStage.setTitle("Gioco Tris");
 

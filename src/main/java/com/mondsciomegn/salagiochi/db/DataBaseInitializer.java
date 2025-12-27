@@ -67,21 +67,25 @@ public class DataBaseInitializer {
         						  "SELECT 'LanciaDadi', 'Fortuna', 50 " +
         						  "WHERE NOT EXISTS (SELECT 1 FROM videogioco WHERE nome = 'TrovaDadi');";
        
-        String createUsers = 	  "INSERT INTO utente (nickname, nome, psww, score)" +
-				  				  "SELECT '_COMPUTER_', 'computer', 'computer123' , 0 " +
-				  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_COMPUTER_');"; 
-				  				  
+        String createComputerAcc = "INSERT INTO utente (nickname, nome, psww, score)" +
+				  				   "SELECT '_COMPUTER_', 'computer', 'computer123' , 0 " +
+				  				   "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_COMPUTER_');"; 
+        
+        String createAnonimousAcc = "INSERT INTO utente (nickname, nome, psww, score)" +
+				  					"SELECT '_ANONIMO_', 'anonimo', '' , 0 " +
+				  					"WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');";
+        
         
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
         	
-        	stmt.execute("DROP TABLE videogioco");  
-        	stmt.execute("DROP TABLE activityLog");  
+        	stmt.execute("DROP TABLE videogioco");
         	stmt.execute(user);
             stmt.execute(videogame);
             stmt.execute(category);
             stmt.execute(activityLog);
-            stmt.executeUpdate(createUsers);
+            stmt.executeUpdate(createComputerAcc);
+            stmt.executeUpdate(createAnonimousAcc);
             stmt.executeUpdate(createCategorys);
             stmt.executeUpdate(createVideogames);
             

@@ -97,24 +97,6 @@ public class Roulette extends VideoGames{
 	 * iniziare la partita.
 	 */
 	private void startGame() {
-    	if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
-            String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
-	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
-	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
-            
-            try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-                    try {
-                        stmt.executeUpdate(); 			// Prova a inserire l'utente
-
-                    } catch (SQLException ex) { 
-                    	ex.printStackTrace();
-                    }
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
-        }
     	
     	updateDB();										// Devo considerare i punteggi del giocatore che sta giocando
     	

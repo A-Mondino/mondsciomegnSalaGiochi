@@ -1,4 +1,4 @@
-package com.mondsciomegn.salagiochi.videogame;
+package com.mondsciomegn.salagiochi.videogame.battleship;
 
 
 
@@ -34,7 +34,7 @@ import javafx.stage.StageStyle;
 
 public class Battleship extends VideoGames {
 	
-	   /**
+	 /**
      * Costruttore della classe Battleship,
      * Inizializza il punteggio a 1000.
      *  
@@ -87,6 +87,7 @@ public class Battleship extends VideoGames {
 	 * 
 	 * @param nickname nickname del giocatore.
 	 */
+	@Override
 	public void play(String nickname) {
 		setNickname(nickname);
     	Dialog<ButtonType> dialog = new Dialog<>();
@@ -121,22 +122,7 @@ public class Battleship extends VideoGames {
 	 * posizionamento delle barca  
 	 */
 	private void startGame() {
-		if(getNickname().isEmpty()) {					// Significa che qualcuno sta giocando in anonimo
-            String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
-	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
-	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
-	        try (Connection conn = DataBaseConnection.getConnection();
-	                PreparedStatement stmt = conn.prepareStatement(sql)) {
-	                
-	                    stmt.executeUpdate(); 		// Prova a inserire l'utente
-	
-	               
-	          } catch (SQLException e) {
-	        	  e.printStackTrace();
-	          }
-        }
-    	
-    	
+		
         primaryStage.setTitle("Battaglia Navale");
 
         for (int i = 0; i < N; i++) {        
@@ -360,8 +346,9 @@ public class Battleship extends VideoGames {
 							currentShip[1]--;			// E segno che l'ho messa giu
 							completeShip(row,col);		// Completo l'inserimento calcolando la direzione
 					}
-					else 
+					else
 						return false;
+						
 				else 				
 					return false;
 				
@@ -404,27 +391,29 @@ public class Battleship extends VideoGames {
 	 * @param col numero della colonna dove si vuole eggettuare l'attacco
 	 */
 	private void playerAttack(int row, int col) {
-		if(tmpComputer[row][col] != '-') {			// Se colpisco qualcosa nella girglia del computer
-			char id = tmpComputer[row][col];		// Memorizzo l'id di cosa ho colpito
-	        computerGrid[row][col].setText("X");	// Segno che l'ho compito
-			computerShipHits.put(id, computerShipHits.get(id) + 1);	// Aggiungo il colpo nella mappa che mantiene, per ogni ID, il numero di volte in cui ho colpito quel tipo di barca 
-									
-	        if (computerShipHits.get(id).equals(computerShipSizes.get(id))) 	// Se la nave è affondata (i colpi subiti dalla nave == dimensione)
-	            sunkenShips(id); 													// La coloro tutta di rosso
-	        else  																// Altrimenti l'ho colpita ma non affondata 
-	            computerGrid[row][col].setStyle("-fx-background-color: rgba(255,165,0,0.3); -fx-font-size: 20px;"); // Allora coloro la casella di arancio
-	        
-			
-			if(checkPlayerWin()) {				// Poi controllo se ho vinto
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		        alert.setTitle("RISULTATO");
-		        alert.setHeaderText("Hai vinto!!!");
-		        alert.setContentText(null);
-		        alert.showAndWait();
-		        primaryStage.close();
-		        stopTimer();
-				addPoints(getNickname());		// Calcolo i punti
-				registerGame(getNickname(), getScore());
+		if(tmpComputer[row][col] != '-') {				// Se colpisco qualcosa nella girglia del computer
+			if(!computerGrid[row][col].getText().equals("X")) {						// Che non avevo ancora compilto
+				char id = tmpComputer[row][col];		// Memorizzo l'id di cosa ho colpito
+		        computerGrid[row][col].setText("X");	// Segno che l'ho compito
+				computerShipHits.put(id, computerShipHits.get(id) + 1);	// Aggiungo il colpo nella mappa che mantiene, per ogni ID, il numero di volte in cui ho colpito quel tipo di barca 
+										
+		        if (computerShipHits.get(id).equals(computerShipSizes.get(id))) 	// Se la nave è affondata (i colpi subiti dalla nave == dimensione)
+		            sunkenShips(id); 													// La coloro tutta di rosso
+		        else  																// Altrimenti l'ho colpita ma non affondata 
+		            computerGrid[row][col].setStyle("-fx-background-color: rgba(255,165,0,0.3); -fx-font-size: 20px;"); // Allora coloro la casella di arancio
+		        
+				
+				if(checkPlayerWin()) {				// Poi controllo se ho vinto
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			        alert.setTitle("RISULTATO");
+			        alert.setHeaderText("Hai vinto!!!");
+			        alert.setContentText(null);
+			        alert.showAndWait();
+			        primaryStage.close();
+			        stopTimer();
+					addPoints(getNickname());		// Calcolo i punti
+					registerGame(getNickname(), getScore());
+				}
 			}
 		}
 		else {			// Non ho colpito niente, è il turno del computer a sparare

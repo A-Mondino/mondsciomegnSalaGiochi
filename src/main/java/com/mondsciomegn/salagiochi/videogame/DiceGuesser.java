@@ -84,24 +84,7 @@ public class DiceGuesser extends VideoGames{
 	 * del computer, facendo visualizzare anche l'immagine dei dadi   
 	 */
 	private void startGame() {
-		if(getNickname().isEmpty()) {														// Significa che qualcuno sta giocando in anonimo
-            String sql = "INSERT INTO utente (nickname, nome, psww, score)" +
-	  				  "SELECT '_ANONIMO_', 'Anonimo', '' , 0 " +
-	  				  "WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; 
-            
-            try (Connection conn = DataBaseConnection.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(sql)) {
-                    try {
-                        stmt.executeUpdate(); 												// Prova a inserire l'utente
-                    } catch (SQLException ex) { 
-                    	ex.printStackTrace();
-                    }
-                   
-              } catch (SQLException e1) {
-            	  e1.printStackTrace();
-              }
-        }
-		
+	
 		primaryStage.setTitle("Gioco dei Dadi");
 
         Label title = new Label("Lancio dei Dadi");

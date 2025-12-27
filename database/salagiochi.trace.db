@@ -2727,3 +2727,30 @@ INSERT INTO activityLog (nickname, videogioco, data_partita, score) VALUES (?, ?
 	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+2025-12-27 17:06:12.331684+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE [*]user"; expected "identifier"; SQL statement:
+DROP TABLE user [42001-224]
+2025-12-27 17:08:48.307516+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ACTIVITYLOG" not found; SQL statement:
+SELECT * FROM activityLog ORDER BY data_partita DESC [42102-224]
+2025-12-27 17:09:15.607789+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ACTIVITYLOG" not found; SQL statement:
+DROP TABLE activityLog [42102-224]
+2025-12-27 17:11:42.679848+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ACTIVITYLOG" not found; SQL statement:
+DROP TABLE activityLog [42102-224]
+2025-12-27 17:12:48.102670+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+DROP TABLE videogioco [42102-224]
+2025-12-27 17:12:55.725188+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+SELECT * FROM videogioco ORDER BY score DESC [42102-224]
+2025-12-27 17:12:55.954591+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ACTIVITYLOG" not found; SQL statement:
+SELECT * FROM activityLog ORDER BY data_partita DESC [42102-224]
+2025-12-27 17:14:26.704682+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "VIDEOGIOCO" not found; SQL statement:
+DROP TABLE videogioco [42102-224]
+2025-12-27 17:17:09.614657+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO utente (nickname, nome, psww, score)SELECT '_COMPUTER_', 'computer', 'computer123' , 0 WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_COMPUTER_')UNION [*]ALLINSERT INTO utente (nickname, nome, psww, score)SELECT '_ANONIMO_', 'Anonimo', '' , 0 WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_');"; expected "ALL, DISTINCT, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO utente (nickname, nome, psww, score)SELECT '_COMPUTER_', 'computer', 'computer123' , 0 WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_COMPUTER_')UNION ALLINSERT INTO utente (nickname, nome, psww, score)SELECT '_ANONIMO_', 'Anonimo', '' , 0 WHERE NOT EXISTS (SELECT 1 FROM utente WHERE nickname = '_ANONIMO_'); [42001-224]
