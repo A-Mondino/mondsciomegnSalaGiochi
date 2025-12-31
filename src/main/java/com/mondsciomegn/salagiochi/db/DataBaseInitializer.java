@@ -79,7 +79,7 @@ public class DataBaseInitializer {
         try (Connection conn = DataBaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
         	
-        	//stmt.execute("DROP TABLE videogioco");
+        	stmt.execute("DROP TABLE videogioco");
         	stmt.execute(user);
             stmt.execute(videogame);
             stmt.execute(category);
