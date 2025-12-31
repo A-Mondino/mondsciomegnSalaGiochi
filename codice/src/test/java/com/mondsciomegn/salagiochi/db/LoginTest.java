@@ -1,8 +1,8 @@
-package test;
+package com.mondsciomegn.salagiochi.db;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import com.mondsciomegn.salagiochi.db.User;
 
 class LoginTest {
 	

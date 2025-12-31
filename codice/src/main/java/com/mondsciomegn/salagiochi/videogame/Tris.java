@@ -50,6 +50,8 @@ public class Tris extends VideoGames{
 			super(name, category);
 			setScore(300);
 		}
+		
+		
 
 	 	private Button[][] buttons = new Button[3][3];		// Griglia del tris
 	    private char[][] playGrid = new char[3][3];			// Matrice di supporto
