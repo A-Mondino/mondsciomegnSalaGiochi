@@ -1149,6 +1149,9 @@ user not logged</body>
   <packagedElement xmi:type="uml:Usage" xmi:id="_csju4PLsEfCVJKPZzLqHlA" client="_WlEzUMFUEfCZUZ7PVYJSjg" supplier="_9Ai0oPLhEfCVJKPZzLqHlA"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_dkZ84PLsEfCVJKPZzLqHlA" client="_WlEzUMFUEfCZUZ7PVYJSjg" supplier="_8zKf8PLhEfCVJKPZzLqHlA"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_eLrYQPLsEfCVJKPZzLqHlA" client="_WlEzUMFUEfCZUZ7PVYJSjg" supplier="_5k50MPLhEfCVJKPZzLqHlA"/>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_b06JoPL2EfCV6Jee0k4nFw" name="Interaction72"/>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_i-WRgPL2EfCV6Jee0k4nFw" name="Interaction73"/>
+  <packagedElement xmi:type="uml:Activity" xmi:id="_tov-sPL2EfCV6Jee0k4nFw" name="Activity74"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_3gt1cK6yEfCy9KboeOQdTw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3gw4wK6yEfCy9KboeOQdTw" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
