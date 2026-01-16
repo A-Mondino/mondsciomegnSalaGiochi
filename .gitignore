@@ -1,3 +1,4 @@
 bin/
 .metadata/
 .sonarlint/
+.DS_Store/
