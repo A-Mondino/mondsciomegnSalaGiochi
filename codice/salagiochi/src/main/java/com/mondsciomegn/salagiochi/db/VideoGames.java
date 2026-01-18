@@ -166,7 +166,6 @@ public class VideoGames {
 	        stmt.setInt(4, gameScore);                        // punteggio del videogioco
 
 	        stmt.executeUpdate();                               // eseguo l'inserimento
-	        //System.out.println("Gioco registrato correttamente!");
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
