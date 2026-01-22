@@ -24,11 +24,11 @@ public class RouletteRules {
     private void initializeRules() {
         // --- Regole Righe (Resto della divisione per 3) ---
         // Riga 1: 1, 4, 7... (diviso 3 danno resto 1)
-        rulesMap.put("Punta sull'intera riga 1", new RemainderRule(3, 1, 3));	// Triplica la puntata
+        rulesMap.put("Punta sull'intera riga 1", new RowRule(3, 1, 3));	// Triplica la puntata
         // Riga 2: 2, 5, 8... (diviso 3 danno resto 2)
-        rulesMap.put("Punta sull'intera riga 2", new RemainderRule(3, 2, 3));
+        rulesMap.put("Punta sull'intera riga 2", new RowRule(3, 2, 3));
         // Riga 3: 3, 6, 9... (divisibili per 3, resto 0)
-        rulesMap.put("Punta sull'intera riga 3", new RemainderRule(3, 0, 3));
+        rulesMap.put("Punta sull'intera riga 3", new RowRule(3, 0, 3));
 
         // --- Regole Dozzine (Intervalli) ---
         rulesMap.put("Punta sui primi 12 numeri", new RangeRule(1, 12, 3));		// Triplica la puntata	
@@ -40,8 +40,8 @@ public class RouletteRules {
         rulesMap.put("Punta 19-36", new RangeRule(19, 36, 2));
 
         // Pari (diviso 2 resto 0) e Dispari (diviso 2 resto 1)
-        rulesMap.put("Pari", new RemainderRule(2, 0, 2)); 						// Raddoppia la puntata
-        rulesMap.put("Dispari", new RemainderRule(2, 1, 2));
+        rulesMap.put("Pari", new RowRule(2, 0, 2)); 						// Raddoppia la puntata
+        rulesMap.put("Dispari", new RowRule(2, 1, 2));
 
         // --- Colori ---	
         rulesMap.put("Rosso", new ColorRule("red", 2));							// Raddoppia la puntata

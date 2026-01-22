@@ -2,12 +2,12 @@ package com.mondsciomegn.salagiochi.videogame.roulette;
 
 import java.util.Map;
 
-public class RemainderRule implements GameRules {
+public class RowRule implements GameRules {
     private final int divisor;
     private final int expectedRemainder;
     private final int multiplier;
 
-    public RemainderRule(int divisor, int expectedRemainder, int multiplier) {
+    public RowRule(int divisor, int expectedRemainder, int multiplier) {
         this.divisor = divisor;
         this.expectedRemainder = expectedRemainder;
         this.multiplier = multiplier;

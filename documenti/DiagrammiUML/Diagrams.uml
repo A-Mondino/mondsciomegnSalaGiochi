@@ -1386,7 +1386,7 @@ user not logged</body>
     <message xmi:type="uml:Message" xmi:id="_oZa7EPeAEfCsTrCC-hSIvg" name="addPoints()" messageSort="asynchCall" receiveEvent="_oZiP0PeAEfCsTrCC-hSIvg" sendEvent="_oZd-YPeAEfCsTrCC-hSIvg"/>
     <message xmi:type="uml:Message" xmi:id="_r61zYPeAEfCsTrCC-hSIvg" name="updateLeaderboard()" messageSort="asynchCall" receiveEvent="_r66E0PeAEfCsTrCC-hSIvg" sendEvent="_r64PoPeAEfCsTrCC-hSIvg"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interaction" xmi:id="_i-WRgPL2EfCV6Jee0k4nFw" name="SalaGiochiCommunicationDiagram">
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_i-WRgPL2EfCV6Jee0k4nFw" name="SalaGiochiCD">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_7Lk-gPSLEfCBu7SUPZDsjQ" name="" type="_i-WRgPL2EfCV6Jee0k4nFw"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_G1veIPeCEfCsTrCC-hSIvg" name="" type="_i-WRgPL2EfCV6Jee0k4nFw"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_7iwQwPR9EfC_oI4IzvuNfA" name="User" coveredBy="_L85H8PR-EfC_oI4IzvuNfA _lh2I4PR-EfC_oI4IzvuNfA"/>
