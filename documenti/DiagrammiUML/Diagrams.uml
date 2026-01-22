@@ -1199,7 +1199,7 @@ user not logged</body>
     <message xmi:type="uml:Message" xmi:id="__jXxEPR-EfC_oI4IzvuNfA" name="2.2 verifyCredentials() ??" messageSort="asynchCall" receiveEvent="__jY_MPR-EfC_oI4IzvuNfA" sendEvent="__jYYIPR-EfC_oI4IzvuNfA"/>
     <message xmi:type="uml:Message" xmi:id="_0ZFNcPR_EfC_oI4IzvuNfA" name="2.3"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Activity" xmi:id="_tov-sPL2EfCV6Jee0k4nFw" name="SalaGiochi" node="_BPShoPMREfCV6Jee0k4nFw _OfQtcPMSEfCVAKR_JMJjRg _SMVcIPMSEfCVAKR_JMJjRg _s4qU0PMSEfCVAKR_JMJjRg _xaKKEPMSEfCVAKR_JMJjRg _1gE2kPMSEfCVAKR_JMJjRg _9GGMwPMSEfCVAKR_JMJjRg _SEaZwPMTEfCVAKR_JMJjRg _Uab18PMTEfCVAKR_JMJjRg _cOV3IPMTEfCVAKR_JMJjRg _XM7WQPMUEfCVAKR_JMJjRg _YA5J0PMUEfCVAKR_JMJjRg _Y8-XkPMUEfCVAKR_JMJjRg _ZyDlcPMUEfCVAKR_JMJjRg _tR96wPMUEfCVAKR_JMJjRg _zEyN8PMUEfCVAKR_JMJjRg _1RlcsPMUEfCVAKR_JMJjRg _NsgTcPMVEfCVAKR_JMJjRg _lHhzcPMVEfCVAKR_JMJjRg _J6JmsPMWEfCVAKR_JMJjRg _PLHKAPMWEfCVAKR_JMJjRg _2Gnl8PSCEfCBu7SUPZDsjQ _eVQNEPSDEfCBu7SUPZDsjQ _hl5B8PSEEfCBu7SUPZDsjQ _SYhDYPSFEfCBu7SUPZDsjQ _Yfo9MPSGEfCBu7SUPZDsjQ _rBgLUPSFEfCBu7SUPZDsjQ _AB4_cPSHEfCBu7SUPZDsjQ _58ZLYPSHEfCBu7SUPZDsjQ _U5Ur4PSIEfCBu7SUPZDsjQ _ma6TUPSIEfCBu7SUPZDsjQ _YgkC4PSJEfCBu7SUPZDsjQ __KWzIPSJEfCBu7SUPZDsjQ _Lk0vwPSKEfCBu7SUPZDsjQ _jvPsYPSKEfCBu7SUPZDsjQ _SivusPSLEfCBu7SUPZDsjQ">
+  <packagedElement xmi:type="uml:Activity" xmi:id="_tov-sPL2EfCV6Jee0k4nFw" name="SalaGiochi" node="_BPShoPMREfCV6Jee0k4nFw _OfQtcPMSEfCVAKR_JMJjRg _SMVcIPMSEfCVAKR_JMJjRg _s4qU0PMSEfCVAKR_JMJjRg _xaKKEPMSEfCVAKR_JMJjRg _1gE2kPMSEfCVAKR_JMJjRg _9GGMwPMSEfCVAKR_JMJjRg _SEaZwPMTEfCVAKR_JMJjRg _Uab18PMTEfCVAKR_JMJjRg _cOV3IPMTEfCVAKR_JMJjRg _XM7WQPMUEfCVAKR_JMJjRg _YA5J0PMUEfCVAKR_JMJjRg _Y8-XkPMUEfCVAKR_JMJjRg _ZyDlcPMUEfCVAKR_JMJjRg _tR96wPMUEfCVAKR_JMJjRg _zEyN8PMUEfCVAKR_JMJjRg _1RlcsPMUEfCVAKR_JMJjRg _NsgTcPMVEfCVAKR_JMJjRg _lHhzcPMVEfCVAKR_JMJjRg _J6JmsPMWEfCVAKR_JMJjRg _PLHKAPMWEfCVAKR_JMJjRg _2Gnl8PSCEfCBu7SUPZDsjQ _eVQNEPSDEfCBu7SUPZDsjQ _hl5B8PSEEfCBu7SUPZDsjQ _SYhDYPSFEfCBu7SUPZDsjQ _Yfo9MPSGEfCBu7SUPZDsjQ _rBgLUPSFEfCBu7SUPZDsjQ _AB4_cPSHEfCBu7SUPZDsjQ _58ZLYPSHEfCBu7SUPZDsjQ _U5Ur4PSIEfCBu7SUPZDsjQ _ma6TUPSIEfCBu7SUPZDsjQ _YgkC4PSJEfCBu7SUPZDsjQ __KWzIPSJEfCBu7SUPZDsjQ _Lk0vwPSKEfCBu7SUPZDsjQ _jvPsYPSKEfCBu7SUPZDsjQ _SivusPSLEfCBu7SUPZDsjQ _yBifIPdwEfCjFplGFo-9HA">
     <edge xmi:type="uml:ControlFlow" xmi:id="_jC_QMPMSEfCVAKR_JMJjRg" target="_OfQtcPMSEfCVAKR_JMJjRg" source="_BPShoPMREfCV6Jee0k4nFw"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_jkASkPMSEfCVAKR_JMJjRg" target="_hl5B8PSEEfCBu7SUPZDsjQ" source="_OfQtcPMSEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_Cw068PMTEfCVAKR_JMJjRg" target="_AB4_cPSHEfCBu7SUPZDsjQ" source="_SEaZwPMTEfCVAKR_JMJjRg"/>
@@ -1208,7 +1208,7 @@ user not logged</body>
     <edge xmi:type="uml:ControlFlow" xmi:id="_E7ajMPMTEfCVAKR_JMJjRg" name="yes" target="_9GGMwPMSEfCVAKR_JMJjRg" source="_xaKKEPMSEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_diE6cPMUEfCVAKR_JMJjRg" target="_AB4_cPSHEfCBu7SUPZDsjQ" source="_1gE2kPMSEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_6sPukPMUEfCVAKR_JMJjRg" target="_XM7WQPMUEfCVAKR_JMJjRg" source="_SivusPSLEfCBu7SUPZDsjQ"/>
-    <edge xmi:type="uml:ControlFlow" xmi:id="_7fvBAPMUEfCVAKR_JMJjRg" target="_YA5J0PMUEfCVAKR_JMJjRg" source="_SivusPSLEfCBu7SUPZDsjQ"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_7fvBAPMUEfCVAKR_JMJjRg" name="play" target="_YA5J0PMUEfCVAKR_JMJjRg" source="_SivusPSLEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_76bY8PMUEfCVAKR_JMJjRg" target="_Y8-XkPMUEfCVAKR_JMJjRg" source="_SivusPSLEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_8Z_p0PMUEfCVAKR_JMJjRg" target="_ZyDlcPMUEfCVAKR_JMJjRg" source="_SivusPSLEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="__MF-APMUEfCVAKR_JMJjRg" target="_YgkC4PSJEfCBu7SUPZDsjQ" source="_XM7WQPMUEfCVAKR_JMJjRg"/>
@@ -1220,7 +1220,7 @@ user not logged</body>
     <edge xmi:type="uml:ControlFlow" xmi:id="_J7YLMPMVEfCVAKR_JMJjRg" name="lose" target="_jvPsYPSKEfCBu7SUPZDsjQ" source="_zEyN8PMUEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_SID4wPMVEfCVAKR_JMJjRg" target="_jvPsYPSKEfCBu7SUPZDsjQ" source="_1RlcsPMUEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_P7rrUPMWEfCVAKR_JMJjRg" target="_PLHKAPMWEfCVAKR_JMJjRg" source="_J6JmsPMWEfCVAKR_JMJjRg"/>
-    <edge xmi:type="uml:ControlFlow" xmi:id="_ldm6YPSEEfCBu7SUPZDsjQ" name="currentRoom = 0" target="_SMVcIPMSEfCVAKR_JMJjRg" source="_hl5B8PSEEfCBu7SUPZDsjQ"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_ldm6YPSEEfCBu7SUPZDsjQ" name="currentRoom = 0" target="_yBifIPdwEfCjFplGFo-9HA" source="_hl5B8PSEEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_5C1NgPSEEfCBu7SUPZDsjQ" target="_hl5B8PSEEfCBu7SUPZDsjQ" source="_2Gnl8PSCEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_GMtN0PSFEfCBu7SUPZDsjQ" name="currentRoom = 1" target="_eVQNEPSDEfCBu7SUPZDsjQ" source="_hl5B8PSEEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_I9FqwPSFEfCBu7SUPZDsjQ" name="currentRoom = -1" target="_2Gnl8PSCEfCBu7SUPZDsjQ" source="_hl5B8PSEEfCBu7SUPZDsjQ"/>
@@ -1228,19 +1228,18 @@ user not logged</body>
     <edge xmi:type="uml:ControlFlow" xmi:id="_mEUfoPSFEfCBu7SUPZDsjQ" target="_SYhDYPSFEfCBu7SUPZDsjQ" source="_eVQNEPSDEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_seYZAPSFEfCBu7SUPZDsjQ" target="_rBgLUPSFEfCBu7SUPZDsjQ" source="_SMVcIPMSEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_tFhRgPSFEfCBu7SUPZDsjQ" name="switchRoom" target="_hl5B8PSEEfCBu7SUPZDsjQ" source="_rBgLUPSFEfCBu7SUPZDsjQ"/>
-    <edge xmi:type="uml:ControlFlow" xmi:id="_kFwEsPSGEfCBu7SUPZDsjQ" name="notLogged" target="_Yfo9MPSGEfCBu7SUPZDsjQ" source="_rBgLUPSFEfCBu7SUPZDsjQ"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_kFwEsPSGEfCBu7SUPZDsjQ" name="visitRoom" target="_Yfo9MPSGEfCBu7SUPZDsjQ" source="_rBgLUPSFEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_q3ca8PSGEfCBu7SUPZDsjQ" name="hasAnAccount" target="_SEaZwPMTEfCVAKR_JMJjRg" source="_Yfo9MPSGEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_yk09YPSGEfCBu7SUPZDsjQ" target="_Uab18PMTEfCVAKR_JMJjRg" source="_Yfo9MPSGEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_DSAsYPSHEfCBu7SUPZDsjQ" target="_s4qU0PMSEfCVAKR_JMJjRg" source="_AB4_cPSHEfCBu7SUPZDsjQ"/>
-    <edge xmi:type="uml:ControlFlow" xmi:id="_bsbM0PSHEfCBu7SUPZDsjQ" target="_hl5B8PSEEfCBu7SUPZDsjQ" source="_9GGMwPMSEfCVAKR_JMJjRg"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_bsbM0PSHEfCBu7SUPZDsjQ" target="_yBifIPdwEfCjFplGFo-9HA" source="_9GGMwPMSEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_trnWQPSHEfCBu7SUPZDsjQ" target="_U5Ur4PSIEfCBu7SUPZDsjQ" source="_cOV3IPMTEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_X6QGQPSIEfCBu7SUPZDsjQ" name="dataAlreadyPresent" target="_58ZLYPSHEfCBu7SUPZDsjQ" source="_U5Ur4PSIEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_Zz36UPSIEfCBu7SUPZDsjQ" target="_Yfo9MPSGEfCBu7SUPZDsjQ" source="_U5Ur4PSIEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_odsqcPSIEfCBu7SUPZDsjQ" target="_ma6TUPSIEfCBu7SUPZDsjQ" source="_Uab18PMTEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_pLYP0PSIEfCBu7SUPZDsjQ" target="_cOV3IPMTEfCVAKR_JMJjRg" source="_ma6TUPSIEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_qggPsPSIEfCBu7SUPZDsjQ" target="_ma6TUPSIEfCBu7SUPZDsjQ" source="_58ZLYPSHEfCBu7SUPZDsjQ"/>
-    <edge xmi:type="uml:ControlFlow" xmi:id="_1wHiwPSIEfCBu7SUPZDsjQ" name="loggedIn" target="_J6JmsPMWEfCVAKR_JMJjRg" source="_rBgLUPSFEfCBu7SUPZDsjQ"/>
-    <edge xmi:type="uml:ControlFlow" xmi:id="_VeAQ0PSJEfCBu7SUPZDsjQ" name="wannaPlay" target="_SivusPSLEfCBu7SUPZDsjQ" source="_SYhDYPSFEfCBu7SUPZDsjQ"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_VeAQ0PSJEfCBu7SUPZDsjQ" name="visitRoom" target="_SivusPSLEfCBu7SUPZDsjQ" source="_SYhDYPSFEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_fInU8PSJEfCBu7SUPZDsjQ" target="_tR96wPMUEfCVAKR_JMJjRg" source="_YgkC4PSJEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_z4330PSJEfCBu7SUPZDsjQ" target="_SYhDYPSFEfCBu7SUPZDsjQ" source="_Lk0vwPSKEfCBu7SUPZDsjQ"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_GiO_oPSKEfCBu7SUPZDsjQ" target="_NsgTcPMVEfCVAKR_JMJjRg" source="__KWzIPSJEfCBu7SUPZDsjQ"/>
@@ -1248,9 +1247,11 @@ user not logged</body>
     <edge xmi:type="uml:ControlFlow" xmi:id="_NXauwPSKEfCBu7SUPZDsjQ" target="_Lk0vwPSKEfCBu7SUPZDsjQ" source="_NsgTcPMVEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_OFGUIPSKEfCBu7SUPZDsjQ" target="_Lk0vwPSKEfCBu7SUPZDsjQ" source="_lHhzcPMVEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_olLgkPSKEfCBu7SUPZDsjQ" target="__KWzIPSJEfCBu7SUPZDsjQ" source="_jvPsYPSKEfCBu7SUPZDsjQ"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_1YGLQPdwEfCjFplGFo-9HA" target="_SMVcIPMSEfCVAKR_JMJjRg" source="_yBifIPdwEfCjFplGFo-9HA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_OBUjwPdxEfCjFplGFo-9HA" name="logout" target="_J6JmsPMWEfCVAKR_JMJjRg" source="_rBgLUPSFEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:InitialNode" xmi:id="_BPShoPMREfCV6Jee0k4nFw" name="start" outgoing="_jC_QMPMSEfCVAKR_JMJjRg"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_OfQtcPMSEfCVAKR_JMJjRg" name="InitDB" incoming="_jC_QMPMSEfCVAKR_JMJjRg" outgoing="_jkASkPMSEfCVAKR_JMJjRg"/>
-    <node xmi:type="uml:OpaqueAction" xmi:id="_SMVcIPMSEfCVAKR_JMJjRg" name="viewMainRoom" incoming="_ldm6YPSEEfCBu7SUPZDsjQ" outgoing="_seYZAPSFEfCBu7SUPZDsjQ"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_SMVcIPMSEfCVAKR_JMJjRg" name="viewMainRoom" incoming="_1YGLQPdwEfCjFplGFo-9HA" outgoing="_seYZAPSFEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_s4qU0PMSEfCVAKR_JMJjRg" name="insertData" incoming="_DSAsYPSHEfCBu7SUPZDsjQ" outgoing="_D-3bYPMTEfCVAKR_JMJjRg"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_xaKKEPMSEfCVAKR_JMJjRg" name="dataIsValid" incoming="_D-3bYPMTEfCVAKR_JMJjRg" outgoing="_EfRZwPMTEfCVAKR_JMJjRg _E7ajMPMTEfCVAKR_JMJjRg"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_1gE2kPMSEfCVAKR_JMJjRg" name="errorMessage" incoming="_EfRZwPMTEfCVAKR_JMJjRg" outgoing="_diE6cPMUEfCVAKR_JMJjRg"/>
@@ -1267,13 +1268,13 @@ user not logged</body>
     <node xmi:type="uml:OpaqueAction" xmi:id="_1RlcsPMUEfCVAKR_JMJjRg" name="calculatePoints" incoming="_HJf5cPMVEfCVAKR_JMJjRg" outgoing="_SID4wPMVEfCVAKR_JMJjRg"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_NsgTcPMVEfCVAKR_JMJjRg" name="updateScore" incoming="_GiO_oPSKEfCBu7SUPZDsjQ" outgoing="_NXauwPSKEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_lHhzcPMVEfCVAKR_JMJjRg" name="updateClassifica" incoming="_HNne8PSKEfCBu7SUPZDsjQ" outgoing="_OFGUIPSKEfCBu7SUPZDsjQ"/>
-    <node xmi:type="uml:OpaqueAction" xmi:id="_J6JmsPMWEfCVAKR_JMJjRg" name="Logout" incoming="_1wHiwPSIEfCBu7SUPZDsjQ" outgoing="_P7rrUPMWEfCVAKR_JMJjRg"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_J6JmsPMWEfCVAKR_JMJjRg" name="Logout" incoming="_OBUjwPdxEfCjFplGFo-9HA" outgoing="_P7rrUPMWEfCVAKR_JMJjRg"/>
     <node xmi:type="uml:ActivityFinalNode" xmi:id="_PLHKAPMWEfCVAKR_JMJjRg" name="" incoming="_P7rrUPMWEfCVAKR_JMJjRg"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_2Gnl8PSCEfCBu7SUPZDsjQ" name="viewLeaderboard" incoming="_I9FqwPSFEfCBu7SUPZDsjQ" outgoing="_5C1NgPSEEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_eVQNEPSDEfCBu7SUPZDsjQ" name="viewGames" incoming="_GMtN0PSFEfCBu7SUPZDsjQ" outgoing="_mEUfoPSFEfCBu7SUPZDsjQ"/>
-    <node xmi:type="uml:DecisionNode" xmi:id="_hl5B8PSEEfCBu7SUPZDsjQ" incoming="_jkASkPMSEfCVAKR_JMJjRg _5C1NgPSEEfCBu7SUPZDsjQ _lNMDUPSFEfCBu7SUPZDsjQ _tFhRgPSFEfCBu7SUPZDsjQ _bsbM0PSHEfCBu7SUPZDsjQ" outgoing="_ldm6YPSEEfCBu7SUPZDsjQ _GMtN0PSFEfCBu7SUPZDsjQ _I9FqwPSFEfCBu7SUPZDsjQ"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_hl5B8PSEEfCBu7SUPZDsjQ" incoming="_jkASkPMSEfCVAKR_JMJjRg _5C1NgPSEEfCBu7SUPZDsjQ _lNMDUPSFEfCBu7SUPZDsjQ _tFhRgPSFEfCBu7SUPZDsjQ" outgoing="_ldm6YPSEEfCBu7SUPZDsjQ _GMtN0PSFEfCBu7SUPZDsjQ _I9FqwPSFEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_SYhDYPSFEfCBu7SUPZDsjQ" incoming="_mEUfoPSFEfCBu7SUPZDsjQ _z4330PSJEfCBu7SUPZDsjQ" outgoing="_lNMDUPSFEfCBu7SUPZDsjQ _VeAQ0PSJEfCBu7SUPZDsjQ"/>
-    <node xmi:type="uml:DecisionNode" xmi:id="_rBgLUPSFEfCBu7SUPZDsjQ" incoming="_seYZAPSFEfCBu7SUPZDsjQ" outgoing="_tFhRgPSFEfCBu7SUPZDsjQ _kFwEsPSGEfCBu7SUPZDsjQ _1wHiwPSIEfCBu7SUPZDsjQ"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_rBgLUPSFEfCBu7SUPZDsjQ" incoming="_seYZAPSFEfCBu7SUPZDsjQ" outgoing="_tFhRgPSFEfCBu7SUPZDsjQ _kFwEsPSGEfCBu7SUPZDsjQ _OBUjwPdxEfCjFplGFo-9HA"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_Yfo9MPSGEfCBu7SUPZDsjQ" incoming="_kFwEsPSGEfCBu7SUPZDsjQ _Zz36UPSIEfCBu7SUPZDsjQ" outgoing="_q3ca8PSGEfCBu7SUPZDsjQ _yk09YPSGEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_AB4_cPSHEfCBu7SUPZDsjQ" incoming="_Cw068PMTEfCVAKR_JMJjRg _diE6cPMUEfCVAKR_JMJjRg" outgoing="_DSAsYPSHEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:OpaqueAction" xmi:id="_58ZLYPSHEfCBu7SUPZDsjQ" name="errorMessage" incoming="_X6QGQPSIEfCBu7SUPZDsjQ" outgoing="_qggPsPSIEfCBu7SUPZDsjQ"/>
@@ -1284,6 +1285,7 @@ user not logged</body>
     <node xmi:type="uml:JoinNode" xmi:id="_Lk0vwPSKEfCBu7SUPZDsjQ" incoming="_NXauwPSKEfCBu7SUPZDsjQ _OFGUIPSKEfCBu7SUPZDsjQ" outgoing="_z4330PSJEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_jvPsYPSKEfCBu7SUPZDsjQ" name="" incoming="_SID4wPMVEfCVAKR_JMJjRg _J7YLMPMVEfCVAKR_JMJjRg" outgoing="_olLgkPSKEfCBu7SUPZDsjQ"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_SivusPSLEfCBu7SUPZDsjQ" incoming="_VeAQ0PSJEfCBu7SUPZDsjQ" outgoing="_6sPukPMUEfCVAKR_JMJjRg _7fvBAPMUEfCVAKR_JMJjRg _76bY8PMUEfCVAKR_JMJjRg _8Z_p0PMUEfCVAKR_JMJjRg"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_yBifIPdwEfCjFplGFo-9HA" name="" incoming="_ldm6YPSEEfCBu7SUPZDsjQ _bsbM0PSHEfCBu7SUPZDsjQ" outgoing="_1YGLQPdwEfCjFplGFo-9HA"/>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_3gt1cK6yEfCy9KboeOQdTw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3gw4wK6yEfCy9KboeOQdTw" source="http://www.eclipse.org/uml2/2.0.0/UML">
