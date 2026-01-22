@@ -1200,6 +1200,17 @@ user not logged</body>
     <message xmi:type="uml:Message" xmi:id="_0ZFNcPR_EfC_oI4IzvuNfA" name="2.3"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Activity" xmi:id="_tov-sPL2EfCV6Jee0k4nFw" name="SalaGiochi" node="_BPShoPMREfCV6Jee0k4nFw _OfQtcPMSEfCVAKR_JMJjRg _SMVcIPMSEfCVAKR_JMJjRg _s4qU0PMSEfCVAKR_JMJjRg _xaKKEPMSEfCVAKR_JMJjRg _1gE2kPMSEfCVAKR_JMJjRg _9GGMwPMSEfCVAKR_JMJjRg _SEaZwPMTEfCVAKR_JMJjRg _Uab18PMTEfCVAKR_JMJjRg _cOV3IPMTEfCVAKR_JMJjRg _XM7WQPMUEfCVAKR_JMJjRg _YA5J0PMUEfCVAKR_JMJjRg _Y8-XkPMUEfCVAKR_JMJjRg _ZyDlcPMUEfCVAKR_JMJjRg _tR96wPMUEfCVAKR_JMJjRg _zEyN8PMUEfCVAKR_JMJjRg _1RlcsPMUEfCVAKR_JMJjRg _NsgTcPMVEfCVAKR_JMJjRg _lHhzcPMVEfCVAKR_JMJjRg _J6JmsPMWEfCVAKR_JMJjRg _PLHKAPMWEfCVAKR_JMJjRg _2Gnl8PSCEfCBu7SUPZDsjQ _eVQNEPSDEfCBu7SUPZDsjQ _hl5B8PSEEfCBu7SUPZDsjQ _SYhDYPSFEfCBu7SUPZDsjQ _Yfo9MPSGEfCBu7SUPZDsjQ _rBgLUPSFEfCBu7SUPZDsjQ _AB4_cPSHEfCBu7SUPZDsjQ _58ZLYPSHEfCBu7SUPZDsjQ _U5Ur4PSIEfCBu7SUPZDsjQ _ma6TUPSIEfCBu7SUPZDsjQ _YgkC4PSJEfCBu7SUPZDsjQ __KWzIPSJEfCBu7SUPZDsjQ _Lk0vwPSKEfCBu7SUPZDsjQ _jvPsYPSKEfCBu7SUPZDsjQ _SivusPSLEfCBu7SUPZDsjQ _yBifIPdwEfCjFplGFo-9HA">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_h2pLkPd1EfCsTrCC-hSIvg">
+      <body>La prima iterazione del diagramma porta direttamente all'uscita del &#xD;
+Decision Node -> (currentRoom = 0), infatti di default l'applicazione mostra la Main Room (stanza 0, centrale)&#xD;
+</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_5DK8kPd1EfCsTrCC-hSIvg">
+      <body>L'applicazione di default dà la possibiltà di giocare in anonimo, quindi se &#xD;
+appena entrati nell'applicazione si vuole subito giocare senza fare il login o creare il proprio account, si può giocare lo stesso in modalità anonima. &#xD;
+(modalità che ha la caratteristica di sovrascrivere il punteggio ad ogni partita, in modo da invogliare l'utente ad accedere)&#xD;
+</body>
+    </ownedComment>
     <edge xmi:type="uml:ControlFlow" xmi:id="_jC_QMPMSEfCVAKR_JMJjRg" target="_OfQtcPMSEfCVAKR_JMJjRg" source="_BPShoPMREfCV6Jee0k4nFw"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_jkASkPMSEfCVAKR_JMJjRg" target="_hl5B8PSEEfCBu7SUPZDsjQ" source="_OfQtcPMSEfCVAKR_JMJjRg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_Cw068PMTEfCVAKR_JMJjRg" target="_AB4_cPSHEfCBu7SUPZDsjQ" source="_SEaZwPMTEfCVAKR_JMJjRg"/>
