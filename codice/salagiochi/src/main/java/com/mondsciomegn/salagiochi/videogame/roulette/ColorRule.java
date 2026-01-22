@@ -13,7 +13,8 @@ public class ColorRule implements GameRules {
 	
 	@Override
 	public boolean isValid(int number, Map<Integer, String> colorMap) {
-	   if (number == 0) return false;
+	   if (number == 0) 
+		   return false;
 	   String color = colorMap.getOrDefault(number, "green");
 	   return targetColor.equals(color);
 	}

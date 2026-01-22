@@ -15,8 +15,9 @@ public class RowRule implements GameRules {
 
     @Override
     public boolean isValid(int number, Map<Integer, String> colorMap) {
-        // Gestione speciale: lo 0 di solito fa perdere queste puntate
-        if (number == 0) return false;
+        if (number == 0) 
+        	return false;
+        
         return number % divisor == expectedRemainder;
     }
 

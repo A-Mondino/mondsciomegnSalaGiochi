@@ -193,7 +193,7 @@ public class Roulette extends VideoGames {
             showMessage("Non hai gettoni disponibili! Converti altri punti.");
             return null;
         }
-        if (selectionLocked) return null;
+        if (selectionLocked) return null;		// Per gestire eccezioni
 
         selectedButton = cell;
         cell.setStyle(cell.getStyle() + "-fx-border-color: yellow; -fx-border-width: 3px;");
@@ -213,16 +213,13 @@ public class Roulette extends VideoGames {
             registerGame(getNickname(), (multiplier + gameTokens) * 300);		// Registro la partita
         } else { 	// Non ho vinto nulla, devo registrare però la partedita di punti
             showMessage("Numero estratto: " + extractedNum + "\nHAI PERSO!");
-            registerGame(getNickname(), (multiplier * gameTokens) * 300);
+            registerGame(getNickname(), (multiplier * gameTokens) * 300);		// Registro la perdita dei punti
         }
         
-        
-       			// Registro la partita nel DB (metodo della superclasse VideoGames)
-        
+                
         gameTokens = 0; 			// Reset stato
         selectionLocked = false;
         if (selectedButton != null) {
-            // Rimuovi bordo giallo (reset brutale ma efficace per non parsare lo stile)
             String baseStyle = selectedButton.getStyle().replace("-fx-border-color: yellow; -fx-border-width: 3px;", "");
             selectedButton.setStyle(baseStyle);
             selectedButton = null;
@@ -265,7 +262,7 @@ public class Roulette extends VideoGames {
 
         convertBtn.setOnAction(e -> {
             if (playerScore >= 300) {
-                // Modifica punti: -1 gettone (che vale 300 punti nel calcolo updatePoints)
+                // Modifica punti: -1 gettone (che vale 300 punti)
             	
                 rouletteDBConnection.updateScore(getNickname(), playerScore - 300);
                 playerScore = rouletteDBConnection.getScoreFromDB(getNickname());

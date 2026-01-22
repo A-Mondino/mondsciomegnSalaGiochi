@@ -6,7 +6,6 @@ import java.util.Map;
 public class RouletteRules {
 
     private final Map<Integer, String> colors = new HashMap<>();
-    // Qui usiamo la lista (Mappa) di un "altro tipo" come chiedevi: l'interfaccia GameRule
     private final Map<String, GameRules> rulesMap = new HashMap<>();
 
     public RouletteRules() {
