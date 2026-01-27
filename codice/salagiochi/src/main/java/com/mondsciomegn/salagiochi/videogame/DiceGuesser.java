@@ -1,13 +1,9 @@
 package com.mondsciomegn.salagiochi.videogame;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Random;
 
 import com.mondsciomegn.salagiochi.db.Category;
-import com.mondsciomegn.salagiochi.db.DataBaseConnection;
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
 import javafx.scene.control.Label;

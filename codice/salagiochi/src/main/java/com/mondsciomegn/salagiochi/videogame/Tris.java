@@ -1,40 +1,26 @@
 package com.mondsciomegn.salagiochi.videogame;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.Scanner;
 
 
 
 import com.mondsciomegn.salagiochi.db.Category;
-import com.mondsciomegn.salagiochi.db.DataBaseConnection;
-import com.mondsciomegn.salagiochi.db.User;
+
 import com.mondsciomegn.salagiochi.db.VideoGames;
 
-import javafx.application.Platform;
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 
 
 public class Tris extends VideoGames{
