@@ -1781,7 +1781,7 @@ appena entrati nell'applicazione si vuole subito giocare senza fare il login o c
     <message xmi:type="uml:Message" xmi:id="_IMu5YPtrEfC1pauPES-S5Q" name="3.2: playGame()" messageSort="asynchCall" receiveEvent="_IMvgcftrEfC1pauPES-S5Q" sendEvent="_IMvgcPtrEfC1pauPES-S5Q"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Component" xmi:id="_DhW58PtsEfC1pauPES-S5Q" name="GUI">
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_VxZi0PtsEfC1pauPES-S5Q" name="Port1" isOrdered="true" aggregation="composite" isDerived="true" isDerivedUnion="true" isBehavior="true"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_VxZi0PtsEfC1pauPES-S5Q" name="Port1" visibility="public" isOrdered="true" aggregation="composite" isDerived="true"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Component" xmi:id="_F4S8IPtsEfC1pauPES-S5Q" name="DataBase">
     <ownedAttribute xmi:type="uml:Port" xmi:id="_KQfrcPtsEfC1pauPES-S5Q" name="Port1" aggregation="composite"/>
@@ -1789,7 +1789,6 @@ appena entrati nell'applicazione si vuole subito giocare senza fare il login o c
   <packagedElement xmi:type="uml:Component" xmi:id="_sVSKAPttEfC1pauPES-S5Q" name="VideoGame">
     <ownedAttribute xmi:type="uml:Port" xmi:id="_3UPx8PttEfC1pauPES-S5Q" name="Port1" aggregation="composite"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Dependency" xmi:id="_HgEgUPtuEfC1pauPES-S5Q" client="_VxZi0PtsEfC1pauPES-S5Q" supplier="_KQfrcPtsEfC1pauPES-S5Q"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_3gt1cK6yEfCy9KboeOQdTw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3gw4wK6yEfCy9KboeOQdTw" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
